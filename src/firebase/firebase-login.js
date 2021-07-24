@@ -1,12 +1,32 @@
+//import { auth } from "firebase-admin";
 
-// Función para obtener datos de correo y contraseña
+
+
+
+// Función para obtener el valor del correo y contraseña
 export const getInputValue = () => {
- 
-    document.getElementById('input-btn').addEventListener('submit', (e) => {
-  
-      const email = document.querySelector('#email').value;
-      const password = document.querySelector('#password').value;
-  
-      console.log(email, password);
-    })
+    // Llamar el formulario del login
+    const signUpForm = document.querySelector('#signup-form');
+    
+    // Evento al pulsar 'iniciar sesión'
+    signUpForm.addEventListener('submit', (e) => {
+        // Evita que la página vuelva a cargar
+        e.preventDefault(); 
+        console.log('enviando');
+        const email = document.querySelector('#email').value;
+        const password = document.querySelector('#password').value;
+    
+        console.log(email, password);
+
+        //  Autentificación => Método de Firebase
+        // auth
+        // .createUserWithEmail(email, password)
+        // .then(userCredentials => {
+        // //.. min 24 del video
+        // })
+
+
+
+    });
+    
 };

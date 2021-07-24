@@ -11,3 +11,5 @@
   
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+  // Se agrega el auth => Nos ayuda a enviar los datos a Firebase
+  const auth = firebase.auth(); 
