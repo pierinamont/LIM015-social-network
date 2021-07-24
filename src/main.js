@@ -1,11 +1,9 @@
 // Este es el punto de entrada de tu aplicacion
-
-// import { myFunction, otrafuncion, otrafuncion } from './lib/index.js';
-// myFunction();
 //import * as all from './lib/index.js';
 //import * as all from 'firebase-admin';
 
 import * as all from "./firebase/firebase-login.js";
+
 
 const loginSection = document.getElementById('login-section')
 
@@ -67,17 +65,12 @@ const signUpContainer = document.getElementById('signup-container'); // Llama co
 signUpForm.addEventListener('click', e => {
     contentContainer.style.display = 'none';
     signUpContainer.style.display = 'block';
-
+    
     all.getInputValue();
-
 });
 
 
 
-
-
-
-// Llama función para obtener datos de correo y password
 
 
 
