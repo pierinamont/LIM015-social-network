@@ -5,9 +5,9 @@
 //import * as all from './lib/index.js';
 //import * as all from 'firebase-admin';
 
-import * as all from "./firebase/firebase-login.js";
+import * as all from './firebase/firebase-login.js';
 
-const loginSection = document.getElementById('login-section')
+const loginSection = document.getElementById('login-section');
 
 // Crear estructura del login
 
