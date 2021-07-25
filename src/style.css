@@ -21,7 +21,7 @@ font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background-color:  #F8F8F8;
+    background-color: var(--background);
 }
 
 .login-div {

@@ -17,23 +17,25 @@ export const getInputValue = () => {
         //  Autentificación => Método de Firebase
         todo.auth
         .createUserWithEmailAndPassword(email, password)
-        .then(userCredentials => {
+        .then((userCredentials) => {
             console.log('sign up');
             console.log(userCredentials.operationType);
         })
 
         .catch((error) => {
             console.log(error);
+            const errorCode = error.code;
+
             // error en contraseña
-            if(error.code === 'auth/weak-password') {
-                alert('La contraseña debe tener al menos, 6 caracteres');
+            if(errorCode === 'auth/weak-password') {
+                alert('La contraseña debe tener al menos 6 caracteres');
             }
             // error en inputs vacíos
-            if(error.code === 'auth/invalid-email') {
+            if(errorCode === 'auth/invalid-email') {
                 alert('Por favor, completa los campos');
             }
             // error de correo ya registrado
-            if(error.code === 'auth/email-already-in-use') {
+            if(errorCode === 'auth/email-already-in-use') {
                 alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
             }
             
