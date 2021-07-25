@@ -7,7 +7,7 @@ import * as all from "./firebase/firebase-login.js";
 
 const loginSection = document.getElementById('login-section')
 
-// Crear estructura del login
+// CREAR ESTRUCTURA DEL LOGIN
 
     const loginDiv = document.createElement('div');
     loginDiv.className = 'login-div';
@@ -18,15 +18,15 @@ const loginSection = document.getElementById('login-section')
     <div class="content-container">
         <img class="illustration" src="../images/dog-walking.svg" alt="">
         <form id="login-form">
-                <img src="../images/Pet-Place.svg" alt="">
+                <img class="logo" src="../images/petPlace.svg" alt="">
                 <p>¡Bienvenid@ Pet Lover!</p>
                 <input type="email" placeholder="Coloca tu correo" id="email" required>
                 <input type="password" placeholder="Coloca tu contraseña" name="" id="password" required>
                 <button id="signin-btn">Iniciar Sesión</button>
                 <p>O bien ingresa por...</p>
                 <div class="options">
-                    <span id="facebook-btn"></span>
-                    <span id="gmail-btn"></span>
+                    <img class="img" id="facebook-btn" src="../images/facebook.svg" alt="">
+                    <img class="img" id="gmail-btn" src="../images/google.svg" alt="">
                 </div>
                 <p>¿No tienes cuenta? <strong id="sign-up">Regístrate</strong></p>
             </form>
@@ -36,7 +36,7 @@ const loginSection = document.getElementById('login-section')
 
     <div id="signup-container" style= "display: none">
         <form id="signup-form">
-                <img src="../images/Pet-Place.svg" alt="">
+                <img class="logo" src="../images/petPlace.svg" alt="">
                 <h2>Regístrate gratis</h2>
                 <div class="labels-container">
                     <label for="signup-name">Coloca tu nombre:</label>
@@ -61,16 +61,14 @@ const loginSection = document.getElementById('login-section')
 const contentContainer = document.querySelector('.content-container'); // Llama contenedor del login
 const signUpForm = document.querySelector('#sign-up'); // Llama a registrarse
 const signUpContainer = document.getElementById('signup-container'); // Llama contenedor de registro
+const inputs = document.querySelectorAll('input');
 
 signUpForm.addEventListener('click', e => {
     contentContainer.style.display = 'none';
     signUpContainer.style.display = 'block';
-    
+    // Función para registrarse
     all.getInputValue();
 });
-
-
-
 
 
 
