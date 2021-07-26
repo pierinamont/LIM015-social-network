@@ -19,13 +19,12 @@ export const getInputValue = () => {
         .createUserWithEmailAndPassword(email, password)
         .then((userCredentials) => {
             console.log('sign up');
-            console.log(userCredentials.operationType);
         })
 
         .catch((error) => {
             console.log(error);
             const errorCode = error.code;
-
+            console.log(error.code);
             // error en contraseña
             if(errorCode === 'auth/weak-password') {
                 alert('La contraseña debe tener al menos 6 caracteres');
