@@ -1,3 +1,174 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+    
+html { 
+font-size: 62.5%;
+font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    /*cobalto*/
+    --logo-color: #08CAB3;
+    /*amarillo*/
+    --btn-color: #F8C908;
+    /*rojo*/
+    --settings-color: #EB4A58;
+    /*color de fondo*/
+    --background:  #F8F8F8;
+}
+
 body {
+    background-color:  #F8F8F8;
+}
+
+.login-div {
+    margin: 0 auto;
+}
+
+    
+/* SECCION PARA LOGIN */
+
+.content-container,
+#signup-container {
+    margin-top: 100px;
+    align-items: center;
+}
+
+.content-container .illustration {
+    display: none;
+}
+
+@media (min-width: 1000px) {
+    .content-container .illustration {
+    display: inline;
+    width: 500px;
+    height: 500px;
+    margin-left: 100px;
+    }
+}
+
+.content-container,
+#signup-container {
+    display: flex;
+    text-align: center;
+    font-size: 1.4rem; /*14px*/
+}
+
+.content-container #login-form {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#login-form img {
+    width: 120px;
+    height: auto;
+}
+
+#login-form input {
+    display: inline;
+    margin-bottom: 18px;
+    border: solid 2px var(--btn-color);
+    border-radius: 20px;
+    width: 254px;
+    height: 37px;
     font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+}
+
+#login-form input::placeholder {
+    padding-left: 15px;
+}
+
+#login-form button {
+    width: 164px;
+    height: 37px;
+    background-color: var(--btn-color);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#login-form strong .options {
+    display: flex;
+    height: 70px;
+    width: 100%;
+}
+
+#login-form strong .options #facebook-btn { /*falta*/
+    display: inline;
+    background-image: url();
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 17px;
+    width: 50px;
+}
+
+#login-form strong {
+    color: var(--logo-color);
+    cursor: pointer;
+}
+
+/* SECCION PARA REGISTRARSE */
+
+#signup-form img {
+    width: 120px;
+    height: auto;
+}
+.signup-container #signup-form {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.labels-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#signup-container .labels-container input {
+    border: solid 2px var(--btn-color);
+    border-radius: 20px;
+    width: 254px;
+    height: 37px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+#signup-container .labels-container input::placeholder {
+    padding-left: 15px;
+}
+
+
+#signup-container .labels-container label {
+    margin-bottom: 6px;
+}
+
+#signup-form button {
+    width: 164px;
+    height: 37px;
+    background-color: var(--btn-color);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#signup-form #sign-in {
+    color: var(--logo-color);
+    cursor: pointer;
 }
