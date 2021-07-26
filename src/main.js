@@ -1,17 +1,16 @@
 // Este es el punto de entrada de tu aplicacion
-//import * as all from './lib/index.js';
-//import * as all from 'firebase-admin';
+// import * as all from './lib/index.js';
+// import * as all from 'firebase-admin';
 
-import * as all from "./firebase/firebase-login.js";
+import * as all from './firebase/firebase-login.js';
 
-
-const loginSection = document.getElementById('login-section')
+const loginSection = document.getElementById('login-section');
 
 // CREAR ESTRUCTURA DEL LOGIN
 
-    const loginDiv = document.createElement('div');
-    loginDiv.className = 'login-div';
-    loginDiv.innerHTML = `
+const loginDiv = document.createElement('div');
+loginDiv.className = 'login-div';
+loginDiv.innerHTML = `
 
     <!--SECCION PRINCIPAL DEL LOGIN-->
 
@@ -53,44 +52,30 @@ const loginSection = document.getElementById('login-section')
             </form>
     </div>
 
-    `
-    loginSection.appendChild(loginDiv);
-
-
+    `;
+loginSection.appendChild(loginDiv);
 // FUNCIÓN PARA MOSTRAR CONTENEDOR DE REGISTRO
 const contentContainer = document.querySelector('.content-container'); // Llama contenedor del login
 const signUpForm = document.querySelector('#sign-up'); // Llama a registrarse
 const signUpContainer = document.getElementById('signup-container'); // Llama contenedor de registro
-
-
-signUpForm.addEventListener('click', e => {
-    e.preventDefault(); 
-
-    contentContainer.style.display = 'none';
-    signUpContainer.style.display = 'block';
-    // Función para registrarse
-    all.getInputValue();
+signUpForm.addEventListener('click', (e) => {
+  e.preventDefault();
+  contentContainer.style.display = 'none';
+  signUpContainer.style.display = 'block';
+  // Función para registrarse
+  all.getInputValue();
 });
-
 // FUNCIÓN PARA MOSTRAR CONTENEDOR DE INICIAR SESIÓN
 const signInForm = document.querySelector('#sign-in');
 const illustration = document.querySelector('.illustration');
-//const inputs = document.querySelectorAll('.input');
-//const active = document.activeElement;
+// const inputs = document.querySelectorAll('.input');
+// const active = document.activeElement;
 
-signInForm.addEventListener('click', e => {
-    e.preventDefault(); 
-    
-    contentContainer.style.display = 'block';
-    signUpContainer.style.display = 'none';
-    illustration.style.display = 'none';
-
-    // Sirve para resetear el registro cuando haces click en el texto Iniciar Sesión
-    document.querySelector('#signup-form').reset();
-    
-})
-
-
-
-
-
+signInForm.addEventListener('click', (e) => {
+  e.preventDefault();
+  contentContainer.style.display = 'block';
+  signUpContainer.style.display = 'none';
+  illustration.style.display = 'none';
+  // Sirve para resetear el registro cuando haces click en el texto Iniciar Sesión
+  document.querySelector('#signup-form').reset();
+});
