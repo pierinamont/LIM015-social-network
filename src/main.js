@@ -86,13 +86,24 @@ signUpBtn.addEventListener('click', (e) => {
   const email = document.querySelector('#signup-email').value;
   const password = document.querySelector('#signup-password').value;
 
-  const result = all.userSignUp(email, password);
-  alert(result);
-  if (result === true) {
-    alert('entro');
-    contentContainer.style.display = 'flex';
-    signUpContainer.style.display = 'none';
-  }
+  // Llama la función de error y éxito
+  all.userSignUp(email, password)
+    .then(() => {
+      alert('exito');
+    })
+    .catch((error) => {
+      console.log(error);
+      const errorCode = error.code;
+      if (errorCode === 'auth/invalid-email') {
+        alert('Por favor, completa los campos');
+      }
+      if (errorCode === 'auth/email-already-in-use') {
+        alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
+      }
+      if (errorCode === 'auth/weak-password') {
+        alert('La contraseña debe tener al menos 6 caracteres');
+      }
+    });
 });
 
 // FUNCION PARA INICIAR SESION
@@ -107,5 +118,24 @@ signInBtn.addEventListener('click', (e) => {
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
 
-  all.userSignIn(email, password);
+  all.userSignIn(email, password)
+    .then(() => {
+      alert('iniciaste sesion');
+    })
+    .catch((error) => {
+      console.log(error);
+      const errorCode = error.code;
+
+      if (errorCode === 'auth/invalid-email') {
+        alert('Por favor ingrese su usuario y contraseña');
+      }
+      // error contraseña incorrecta
+      if (errorCode === 'auth/wrong-password') {
+        alert('Contraseña incorrecta, inténtelo de nuevo');
+      }
+      // error usuario no encontrado
+      if (errorCode === 'auth/user-not-found') {
+        alert('El correo que ingresó no está registrado, por favor, regístrece');
+      }
+    });
 });
