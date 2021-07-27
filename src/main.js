@@ -139,3 +139,16 @@ signInBtn.addEventListener('click', (e) => {
       }
     });
 });
+
+// FUNCIÓN DE GOOGLE LOGIN
+const google = document.querySelector('#gmail-btn');
+
+google.addEventListener('click', (e) => {
+  all.googleLogIn()
+  // .then(() => {
+  //   alert('funciona');
+  // })
+  // .catch(() => {
+  //   alert('NO funciona');
+  // })
+});
