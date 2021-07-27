@@ -4,11 +4,11 @@
 
 import * as all from './firebase/firebase-login.js';
 
-const loginSection = document.getElementById('login-section');
+const loginSection = document.getElementById("login-section");
 
 // CREAR ESTRUCTURA DEL LOGIN
 
-const loginDiv = document.createElement('div');
+const loginDiv = document.createElement("div");
 loginDiv.className = 'login-div';
 loginDiv.innerHTML = `
 
@@ -56,59 +56,59 @@ loginDiv.innerHTML = `
 loginSection.appendChild(loginDiv);
 
 // FUNCIÓN PARA MOSTRAR CONTENEDOR DE REGISTRO
-const contentContainer = document.querySelector('.content-container'); // Llama contenedor del login
-const signUpForm = document.querySelector('#sign-up'); // Llama a registrarse
-const signUpContainer = document.getElementById('signup-container'); // Llama contenedor de registro
-signUpForm.addEventListener('click', (e) => {
+const contentContainer = document.querySelector(".content-container"); // Llama contenedor del login
+const signUpForm = document.querySelector("#sign-up"); // Llama a registrarse
+const signUpContainer = document.getElementById("signup-container"); // Llama contenedor de registro
+signUpForm.addEventListener("click", (e) => {
   e.preventDefault();
-  contentContainer.style.display = 'none';
-  signUpContainer.style.display = 'block';
+  contentContainer.style.display = "none";
+  signUpContainer.style.display = "block";
 });
 
 // FUNCIÓN PARA MOSTRAR CONTENEDOR DE INICIAR SESIÓN
-const signInForm = document.querySelector('#sign-in');
-signInForm.addEventListener('click', (e) => {
+const signInForm = document.querySelector("#sign-in");
+signInForm.addEventListener("click", (e) => {
   e.preventDefault();
-  contentContainer.style.display = 'flex';
-  signUpContainer.style.display = 'none';
-  
+  contentContainer.style.display = "flex";
+  signUpContainer.style.display = "none";
+
   // Sirve para resetear el registro cuando haces click en el texto Iniciar Sesión
-  document.querySelector('#signup-form').reset();
+  document.querySelector("#signup-form").reset();
 });
 
 // FUNCION PARA REGISTRARSE
-const signUpBtn = document.querySelector('#signup-btn');// Llama a registrarse
-signUpBtn.addEventListener('click', (e) => { 
-    // Evita que la página vuelva a cargar//
-    e.preventDefault();
+const signUpBtn = document.querySelector("#signup-btn"); // Llama a registrarse
+signUpBtn.addEventListener("click", (e) => {
+  // Evita que la página vuelva a cargar//
+  e.preventDefault();
 
-    // Llamando el valor de los inputs
-    const email = document.querySelector('#signup-email').value;
-    const password = document.querySelector('#signup-password').value;
+  // Llamando el valor de los inputs
+  const email = document.querySelector("#signup-email").value;
+  const password = document.querySelector("#signup-password").value;
 
-   let result = all.userSignUp(email, password);
-   alert(result);
-    if (result === true) {
-        alert('entro')
-        const contentContainer = document.querySelector('.content-container');
-        const signUpContainer = document.getElementById('signup-container'); // Llama contenedor de registro
+  let result = all.userSignUp(email, password);
+  //alert(result);
+  if (result === true) {
+    alert("entro");
+    const contentContainer = document.querySelector(".content-container");
+    const signUpContainer = document.getElementById("signup-container"); // Llama contenedor de registro
 
-        contentContainer.style.display = 'flex';
-        signUpContainer.style.display = 'none';
-    }
-    
+    contentContainer.style.display = "flex";
+    signUpContainer.style.display = "none";
+  }
 });
 
 // FUNCION PARA INICIAR SESION
-const signInBtn = document.querySelector('#signin-btn');// Llama boton de iniciar sesión
+const signInBtn = document.querySelector("#signin-btn"); // Llama boton de iniciar sesión
 
-signInBtn.addEventListener('click', (e) => { /* Evento al pulsar */
-    // Evita que la página vuelva a cargar//
-    e.preventDefault();
+signInBtn.addEventListener("click", (e) => {
+  /* Evento al pulsar */
+  // Evita que la página vuelva a cargar//
+  e.preventDefault();
 
-    // Llamando el valor de los inputs
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
+  // Llamando el valor de los inputs
+  const email = document.querySelector("#email").value;
+  const password = document.querySelector("#password").value;
 
-    all.userSignIn(email, password);
+  all.userSignIn(email, password);
 });
