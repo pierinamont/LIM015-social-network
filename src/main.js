@@ -69,60 +69,24 @@ signUpForm.addEventListener("click", (e) => {
 const signInForm = document.querySelector("#sign-in");
 signInForm.addEventListener("click", (e) => {
   e.preventDefault();
-<<<<<<< HEAD
-  contentContainer.style.display = "flex";
-  signUpContainer.style.display = "none";
-=======
+
   contentContainer.style.display = 'flex';
   signUpContainer.style.display = 'none';
->>>>>>> 91fb46e96cbe462ec84acd6decc5da75c9f64640
 
   // Sirve para resetear el registro cuando haces click en el texto Iniciar Sesión
   document.querySelector("#signup-form").reset();
 });
 
 // FUNCION PARA REGISTRARSE
-<<<<<<< HEAD
-const signUpBtn = document.querySelector("#signup-btn"); // Llama a registrarse
-signUpBtn.addEventListener("click", (e) => {
-=======
+
 const signUpBtn = document.querySelector('#signup-btn'); // Llama a registrarse
 signUpBtn.addEventListener('click', (e) => {
->>>>>>> 91fb46e96cbe462ec84acd6decc5da75c9f64640
+
   // Evita que la página vuelva a cargar//
   e.preventDefault();
 
   // Llamando el valor de los inputs
-<<<<<<< HEAD
-  const email = document.querySelector("#signup-email").value;
-  const password = document.querySelector("#signup-password").value;
 
-  let result = all.userSignUp(email, password);
-  //alert(result);
-  if (result === true) {
-    alert("entro");
-    const contentContainer = document.querySelector(".content-container");
-    const signUpContainer = document.getElementById("signup-container"); // Llama contenedor de registro
-
-    contentContainer.style.display = "flex";
-    signUpContainer.style.display = "none";
-  }
-});
-
-// FUNCION PARA INICIAR SESION
-const signInBtn = document.querySelector("#signin-btn"); // Llama boton de iniciar sesión
-
-signInBtn.addEventListener("click", (e) => {
-  /* Evento al pulsar */
-  // Evita que la página vuelva a cargar//
-  e.preventDefault();
-
-  // Llamando el valor de los inputs
-  const email = document.querySelector("#email").value;
-  const password = document.querySelector("#password").value;
-
-  all.userSignIn(email, password);
-=======
   const email = document.querySelector('#signup-email').value;
   const password = document.querySelector('#signup-password').value;
 
@@ -178,7 +142,6 @@ signInBtn.addEventListener('click', (e) => {
         alert('El correo que ingresó no está registrado, por favor, regístrece');
       }
     });
->>>>>>> 91fb46e96cbe462ec84acd6decc5da75c9f64640
 });
 
 // FUNCIÓN DE GOOGLE LOGIN
