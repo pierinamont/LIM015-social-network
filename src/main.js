@@ -145,10 +145,66 @@ const google = document.querySelector('#gmail-btn');
 
 google.addEventListener('click', (e) => {
   all.googleLogIn()
-  // .then(() => {
-  //   alert('funciona');
-  // })
-  // .catch(() => {
-  //   alert('NO funciona');
-  // })
+  .then(() => {
+    console.log('funciona');
+  })
+  .catch((error) => {
+    console.log(error);
+    console.log('no funciona');
+  })
 });
+
+//Funcion de facebook login
+
+const facebook = document.querySelector('#facebook-btn');
+
+facebook.addEventListener('click', (e) => {
+
+  all.FacebookLogin()
+  .then((result) => {
+    // console.log('funciona');
+    let token = result.credential.accessToken;
+    let user = result.user;
+    console.log(user.display);
+    updateUser(user);
+  })
+
+  .catch((error) => {
+    console.log(error);
+    // alert('no funciona');
+  })
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const auth = getAuth();
+// signInWithPopup(auth, provider)
+//   .then((result) => {
+//     // This gives you a Google Access Token. You can use it to access the Google API.
+//     const credential = GoogleAuthProvider.credentialFromResult(result);
+//     const token = credential.accessToken;
+//     // The signed-in user info.
+//     const user = result.user;
+//     // ...
+//   }).catch((error) => {
+//     // Handle Errors here.
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     // The email of the user's account used.
+//     const email = error.email;
+//     // The AuthCredential type that was used.
+//     const credential = GoogleAuthProvider.credentialFromError(error);
+//     // ...
+//   });

@@ -1,3 +1,4 @@
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyDMttVOUCqIenDzQS8Gzdt-D4bjUqxyfIU',
@@ -16,4 +17,7 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 // Nos permite conectar con google 
-export const provider = new firebase.auth.GoogleAuthProvider();
+export const providerG = new firebase.auth.GoogleAuthProvider();
+
+//Nos permite conectar con facebook
+export const providerF = new firebase.auth.FacebookAuthProvider();
