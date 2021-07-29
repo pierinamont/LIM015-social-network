@@ -69,20 +69,31 @@ signUpForm.addEventListener("click", (e) => {
 const signInForm = document.querySelector("#sign-in");
 signInForm.addEventListener("click", (e) => {
   e.preventDefault();
+<<<<<<< HEAD
   contentContainer.style.display = "flex";
   signUpContainer.style.display = "none";
+=======
+  contentContainer.style.display = 'flex';
+  signUpContainer.style.display = 'none';
+>>>>>>> 91fb46e96cbe462ec84acd6decc5da75c9f64640
 
   // Sirve para resetear el registro cuando haces click en el texto Iniciar Sesión
   document.querySelector("#signup-form").reset();
 });
 
 // FUNCION PARA REGISTRARSE
+<<<<<<< HEAD
 const signUpBtn = document.querySelector("#signup-btn"); // Llama a registrarse
 signUpBtn.addEventListener("click", (e) => {
+=======
+const signUpBtn = document.querySelector('#signup-btn'); // Llama a registrarse
+signUpBtn.addEventListener('click', (e) => {
+>>>>>>> 91fb46e96cbe462ec84acd6decc5da75c9f64640
   // Evita que la página vuelva a cargar//
   e.preventDefault();
 
   // Llamando el valor de los inputs
+<<<<<<< HEAD
   const email = document.querySelector("#signup-email").value;
   const password = document.querySelector("#signup-password").value;
 
@@ -111,4 +122,74 @@ signInBtn.addEventListener("click", (e) => {
   const password = document.querySelector("#password").value;
 
   all.userSignIn(email, password);
+=======
+  const email = document.querySelector('#signup-email').value;
+  const password = document.querySelector('#signup-password').value;
+
+  // Llama la función de error y éxito
+  all.userSignUp(email, password)
+    .then(() => {
+      alert('exito');
+    })
+    .catch((error) => {
+      console.log(error);
+      const errorCode = error.code;
+      if (errorCode === 'auth/invalid-email') {
+        alert('Por favor, completa los campos');
+      }
+      if (errorCode === 'auth/email-already-in-use') {
+        alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
+      }
+      if (errorCode === 'auth/weak-password') {
+        alert('La contraseña debe tener al menos 6 caracteres');
+      }
+    });
+});
+
+// FUNCION PARA INICIAR SESION
+const signInBtn = document.querySelector('#signin-btn'); // Llama boton de iniciar sesión
+
+signInBtn.addEventListener('click', (e) => {
+  /* Evento al pulsar */
+  // Evita que la página vuelva a cargar//
+  e.preventDefault();
+
+  // Llamando el valor de los inputs
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#password').value;
+
+  all.userSignIn(email, password)
+    .then(() => {
+      alert('iniciaste sesion');
+    })
+    .catch((error) => {
+      console.log(error);
+      const errorCode = error.code;
+
+      if (errorCode === 'auth/invalid-email') {
+        alert('Por favor ingrese su usuario y contraseña');
+      }
+      // error contraseña incorrecta
+      if (errorCode === 'auth/wrong-password') {
+        alert('Contraseña incorrecta, inténtelo de nuevo');
+      }
+      // error usuario no encontrado
+      if (errorCode === 'auth/user-not-found') {
+        alert('El correo que ingresó no está registrado, por favor, regístrece');
+      }
+    });
+>>>>>>> 91fb46e96cbe462ec84acd6decc5da75c9f64640
+});
+
+// FUNCIÓN DE GOOGLE LOGIN
+const google = document.querySelector('#gmail-btn');
+
+google.addEventListener('click', (e) => {
+  all.googleLogIn()
+  // .then(() => {
+  //   alert('funciona');
+  // })
+  // .catch(() => {
+  //   alert('NO funciona');
+  // })
 });

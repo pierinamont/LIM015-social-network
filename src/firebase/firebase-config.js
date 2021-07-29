@@ -7,13 +7,20 @@ const firebaseConfig = {
   messagingSenderId: '530373394488',
   appId: '1:530373394488:web:9244c18bf0bf31c10926cd',
 };
+<<<<<<< HEAD
 // console.log(typeof firebaseConfig);
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+=======
+export const firebaseInit = firebase.initializeApp(firebaseConfig);
+>>>>>>> 91fb46e96cbe462ec84acd6decc5da75c9f64640
 
 // Se agrega el auth => Nos ayuda a enviar los datos a Firebase
 export const auth = firebase.auth();
 
 // Nos sirve para guardar los datos de cada usuario
 export const firestore = firebase.firestore();
+
+// Nos permite conectar con google 
+export const provider = new firebase.auth.GoogleAuthProvider();

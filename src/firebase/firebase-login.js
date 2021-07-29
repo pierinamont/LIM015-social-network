@@ -1,9 +1,8 @@
 import * as todo from './firebase-config.js';
 
-todo.firebaseConfig;
+todo.firebaseInit;
 
-// FUNCIÓN PARA REGISTRARSE
-
+<<<<<<< HEAD
 export const userSignUp = (email, password) => {
   let result = false;
   //  Autentificación => Método de Firebase
@@ -60,4 +59,18 @@ export const userSignIn = (email, password) => {
         alert("El correo que ingresó no está registrado, por favor, regístrece");
       }
     });
+=======
+const auth = todo.auth;
+const provider = todo.provider;
+
+// FUNCIÓN PARA REGISTRARSE
+export const userSignUp = (email, password) => auth.createUserWithEmailAndPassword(email, password);
+
+// FUNCIÓN PARA INICIAR SESIÓN
+export const userSignIn = (email, password) => auth.signInWithEmailAndPassword(email, password);
+
+// FUNCIÓN CON GOOGLE
+export const googleLogIn = () => {
+    firebase.auth.signInWithPopup(provider);
+>>>>>>> 91fb46e96cbe462ec84acd6decc5da75c9f64640
 };
