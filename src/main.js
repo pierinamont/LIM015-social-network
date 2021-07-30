@@ -3,6 +3,7 @@
 // import * as all from 'firebase-admin';
 
 import * as all from './firebase/firebase-login.js';
+import * as todo from './firebase/firebase-config.js';
 
 const loginSection = document.getElementById('login-section');
 
@@ -77,9 +78,29 @@ signInForm.addEventListener('click', (e) => {
   document.querySelector('#login-form').reset();
 });
 
-// FUNCION PARA REGISTRARSE
-// const sendEmailVerification = all.sendEmailV(userEmail);
+// FUNCIÓN PARA VER ESTADO DE AUTENTIFICACIÓN Y DATOS DE USUARIO
+all.stateChange(user => {
+    if (user) {
+      let uid = user.uid;
+      console.log('El usuario ' + uid + ' está conectado');
+    } else {
+      console.log('usuario no conectado');
+    }
+});
 
+// FUNCIÓN PARA OBTENER PERFIL DE UN USUARIO
+const currentUser = todo.current;
+console.log(currentUser);
+if(currentUser !== null) {
+  const displayName = user.displayName;
+  const email = user.email;
+  const photoURL = user.photoURL;
+  const emailVerified = user.emailVerified;
+  console.log(displayName, email, photoURL, emailVerified);
+}
+
+
+// FUNCION PARA REGISTRARSE
 const signUpBtn = document.querySelector('#signup-btn'); // Llama a registrarse
 signUpBtn.addEventListener('click', (e) => {
   // Evita que la página vuelva a cargar//
@@ -96,7 +117,8 @@ signUpBtn.addEventListener('click', (e) => {
       console.log(result.user.uid);
       const email = result.user.email;
       console.log(email);
-      all.sendEmailV(email) // corregir 
+      
+      // all.sendEmailV(email) // corregir 
       console.log('registro exitoso');
     })
     .catch((error) => {
@@ -114,9 +136,14 @@ signUpBtn.addEventListener('click', (e) => {
     });
 });
 
+// FUNCIÓN PARA ENVIAR CORREO DE VERIFICACIÓN
+// all.sendEmailVerification
+//   .then(() => {
+//     console.log('correo de verificación enviado')
+//   })
+
 // FUNCION PARA INICIAR SESION
 const signInBtn = document.querySelector('#signin-btn'); // Llama boton de iniciar sesión
-
 signInBtn.addEventListener('click', (e) => {
   /* Evento al pulsar */
   // Evita que la página vuelva a cargar//
@@ -151,7 +178,6 @@ signInBtn.addEventListener('click', (e) => {
 
 // FUNCIÓN DE GOOGLE LOGIN
 const google = document.querySelector('#gmail-btn');
-
 google.addEventListener('click', (e) => {
   all.googleLogIn()
   .then((resullt) => {
@@ -165,22 +191,15 @@ google.addEventListener('click', (e) => {
 });
 
 // FUNCIÓN DE FACEBOOK LOGIN
-
 const facebook = document.querySelector('#facebook-btn');
-
 facebook.addEventListener('click', (e) => {
-  all.FacebookLogin()
+  all.facebookLogin()
   .then((result) => {
     console.log(result);
     console.log('login con facebook');
-    // const user = result.user;
-    // const credential = FacebookAuthProvider.credentialFromResult(result);
-    // const accessToken = credential.accessToken;
-    // console.log(user, accessToken);
   })
   .catch((error) => {
     console.log(error);
-    // alert('no funciona');
   })
 });
 

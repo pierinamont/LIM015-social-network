@@ -22,5 +22,9 @@ export const providerG = new firebase.auth.GoogleAuthProvider();
 //Nos permite conectar con facebook
 export const providerF = new firebase.auth.FacebookAuthProvider();
 
+// Nos ayuda a obtener el perfil del usuario
+export const current = auth.currentUser;
+
 // Envía un mensaje de verificación a un usuario
-export const user = firebase.auth.currentUser;
+//export const user = firebase.auth.currentUser;
+
