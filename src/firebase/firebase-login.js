@@ -3,7 +3,8 @@ import * as todo from './firebase-config.js';
 todo.firebaseInit;
 todo.providerG;
 const auth = todo.auth;
-//const provider = todo.provider;
+todo.getAuth;
+const user = todo.user;
 
 // FUNCIÓN PARA REGISTRARSE
 export const userSignUp = (email, password) => auth.createUserWithEmailAndPassword(email, password);
@@ -14,6 +15,9 @@ export const userSignIn = (email, password) => auth.signInWithEmailAndPassword(e
 // FUNCIÓN CON GOOGLE
 export const googleLogIn = () => auth.signInWithPopup(todo.providerG);
 
-//Funcion con facebook
+// FUNCIÓN CON FACEBOOK
 export const FacebookLogin = () => auth.signInWithPopup(todo.providerF);
+
+// FUNCIÓN PARA ENVIAR MENSAJE DE VERIFICACIÓN
+export const sendEmailV = (userEmail) => user.updateEmail(userEmail);
 
