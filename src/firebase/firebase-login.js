@@ -19,5 +19,5 @@ export const googleLogIn = () => auth.signInWithPopup(todo.providerG);
 export const FacebookLogin = () => auth.signInWithPopup(todo.providerF);
 
 // FUNCIÓN PARA ENVIAR MENSAJE DE VERIFICACIÓN
-export const sendEmailV = (userEmail) => user.updateEmail(userEmail);
+export const sendEmailV = (useremail) => user.updateEmail(useremail);
 

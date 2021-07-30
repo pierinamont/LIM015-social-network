@@ -99,6 +99,14 @@ signUpBtn.addEventListener('click', (e) => {
       all.sendEmailV(email) // corregir 
       console.log('registro exitoso');
     })
+
+    all.sendEmailV(useremail)
+    .then((result) => {
+      console.log(result);
+      console.log('Enviamos un msm de verificaciòn')
+
+    })
+
     .catch((error) => {
       console.log(error);
       const errorCode = error.code;
