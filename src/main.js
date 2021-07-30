@@ -72,11 +72,14 @@ signInForm.addEventListener('click', (e) => {
   contentContainer.style.display = 'flex';
   signUpContainer.style.display = 'none';
 
-  // Sirve para resetear el registro cuando haces click en el texto Iniciar Sesión
+  // Sirve para resetear el registro y el login cuando haces click en el texto Iniciar Sesión
   document.querySelector('#signup-form').reset();
+  document.querySelector('#login-form').reset();
 });
 
 // FUNCION PARA REGISTRARSE
+// const sendEmailVerification = all.sendEmailV(userEmail);
+
 const signUpBtn = document.querySelector('#signup-btn'); // Llama a registrarse
 signUpBtn.addEventListener('click', (e) => {
   // Evita que la página vuelva a cargar//
@@ -88,8 +91,13 @@ signUpBtn.addEventListener('click', (e) => {
 
   // Llama la función de error y éxito
   all.userSignUp(email, password)
-    .then(() => {
-      alert('exito');
+    .then((result) => {
+      console.log(result);
+      console.log(result.user.uid);
+      const email = result.user.email;
+      console.log(email);
+      all.sendEmailV(email) // corregir 
+      console.log('registro exitoso');
     })
     .catch((error) => {
       console.log(error);
@@ -119,8 +127,9 @@ signInBtn.addEventListener('click', (e) => {
   const password = document.querySelector('#password').value;
 
   all.userSignIn(email, password)
-    .then(() => {
-      alert('iniciaste sesion');
+    .then((result) => {
+      console.log(result);
+      console.log('iniciaste sesion con tu correo');
     })
     .catch((error) => {
       console.log(error);
@@ -145,8 +154,9 @@ const google = document.querySelector('#gmail-btn');
 
 google.addEventListener('click', (e) => {
   all.googleLogIn()
-  .then(() => {
-    console.log('funciona');
+  .then((resullt) => {
+    console.log(resullt)
+    console.log('login con google');
   })
   .catch((error) => {
     console.log(error);
@@ -154,21 +164,20 @@ google.addEventListener('click', (e) => {
   })
 });
 
-//Funcion de facebook login
+// FUNCIÓN DE FACEBOOK LOGIN
 
 const facebook = document.querySelector('#facebook-btn');
 
 facebook.addEventListener('click', (e) => {
-
   all.FacebookLogin()
   .then((result) => {
-    // console.log('funciona');
-    let token = result.credential.accessToken;
-    let user = result.user;
-    console.log(user.display);
-    updateUser(user);
+    console.log(result);
+    console.log('login con facebook');
+    // const user = result.user;
+    // const credential = FacebookAuthProvider.credentialFromResult(result);
+    // const accessToken = credential.accessToken;
+    // console.log(user, accessToken);
   })
-
   .catch((error) => {
     console.log(error);
     // alert('no funciona');
@@ -188,23 +197,3 @@ facebook.addEventListener('click', (e) => {
 
 
 
-
-// const auth = getAuth();
-// signInWithPopup(auth, provider)
-//   .then((result) => {
-//     // This gives you a Google Access Token. You can use it to access the Google API.
-//     const credential = GoogleAuthProvider.credentialFromResult(result);
-//     const token = credential.accessToken;
-//     // The signed-in user info.
-//     const user = result.user;
-//     // ...
-//   }).catch((error) => {
-//     // Handle Errors here.
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//     // The email of the user's account used.
-//     const email = error.email;
-//     // The AuthCredential type that was used.
-//     const credential = GoogleAuthProvider.credentialFromError(error);
-//     // ...
-//   });
