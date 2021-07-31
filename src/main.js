@@ -3,12 +3,9 @@
 // import * as all from 'firebase-admin';
 
 import * as all from './firebase/firebase-login.js';
-import * as todo from './firebase/firebase-config.js';
-
-const loginSection = document.getElementById('login-section');
 
 // CREAR ESTRUCTURA DEL LOGIN
-
+const loginSection = document.getElementById('login-section');
 const loginDiv = document.createElement('div');
 loginDiv.className = 'login-div';
 loginDiv.innerHTML = `
@@ -73,52 +70,42 @@ signInForm.addEventListener('click', (e) => {
   contentContainer.style.display = 'flex';
   signUpContainer.style.display = 'none';
 
-  // Sirve para resetear el registro y el login cuando haces click en el texto Iniciar Sesión
+  // Sirve para resetear el registro y el login 
   document.querySelector('#signup-form').reset();
   document.querySelector('#login-form').reset();
 });
 
 // FUNCIÓN PARA VER ESTADO DE AUTENTIFICACIÓN Y DATOS DE USUARIO
-all.stateChange(user => {
+all.authStateChange(user => {
     if (user) {
-      let uid = user.uid;
+      console.log(user);
+      user.sendEmailVerification().then(function () {
+        console.log('correo de verificación enviado');
+      }), function (error) {
+        console.log(error);
+      }
+      const uid = user.uid;
+      const email = user.email;
+      const emailVerified = user.emailVerified;
       console.log('El usuario ' + uid + ' está conectado');
+      console.log(email, emailVerified);
     } else {
-      console.log('usuario no conectado');
+      console.log('Ningún usuario conectado');
     }
 });
 
-// FUNCIÓN PARA OBTENER PERFIL DE UN USUARIO
-const currentUser = todo.current;
-console.log(currentUser);
-if(currentUser !== null) {
-  const displayName = user.displayName;
-  const email = user.email;
-  const photoURL = user.photoURL;
-  const emailVerified = user.emailVerified;
-  console.log(displayName, email, photoURL, emailVerified);
-}
-
-
 // FUNCION PARA REGISTRARSE
-const signUpBtn = document.querySelector('#signup-btn'); // Llama a registrarse
+const signUpBtn = document.querySelector('#signup-btn'); 
 signUpBtn.addEventListener('click', (e) => {
-  // Evita que la página vuelva a cargar//
   e.preventDefault();
-
-  // Llamando el valor de los inputs
   const email = document.querySelector('#signup-email').value;
   const password = document.querySelector('#signup-password').value;
 
-  // Llama la función de error y éxito
   all.userSignUp(email, password)
-    .then((result) => {
-      console.log(result);
-      console.log(result.user.uid);
-      const email = result.user.email;
+    .then((user) => {
+      console.log(user.user.uid);
+      const email = user.user.email;
       console.log(email);
-      
-      // all.sendEmailV(email) // corregir 
       console.log('registro exitoso');
     })
     .catch((error) => {
@@ -134,25 +121,16 @@ signUpBtn.addEventListener('click', (e) => {
         alert('La contraseña debe tener al menos 6 caracteres');
       }
     });
+    document.querySelector('#signup-form').reset();
 });
-
-// FUNCIÓN PARA ENVIAR CORREO DE VERIFICACIÓN
-// all.sendEmailVerification
-//   .then(() => {
-//     console.log('correo de verificación enviado')
-//   })
 
 // FUNCION PARA INICIAR SESION
 const signInBtn = document.querySelector('#signin-btn'); // Llama boton de iniciar sesión
 signInBtn.addEventListener('click', (e) => {
-  /* Evento al pulsar */
-  // Evita que la página vuelva a cargar//
   e.preventDefault();
 
-  // Llamando el valor de los inputs
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
-
   all.userSignIn(email, password)
     .then((result) => {
       console.log(result);
@@ -161,19 +139,17 @@ signInBtn.addEventListener('click', (e) => {
     .catch((error) => {
       console.log(error);
       const errorCode = error.code;
-
       if (errorCode === 'auth/invalid-email') {
         alert('Por favor ingrese su usuario y contraseña');
       }
-      // error contraseña incorrecta
       if (errorCode === 'auth/wrong-password') {
         alert('Contraseña incorrecta, inténtelo de nuevo');
       }
-      // error usuario no encontrado
       if (errorCode === 'auth/user-not-found') {
         alert('El correo que ingresó no está registrado, por favor, regístrece');
       }
     });
+    document.querySelector('#login-form').reset();
 });
 
 // FUNCIÓN DE GOOGLE LOGIN
