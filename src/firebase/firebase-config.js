@@ -16,6 +16,9 @@ export const auth = firebase.auth();
 // Nos sirve para guardar los datos de cada usuario
 export const firestore = firebase.firestore();
 
+// Método para cerrar sesión
+export const signOut = firebase.auth().signOut()
+
 // Nos permite conectar con google 
 export const providerG = new firebase.auth.GoogleAuthProvider();
 

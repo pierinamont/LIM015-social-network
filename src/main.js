@@ -76,52 +76,67 @@ signInForm.addEventListener('click', (e) => {
 });
 
 // FUNCIÓN PARA VER ESTADO DE AUTENTIFICACIÓN Y DATOS DE USUARIO
-all.authStateChange(user => {
-    if (user) {
-      console.log(user);
-      user.sendEmailVerification().then(function () {
-        console.log('correo de verificación enviado');
-      }), function (error) {
-        console.log(error);
-      }
-      const uid = user.uid;
-      const email = user.email;
-      const emailVerified = user.emailVerified;
-      console.log('El usuario ' + uid + ' está conectado');
-      console.log(email, emailVerified);
-    } else {
-      console.log('Ningún usuario conectado');
-    }
-});
+// all.authStateChange(user => {
+//     if (user) {
+//       console.log(user);
+//       user.sendEmailVerification().then(function () {
+//         console.log('correo de verificación enviado');
+//       }), function (error) {
+//         console.log(error);
+//       }
+//       const uid = user.uid;
+//       const email = user.email;
+//       const emailVerified = user.emailVerified;
+//       console.log('El usuario ' + uid + ' está conectado');
+//       console.log(email, emailVerified);
+//     } else {
+//       console.log('Ningún usuario conectado');
+//     }
+// });
 
 // FUNCION PARA REGISTRARSE
+const checkIn = (email, password, name) => {
+  all.userSignUp(email, password, name)
+  .then((result) => {
+    const email = result.user.email;
+    console.log(email);
+    console.log('registro exitoso');
+    result.user.updateProfile({
+      displayName: name
+    })
+    const configuration = {
+      url: 'http://localhost:5000/'
+    }
+    result.user.sendEmailVerification(configuration).catch(error => {
+      console.log(error)
+    })
+    all.signOut
+    alert(`Bienvenido ${name}, debes realizar el proceso de verificación`, 4000)
+  })
+  .catch((error) => {
+    console.log(error);
+    const errorCode = error.code;
+    if (errorCode === 'auth/invalid-email') {
+      alert('Por favor, completa los campos');
+    }
+    if (errorCode === 'auth/email-already-in-use') {
+      alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
+    }
+    if (errorCode === 'auth/weak-password') {
+      alert('La contraseña debe tener al menos 6 caracteres');
+    }
+  });
+}
+
+// EVENTO PARA REGISTRARSE
 const signUpBtn = document.querySelector('#signup-btn'); 
 signUpBtn.addEventListener('click', (e) => {
   e.preventDefault();
+  const name = document.querySelector('#signup-name').value;
   const email = document.querySelector('#signup-email').value;
   const password = document.querySelector('#signup-password').value;
-
-  all.userSignUp(email, password)
-    .then((user) => {
-      console.log(user.user.uid);
-      const email = user.user.email;
-      console.log(email);
-      console.log('registro exitoso');
-    })
-    .catch((error) => {
-      console.log(error);
-      const errorCode = error.code;
-      if (errorCode === 'auth/invalid-email') {
-        alert('Por favor, completa los campos');
-      }
-      if (errorCode === 'auth/email-already-in-use') {
-        alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
-      }
-      if (errorCode === 'auth/weak-password') {
-        alert('La contraseña debe tener al menos 6 caracteres');
-      }
-    });
-    document.querySelector('#signup-form').reset();
+  checkIn(email, password, name)
+  document.querySelector('#signup-form').reset();
 });
 
 // FUNCION PARA INICIAR SESION
@@ -133,8 +148,12 @@ signInBtn.addEventListener('click', (e) => {
   const password = document.querySelector('#password').value;
   all.userSignIn(email, password)
     .then((result) => {
-      console.log(result);
-      console.log('iniciaste sesion con tu correo');
+      if(result.user.emailVerified) {
+        alert(`Bienvenido ${result.user.displayName}`)
+      } else {
+        all.signOut
+        alert(`${result.user.displayName} por favor, realiza la verificación`)
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -156,9 +175,8 @@ signInBtn.addEventListener('click', (e) => {
 const google = document.querySelector('#gmail-btn');
 google.addEventListener('click', (e) => {
   all.googleLogIn()
-  .then((resullt) => {
-    console.log(resullt)
-    console.log('login con google');
+  .then((result) => {
+    alert(`Bienvenido ${result.user.displayName}`);
   })
   .catch((error) => {
     console.log(error);
@@ -171,8 +189,7 @@ const facebook = document.querySelector('#facebook-btn');
 facebook.addEventListener('click', (e) => {
   all.facebookLogin()
   .then((result) => {
-    console.log(result);
-    console.log('login con facebook');
+    alert(`Bienvenido ${result.user.displayName}`);
   })
   .catch((error) => {
     console.log(error);
