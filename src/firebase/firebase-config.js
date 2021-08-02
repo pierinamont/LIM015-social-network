@@ -8,6 +8,8 @@ const firebaseConfig = {
   appId: '1:530373394488:web:9244c18bf0bf31c10926cd',
 };
 
+
+
 export const firebaseInit = firebase.initializeApp(firebaseConfig);
 
 // Se agrega el auth => Nos ayuda a enviar los datos a Firebase
@@ -17,4 +19,7 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 // Nos permite conectar con google 
-export const provider = new firebase.auth.GoogleAuthProvider();
+export const providerG = new firebase.auth.GoogleAuthProvider();
+
+//Nos permite conectar con facebook
+export const providerF = new firebase.auth.FacebookAuthProvider();
