@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
 }
-    
+
 html { 
 font-size: 62.5%;
 font-family: 'Poppins', sans-serif;
@@ -22,6 +22,7 @@ font-family: 'Poppins', sans-serif;
 
 body {
     background-color: var(--background);
+    margin: 0;
 }
 
 .login-div {
@@ -204,3 +205,69 @@ body {
 #signup-form #sign-in:hover {
     color: var(--settings-color);
 }
+
+/*Estilos para navbar*/
+.header-bar-nav {
+    margin: 0;
+}
+
+.headerNav {
+    background-color: var( --btn-color);
+    color: black;
+    display: flex;
+    /*justify-content: space-around;*/
+    height: 50px;
+    align-items: center;
+    font-size: 1.4rem;
+}
+.logo-nav {
+    height: 27px;
+    width: auto;
+}
+.ul-nav {
+    list-style-type: none;
+    padding-top: 10px;
+    width: 50%;
+    background-color: var(--settings-color);
+    color: white;
+    /*display: none;*/
+}
+
+.ul-nav .li-nav {
+    /*display: none;*/
+    cursor: pointer;
+}
+.menu-hamburger {
+    padding-top: 3px;
+    display: none;
+}
+.menu-hamburger .menu-line {
+    width: 20px;
+    height: 3px;
+    background-color: white;
+    margin-bottom: 0.4rem;
+}
+@media all and (max-width: 600px) {
+    .headerNav {
+        flex-direction: column;
+        position: relative;
+    }
+    .menu-hamburger {
+        display: block;
+        position: absolute;
+        left: 15px;
+        top: 15px;
+    }
+    .ul-nav .li-nav {
+        display: inline-block;
+    }
+    .active {
+        display: block;
+    }
+}
+/* @media all and (min-width: 370px) {
+    .active {
+        display: block;
+    }
+} */
+

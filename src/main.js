@@ -4,7 +4,7 @@
 
 import * as all from './firebase/firebase-login.js';
 
-// CREAR ESTRUCTURA DEL LOGIN
+// Crear estructura del login
 const loginSection = document.getElementById('login-section');
 const loginDiv = document.createElement('div');
 loginDiv.className = 'login-div';
@@ -53,29 +53,31 @@ loginDiv.innerHTML = `
     `;
 loginSection.appendChild(loginDiv);
 
-// FUNCIÓN PARA MOSTRAR CONTENEDOR DE REGISTRO
-const contentContainer = document.querySelector('.content-container'); // Llama contenedor del login
-const signUpForm = document.querySelector('#sign-up'); // Llama a registrarse
-const signUpContainer = document.getElementById('signup-container'); // Llama contenedor de registro
+
+// Funciones 
+
+// Función para mostrar contenedor de registro
+const contentContainer = document.querySelector('.content-container'); 
+const signUpForm = document.querySelector('#sign-up'); 
+const signUpContainer = document.getElementById('signup-container'); 
 signUpForm.addEventListener('click', (e) => {
   e.preventDefault();
   contentContainer.style.display = 'none';
   signUpContainer.style.display = 'block';
 });
 
-// FUNCIÓN PARA MOSTRAR CONTENEDOR DE INICIAR SESIÓN
+// Función para mostrar contenedor de iniciar sesión
 const signInForm = document.querySelector('#sign-in');
 signInForm.addEventListener('click', (e) => {
   e.preventDefault();
   contentContainer.style.display = 'flex';
   signUpContainer.style.display = 'none';
 
-  // Sirve para resetear el registro y el login 
   document.querySelector('#signup-form').reset();
   document.querySelector('#login-form').reset();
 });
 
-// FUNCIÓN PARA VER ESTADO DE AUTENTIFICACIÓN Y DATOS DE USUARIO
+// Función para gestionar el estado del usuario
 // all.authStateChange(user => {
 //     if (user) {
 //       console.log(user);
@@ -94,7 +96,7 @@ signInForm.addEventListener('click', (e) => {
 //     }
 // });
 
-// FUNCION PARA REGISTRARSE
+// Función para registrarse
 const checkIn = (email, password, name) => {
   all.userSignUp(email, password, name)
   .then((result) => {
@@ -111,7 +113,7 @@ const checkIn = (email, password, name) => {
       console.log(error)
     })
     all.signOut
-    alert(`Bienvenido ${name}, debes realizar el proceso de verificación`, 4000)
+    alert(`Bienvenido ${name}, debes realizar el proceso de verificación`)
   })
   .catch((error) => {
     console.log(error);
@@ -128,7 +130,59 @@ const checkIn = (email, password, name) => {
   });
 }
 
-// EVENTO PARA REGISTRARSE
+// Función para iniciar sesión
+const login = (email, password) =>{
+  all.userSignIn(email, password)
+  .then((result) => {
+    if(result.user.emailVerified) {
+      alert(`Bienvenido ${result.user.displayName}`)
+    } else {
+      all.signOut
+      alert(`${result.user.displayName} por favor, realiza la verificación`)
+    }
+  })
+  .catch((error) => {
+    console.log(error);
+    const errorCode = error.code;
+    if (errorCode === 'auth/invalid-email') {
+      alert('Por favor ingrese su usuario y contraseña');
+    }
+    if (errorCode === 'auth/wrong-password') {
+      alert('Contraseña incorrecta, inténtelo de nuevo');
+    }
+    if (errorCode === 'auth/user-not-found') {
+      alert('El correo que ingresó no está registrado, por favor, regístrece');
+    }
+  })
+}
+
+// Función de Google login
+const loginGoogle = () => {
+  all.googleLogIn()
+  .then((result) => {
+    alert(`Bienvenido ${result.user.displayName}`);
+     
+  })
+  .catch((error) => {
+    console.log(error);
+    console.log('no funciona');
+  })
+}
+
+// Función de Facebook login
+const loginFacebook = () => {
+  all.facebookLogin()
+  .then((result) => {
+    alert(`Bienvenido ${result.user.displayName}`);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+}
+
+// Eventos
+
+// Evento para registrarse
 const signUpBtn = document.querySelector('#signup-btn'); 
 signUpBtn.addEventListener('click', (e) => {
   e.preventDefault();
@@ -139,67 +193,27 @@ signUpBtn.addEventListener('click', (e) => {
   document.querySelector('#signup-form').reset();
 });
 
-// FUNCION PARA INICIAR SESION
-const signInBtn = document.querySelector('#signin-btn'); // Llama boton de iniciar sesión
+// Evento de inciar sección 
+const signInBtn = document.querySelector('#signin-btn'); 
 signInBtn.addEventListener('click', (e) => {
   e.preventDefault();
-
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
-  all.userSignIn(email, password)
-    .then((result) => {
-      if(result.user.emailVerified) {
-        alert(`Bienvenido ${result.user.displayName}`)
-      } else {
-        all.signOut
-        alert(`${result.user.displayName} por favor, realiza la verificación`)
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      const errorCode = error.code;
-      if (errorCode === 'auth/invalid-email') {
-        alert('Por favor ingrese su usuario y contraseña');
-      }
-      if (errorCode === 'auth/wrong-password') {
-        alert('Contraseña incorrecta, inténtelo de nuevo');
-      }
-      if (errorCode === 'auth/user-not-found') {
-        alert('El correo que ingresó no está registrado, por favor, regístrece');
-      }
-    });
-    document.querySelector('#login-form').reset();
+  document.querySelector('#login-form').reset();
+  login(email,password);
 });
 
-// FUNCIÓN DE GOOGLE LOGIN
+// Evento de google login
 const google = document.querySelector('#gmail-btn');
 google.addEventListener('click', (e) => {
-  all.googleLogIn()
-  .then((result) => {
-    alert(`Bienvenido ${result.user.displayName}`);
-  })
-  .catch((error) => {
-    console.log(error);
-    console.log('no funciona');
-  })
+  loginGoogle();
 });
 
-// FUNCIÓN DE FACEBOOK LOGIN
+// Evento de facebook login
 const facebook = document.querySelector('#facebook-btn');
 facebook.addEventListener('click', (e) => {
-  all.facebookLogin()
-  .then((result) => {
-    alert(`Bienvenido ${result.user.displayName}`);
-  })
-  .catch((error) => {
-    console.log(error);
-  })
+  loginFacebook();
 });
-
-
-
-
-
 
 
 
