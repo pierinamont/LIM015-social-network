@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
 }
-    
+
 html { 
 font-size: 62.5%;
 font-family: 'Poppins', sans-serif;
@@ -22,6 +22,7 @@ font-family: 'Poppins', sans-serif;
 
 body {
     background-color: var(--background);
+    margin: 0;
 }
 
 .login-div {
@@ -144,7 +145,6 @@ body {
 
 
 /* SECCION PARA REGISTRARSE */
-
 #signup-form img {
     width: 120px;
     height: auto;
@@ -174,12 +174,9 @@ body {
 #signup-container .labels-container input::placeholder {
     padding-left: 15px;
 }
-
-
 #signup-container .labels-container label {
     margin-bottom: 6px;
 }
-
 #signup-form button {
     width: 164px;
     height: 40px;
@@ -195,8 +192,6 @@ body {
 #signup-form button:hover {
     background-color: var( --settings-color);
 }
-
-
 #signup-form #sign-in {
     color: var(--logo-color);
     cursor: pointer;
@@ -204,3 +199,97 @@ body {
 #signup-form #sign-in:hover {
     color: var(--settings-color);
 }
+
+/*Estilos para navbar*/
+.header-bar-nav {
+    margin: 0;
+}
+
+.headerNav {
+    background-color: var( --btn-color);
+    color: black;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    font-size: 1.4rem;
+}
+.logo-nav {
+    height: 27px;
+    width: auto;
+}
+.ul-nav {
+    list-style-type: none;
+    padding-top: 10px;
+    width: 50%;
+    color: white;
+}
+.li-nav {
+    cursor: pointer;
+    display: flex;
+}
+.li-nav img {
+    margin-right: 5px;
+}
+.menu-hamburger {
+    padding-top: 3px;
+    display: none;
+}
+.menu-hamburger .menu-line {
+    width: 20px;
+    height: 3px;
+    background-color: white;
+    margin-bottom: 0.4rem;
+}
+/*cuando es 600 o menos*/
+@media all and (max-width: 600px) {
+    .headerNav {
+        justify-content: center;
+        position: relative;
+    }
+    .menu-hamburger img {
+        padding-top: 12px;
+    }
+    .menu-hamburger {
+        display: block;
+        position: absolute;
+        left: 15px;
+        top: 15px;
+        padding-top: 0.4px;
+    }
+    .ul-nav {
+        display: none;
+    }
+    .li-nav:hover {
+        color: var(--btn-color);
+    }
+    .active {
+        background-color: var(--settings-color);
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: 0;
+        top: 36px;
+    }
+}
+/*cuando es más de 600*/
+@media all and (min-width: 600px) {
+    .headerNav {
+      justify-content: space-around;
+    }
+    .ul-nav {
+        list-style-type: none;
+        padding-top: 0px;
+        display: flex;
+        justify-content: space-around;
+        width: 50%;
+        color: white;
+    }
+    .li-nav {
+        display: flex;
+    }  
+    .li-nav:hover {
+        color: var(--settings-color);
+    }
+}
+
+
