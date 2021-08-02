@@ -3,6 +3,7 @@
 // import * as all from 'firebase-admin';
 
 import * as all from './firebase/firebase-login.js';
+import * as todo from './firebase/firebase-config.js';
 
 // Crear estructura del login
 const loginSection = document.getElementById('login-section');
@@ -77,25 +78,6 @@ signInForm.addEventListener('click', (e) => {
   document.querySelector('#login-form').reset();
 });
 
-// Función para gestionar el estado del usuario
-// all.authStateChange(user => {
-//     if (user) {
-//       console.log(user);
-//       user.sendEmailVerification().then(function () {
-//         console.log('correo de verificación enviado');
-//       }), function (error) {
-//         console.log(error);
-//       }
-//       const uid = user.uid;
-//       const email = user.email;
-//       const emailVerified = user.emailVerified;
-//       console.log('El usuario ' + uid + ' está conectado');
-//       console.log(email, emailVerified);
-//     } else {
-//       console.log('Ningún usuario conectado');
-//     }
-// });
-
 // Función para registrarse
 const checkIn = (email, password, name) => {
   all.userSignUp(email, password, name)
@@ -130,12 +112,27 @@ const checkIn = (email, password, name) => {
   });
 }
 
+// Función para gestionar el estado del usuario
+const headerBarNav = document.querySelector('#header-bar-nav');
+
+const authStateChange = () => {
+  all.authStateChange(user => {
+    if (user) {
+      headerBarNav.style.display = 'inline';
+      loginSection.style.display = 'none';
+    } else {
+      loginSection.style.display = 'inline';
+    }
+});
+}
+
 // Función para iniciar sesión
 const login = (email, password) =>{
   all.userSignIn(email, password)
   .then((result) => {
     if(result.user.emailVerified) {
       alert(`Bienvenido ${result.user.displayName}`)
+      authStateChange();
     } else {
       all.signOut
       alert(`${result.user.displayName} por favor, realiza la verificación`)
@@ -180,6 +177,14 @@ const loginFacebook = () => {
   })
 }
 
+// Función currentUser
+// const currentUser = all.currentUser
+// if(currentUser) {
+
+// }
+
+
+
 // Eventos
 
 // Evento para registrarse
@@ -202,6 +207,23 @@ signInBtn.addEventListener('click', (e) => {
   document.querySelector('#login-form').reset();
   login(email,password);
 });
+
+// Evento de cerrar sesión
+const signOutBtn = document.querySelector('#sign-out');
+signOutBtn.addEventListener('click', (e) => {
+  todo.signOut
+  .then(function() {
+    console.log('cerraste sesión')
+    headerBarNav.style.display = 'none';
+    loginSection.style.display = 'inline';
+  })
+  .catch((error) => {
+    console.log(error);
+    headerBarNav.style.display = 'inline';
+    loginSection.style.display = 'none';
+  })
+
+})
 
 // Evento de google login
 const google = document.querySelector('#gmail-btn');

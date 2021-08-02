@@ -145,7 +145,6 @@ body {
 
 
 /* SECCION PARA REGISTRARSE */
-
 #signup-form img {
     width: 120px;
     height: auto;
@@ -175,12 +174,9 @@ body {
 #signup-container .labels-container input::placeholder {
     padding-left: 15px;
 }
-
-
 #signup-container .labels-container label {
     margin-bottom: 6px;
 }
-
 #signup-form button {
     width: 164px;
     height: 40px;
@@ -196,8 +192,6 @@ body {
 #signup-form button:hover {
     background-color: var( --settings-color);
 }
-
-
 #signup-form #sign-in {
     color: var(--logo-color);
     cursor: pointer;
@@ -215,7 +209,6 @@ body {
     background-color: var( --btn-color);
     color: black;
     display: flex;
-    /*justify-content: space-around;*/
     height: 50px;
     align-items: center;
     font-size: 1.4rem;
@@ -228,14 +221,14 @@ body {
     list-style-type: none;
     padding-top: 10px;
     width: 50%;
-    /*background-color: var(--settings-color);*/
     color: white;
-    /*display: none;*/
 }
-
-.ul-nav .li-nav {
-   /* display: none;*/
+.li-nav {
     cursor: pointer;
+    display: flex;
+}
+.li-nav img {
+    margin-right: 5px;
 }
 .menu-hamburger {
     padding-top: 3px;
@@ -250,7 +243,6 @@ body {
 /*cuando es 600 o menos*/
 @media all and (max-width: 600px) {
     .headerNav {
-        /*flex-direction: column;*/
         justify-content: center;
         position: relative;
     }
@@ -262,15 +254,21 @@ body {
         position: absolute;
         left: 15px;
         top: 15px;
+        padding-top: 0.4px;
     }
     .ul-nav {
-        background-color: var(--settings-color);
         display: none;
     }
+    .li-nav:hover {
+        color: var(--btn-color);
+    }
     .active {
+        background-color: var(--settings-color);
         display: flex;
         flex-direction: column;
         position: absolute;
+        left: 0;
+        top: 36px;
     }
 }
 /*cuando es más de 600*/
@@ -280,21 +278,18 @@ body {
     }
     .ul-nav {
         list-style-type: none;
-        /* padding-top: 10px; */
+        padding-top: 0px;
         display: flex;
         justify-content: space-around;
         width: 50%;
         color: white;
-        display: inline;
     }
     .li-nav {
-        display: block;
+        display: flex;
+    }  
+    .li-nav:hover {
+        color: var(--settings-color);
     }
-    
 }
-/* @media all and (min-width: 370px) {
-    .active {
-        display: block;
-    }
-} */
+
 

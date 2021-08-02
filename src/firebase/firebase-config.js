@@ -17,7 +17,10 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 // Método para cerrar sesión
-export const signOut = firebase.auth().signOut()
+export const signOut = firebase.auth().signOut();
+
+// Método de para obtener el usuario actual autenticado
+export const currentUser = firebase.auth().currentUser;
 
 // Nos permite conectar con google 
 export const providerG = new firebase.auth.GoogleAuthProvider();

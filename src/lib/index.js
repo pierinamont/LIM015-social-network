@@ -18,13 +18,14 @@ headerNav.innerHTML = `
         <li class="li-nav">
             <a>Mi perfil</a>
         </li>
-        <li class="li-nav">
-            <a>Cerrar Sesión</a>
+        <li class="li-nav" id="sign-out">
+        <img src="../images/sign-out.svg"></img><a>Cerrar Sesión</a>
         </li>
     </ul>
 `;
 headerBarNav.appendChild(headerNav);
 
+// Evento para el menu de hamburguesa
 const toggleButton = document.getElementById('toggle-button');
 const navList = document.getElementById('nav-list');
 toggleButton.addEventListener('click',() => {
