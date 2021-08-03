@@ -292,4 +292,12 @@ body {
     }
 }
 
+/*Sección de perfil*/
+.profile .profile-user-img {
+    width: 80px;
+    height: auto;
+    border-radius: 100%;
+}
+
+
 
