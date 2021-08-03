@@ -82,7 +82,7 @@ const checkIn = (email, password, name) => {
       displayName: name
     })
     const configuration = {
-      url: 'http://localhost:5000/'
+      url: 'http://localhost:5000/' /**chequear */
     }
     result.user.sendEmailVerification(configuration).catch(error => {
       console.log(error)
@@ -107,7 +107,6 @@ const checkIn = (email, password, name) => {
 
 // Función para gestionar el estado del usuario
 const headerBarNav = document.querySelector('#header-bar-nav');
-
 const authStateChange = () => {
   all.authStateChange(user => {
     if (user) {
@@ -116,7 +115,7 @@ const authStateChange = () => {
     } else {
       loginSection.style.display = 'inline';
     }
-});
+  });
 }
 
 // Función para iniciar sesión
@@ -151,7 +150,7 @@ const loginGoogle = () => {
   all.googleLogIn()
   .then((result) => {
     alert(`Bienvenido ${result.user.displayName}`);
-     
+    authStateChange();
   })
   .catch((error) => {
     console.log(error);
@@ -164,18 +163,12 @@ const loginFacebook = () => {
   all.facebookLogin()
   .then((result) => {
     alert(`Bienvenido ${result.user.displayName}`);
+    authStateChange();
   })
   .catch((error) => {
     console.log(error);
   })
 }
-
-// Función currentUser
-// const currentUser = all.currentUser
-// if(currentUser) {
-
-// }
-
 
 
 // Eventos
