@@ -1,3 +1,4 @@
+import *  as firebase from '../firebase/firebase-login.js'
 // aqui exportaras las funciones que necesites
 const headerBarNav = document.getElementById('header-bar-nav');
 
@@ -31,3 +32,40 @@ const navList = document.getElementById('nav-list');
 toggleButton.addEventListener('click',() => {
     navList.classList.toggle('active');
 })
+
+// Estructura del perfil
+const mainPage = document.getElementById('main-page');
+
+const profileContainer = document.createElement('div');
+profileContainer.className = 'profile-container';
+profileContainer.innerHTML = `
+<div class="profile">
+<img class="profile-user-img" src=''>
+</div>
+`
+mainPage.appendChild(profileContainer);
+
+//Función para motrar la imagen 
+const profileUserImg = document.querySelector('.profile-user-img');
+
+const showProfileImg = () => {
+    firebase.authStateChange(user => {
+        if (user) {
+            console.log(user.photoURL);
+           if(user.photoURL === null) {
+            profileUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
+            console.log('no tienes foto');
+         } else {
+            profileUserImg.setAttribute('src', `${user.photoURL}`);
+            console.log('tienes foto');
+          
+        }
+
+        } else {
+          // ningun usuario conectado
+        }
+      });
+
+}
+showProfileImg();
+
