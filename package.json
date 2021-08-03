@@ -1,4 +1,5 @@
 {
+  "homepage": "https://pierinamont.github.io/LIM015-social-network",
   "name": "social-network",
   "version": "1.0.0",
   "description": "Social Network @ Laboratoria",
@@ -10,6 +11,8 @@
   ],
   "license": "MIT",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "htmlhint": "htmlhint dist/*.html ",
     "eslint": "eslint --ext .js src/ test/",
     "stylelint": "stylelint --aei src/**/*.css",
@@ -26,6 +29,7 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^24.1.0",
+    "gh-pages": "^3.2.3",
     "htmlhint": "^0.14.0",
     "jest": "^27.0.6",
     "regenerator-runtime": "^0.13.1",
@@ -37,6 +41,7 @@
     "node": ">=10"
   },
   "dependencies": {
+    "firebase": "^8.8.1",
     "firebase-admin": "^9.11.0"
   }
 }
