@@ -41,28 +41,28 @@ profileContainer.className = 'profile-container';
 profileContainer.innerHTML = `
 <div class="profile">
 <img class="profile-user-img" src=''>
+<p id='name-profile'></p>
 </div>
 `
 mainPage.appendChild(profileContainer);
 
 //Función para motrar la imagen 
 const profileUserImg = document.querySelector('.profile-user-img');
+const nameProfile = document.querySelector('#name-profile');
 
 const showProfileImg = () => {
     firebase.authStateChange(user => {
         if (user) {
-            console.log(user.photoURL);
+            nameProfile.innerHTML = `${user.displayName}`;
            if(user.photoURL === null) {
             profileUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
             console.log('no tienes foto');
          } else {
             profileUserImg.setAttribute('src', `${user.photoURL}`);
-            console.log('tienes foto');
-          
         }
 
         } else {
-          // ningun usuario conectado
+    
         }
       });
 
