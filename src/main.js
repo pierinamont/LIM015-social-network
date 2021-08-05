@@ -154,8 +154,8 @@ const login = (email, password) =>{
 const loginGoogle = () => {
   all.googleLogIn()
   .then((result) => {
+    console.log(result);
     alert(`Bienvenido ${result.user.displayName}`);
-     
   })
   .catch((error) => {
     console.log(error);
@@ -228,10 +228,12 @@ signOutBtn.addEventListener('click', (e) => {
 const google = document.querySelector('#gmail-btn');
 google.addEventListener('click', (e) => {
   loginGoogle();
+  authStateChange(); /*PIERINA */
 });
 
 // Evento de facebook login
 const facebook = document.querySelector('#facebook-btn');
 facebook.addEventListener('click', (e) => {
   loginFacebook();
+  authStateChange(); /*PIERINA */
 });
