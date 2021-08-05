@@ -10,9 +10,7 @@ const loginSection = document.getElementById('login-section');
 const loginDiv = document.createElement('div');
 loginDiv.className = 'login-div';
 loginDiv.innerHTML = `
-
     <!--SECCION PRINCIPAL DEL LOGIN-->
-
     <div class="content-container">
         <img class="illustration" src="./images/dog-walking.svg" alt="">
         <form id="login-form">
@@ -29,9 +27,7 @@ loginDiv.innerHTML = `
                 <p>¿No tienes cuenta? <strong id="sign-up">Regístrate</strong></p>
          </form>
     </div>
-
     <!--SECCION PARA REGISTRARSE-->
-
     <div id="signup-container" style= "display: none">
         <form id="signup-form">
                 <img class="logo" src="./images/petPlace.svg" alt="">
@@ -39,10 +35,8 @@ loginDiv.innerHTML = `
                 <div class="labels-container">
                     <label for="signup-name">Coloca tu nombre:</label>
                     <input class="input" type="text" placeholder="Coloca tu nombre" id="signup-name" required>
-
                     <label for="signup-email">Coloca tu correo:</label>
                     <input class="input" type="email" placeholder="Coloca tu correo" id="signup-email" required>
-
                     <label for="signup-password">Crea tu contraseña:</label>
                     <input class="input" type="password" placeholder="Coloca tu contraseña" name="" id="signup-password" required>
                 </div>
@@ -50,7 +44,6 @@ loginDiv.innerHTML = `
                 <p>¿Ya tienes cuenta? <strong id="sign-in">Inicia Sesión</strong></p>
             </form>
     </div>
-
     `;
 loginSection.appendChild(loginDiv);
 
@@ -81,15 +74,15 @@ signInForm.addEventListener('click', (e) => {
 // Función para registrarse
 const checkIn = (email, password, name) => {
   all.userSignUp(email, password, name)
-  .then((result) => {
-    const email = result.user.email;
+.then((result) => {
+  const email = result.user.email;
     console.log(email);
     console.log('registro exitoso');
     result.user.updateProfile({
       displayName: name
     })
     const configuration = {
-      url: 'http://localhost:5000/' /**chequear */
+      url: 'http://localhost:5000/'
     }
     result.user.sendEmailVerification(configuration).catch(error => {
       console.log(error)
@@ -127,7 +120,7 @@ const authStateChange = () => {
       mainPage.style.display = 'none';
       headerBarNav.style.display = 'none';
     }
-  });
+});
 }
 
 // Función para iniciar sesión
@@ -162,7 +155,7 @@ const loginGoogle = () => {
   all.googleLogIn()
   .then((result) => {
     alert(`Bienvenido ${result.user.displayName}`);
-    authStateChange();
+     
   })
   .catch((error) => {
     console.log(error);
@@ -175,12 +168,18 @@ const loginFacebook = () => {
   all.facebookLogin()
   .then((result) => {
     alert(`Bienvenido ${result.user.displayName}`);
-    authStateChange();
   })
   .catch((error) => {
     console.log(error);
   })
 }
+
+// Función currentUser
+// const currentUser = all.currentUser
+// if(currentUser) {
+
+// }
+
 
 
 // Eventos
@@ -210,7 +209,7 @@ signInBtn.addEventListener('click', (e) => {
 const signOutBtn = document.querySelector('#sign-out');
 signOutBtn.addEventListener('click', (e) => {
   todo.signOut
-  .then(function() {
+    .then(function() {
     console.log('cerraste sesión')
     headerBarNav.style.display = 'none';
     loginSection.style.display = 'inline';
@@ -236,12 +235,3 @@ const facebook = document.querySelector('#facebook-btn');
 facebook.addEventListener('click', (e) => {
   loginFacebook();
 });
-
-
-
-
-
-
-
-
-

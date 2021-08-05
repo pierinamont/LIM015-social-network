@@ -1,4 +1,4 @@
-import *  as firebase from '../firebase/firebase-login.js'
+import * as firebase from '../firebase/firebase-login.js';
 // aqui exportaras las funciones que necesites
 const headerBarNav = document.getElementById('header-bar-nav');
 
@@ -30,8 +30,9 @@ headerBarNav.appendChild(headerNav);
 const toggleButton = document.getElementById('toggle-button');
 const navList = document.getElementById('nav-list');
 toggleButton.addEventListener('click', () => {
-    navList.classList.toggle('active');
-})
+
+  navList.classList.toggle('active');
+});
 
 // Estructura del perfil
 const mainPage = document.getElementById('main-page');
@@ -46,6 +47,7 @@ container.innerHTML = `
      <p id='name-profile'></p>
   </div>
 </div>
+<<<<<<< HEAD
 
 <!----------------muro---------------->
 <div class = 'timeline-container'>
@@ -60,26 +62,24 @@ container.innerHTML = `
 `
 mainPage.appendChild(container);
 
-//Función para motrar la imagen 
+// Función para motrar la imagen
 const profileUserImg = document.querySelector('.profile-user-img');
 const nameProfile = document.querySelector('#name-profile');
 
 const showProfileImg = () => {
-    firebase.authStateChange(user => {
-        if (user) {
-            nameProfile.innerHTML = `${user.displayName}`;
-            if (user.photoURL === null) {
-                profileUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
-                console.log('no tienes foto');
-            } else {
-                profileUserImg.setAttribute('src', `${user.photoURL}`);
-            }
 
-        } else {
+  firebase.authStateChange((user) => {
+    if (user) {
+      nameProfile.innerHTML = `${user.displayName}`;
+      if (user.photoURL === null) {
+        profileUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
+      } else {
+        profileUserImg.setAttribute('src', `${user.photoURL}`);
+      }
+    } else {
+    // ningun usuario conectado
+    }
+  });
+};
 
-        }
-    });
-
-}
 showProfileImg();
-
