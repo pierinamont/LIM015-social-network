@@ -292,12 +292,90 @@ body {
     }
 }
 
+
+
+/*contenedor pagina principal*/
+.container{
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+    width: 90%;
+    grid-template-rows: 120px 120px 120px;
+    gap: 30px;
+    justify-content: center;
+}
+
+#main-page{
+    margin: 0 auto;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+/*contenedor del perfil*/
+
+.container .profile-container{
+    background-color: pink;
+    grid-column: 1;
+    grid-row: 1;
+    
+}
+.profile{
+    text-align: center;
+    background-color: white;
+    border-radius: 15px;
+    width: 100%;
+    height: 150px;
+}
+
 /*Sección de perfil*/
+
 .profile .profile-user-img {
     width: 80px;
     height: auto;
     border-radius: 100%;
 }
 
+/*contenedor del muro/timeline*/
 
+.container .timeline-container{
+    background-color: blue;
+    width: 100%;
+    height: 100%;
+    grid-column: 1;
+    grid-row: 2;
+}
+
+/*contenedor del posts*/
+.container .posts-container{
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    grid-column: 1;
+    grid-row: 3;
+}
+
+/* a partir de 768 se hace el responsive */
+@media (min-width: 768px) {
+
+    .container{
+     grid-template-columns:  minmax(0,7fr) minmax(0,17fr);
+     grid-auto-rows: minmax(100px, auto);
+
+    }
+    
+    .container .profile-container{
+        grid-column: 1;
+        grid-row: 1/3;
+    }
+    .container .timeline-container{
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .container .posts-container{
+        grid-column: 2 ;
+        grid-row: 2;
+    }
+
+    }
 
