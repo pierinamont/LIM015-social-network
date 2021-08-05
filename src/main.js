@@ -5,7 +5,7 @@
 import * as all from './firebase/firebase-login.js';
 import * as todo from './firebase/firebase-config.js';
 
-// Crear estructura del login
+;// Crear estructura del login
 const loginSection = document.getElementById('login-section');
 const loginDiv = document.createElement('div');
 loginDiv.className = 'login-div';
@@ -47,8 +47,6 @@ loginDiv.innerHTML = `
     `;
 loginSection.appendChild(loginDiv);
 
-
-// Funciones 
 
 // Función para mostrar contenedor de registro
 const contentContainer = document.querySelector('.content-container'); 
@@ -203,17 +201,21 @@ signInBtn.addEventListener('click', (e) => {
 
 // Evento de cerrar sesión
 const signOutBtn = document.querySelector('#sign-out');
+const mainPage = document.getElementById('main-page');
+
 signOutBtn.addEventListener('click', (e) => {
   todo.signOut
     .then(function() {
     console.log('cerraste sesión')
     headerBarNav.style.display = 'none';
     loginSection.style.display = 'inline';
+    mainPage.style.display = 'none';
   })
   .catch((error) => {
     console.log(error);
     headerBarNav.style.display = 'inline';
     loginSection.style.display = 'none';
+    mainPage.style.display = 'inline';
   })
 
 })
