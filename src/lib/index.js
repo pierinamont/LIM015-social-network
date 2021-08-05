@@ -47,7 +47,6 @@ container.innerHTML = `
      <p id='name-profile'></p>
   </div>
 </div>
-<<<<<<< HEAD
 
 <!----------------muro---------------->
 <div class = 'timeline-container'>
