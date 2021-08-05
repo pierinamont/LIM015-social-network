@@ -156,6 +156,7 @@ const loginGoogle = () => {
   .then((result) => {
     console.log(result);
     alert(`Bienvenido ${result.user.displayName}`);
+    authStateChange();
   })
   .catch((error) => {
     console.log(error);
@@ -168,18 +169,12 @@ const loginFacebook = () => {
   all.facebookLogin()
   .then((result) => {
     alert(`Bienvenido ${result.user.displayName}`);
+    authStateChange(); 
   })
   .catch((error) => {
     console.log(error);
   })
 }
-
-// Función currentUser
-// const currentUser = all.currentUser
-// if(currentUser) {
-
-// }
-
 
 
 // Eventos
@@ -228,12 +223,10 @@ signOutBtn.addEventListener('click', (e) => {
 const google = document.querySelector('#gmail-btn');
 google.addEventListener('click', (e) => {
   loginGoogle();
-  authStateChange(); /*PIERINA */
 });
 
 // Evento de facebook login
 const facebook = document.querySelector('#facebook-btn');
 facebook.addEventListener('click', (e) => {
   loginFacebook();
-  authStateChange(); /*PIERINA */
 });
