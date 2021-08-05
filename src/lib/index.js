@@ -29,22 +29,36 @@ headerBarNav.appendChild(headerNav);
 // Evento para el menu de hamburguesa
 const toggleButton = document.getElementById('toggle-button');
 const navList = document.getElementById('nav-list');
-toggleButton.addEventListener('click',() => {
+toggleButton.addEventListener('click', () => {
     navList.classList.toggle('active');
 })
 
 // Estructura del perfil
 const mainPage = document.getElementById('main-page');
 
-const profileContainer = document.createElement('div');
-profileContainer.className = 'profile-container';
-profileContainer.innerHTML = `
-<div class="profile">
-<img class="profile-user-img" src=''>
-<p id='name-profile'></p>
+const container = document.createElement('div');
+container.className = 'container';
+container.innerHTML = `
+<!----------------perfil---------------->
+<div class = 'profile-container'> 
+  <div class="profile">
+     <img class="profile-user-img" src=''>
+     <p id='name-profile'></p>
+  </div>
 </div>
+
+<!----------------muro---------------->
+<div class = 'timeline-container'>
+</div>
+
+<!--------publicaciones---------->
+<div class = 'posts-container'>
+
+</div>
+
+
 `
-mainPage.appendChild(profileContainer);
+mainPage.appendChild(container);
 
 //Función para motrar la imagen 
 const profileUserImg = document.querySelector('.profile-user-img');
@@ -54,17 +68,17 @@ const showProfileImg = () => {
     firebase.authStateChange(user => {
         if (user) {
             nameProfile.innerHTML = `${user.displayName}`;
-           if(user.photoURL === null) {
-            profileUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
-            console.log('no tienes foto');
-         } else {
-            profileUserImg.setAttribute('src', `${user.photoURL}`);
-        }
+            if (user.photoURL === null) {
+                profileUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
+                console.log('no tienes foto');
+            } else {
+                profileUserImg.setAttribute('src', `${user.photoURL}`);
+            }
 
         } else {
-    
+
         }
-      });
+    });
 
 }
 showProfileImg();

@@ -114,13 +114,18 @@ const checkIn = (email, password, name) => {
 
 // Función para gestionar el estado del usuario
 const headerBarNav = document.querySelector('#header-bar-nav');
+const mainPage = document.querySelector('#main-page');
+
 const authStateChange = () => {
   all.authStateChange(user => {
     if (user) {
       headerBarNav.style.display = 'inline';
       loginSection.style.display = 'none';
+      mainPage.style.display = 'flex';
     } else {
       loginSection.style.display = 'inline';
+      mainPage.style.display = 'none';
+      headerBarNav.style.display = 'none';
     }
   });
 }
@@ -209,11 +214,13 @@ signOutBtn.addEventListener('click', (e) => {
     console.log('cerraste sesión')
     headerBarNav.style.display = 'none';
     loginSection.style.display = 'inline';
+    mainPage.style.display = 'none';
   })
   .catch((error) => {
     console.log(error);
     headerBarNav.style.display = 'inline';
     loginSection.style.display = 'none';
+    mainPage.style.display = 'flex';
   })
 
 })
