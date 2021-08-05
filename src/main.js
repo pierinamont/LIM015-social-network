@@ -155,7 +155,7 @@ const loginGoogle = () => {
   all.googleLogIn()
   .then((result) => {
     alert(`Bienvenido ${result.user.displayName}`);
-     
+    authStateChange();
   })
   .catch((error) => {
     console.log(error);
@@ -168,6 +168,7 @@ const loginFacebook = () => {
   all.facebookLogin()
   .then((result) => {
     alert(`Bienvenido ${result.user.displayName}`);
+    authStateChange();
   })
   .catch((error) => {
     console.log(error);
