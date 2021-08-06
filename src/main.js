@@ -208,8 +208,8 @@ signOutBtn.addEventListener('click', (e) => {
       headerBarNav.style.display = 'none';
       loginSection.style.display = 'inline';
       mainPage.style.display = 'none';
-  });
-       .catch((error) => {
+  })
+    .catch((error) => {
     console.log(error);
     headerBarNav.style.display = 'inline';
     loginSection.style.display = 'none';
