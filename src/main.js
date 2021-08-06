@@ -150,6 +150,7 @@ const login = (email, password) => {
 // Función de Google login
 const loginGoogle = () => {
   all.googleLogIn()
+
     .then((result) => {
       console.log(result);
       alert(`Bienvenido ${result.user.displayName}`);
@@ -164,6 +165,7 @@ const loginGoogle = () => {
 // Función de Facebook login
 const loginFacebook = () => {
   all.facebookLogin()
+
     .then((result) => {
       alert(`Bienvenido ${result.user.displayName}`);
       authStateChange();
