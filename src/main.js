@@ -208,13 +208,13 @@ signOutBtn.addEventListener('click', (e) => {
       headerBarNav.style.display = 'none';
       loginSection.style.display = 'inline';
       mainPage.style.display = 'none';
-  })
+    })
     .catch((error) => {
-    console.log(error);
-    headerBarNav.style.display = 'inline';
-    loginSection.style.display = 'none';
+      console.log(error);
+      headerBarNav.style.display = 'inline';
+      loginSection.style.display = 'none';
       mainPage.style.display = 'flex';
-  });
+    });
 });
 
 // Evento de google login
