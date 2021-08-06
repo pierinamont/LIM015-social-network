@@ -106,9 +106,8 @@ const postDatabase = () => {
 }
 
 
-
-
 // Evento de botón publicar
 publishBtn.addEventListener('click', () => {
 
-})
+});
+evento del crud 
