@@ -48,8 +48,6 @@ loginDiv.innerHTML = `
 loginSection.appendChild(loginDiv);
 
 
-// Funciones 
-
 // Función para mostrar contenedor de registro
 const contentContainer = document.querySelector('.content-container'); 
 const signUpForm = document.querySelector('#sign-up'); 
@@ -73,25 +71,24 @@ signInForm.addEventListener('click', (e) => {
 
 // Función para registrarse
 const checkIn = (email, password, name) => {
-  all.userSignUp(email, password, name)
-.then((result) => {
-  const email = result.user.email;
+  all.userSignUp(email, password, name).then((result) => {
+    const email = result.user.email;
     console.log(email);
     console.log('registro exitoso');
     result.user.updateProfile({
-      displayName: name
-    })
+      displayName: name,
+    });
     const configuration = {
       url: 'http://localhost:5000/'
-    }
+    };
     result.user.sendEmailVerification(configuration).catch(error => {
       console.log(error)
-    })
+    });
     all.signOut
     alert(`Bienvenido ${name}, debes realizar el proceso de verificación`)
   })
-  .catch((error) => {
-    console.log(error);
+    .catch((error) => {
+      console.log(error);
     const errorCode = error.code;
     if (errorCode === 'auth/invalid-email') {
       alert('Por favor, completa los campos');
@@ -124,64 +121,59 @@ const authStateChange = () => {
 }
 
 // Función para iniciar sesión
-const login = (email, password) =>{
+const login = (email, password) => {
   all.userSignIn(email, password)
-  .then((result) => {
-    if(result.user.emailVerified) {
-      alert(`Bienvenido ${result.user.displayName}`)
-      authStateChange();
-    } else {
-      all.signOut
-      alert(`${result.user.displayName} por favor, realiza la verificación`)
-    }
-  })
-  .catch((error) => {
-    console.log(error);
-    const errorCode = error.code;
-    if (errorCode === 'auth/invalid-email') {
-      alert('Por favor ingrese su usuario y contraseña');
-    }
-    if (errorCode === 'auth/wrong-password') {
-      alert('Contraseña incorrecta, inténtelo de nuevo');
-    }
-    if (errorCode === 'auth/user-not-found') {
-      alert('El correo que ingresó no está registrado, por favor, regístrece');
-    }
-  })
-}
+    .then((result) => {
+      if (result.user.emailVerified) {
+        alert(`Bienvenido ${result.user.displayName}`)
+        authStateChange();
+      } else {
+        all.signOut
+        alert(`${result.user.displayName} por favor, realiza la verificación`)
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      const errorCode = error.code;
+      if (errorCode === 'auth/invalid-email') {
+        alert('Por favor ingrese su usuario y contraseña');
+      }
+      if (errorCode === 'auth/wrong-password') {
+        alert('Contraseña incorrecta, inténtelo de nuevo');
+      }
+      if (errorCode === 'auth/user-not-found') {
+        alert('El correo que ingresó no está registrado, por favor, regístrece');
+      }
+    });
+};
 
 // Función de Google login
 const loginGoogle = () => {
   all.googleLogIn()
-  .then((result) => {
-    alert(`Bienvenido ${result.user.displayName}`);
-    authStateChange();
-  })
-  .catch((error) => {
-    console.log(error);
-    console.log('no funciona');
-  })
-}
+
+    .then((result) => {
+      console.log(result);
+      alert(`Bienvenido ${result.user.displayName}`);
+      authStateChange(); /*PIERINA */
+    })
+    .catch((error) => {
+      console.log(error);
+      console.log('no funciona');
+    });
+};
 
 // Función de Facebook login
 const loginFacebook = () => {
   all.facebookLogin()
-  .then((result) => {
-    alert(`Bienvenido ${result.user.displayName}`);
-    authStateChange();
-  })
-  .catch((error) => {
-    console.log(error);
-  })
-}
 
-// Función currentUser
-// const currentUser = all.currentUser
-// if(currentUser) {
-
-// }
-
-
+    .then((result) => {
+      alert(`Bienvenido ${result.user.displayName}`);
+      authStateChange();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 // Eventos
 
@@ -192,11 +184,11 @@ signUpBtn.addEventListener('click', (e) => {
   const name = document.querySelector('#signup-name').value;
   const email = document.querySelector('#signup-email').value;
   const password = document.querySelector('#signup-password').value;
-  checkIn(email, password, name)
+  checkIn(email, password, name);
   document.querySelector('#signup-form').reset();
 });
 
-// Evento de inciar sección 
+// Evento de inciar sección
 const signInBtn = document.querySelector('#signin-btn'); 
 signInBtn.addEventListener('click', (e) => {
   e.preventDefault();
@@ -208,22 +200,22 @@ signInBtn.addEventListener('click', (e) => {
 
 // Evento de cerrar sesión
 const signOutBtn = document.querySelector('#sign-out');
+
 signOutBtn.addEventListener('click', (e) => {
   todo.signOut
-    .then(function() {
-    console.log('cerraste sesión')
-    headerBarNav.style.display = 'none';
-    loginSection.style.display = 'inline';
-    mainPage.style.display = 'none';
+    .then(() => {
+      console.log('cerraste sesión')
+      headerBarNav.style.display = 'none';
+      loginSection.style.display = 'inline';
+      mainPage.style.display = 'none';
   })
-  .catch((error) => {
+    .catch((error) => {
     console.log(error);
     headerBarNav.style.display = 'inline';
     loginSection.style.display = 'none';
-    mainPage.style.display = 'flex';
-  })
-
-})
+      mainPage.style.display = 'flex';
+  });
+});
 
 // Evento de google login
 const google = document.querySelector('#gmail-btn');
