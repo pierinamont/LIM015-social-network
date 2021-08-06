@@ -16,4 +16,3 @@ export const facebookLogin = () => auth.signInWithPopup(todo.providerF);
 
 // FUCIÓN PARA DETECTAR CAMBIOS EN LA AUTENTIFICACIÓN
 export const authStateChange = (user) => auth.onAuthStateChanged(user);
-

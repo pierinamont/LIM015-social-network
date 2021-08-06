@@ -30,7 +30,6 @@ headerBarNav.appendChild(headerNav);
 const toggleButton = document.getElementById('toggle-button');
 const navList = document.getElementById('nav-list');
 toggleButton.addEventListener('click', () => {
-
   navList.classList.toggle('active');
 });
 
@@ -50,6 +49,13 @@ container.innerHTML = `
 
 <!----------------muro---------------->
 <div class = 'timeline-container'>
+  <div class= 'timeline'>
+   <input class='input-timeline' type=text placeholder='Crear publicación'><br>
+   <div class= 'container-btn'>
+   <img src='../images/picture.svg'>
+   <input type=button value='Publicar'>
+   </div>
+  </div>
 </div>
 
 <!--------publicaciones---------->
@@ -58,7 +64,7 @@ container.innerHTML = `
 </div>
 
 
-`
+`;
 mainPage.appendChild(container);
 
 // Función para motrar la imagen
@@ -66,7 +72,6 @@ const profileUserImg = document.querySelector('.profile-user-img');
 const nameProfile = document.querySelector('#name-profile');
 
 const showProfileImg = () => {
-
   firebase.authStateChange((user) => {
     if (user) {
       nameProfile.innerHTML = `${user.displayName}`;
