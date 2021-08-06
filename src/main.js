@@ -46,12 +46,10 @@ loginDiv.innerHTML = `
     </div>
     `;
 loginSection.appendChild(loginDiv);
-
-
 // Función para mostrar contenedor de registro
-const contentContainer = document.querySelector('.content-container'); 
-const signUpForm = document.querySelector('#sign-up'); 
-const signUpContainer = document.getElementById('signup-container'); 
+const contentContainer = document.querySelector('.content-container');
+const signUpForm = document.querySelector('#sign-up');
+const signUpContainer = document.getElementById('signup-container');
 signUpForm.addEventListener('click', (e) => {
   e.preventDefault();
   contentContainer.style.display = 'none';
@@ -72,7 +70,7 @@ signInForm.addEventListener('click', (e) => {
 // Función para registrarse
 const checkIn = (email, password, name) => {
   all.userSignUp(email, password, name).then((result) => {
-    const email = result.user.email;
+    let email = result.user.email;
     console.log(email);
     console.log('registro exitoso');
     result.user.updateProfile({
@@ -82,25 +80,25 @@ const checkIn = (email, password, name) => {
       url: 'http://localhost:5000/'
     };
     result.user.sendEmailVerification(configuration).catch(error => {
-      console.log(error)
+      console.log(error);
     });
     all.signOut
     alert(`Bienvenido ${name}, debes realizar el proceso de verificación`)
   })
     .catch((error) => {
       console.log(error);
-    const errorCode = error.code;
-    if (errorCode === 'auth/invalid-email') {
-      alert('Por favor, completa los campos');
-    }
-    if (errorCode === 'auth/email-already-in-use') {
-      alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
-    }
-    if (errorCode === 'auth/weak-password') {
-      alert('La contraseña debe tener al menos 6 caracteres');
-    }
-  });
-}
+      const errorCode = error.code;
+      if (errorCode === 'auth/invalid-email') {
+        alert('Por favor, completa los campos');
+      }
+      if (errorCode === 'auth/email-already-in-use') {
+        alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
+      }
+      if (errorCode === 'auth/weak-password') {
+        alert('La contraseña debe tener al menos 6 caracteres');
+      }
+    });
+};
 
 // Función para gestionar el estado del usuario
 const headerBarNav = document.querySelector('#header-bar-nav');
@@ -118,7 +116,7 @@ const authStateChange = () => {
       headerBarNav.style.display = 'none';
     }
 });
-}
+};
 
 // Función para iniciar sesión
 const login = (email, password) => {
@@ -150,7 +148,6 @@ const login = (email, password) => {
 // Función de Google login
 const loginGoogle = () => {
   all.googleLogIn()
-
     .then((result) => {
       console.log(result);
       alert(`Bienvenido ${result.user.displayName}`);
@@ -165,7 +162,6 @@ const loginGoogle = () => {
 // Función de Facebook login
 const loginFacebook = () => {
   all.facebookLogin()
-
     .then((result) => {
       alert(`Bienvenido ${result.user.displayName}`);
       authStateChange();
@@ -195,7 +191,7 @@ signInBtn.addEventListener('click', (e) => {
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
   document.querySelector('#login-form').reset();
-  login(email,password);
+  login(email, password);
 });
 
 // Evento de cerrar sesión
@@ -208,13 +204,13 @@ signOutBtn.addEventListener('click', (e) => {
       headerBarNav.style.display = 'none';
       loginSection.style.display = 'inline';
       mainPage.style.display = 'none';
-  })
+    })
     .catch((error) => {
-    console.log(error);
-    headerBarNav.style.display = 'inline';
-    loginSection.style.display = 'none';
+      console.log(error);
+      headerBarNav.style.display = 'inline';
+      loginSection.style.display = 'none';
       mainPage.style.display = 'flex';
-  });
+    });
 });
 
 // Evento de google login

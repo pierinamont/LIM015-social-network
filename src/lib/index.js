@@ -1,4 +1,9 @@
 import * as firebase from '../firebase/firebase-login.js';
+import * as config from '../firebase/firebase-config.js';
+
+
+
+
 // aqui exportaras las funciones que necesites
 const headerBarNav = document.getElementById('header-bar-nav');
 
@@ -53,7 +58,7 @@ container.innerHTML = `
    <input class='input-timeline' type=text placeholder='Crear publicación'><br>
    <div class= 'container-btn'>
    <img src='../images/picture.svg'>
-   <input type=button value='Publicar'>
+   <input id="publish-btn" type=button value='Publicar'>
    </div>
   </div>
 </div>
@@ -87,3 +92,21 @@ const showProfileImg = () => {
 };
 
 showProfileImg();
+
+
+
+
+const database = config.db;
+const inputTimeline = document.querySelector('.input-timeline');
+const publishBtn = document.querySelector('#publish-btn');
+
+
+const postDatabase = () => {
+  let description = value('desc');
+}
+
+
+// Evento de botón publicar
+publishBtn.addEventListener('click', () => {
+
+});
