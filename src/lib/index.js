@@ -55,7 +55,7 @@ container.innerHTML = `
 <!----------------muro---------------->
 <div class = 'timeline-container'>
   <div class= 'timeline'>
-   <input class='input-timeline' type=text placeholder='Crear publicación'><br>
+   <input class='input-timeline' type='text' placeholder='Crear publicación'><br>
    <div class= 'container-btn'>
    <img src='../images/picture.svg'>
    <input id="publish-btn" type=button value='Publicar'>
@@ -65,14 +65,14 @@ container.innerHTML = `
 
 <!--------publicaciones---------->
 <div class = 'posts-container'>
-
+  <p class="user-name"></p>
 </div>
 
 
 `;
 mainPage.appendChild(container);
 
-// Función para motrar la imagen
+// Función para motrar la imagen de perfil y su nombre
 const profileUserImg = document.querySelector('.profile-user-img');
 const nameProfile = document.querySelector('#name-profile');
 
@@ -94,20 +94,58 @@ const showProfileImg = () => {
 showProfileImg();
 
 
+const db = config.firestore;
+const inputTimeline = document.querySelector('.input-timeline'); 
+const publishBtn = document.querySelector('#publish-btn'); // Botón para publicar
+const userNameParagraph = document.querySelector('.user-name'); // p
+
+// Nombre en contenedor de publicación (etiqueta p)
+// const userName = () => {
+//   firebase.authStateChange((user) => {
+//     if (user) {
+//       userNameParagraph.innerHTML = `${user.displayName}`;
+//       // (user.displayName);
+//     } else {
+//       console.log('error');
+//     }
+  
+//   });
+// }
+// userName();
+
+// Mostrar nombre de usuario autentificado
+const showName = () => {
+  let nameP = '';
+  firebase.authStateChange((user) => {
+    if (user) {
+      nameP = user.displayName;
+      // console.log(nameP);
+    }
+  });
+  // console.log(nameP);
+  // return nameP;
+};
+showName();
 
 
-const database = config.db;
-const inputTimeline = document.querySelector('.input-timeline');
-const publishBtn = document.querySelector('#publish-btn');
 
-
-const postDatabase = () => {
-  let description = value('desc');
+// Obtiene el valor del input
+const getValues = () => {
+  db.collection('posts').add({
+    // name: showName(),
+    description: inputTimeline.value
+  })
+  .then((docRef) => {
+    console.log('Documento escrito con el ID: ', docRef.id);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
 }
+
 
 
 // Evento de botón publicar
 publishBtn.addEventListener('click', () => {
-
+  getValues();
 });
-evento del crud 
