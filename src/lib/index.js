@@ -16,7 +16,7 @@ headerNav.innerHTML = `
         <div class="menu-line"></div>
         <div class="menu-line"></div>
     </div>     
-    <img class="logo-nav" src="../images/logo-horizontal.svg"></img>
+    <img class="logo-nav" src="../images/logo-horizontal(2).svg"></img>
     <ul class="ul-nav" id="nav-list">
         <li class="li-nav">
             <a>Inicio</a>
@@ -65,6 +65,7 @@ container.innerHTML = `
 
 <!--------publicaciones---------->
 <div class = 'posts-container'>
+  <img class="post-user-img" src='' display="style: none">
   <p class="user-name"></p>
 </div>
 
@@ -98,44 +99,82 @@ const db = config.firestore;
 const inputTimeline = document.querySelector('.input-timeline'); 
 const publishBtn = document.querySelector('#publish-btn'); // Botón para publicar
 const userNameParagraph = document.querySelector('.user-name'); // p
+const postUserImg = document.querySelector('.post-user-img'); 
 
 // Nombre en contenedor de publicación (etiqueta p)
-// const userName = () => {
-//   firebase.authStateChange((user) => {
-//     if (user) {
-//       userNameParagraph.innerHTML = `${user.displayName}`;
-//       // (user.displayName);
-//     } else {
-//       console.log('error');
-//     }
-  
-//   });
-// }
-// userName();
-
-// Mostrar nombre de usuario autentificado
-const showName = () => {
-  let nameP = '';
+const userName = () => {
   firebase.authStateChange((user) => {
     if (user) {
-      nameP = user.displayName;
-      // console.log(nameP);
+      userNameParagraph.innerHTML = `${user.displayName}`;
+      // (user.displayName);
+      if (user.photoURL === null) {
+        postUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
+      } else {
+        postUserImg.setAttribute('src', `${user.photoURL}`);
+      }
+    } else {
+      console.log('error');
     }
+  
   });
-  // console.log(nameP);
-  // return nameP;
+}
+
+
+// Mostrar nombre de usuario autentificado
+
+const showName = (user) => {
+  // let name = '';
+  let userN = firebase.authStateChange((user) => {
+    console.log(user.displayName);
+    return user;
+    // console.log(name);
+    // return name;
+    // name = user.displayName;
+    // user.displayName;
+    // return name
+      // name = user.displayName;
+      // console.log(name);
+  })
+  userN = user;
+  // console.log(userN);
+  // console.log(typeof userN);
+  // return userN;
+  // .then((name) => {
+  //   console.log(name);
+  // })
+  // .catch((err) => {
+  //   console.log(err);
+  // });
+  // console.log(userN);
+
 };
-showName();
+console.log(showName());
+
+// INTENTO
+// let data = {
+//   name: firebase.authStateChange((user)=> {return user.displayName}),
+//   description: inputTimeline.value
+// }
+
+// const getValues = () => { 
+//   db.collection('posts').doc('one').set(data).then((
+//     console.log('colección de posts guardada')
+//   ));
+// }
 
 
 
 // Obtiene el valor del input
 const getValues = () => {
+  
   db.collection('posts').add({
+    // name: `${showName()}`,
     // name: showName(),
-    description: inputTimeline.value
+    description: inputTimeline.value,
+
   })
   .then((docRef) => {
+    console.log(docRef);
     console.log('Documento escrito con el ID: ', docRef.id);
   })
   .catch((error) => {
@@ -148,4 +187,8 @@ const getValues = () => {
 // Evento de botón publicar
 publishBtn.addEventListener('click', () => {
   getValues();
+  userName();
+  // showName();
+  postUserImg.style.display = 'inline';
+  
 });

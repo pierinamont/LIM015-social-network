@@ -214,7 +214,7 @@ body {
     font-size: 1.4rem;
 }
 .logo-nav {
-    height: 27px;
+    height: 32px;
     width: auto;
 }
 .ul-nav {
@@ -314,15 +314,18 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 16px;
+    width: 80%;
+    margin: 0 auto;
 }
 
 /*contenedor del perfil*/
 
 .container .profile-container{
     background-color: pink;
+    width: 100%;
     grid-column: 1;
     grid-row: 1;
-    
+    border: 5px solid black;
 }
 .profile{
     text-align: center;
@@ -340,7 +343,8 @@ body {
     border-radius: 100%;
 }
 .profile #name-profile{
-    font-size: 1.4rem;
+    font-size: 1.6rem;
+    font-weight: 500;
 }
 /*contenedor del muro/timeline*/
 
@@ -372,6 +376,12 @@ body {
     height: 100%;
     grid-column: 1;
     grid-row: 3;
+    border: 5px solid black;
+}
+.posts-container .post-user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
 }
 
 /* a partir de 768 se hace el responsive */
