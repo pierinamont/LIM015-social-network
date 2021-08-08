@@ -17,7 +17,7 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 // Metodo para conectarnos con la base de datos
-export const db = firebase.database();
+// export const db = firebase.database();
 
 // Método para cerrar sesión
 export const signOut = firebase.auth().signOut();
@@ -32,5 +32,6 @@ export const providerG = new firebase.auth.GoogleAuthProvider();
 // Nos permite conectar con facebook
 
 export const providerF = new firebase.auth.FacebookAuthProvider();
+
 //  Persistencia del estado de autenticación
 export const sPersistence = firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
