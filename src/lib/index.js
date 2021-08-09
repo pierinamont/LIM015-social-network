@@ -1,7 +1,6 @@
 import * as firebase from '../firebase/firebase-login.js';
 import * as config from '../firebase/firebase-config.js';
 
-
 // aqui exportaras las funciones que necesites
 const headerBarNav = document.getElementById('header-bar-nav');
 
@@ -48,7 +47,6 @@ container.innerHTML = `
      <p id='name-profile'></p>
   </div>
 </div>
-
 <!----------------muro---------------->
 <div class = 'timeline-container'>
   <div class= 'timeline'>
@@ -59,14 +57,13 @@ container.innerHTML = `
    </div>
   </div>
 </div>
-
 <!--------publicaciones---------->
 <div class = 'posts-container'>
-  <img class="post-user-img" src='' display="style: none">
-  <p class="user-name"></p>
+  <!-- <img class="post-user-img" src='' display="style: none">
+  // <p class="user-name"></p>-->
+  <input class='input-post' type='text'  display="style: none">
+  <div id="post"></div>
 </div>
-
-
 `;
 mainPage.appendChild(container);
 
@@ -91,72 +88,94 @@ const showProfileImg = () => {
 
 showProfileImg();
 
-
 const db = config.firestore;
-const inputTimeline = document.querySelector('.input-timeline'); 
+const inputTimeline = document.querySelector('.input-timeline');
 const publishBtn = document.querySelector('#publish-btn'); // Botón para publicar
-const userNameParagraph = document.querySelector('.user-name'); // p
-const postUserImg = document.querySelector('.post-user-img'); 
+// const userNameParagraph = document.querySelector('.user-name'); // p
+// const postUserImg = document.querySelector('.post-user-img');
+const inputPost = document.querySelector('input-post');
 
 // Nombre en contenedor de publicación (etiqueta p)
-const userName = () => {
-  firebase.authStateChange((user) => {
-    if (user) {
-      userNameParagraph.innerHTML = `${user.displayName}`;
-      if (user.photoURL === null) {
-        postUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
-      } else {
-        postUserImg.setAttribute('src', `${user.photoURL}`);
-      }
-    } else {
-      console.log('error');
-    }
-  
-  });
-}
+// const userName = () => {
+//   firebase.authStateChange((user) => {
+//     if (user) {
+//       userNameParagraph.innerHTML = `${user.displayName}`;
+//       if (user.photoURL === null) {
+//         postUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
+//       } else {
+//         postUserImg.setAttribute('src', `${user.photoURL}`);
+//       }
+//     } else {
+//       console.log('error');
+//     }
+//   });
+// };
+// Mostrar publicacion
+const publishPost = () => {
+  const inputTimelineV = inputTimeline.value;
+  let inputPostV = inputPost;
+  inputPostV = inputTimelineV;
 
+  console.log(inputPostV);
 
+  if (inputTimeline.value === '') {
+    alert('Rellenar espacios ');
+  } else {
+    inputPost.style.display = 'block';
+  }
+};
 // Mostrar nombre de usuario autentificado
 
 // Obtiene el valor del input
 const getValues = () => {
-  firebase.authStateChange((user) => {
-    if (user) {
-      db.collection('posts').add({
-        user: user.uid,
-        description: inputTimeline.value
-      })
-      .then((docRef) => {
-        console.log(docRef);
-        console.log('Documento escrito con el ID: ', docRef.id);
+  const user = config.currentUser();
+  return db.collection('posts').add({
+    photo: user.photoURL,
+    // user: user.uid,
+    name: user.displayName,
+    description: inputTimeline.value,
+    // fecha: config.firestore.FieldValue.Timestamp.now(),
+  })
+    .then((docRef) => {
+      console.log(docRef);
+      console.log('Documento escrito con el ID: ', docRef.id);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+// const getPost = () => {
+//   db.collection('posts')
+//     .get()
+//     .then((querySnapshot) => {
+//       const posts = [];
+//       /// console.log(querySnapshot);
+//       querySnapshot.forEach((doc) => {
+//         posts.push(doc.data());
+//       });
+//       console.log('tus posts: ', posts);
+//     })
+//     .catch((error) => {
+//       console.log('Error getting documents: ', error);
+//     });
+// };
 
-        ////////////////quitarlo de aqui despues
-        db.collection("posts").where("user", "==", user.uid)
-        .get()
-        .then(function(querySnapshot) {
-          let posts = [];
-         /// console.log(querySnapshot);
-          querySnapshot.forEach(function(doc) {
-            posts.push(doc.data());
-          });
-          console.log("tus posts: ", posts);
-        })
-        .catch(function(error) {
-            console.log("Error getting documents: ", error);
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-    } else {
-    // ningun usuario conectado
-    }
-  }); 
-}
+const getPost = () => db.collection('posts').get();
+window.addEventListener('DOMContentLoaded', async () => {
+  const arrayPosts = [];
+  const querySnapshot = await getPost();
+  querySnapshot.forEach((doc) => {
+    const post = document.getElementById('post');
+    post.innerHTML += `<div class = 'post-body'> <p> ${doc.data().description}</p></div>`;
+    arrayPosts.push(doc.data());
+  });
+});
 
 // Evento de botón publicar
 publishBtn.addEventListener('click', () => {
-  getValues();
-  userName();
+  getValues().then(() => {
+    getPost();
+  });
+  // userName();
+  // publishPost();
 });
-
