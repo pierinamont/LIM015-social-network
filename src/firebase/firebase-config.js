@@ -17,7 +17,7 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 // Metodo para conectarnos con la base de datos
-export const db = firebase.database();
+// export const db = firebase.database();
 
 // Método para cerrar sesión
 export const signOut = firebase.auth().signOut();
