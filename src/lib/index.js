@@ -2,14 +2,11 @@ import * as firebase from '../firebase/firebase-login.js';
 import * as config from '../firebase/firebase-config.js';
 
 
-
-
 // aqui exportaras las funciones que necesites
 const headerBarNav = document.getElementById('header-bar-nav');
 
 const headerNav = document.createElement('nav');
 headerNav.className = 'headerNav';
-// headerNav.classListAdd('headerNav');
 headerNav.innerHTML = `
     <div class="menu-hamburger" id="toggle-button">
         <div class="menu-line"></div>
@@ -106,7 +103,6 @@ const userName = () => {
   firebase.authStateChange((user) => {
     if (user) {
       userNameParagraph.innerHTML = `${user.displayName}`;
-      // (user.displayName);
       if (user.photoURL === null) {
         postUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
       } else {
@@ -122,73 +118,45 @@ const userName = () => {
 
 // Mostrar nombre de usuario autentificado
 
-const showName = (user) => {
-  // let name = '';
-  let userN = firebase.authStateChange((user) => {
-    console.log(user.displayName);
-    return user;
-    // console.log(name);
-    // return name;
-    // name = user.displayName;
-    // user.displayName;
-    // return name
-      // name = user.displayName;
-      // console.log(name);
-  })
-  userN = user;
-  // console.log(userN);
-  // console.log(typeof userN);
-  // return userN;
-  // .then((name) => {
-  //   console.log(name);
-  // })
-  // .catch((err) => {
-  //   console.log(err);
-  // });
-  // console.log(userN);
-
-};
-console.log(showName());
-
-// INTENTO
-// let data = {
-//   name: firebase.authStateChange((user)=> {return user.displayName}),
-//   description: inputTimeline.value
-// }
-
-// const getValues = () => { 
-//   db.collection('posts').doc('one').set(data).then((
-//     console.log('colección de posts guardada')
-//   ));
-// }
-
-
-
 // Obtiene el valor del input
 const getValues = () => {
-  
-  db.collection('posts').add({
-    // name: `${showName()}`,
-    // name: showName(),
-    description: inputTimeline.value,
+  firebase.authStateChange((user) => {
+    if (user) {
+      db.collection('posts').add({
+        user: user.uid,
+        description: inputTimeline.value
+      })
+      .then((docRef) => {
+        console.log(docRef);
+        console.log('Documento escrito con el ID: ', docRef.id);
 
-  })
-  .then((docRef) => {
-    console.log(docRef);
-    console.log('Documento escrito con el ID: ', docRef.id);
-  })
-  .catch((error) => {
-    console.log(error);
-  })
+        ////////////////quitarlo de aqui despues
+        db.collection("posts").where("user", "==", user.uid)
+        .get()
+        .then(function(querySnapshot) {
+          let posts = [];
+         /// console.log(querySnapshot);
+          querySnapshot.forEach(function(doc) {
+            posts.push(doc.data());
+          });
+          console.log("tus posts: ", posts);
+        })
+        .catch(function(error) {
+            console.log("Error getting documents: ", error);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    } else {
+    // ningun usuario conectado
+    }
+  }); 
 }
-
-
 
 // Evento de botón publicar
 publishBtn.addEventListener('click', () => {
   getValues();
   userName();
-  // showName();
-  postUserImg.style.display = 'inline';
-  
 });
+
