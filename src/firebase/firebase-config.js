@@ -23,7 +23,7 @@ export const firestore = firebase.firestore();
 export const signOut = firebase.auth().signOut();
 
 // Método de para obtener el usuario actual autenticado
-export const currentUser = firebase.auth().currentUser;
+export const currentUser = () => firebase.auth().currentUser;
 
 // Nos permite conectar con google
 

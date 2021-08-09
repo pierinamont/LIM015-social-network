@@ -151,7 +151,7 @@ const loginGoogle = () => {
     .then((result) => {
       console.log(result);
       alert(`Bienvenido ${result.user.displayName}`);
-      authStateChange();
+      authStateChange(); /*PIERINA */
     })
     .catch((error) => {
       console.log(error);
@@ -185,7 +185,7 @@ signUpBtn.addEventListener('click', (e) => {
 });
 
 // Evento de inciar sección
-const signInBtn = document.querySelector('#signin-btn');
+const signInBtn = document.querySelector('#signin-btn'); 
 signInBtn.addEventListener('click', (e) => {
   e.preventDefault();
   const email = document.querySelector('#email').value;
@@ -197,10 +197,10 @@ signInBtn.addEventListener('click', (e) => {
 // Evento de cerrar sesión
 const signOutBtn = document.querySelector('#sign-out');
 
-signOutBtn.addEventListener('click', () => {
+signOutBtn.addEventListener('click', (e) => {
   todo.signOut
     .then(() => {
-      console.log('cerraste sesión');
+      console.log('cerraste sesión')
       headerBarNav.style.display = 'none';
       loginSection.style.display = 'inline';
       mainPage.style.display = 'none';
@@ -215,12 +215,12 @@ signOutBtn.addEventListener('click', () => {
 
 // Evento de google login
 const google = document.querySelector('#gmail-btn');
-google.addEventListener('click', () => {
+google.addEventListener('click', (e) => {
   loginGoogle();
 });
 
 // Evento de facebook login
 const facebook = document.querySelector('#facebook-btn');
-facebook.addEventListener('click', () => {
+facebook.addEventListener('click', (e) => {
   loginFacebook();
 });
