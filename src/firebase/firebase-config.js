@@ -32,5 +32,6 @@ export const providerG = new firebase.auth.GoogleAuthProvider();
 // Nos permite conectar con facebook
 
 export const providerF = new firebase.auth.FacebookAuthProvider();
+
 //  Persistencia del estado de autenticación
 export const sPersistence = firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
