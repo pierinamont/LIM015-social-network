@@ -131,16 +131,59 @@ showName();
 
 // Obtiene el valor del input
 const getValues = () => {
-  db.collection('posts').add({
-    // name: showName(),
-    description: inputTimeline.value
-  })
-  .then((docRef) => {
-    console.log('Documento escrito con el ID: ', docRef.id);
-  })
-  .catch((error) => {
-    console.log(error);
-  })
+  firebase.authStateChange((user) => {
+    if (user) {
+      
+   
+
+      db.collection('posts').add({
+      //  db.collection('users').doc(user.uid).set({
+        // name: showName(),
+        user: user.uid,
+        description: inputTimeline.value
+      })
+      .then((docRef) => {
+        console.log(docRef);
+        console.log('Documento escrito con el ID: ', docRef.id);
+
+        ////////////////quitarlo de aqui despues
+        db.collection("posts").where("user", "==", user.uid)
+        .get()
+        .then(function(querySnapshot) {
+          let posts = [];
+         /// console.log(querySnapshot);
+          querySnapshot.forEach(function(doc) {
+            posts.push(doc.data());
+          });
+          
+          console.log("tus posts: ", posts);
+        })
+        .catch(function(error) {
+            console.log("Error getting documents: ", error);
+        });
+
+
+        
+
+
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+
+      /*nameProfile.innerHTML = `${user.displayName}`;
+      if (user.photoURL === null) {
+        profileUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
+      } else {
+        profileUserImg.setAttribute('src', `${user.photoURL}`);
+      }*/
+    } else {
+    // ningun usuario conectado
+    }
+  }); 
+
+
+
 }
 
 
