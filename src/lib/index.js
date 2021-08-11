@@ -64,8 +64,6 @@ container.innerHTML = `
   </div>
   <!--------publicaciones---------->
   <div class = 'posts-container'>
-    <!-- <img class="post-user-img" src='' display="style: none">
-    // <p class="user-name"></p>-->
     <div id="post"></div>
   </div>
   `;
@@ -95,7 +93,6 @@ showProfileImg();
 // ----------------------------------------- Muro ------------------------------------------- //
 const publishBtn = document.querySelector('#publish-btn'); // Botón para publicar
 const inputTimeline = document.querySelector('.input-timeline');
-
 // Función que obtiene el valor del input y lo envía a Firestore
 const getValues = () => {
   const user = config.currentUser();
@@ -119,11 +116,11 @@ const getValues = () => {
 // ---------------------------------- Publicaciones --------------------------------------- //
 
 // Función para el muro => vaciar el input
-const emptyInput = () => {
-  if (inputTimeline.value === '') {
-    alert('Rellenar espacios ');
-  } 
-};
+// const emptyInput = () => {
+//   if (inputTimeline.value === '') {
+//     alert('Rellenar espacios ');
+//   }
+// };
 
 // Función que trae la colección de datos para las publicaciones
 
@@ -153,7 +150,8 @@ window.addEventListener('DOMContentLoaded', async () => {
         </div>
 
         <div class="date-likes">
-         
+          <img class="like-post" src='../images/like1.svg' >
+          <img class="like-post" src='../images/like2.svg' style="display: none">
         </div>
       </div>
       `;
@@ -166,9 +164,15 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 // Evento del botón "Publicar"
 publishBtn.addEventListener('click', () => {
-  
   getValues().then(() => {
     postInRealTime();
   });
   inputTimeline.value = '';
 });
+const like = document.querySelector('.like-post');
+
+// const likeCounter = () => {
+//   let counter = '';
+// le
+
+// }

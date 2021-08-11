@@ -81,6 +81,7 @@ const checkIn = (email, password, name) => {
     });
     all.signOut;
     alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
+
   })
     .catch((error) => {
       console.log(error);
