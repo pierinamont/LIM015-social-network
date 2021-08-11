@@ -1,10 +1,15 @@
 import * as firebase from '../firebase/firebase-login.js';
 import * as config from '../firebase/firebase-config.js';
 
-// aqui exportaras las funciones que necesites
+// ---------------------------------- Constantes  ------------------------------------ //
 const headerBarNav = document.getElementById('header-bar-nav');
-
 const headerNav = document.createElement('nav');
+const mainPage = document.getElementById('main-page');
+const container = document.createElement('div');
+const db = config.firestore;
+
+// ----------------------------------- Estructura del header ------------------------------------ //
+
 headerNav.className = 'headerNav';
 headerNav.innerHTML = `
     <div class="menu-hamburger" id="toggle-button">
@@ -27,47 +32,48 @@ headerNav.innerHTML = `
 `;
 headerBarNav.appendChild(headerNav);
 
-// Evento para el menu de hamburguesa
+// ------------------------------------ Header ------------------------------------------- //
 const toggleButton = document.getElementById('toggle-button');
 const navList = document.getElementById('nav-list');
+
+// Evento para el menu de hamburguesa
 toggleButton.addEventListener('click', () => {
   navList.classList.toggle('active');
 });
 
-// Estructura del perfil
-const mainPage = document.getElementById('main-page');
-
-const container = document.createElement('div');
+// ----------------------------------- Página principal ----------------------------------------- //
+// Estructura de la página principal
 container.className = 'container';
 container.innerHTML = `
-<!----------------perfil---------------->
-<div class = 'profile-container'> 
-  <div class="profile">
-     <img class="profile-user-img" src=''>
-     <p id='name-profile'></p>
+  <!----------------perfil---------------->
+  <div class = 'profile-container'> 
+    <div class="profile">
+      <img class="profile-user-img" src=''>
+      <p id='name-profile'></p>
+    </div>
   </div>
-</div>
-<!----------------muro---------------->
-<div class = 'timeline-container'>
-  <div class= 'timeline'>
-   <input class='input-timeline' type='text' placeholder='Crear publicación'><br>
-   <div class= 'container-btn'>
-   <img src='../images/picture.svg'>
-   <input id="publish-btn" type=button value='Publicar'>
-   </div>
+  <!----------------muro---------------->
+  <div class = 'timeline-container'>
+    <div class= 'timeline'>
+    <input class='input-timeline' type='text' placeholder='Crear publicación'><br>
+    <div class= 'container-btn'>
+    <img src='../images/picture.svg'>
+    <input id="publish-btn" type=button value='Publicar'>
+    </div>
+    </div>
   </div>
-</div>
-<!--------publicaciones---------->
-<div class = 'posts-container'>
-  <div id="post"></div>
-</div>
-`;
+  <!--------publicaciones---------->
+  <div class = 'posts-container'>
+    <div id="post"></div>
+  </div>
+  `;
 mainPage.appendChild(container);
 
-// Función para motrar la imagen de perfil y su nombre
+// ----------------------------------------- Perfil ------------------------------------------- //
 const profileUserImg = document.querySelector('.profile-user-img');
 const nameProfile = document.querySelector('#name-profile');
 
+// Función para motrar la imagen de perfil y su nombre
 const showProfileImg = () => {
   firebase.authStateChange((user) => {
     if (user) {
@@ -78,49 +84,16 @@ const showProfileImg = () => {
         profileUserImg.setAttribute('src', `${user.photoURL}`);
       }
     } else {
-    // ningun usuario conectado
+      // ningun usuario conectado
     }
   });
 };
-
 showProfileImg();
 
-const db = config.firestore;
-const inputTimeline = document.querySelector('.input-timeline');
+// ----------------------------------------- Muro ------------------------------------------- //
 const publishBtn = document.querySelector('#publish-btn'); // Botón para publicar
-// const userNameParagraph = document.querySelector('.user-name'); // p
-// const postUserImg = document.querySelector('.post-user-img');
-const inputPost = document.querySelector('input-post');
-
-// Nombre en contenedor de publicación (etiqueta p)
-// const userName = () => {
-//   firebase.authStateChange((user) => {
-//     if (user) {
-//       userNameParagraph.innerHTML = `${user.displayName}`;
-//       if (user.photoURL === null) {
-//         postUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
-//       } else {
-//         postUserImg.setAttribute('src', `${user.photoURL}`);
-//       }
-//     } else {
-//       console.log('error');
-//     }
-//   });
-// };
-// Mostrar publicacion
-const publishPost = () => {
-  if (inputTimeline.value === '') {
-    alert('Rellenar espacios ');
-  } else {
-    inputPost.style.display = 'block';
-  }
-};
-
-
-// Mostrar nombre de usuario autentificado
-
-// Obtiene el valor del input
-
+const inputTimeline = document.querySelector('.input-timeline');
+// Función que obtiene el valor del input y lo envía a Firestore
 const getValues = () => {
   const user = config.currentUser();
   const day = Date.now();
@@ -140,7 +113,18 @@ const getValues = () => {
     });
 };
 
-/* const getPost = () => db.collection('posts').get(); */
+// ---------------------------------- Publicaciones --------------------------------------- //
+
+// Función para el muro => vaciar el input
+// const emptyInput = () => {
+//   if (inputTimeline.value === '') {
+//     alert('Rellenar espacios ');
+//   }
+// };
+
+// Función que trae la colección de datos para las publicaciones
+
+// const getPost = () => db.collection('posts').get();
 const postInRealTime = (callback) => db.collection('posts').onSnapshot(callback);
 
 window.addEventListener('DOMContentLoaded', async () => {
@@ -176,19 +160,19 @@ window.addEventListener('DOMContentLoaded', async () => {
   });
 });
 
-// Evento de botón publicar
+// ------------------------------------------- Eventos  ----------------------------------------- //
+
+// Evento del botón "Publicar"
 publishBtn.addEventListener('click', () => {
-  publishPost(); 
   getValues().then(() => {
     postInRealTime();
   });
   inputTimeline.value = '';
-  
 });
 const like = document.querySelector('.like-post');
 
-const likeCounter = () => {
-  let counter = '';
-le
+// const likeCounter = () => {
+//   let counter = '';
+// le
 
-}
+// }
