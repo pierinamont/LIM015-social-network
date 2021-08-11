@@ -1,4 +1,5 @@
 import * as todo from './firebase-config.js';
+
 todo.firebaseInit;
 const auth = todo.auth;
 
