@@ -83,7 +83,7 @@ const checkIn = (email, password, name) => {
       console.log(error);
     });
     all.signOut
-    alert(`Bienvenido ${name}, debes realizar el proceso de verificación`)
+    //alert(`Bienvenido ${name}, debes realizar el proceso de verificación`)
   })
     .catch((error) => {
       console.log(error);
@@ -123,7 +123,7 @@ const login = (email, password) => {
   all.userSignIn(email, password)
     .then((result) => {
       if (result.user.emailVerified) {
-        alert(`Bienvenido ${result.user.displayName}`)
+        //alert(`Bienvenido ${result.user.displayName}`)
         authStateChange();
       } else {
         all.signOut

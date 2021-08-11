@@ -59,8 +59,6 @@ container.innerHTML = `
 </div>
 <!--------publicaciones---------->
 <div class = 'posts-container'>
-  <!-- <img class="post-user-img" src='' display="style: none">
-  // <p class="user-name"></p>-->
   <div id="post"></div>
 </div>
 `;
@@ -111,18 +109,14 @@ const inputPost = document.querySelector('input-post');
 // };
 // Mostrar publicacion
 const publishPost = () => {
-  const inputTimelineV = inputTimeline.value;
-  let inputPostV = inputPost;
-  inputPostV = inputTimelineV;
-
-  console.log(inputPostV);
-
   if (inputTimeline.value === '') {
     alert('Rellenar espacios ');
   } else {
     inputPost.style.display = 'block';
   }
 };
+
+
 // Mostrar nombre de usuario autentificado
 
 // Obtiene el valor del input
@@ -172,7 +166,8 @@ window.addEventListener('DOMContentLoaded', async () => {
         </div>
 
         <div class="date-likes">
-         
+          <img class="like-post" src='../images/like1.svg' >
+          <img class="like-post" src='../images/like2.svg' style="display: none">
         </div>
       </div>
       `;
@@ -183,8 +178,17 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 // Evento de botón publicar
 publishBtn.addEventListener('click', () => {
+  publishPost(); 
   getValues().then(() => {
     postInRealTime();
   });
   inputTimeline.value = '';
+  
 });
+const like = document.querySelector('.like-post');
+
+const likeCounter = () => {
+  let counter = '';
+le
+
+}
