@@ -1,11 +1,11 @@
-import * as firebase from '../firebase/firebase-login.js';
-import * as config from '../firebase/firebase-config.js';
+import * as firebase from "../firebase/firebase-login.js";
+import * as config from "../firebase/firebase-config.js";
 
 // aqui exportaras las funciones que necesites
-const headerBarNav = document.getElementById('header-bar-nav');
+const headerBarNav = document.getElementById("header-bar-nav");
 
-const headerNav = document.createElement('nav');
-headerNav.className = 'headerNav';
+const headerNav = document.createElement("nav");
+headerNav.className = "headerNav";
 headerNav.innerHTML = `
     <div class="menu-hamburger" id="toggle-button">
         <div class="menu-line"></div>
@@ -28,17 +28,17 @@ headerNav.innerHTML = `
 headerBarNav.appendChild(headerNav);
 
 // Evento para el menu de hamburguesa
-const toggleButton = document.getElementById('toggle-button');
-const navList = document.getElementById('nav-list');
-toggleButton.addEventListener('click', () => {
-  navList.classList.toggle('active');
+const toggleButton = document.getElementById("toggle-button");
+const navList = document.getElementById("nav-list");
+toggleButton.addEventListener("click", () => {
+  navList.classList.toggle("active");
 });
 
 // Estructura del perfil
-const mainPage = document.getElementById('main-page');
+const mainPage = document.getElementById("main-page");
 
-const container = document.createElement('div');
-container.className = 'container';
+const container = document.createElement("div");
+container.className = "container";
 container.innerHTML = `
 <!----------------perfil---------------->
 <div class = 'profile-container'> 
@@ -68,20 +68,23 @@ container.innerHTML = `
 mainPage.appendChild(container);
 
 // Función para motrar la imagen de perfil y su nombre
-const profileUserImg = document.querySelector('.profile-user-img');
-const nameProfile = document.querySelector('#name-profile');
+const profileUserImg = document.querySelector(".profile-user-img");
+const nameProfile = document.querySelector("#name-profile");
 
 const showProfileImg = () => {
   firebase.authStateChange((user) => {
     if (user) {
       nameProfile.innerHTML = `${user.displayName}`;
       if (user.photoURL === null) {
-        profileUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
+        profileUserImg.setAttribute(
+          "src",
+          "https://i.postimg.cc/6pRsrH91/user-2.png"
+        );
       } else {
-        profileUserImg.setAttribute('src', `${user.photoURL}`);
+        profileUserImg.setAttribute("src", `${user.photoURL}`);
       }
     } else {
-    // ningun usuario conectado
+      // ningun usuario conectado
     }
   });
 };
@@ -89,11 +92,11 @@ const showProfileImg = () => {
 showProfileImg();
 
 const db = config.firestore;
-const inputTimeline = document.querySelector('.input-timeline');
-const publishBtn = document.querySelector('#publish-btn'); // Botón para publicar
+const inputTimeline = document.querySelector(".input-timeline");
+const publishBtn = document.querySelector("#publish-btn"); // Botón para publicar
 // const userNameParagraph = document.querySelector('.user-name'); // p
 // const postUserImg = document.querySelector('.post-user-img');
-const inputPost = document.querySelector('input-post');
+const inputPost = document.querySelector("input-post");
 
 // Nombre en contenedor de publicación (etiqueta p)
 // const userName = () => {
@@ -118,10 +121,10 @@ const publishPost = () => {
 
   console.log(inputPostV);
 
-  if (inputTimeline.value === '') {
-    alert('Rellenar espacios ');
+  if (inputTimeline.value === "") {
+    alert("Rellenar espacios ");
   } else {
-    inputPost.style.display = 'block';
+    inputPost.style.display = "block";
   }
 };
 // Mostrar nombre de usuario autentificado
@@ -129,16 +132,18 @@ const publishPost = () => {
 // Obtiene el valor del input
 const getValues = () => {
   const user = config.currentUser();
-  return db.collection('posts').add({
-    photo: user.photoURL,
-    // user: user.uid,
-    name: user.displayName,
-    description: inputTimeline.value,
-    // fecha: config.firestore.FieldValue.Timestamp.now(),
-  })
+  return db
+    .collection("posts")
+    .add({
+      photo: user.photoURL,
+      // user: user.uid,
+      name: user.displayName,
+      description: inputTimeline.value,
+      // fecha: config.firestore.FieldValue.Timestamp.now(),
+    })
     .then((docRef) => {
       console.log(docRef);
-      console.log('Documento escrito con el ID: ', docRef.id);
+      console.log("Documento escrito con el ID: ", docRef.id);
     })
     .catch((error) => {
       console.log(error);
@@ -160,19 +165,20 @@ const getValues = () => {
 //     });
 // };
 
-const getPost = () => db.collection('posts').get();
-window.addEventListener('DOMContentLoaded', async () => {
+const getPost = () => db.collection("posts").get();
+window.addEventListener("DOMContentLoaded", async () => {
   const arrayPosts = [];
   const querySnapshot = await getPost();
   querySnapshot.forEach((doc) => {
-    const post = document.getElementById('post');
-    post.innerHTML += `<div class = 'post-body'> <p> ${doc.data().description}</p></div>`;
+    const post = document.getElementById("post");
+    post.innerHTML += `<div class = 'post-body'> <p> ${doc.data().description
+      }</p></div>`;
     arrayPosts.push(doc.data());
   });
 });
 
 // Evento de botón publicar
-publishBtn.addEventListener('click', () => {
+publishBtn.addEventListener("click", () => {
   getValues().then(() => {
     getPost();
   });

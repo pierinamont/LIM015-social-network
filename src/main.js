@@ -69,22 +69,24 @@ signInForm.addEventListener('click', (e) => {
 
 // Función para registrarse
 const checkIn = (email, password, name) => {
-  all.userSignUp(email, password, name).then((result) => {
-    let email = result.user.email;
-    console.log(email);
-    console.log('registro exitoso');
-    result.user.updateProfile({
-      displayName: name,
-    });
-    const configuration = {
-      url: 'http://localhost:5000/'
-    };
-    result.user.sendEmailVerification(configuration).catch(error => {
-      console.log(error);
-    });
-    all.signOut
-    alert(`Bienvenido ${name}, debes realizar el proceso de verificación`)
-  })
+  all
+    .userSignUp(email, password, name)
+    .then((result) => {
+      let email = result.user.email;
+      console.log(email);
+      console.log('registro exitoso');
+      result.user.updateProfile({
+        displayName: name,
+      });
+      const configuration = {
+        url: 'http://localhost:5000/',
+      };
+      result.user.sendEmailVerification(configuration).catch((error) => {
+        console.log(error);
+      });
+      all.signOut;
+      alert(`Bienvenido ${name}, debes realizar el proceso de verificación`);
+    })
     .catch((error) => {
       console.log(error);
       const errorCode = error.code;
@@ -92,7 +94,9 @@ const checkIn = (email, password, name) => {
         alert('Por favor, completa los campos');
       }
       if (errorCode === 'auth/email-already-in-use') {
-        alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
+        alert(
+          'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido'
+        );
       }
       if (errorCode === 'auth/weak-password') {
         alert('La contraseña debe tener al menos 6 caracteres');
@@ -105,7 +109,7 @@ const headerBarNav = document.querySelector('#header-bar-nav');
 const mainPage = document.querySelector('#main-page');
 
 const authStateChange = () => {
-  all.authStateChange(user => {
+  all.authStateChange((user) => {
     if (user) {
       headerBarNav.style.display = 'inline';
       loginSection.style.display = 'none';
@@ -115,19 +119,20 @@ const authStateChange = () => {
       mainPage.style.display = 'none';
       headerBarNav.style.display = 'none';
     }
-});
+  });
 };
 
 // Función para iniciar sesión
 const login = (email, password) => {
-  all.userSignIn(email, password)
+  all
+    .userSignIn(email, password)
     .then((result) => {
       if (result.user.emailVerified) {
-        alert(`Bienvenido ${result.user.displayName}`)
+        alert(`Bienvenido ${result.user.displayName}`);
         authStateChange();
       } else {
-        all.signOut
-        alert(`${result.user.displayName} por favor, realiza la verificación`)
+        all.signOut;
+        alert(`${result.user.displayName} por favor, realiza la verificación`);
       }
     })
     .catch((error) => {
@@ -140,14 +145,17 @@ const login = (email, password) => {
         alert('Contraseña incorrecta, inténtelo de nuevo');
       }
       if (errorCode === 'auth/user-not-found') {
-        alert('El correo que ingresó no está registrado, por favor, regístrece');
+        alert(
+          'El correo que ingresó no está registrado, por favor, regístrece'
+        );
       }
     });
 };
 
 // Función de Google login
 const loginGoogle = () => {
-  all.googleLogIn()
+  all
+    .googleLogIn()
     .then((result) => {
       console.log(result);
       alert(`Bienvenido ${result.user.displayName}`);
@@ -161,7 +169,8 @@ const loginGoogle = () => {
 
 // Función de Facebook login
 const loginFacebook = () => {
-  all.facebookLogin()
+  all
+    .facebookLogin()
     .then((result) => {
       alert(`Bienvenido ${result.user.displayName}`);
       authStateChange();
@@ -174,7 +183,7 @@ const loginFacebook = () => {
 // Eventos
 
 // Evento para registrarse
-const signUpBtn = document.querySelector('#signup-btn'); 
+const signUpBtn = document.querySelector('#signup-btn');
 signUpBtn.addEventListener('click', (e) => {
   e.preventDefault();
   const name = document.querySelector('#signup-name').value;
@@ -185,7 +194,7 @@ signUpBtn.addEventListener('click', (e) => {
 });
 
 // Evento de inciar sección
-const signInBtn = document.querySelector('#signin-btn'); 
+const signInBtn = document.querySelector('#signin-btn');
 signInBtn.addEventListener('click', (e) => {
   e.preventDefault();
   const email = document.querySelector('#email').value;
@@ -200,7 +209,7 @@ const signOutBtn = document.querySelector('#sign-out');
 signOutBtn.addEventListener('click', (e) => {
   todo.signOut
     .then(() => {
-      console.log('cerraste sesión')
+      console.log('cerraste sesión');
       headerBarNav.style.display = 'none';
       loginSection.style.display = 'inline';
       mainPage.style.display = 'none';
