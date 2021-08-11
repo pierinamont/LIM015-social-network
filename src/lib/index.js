@@ -61,7 +61,6 @@ container.innerHTML = `
 <div class = 'posts-container'>
   <!-- <img class="post-user-img" src='' display="style: none">
   // <p class="user-name"></p>-->
-  <input class='input-post' type='text'  display="style: none">
   <div id="post"></div>
 </div>
 `;
@@ -130,17 +129,17 @@ const publishPost = () => {
 // Mostrar nombre de usuario autentificado
 
 // Obtiene el valor del input
+
 const getValues = () => {
   const user = config.currentUser();
-  return db
-    .collection("posts")
-    .add({
-      photo: user.photoURL,
-      // user: user.uid,
-      name: user.displayName,
-      description: inputTimeline.value,
-      // fecha: config.firestore.FieldValue.Timestamp.now(),
-    })
+  const day = Date.now();
+  const objectoAccion = new Date(day);
+  return db.collection('posts').add({
+    photo: user.photoURL,
+    name: user.displayName,
+    description: inputTimeline.value,
+    day: objectoAccion.toLocaleString(),
+  })
     .then((docRef) => {
       console.log(docRef);
       console.log("Documento escrito con el ID: ", docRef.id);
@@ -149,39 +148,46 @@ const getValues = () => {
       console.log(error);
     });
 };
-// const getPost = () => {
-//   db.collection('posts')
-//     .get()
-//     .then((querySnapshot) => {
-//       const posts = [];
-//       /// console.log(querySnapshot);
-//       querySnapshot.forEach((doc) => {
-//         posts.push(doc.data());
-//       });
-//       console.log('tus posts: ', posts);
-//     })
-//     .catch((error) => {
-//       console.log('Error getting documents: ', error);
-//     });
-// };
 
-const getPost = () => db.collection("posts").get();
-window.addEventListener("DOMContentLoaded", async () => {
+/* const getPost = () => db.collection('posts').get(); */
+const postInRealTime = (callback) => db.collection('posts').onSnapshot(callback);
+
+window.addEventListener('DOMContentLoaded', async () => {
   const arrayPosts = [];
-  const querySnapshot = await getPost();
-  querySnapshot.forEach((doc) => {
-    const post = document.getElementById("post");
-    post.innerHTML += `<div class = 'post-body'> <p> ${doc.data().description
-      }</p></div>`;
-    arrayPosts.push(doc.data());
+  /* const  = await getPost(); */
+  postInRealTime((querySnapshot) => {
+    const post = document.getElementById('post');
+    post.innerHTML = '';
+    querySnapshot.forEach((doc) => {
+      post.innerHTML += `
+      <div class='post-body'>
+
+        <div class="img-name">
+          <img class="profile-user-img" src='${doc.data().photo}'>
+          <span>
+           <p class="name">${doc.data().name}</p>
+           <p class="date">${doc.data().day}</p>
+          <span>
+        </div>
+
+        <div class="description-div">
+          <p>${doc.data().description}</p>
+        </div>
+
+        <div class="date-likes">
+         
+        </div>
+      </div>
+      `;
+      arrayPosts.push(doc.data());
+    });
   });
 });
 
 // Evento de botón publicar
 publishBtn.addEventListener("click", () => {
   getValues().then(() => {
-    getPost();
+    postInRealTime();
   });
-  // userName();
-  // publishPost();
+  inputTimeline.value = '';
 });
