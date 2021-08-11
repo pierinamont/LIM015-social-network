@@ -321,11 +321,9 @@ body {
 /*contenedor del perfil*/
 
 .container .profile-container{
-    background-color: pink;
     width: 100%;
     grid-column: 1;
     grid-row: 1;
-    border: 5px solid black;
 }
 .profile{
     text-align: center;
@@ -341,6 +339,7 @@ body {
     width: 80px;
     height: auto;
     border-radius: 100%;
+    margin-top: 12px;
 }
 .profile #name-profile{
     font-size: 1.6rem;
@@ -349,12 +348,10 @@ body {
 /*contenedor del muro/timeline*/
 
 .container .timeline-container{
-    background-color: blue;
     width: 100%;
     height: 100%;
     grid-column: 1;
     grid-row: 2;
-    border: 5px solid black;
 }
 .timeline-container .timeline{
     text-align: center;
@@ -371,12 +368,10 @@ body {
 
 /*contenedor del posts*/
 .container .posts-container{
-    background-color: red;
     width: 100%;
     height: 100%;
     grid-column: 1;
     grid-row: 3;
-    border: 5px solid black;
 }
 .posts-container .post-user-img {
     width: 40px;
@@ -407,5 +402,34 @@ body {
         grid-row: 2;
     }
 
-    }
+}
 
+.post-body {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+.post-body .profile-user-img {
+    border-radius: 100%;
+    width: 48px;
+    margin-right: 15px;
+}
+.post-body .img-name {
+    display: flex;
+    align-items: center;
+}
+.post-body .img-name .name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+.post-body .img-name .date {
+    font-size: 1.3rem;
+    color: grey;
+    margin-top: 0px;
+}
+
+.post-body .description p {
+    font-size: 1.3rem;
+}
