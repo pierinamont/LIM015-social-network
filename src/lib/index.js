@@ -81,7 +81,7 @@ const showProfileImg = () => {
         profileUserImg.setAttribute('src', `${user.photoURL}`);
       }
     } else {
-    // ningun usuario conectado
+      // ningun usuario conectado
     }
   });
 };
@@ -134,7 +134,7 @@ const getValues = () => {
     // user: user.uid,
     name: user.displayName,
     description: inputTimeline.value,
-    // fecha: config.firestore.FieldValue.Timestamp.now(),
+    // date: config.firestore.FieldValue.Timestamp.now(),
   })
     .then((docRef) => {
       console.log(docRef);
@@ -166,7 +166,11 @@ window.addEventListener('DOMContentLoaded', async () => {
   const querySnapshot = await getPost();
   querySnapshot.forEach((doc) => {
     const post = document.getElementById('post');
-    post.innerHTML += `<div class = 'post-body'> <p> ${doc.data().description}</p></div>`;
+    post.innerHTML += `
+    <div class = 'post-body'>
+      <p> ${doc.data().description}</p>
+    </div>
+    `;
     arrayPosts.push(doc.data());
   });
 });
