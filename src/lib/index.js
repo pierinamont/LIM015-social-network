@@ -93,6 +93,15 @@ showProfileImg();
 // ----------------------------------------- Muro ------------------------------------------- //
 const publishBtn = document.querySelector('#publish-btn'); // Botón para publicar
 const inputTimeline = document.querySelector('.input-timeline');
+
+// Función para el muro => vaciar el input
+// const emptyInput = () => {
+//   if (inputTimeline.value === '') {
+//     alert('Rellenar espacios ');
+//   }
+// };
+
+
 // Función que obtiene el valor del input y lo envía a Firestore
 const getValues = () => {
   const user = config.currentUser();
@@ -114,13 +123,6 @@ const getValues = () => {
 };
 // ---------------------------------- Publicaciones --------------------------------------- //
 
-// Función para el muro => vaciar el input
-// const emptyInput = () => {
-//   if (inputTimeline.value === '') {
-//     alert('Rellenar espacios ');
-//   }
-// };
-
 // Función que trae la colección de datos para las publicaciones
 
 // const getPost = () => db.collection('posts').get();
@@ -138,10 +140,17 @@ window.addEventListener('DOMContentLoaded', async () => {
 
         <div class="img-name">
           <img class="profile-user-img" src='${doc.data().photo}'>
+
           <span>
-           <p class="name">${doc.data().name}</p>
-           <p class="date">${doc.data().day}</p>
-          <span>
+          <p class="name">${doc.data().name}</p>
+          <p class="date">${doc.data().day}</p>
+          </span>
+
+          <i>
+          <img class="edit-img" src='../images/edit3.svg'>
+          <img class="close-img" src='../images/close-1.svg'>
+          </i>
+
         </div>
 
         <div class="description-div">
@@ -149,8 +158,14 @@ window.addEventListener('DOMContentLoaded', async () => {
         </div>
 
         <div class="date-likes">
+<<<<<<< HEAD
           <img class="like_post" src='../images/like1.svg' >
           <img class="like-post" src='../images/like2.svg' style="display: none"><p id="counter"></p>
+=======
+          <img class="like-post" src='../images/like1.svg' >
+          <img class="dislike-post" src='../images/like2.svg' style="display: none">
+          <p id="p-likes"></p>
+>>>>>>> edde78b0eddeb1d2207666123853ee870ce8df8a
         </div>
       </div>
       `;
