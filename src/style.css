@@ -486,8 +486,8 @@ body {
     padding-top: 17px;
 }
 
-.date-likes .like1-post,
-.date-likes .like2-post {
+.date-likes .like-post,
+.date-likes .dislike-post {
     width: 25px;
     height: auto;
     cursor: pointer;

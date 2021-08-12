@@ -159,8 +159,8 @@ window.addEventListener('DOMContentLoaded', async () => {
         </div>
 
         <div class="date-likes">
-          <img class="like1-post" src='../images/like1.svg' >
-          <img class="like2-post" src='../images/like2.svg' style="display: none">
+          <img class="like-post" src='../images/like1.svg' >
+          <img class="dislike-post" src='../images/like2.svg' style="display: none">
           <p id="p-likes"></p>
         </div>
       </div>
