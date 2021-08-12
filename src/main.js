@@ -1,11 +1,7 @@
-// Este es el punto de entrada de tu aplicacion
-// import * as all from './lib/index.js';
-// import * as all from 'firebase-admin';
-
 import * as all from './firebase/firebase-login.js';
 import * as todo from './firebase/firebase-config.js';
 
-// Crear estructura del login
+// ------------------------------------ Estructura del login ------------------------------------ //
 const loginSection = document.getElementById('login-section');
 const loginDiv = document.createElement('div');
 loginDiv.className = 'login-div';
@@ -46,29 +42,31 @@ loginDiv.innerHTML = `
     </div>
     `;
 loginSection.appendChild(loginDiv);
-// Función para mostrar contenedor de registro
+
+// ------------------------------------ Variables / Constantes ---------------------------------- //
 const contentContainer = document.querySelector('.content-container');
 const signUpForm = document.querySelector('#sign-up');
 const signUpContainer = document.getElementById('signup-container');
+const signInForm = document.querySelector('#sign-in');
+const signUpBtn = document.querySelector('#signup-btn');
+const headerBarNav = document.querySelector('#header-bar-nav');
+const mainPage = document.querySelector('#main-page');
+const signOutBtn = document.querySelector('#sign-out');
+const google = document.querySelector('#gmail-btn');
+const facebook = document.querySelector('#facebook-btn');
+
+// ----------------------------------------- Registro ----------------------------------------- //
+
+// Función para mostrar contenedor de registro
 signUpForm.addEventListener('click', (e) => {
   e.preventDefault();
   contentContainer.style.display = 'none';
   signUpContainer.style.display = 'block';
 });
 
-// Función para mostrar contenedor de iniciar sesión
-const signInForm = document.querySelector('#sign-in');
-signInForm.addEventListener('click', (e) => {
-  e.preventDefault();
-  contentContainer.style.display = 'flex';
-  signUpContainer.style.display = 'none';
-
-  document.querySelector('#signup-form').reset();
-  document.querySelector('#login-form').reset();
-});
-
 // Función para registrarse
 const checkIn = (email, password, name) => {
+<<<<<<< HEAD
   all
     .userSignUp(email, password, name)
     .then((result) => {
@@ -87,6 +85,25 @@ const checkIn = (email, password, name) => {
       all.signOut;
       alert(`Bienvenido ${name}, debes realizar el proceso de verificación`);
     })
+=======
+  all.userSignUp(email, password, name).then((result) => {
+    const email = result.user.email;
+    console.log(email);
+    console.log('registro exitoso');
+    result.user.updateProfile({
+      displayName: name,
+    });
+    const configuration = {
+      url: 'http://localhost:5000/',
+    };
+    result.user.sendEmailVerification(configuration).catch((error) => {
+      console.log(error);
+    });
+    all.signOut;
+    alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
+
+  })
+>>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
     .catch((error) => {
       console.log(error);
       const errorCode = error.code;
@@ -104,10 +121,9 @@ const checkIn = (email, password, name) => {
     });
 };
 
-// Función para gestionar el estado del usuario
-const headerBarNav = document.querySelector('#header-bar-nav');
-const mainPage = document.querySelector('#main-page');
+// ----------------- authStateChange para mostrar y ocultar contenedores ------------------------ //
 
+// Función para gestionar el estado del usuario
 const authStateChange = () => {
   all.authStateChange((user) => {
     if (user) {
@@ -122,13 +138,28 @@ const authStateChange = () => {
   });
 };
 
+// ------------------------------------- Inicio de sesión --------------------------------------- //
+
+// Función para mostrar contenedor de iniciar sesión
+signInForm.addEventListener('click', (e) => {
+  e.preventDefault();
+  contentContainer.style.display = 'flex';
+  signUpContainer.style.display = 'none';
+
+  document.querySelector('#signup-form').reset();
+  document.querySelector('#login-form').reset();
+});
+
 // Función para iniciar sesión
 const login = (email, password) => {
   all
     .userSignIn(email, password)
     .then((result) => {
       if (result.user.emailVerified) {
+<<<<<<< HEAD
         alert(`Bienvenido ${result.user.displayName}`);
+=======
+>>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
         authStateChange();
       } else {
         all.signOut;
@@ -152,14 +183,13 @@ const login = (email, password) => {
     });
 };
 
-// Función de Google login
+// Función de inicio con Google
 const loginGoogle = () => {
   all
     .googleLogIn()
     .then((result) => {
       console.log(result);
-      alert(`Bienvenido ${result.user.displayName}`);
-      authStateChange(); /*PIERINA */
+      authStateChange();
     })
     .catch((error) => {
       console.log(error);
@@ -167,12 +197,17 @@ const loginGoogle = () => {
     });
 };
 
-// Función de Facebook login
+// Función de  inicio con Facebook
 const loginFacebook = () => {
+<<<<<<< HEAD
   all
     .facebookLogin()
     .then((result) => {
       alert(`Bienvenido ${result.user.displayName}`);
+=======
+  all.facebookLogin()
+    .then(() => {
+>>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
       authStateChange();
     })
     .catch((error) => {
@@ -180,10 +215,13 @@ const loginFacebook = () => {
     });
 };
 
-// Eventos
+// ------------------------------------------- Eventos  ----------------------------------------- //
 
 // Evento para registrarse
+<<<<<<< HEAD
 const signUpBtn = document.querySelector('#signup-btn');
+=======
+>>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
 signUpBtn.addEventListener('click', (e) => {
   e.preventDefault();
   const name = document.querySelector('#signup-name').value;
@@ -193,7 +231,11 @@ signUpBtn.addEventListener('click', (e) => {
   document.querySelector('#signup-form').reset();
 });
 
+<<<<<<< HEAD
 // Evento de inciar sección
+=======
+// Evento para inciar sección
+>>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
 const signInBtn = document.querySelector('#signin-btn');
 signInBtn.addEventListener('click', (e) => {
   e.preventDefault();
@@ -203,10 +245,8 @@ signInBtn.addEventListener('click', (e) => {
   login(email, password);
 });
 
-// Evento de cerrar sesión
-const signOutBtn = document.querySelector('#sign-out');
-
-signOutBtn.addEventListener('click', (e) => {
+// Evento para cerrar sesión
+signOutBtn.addEventListener('click', () => {
   todo.signOut
     .then(() => {
       console.log('cerraste sesión');
@@ -223,13 +263,11 @@ signOutBtn.addEventListener('click', (e) => {
 });
 
 // Evento de google login
-const google = document.querySelector('#gmail-btn');
-google.addEventListener('click', (e) => {
+google.addEventListener('click', () => {
   loginGoogle();
 });
 
 // Evento de facebook login
-const facebook = document.querySelector('#facebook-btn');
-facebook.addEventListener('click', (e) => {
+facebook.addEventListener('click', () => {
   loginFacebook();
 });

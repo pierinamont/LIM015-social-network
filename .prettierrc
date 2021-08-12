@@ -1,2 +1,10 @@
+<<<<<<< HEAD
 {"singleQuote": true,
     "tabWidth": 2}  
+=======
+{
+    "singleQuote": true,
+    "tabWidth": 2
+}
+  
+>>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
