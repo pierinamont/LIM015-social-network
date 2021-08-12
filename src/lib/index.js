@@ -139,10 +139,17 @@ window.addEventListener('DOMContentLoaded', async () => {
 
         <div class="img-name">
           <img class="profile-user-img" src='${doc.data().photo}'>
+
           <span>
-           <p class="name">${doc.data().name}</p>
-           <p class="date">${doc.data().day}</p>
-          <span>
+          <p class="name">${doc.data().name}</p>
+          <p class="date">${doc.data().day}</p>
+          </span>
+
+          <i>
+          <img class="edit-img" src='../images/edit3.svg'>
+          <img class="close-img" src='../images/close-1.svg'>
+          </i>
+
         </div>
 
         <div class="description-div">
