@@ -318,7 +318,7 @@ body {
     margin: 0 auto;
 }
 .container-btn img {
-    box-shadow: 0px 0px 4px 1px rgb(0 0 0 / 10%);
+    cursor: pointer;
 }
 
 /*contenedor del perfil*/
