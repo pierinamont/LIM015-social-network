@@ -1,13 +1,6 @@
 import * as firebase from "../firebase/firebase-login.js";
 import * as config from "../firebase/firebase-config.js";
 
-<<<<<<< HEAD
-// aqui exportaras las funciones que necesites
-const headerBarNav = document.getElementById("header-bar-nav");
-
-const headerNav = document.createElement("nav");
-headerNav.className = "headerNav";
-=======
 // ---------------------------------- Constantes  ------------------------------------ //
 const headerBarNav = document.getElementById('header-bar-nav');
 const headerNav = document.createElement('nav');
@@ -18,7 +11,6 @@ const db = config.firestore;
 // ----------------------------------- Estructura del header ------------------------------------ //
 
 headerNav.className = 'headerNav';
->>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
 headerNav.innerHTML = `
     <div class="menu-hamburger" id="toggle-button">
         <div class="menu-line"></div>
@@ -40,20 +32,6 @@ headerNav.innerHTML = `
 `;
 headerBarNav.appendChild(headerNav);
 
-<<<<<<< HEAD
-// Evento para el menu de hamburguesa
-const toggleButton = document.getElementById("toggle-button");
-const navList = document.getElementById("nav-list");
-toggleButton.addEventListener("click", () => {
-  navList.classList.toggle("active");
-});
-
-// Estructura del perfil
-const mainPage = document.getElementById("main-page");
-
-const container = document.createElement("div");
-container.className = "container";
-=======
 // ------------------------------------ Header ------------------------------------------- //
 const toggleButton = document.getElementById('toggle-button');
 const navList = document.getElementById('nav-list');
@@ -66,7 +44,6 @@ toggleButton.addEventListener('click', () => {
 // ----------------------------------- Página principal ----------------------------------------- //
 // Estructura de la página principal
 container.className = 'container';
->>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
 container.innerHTML = `
   <!----------------perfil---------------->
   <div class = 'profile-container'> 
@@ -92,15 +69,9 @@ container.innerHTML = `
   `;
 mainPage.appendChild(container);
 
-<<<<<<< HEAD
-// Función para motrar la imagen de perfil y su nombre
-const profileUserImg = document.querySelector(".profile-user-img");
-const nameProfile = document.querySelector("#name-profile");
-=======
 // ----------------------------------------- Perfil ------------------------------------------- //
 const profileUserImg = document.querySelector('.profile-user-img');
 const nameProfile = document.querySelector('#name-profile');
->>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
 
 // Función para motrar la imagen de perfil y su nombre
 const showProfileImg = () => {
@@ -122,53 +93,10 @@ const showProfileImg = () => {
 };
 showProfileImg();
 
-<<<<<<< HEAD
-const db = config.firestore;
-const inputTimeline = document.querySelector(".input-timeline");
-const publishBtn = document.querySelector("#publish-btn"); // Botón para publicar
-// const userNameParagraph = document.querySelector('.user-name'); // p
-// const postUserImg = document.querySelector('.post-user-img');
-const inputPost = document.querySelector("input-post");
-
-// Nombre en contenedor de publicación (etiqueta p)
-// const userName = () => {
-//   firebase.authStateChange((user) => {
-//     if (user) {
-//       userNameParagraph.innerHTML = `${user.displayName}`;
-//       if (user.photoURL === null) {
-//         postUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
-//       } else {
-//         postUserImg.setAttribute('src', `${user.photoURL}`);
-//       }
-//     } else {
-//       console.log('error');
-//     }
-//   });
-// };
-// Mostrar publicacion
-const publishPost = () => {
-  const inputTimelineV = inputTimeline.value;
-  let inputPostV = inputPost;
-  inputPostV = inputTimelineV;
-
-  console.log(inputPostV);
-
-  if (inputTimeline.value === "") {
-    alert("Rellenar espacios ");
-  } else {
-    inputPost.style.display = "block";
-  }
-};
-// Mostrar nombre de usuario autentificado
-
-// Obtiene el valor del input
-
-=======
 // ----------------------------------------- Muro ------------------------------------------- //
 const publishBtn = document.querySelector('#publish-btn'); // Botón para publicar
 const inputTimeline = document.querySelector('.input-timeline');
 // Función que obtiene el valor del input y lo envía a Firestore
->>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
 const getValues = () => {
   const user = config.currentUser();
   const day = Date.now();
@@ -235,15 +163,10 @@ window.addEventListener('DOMContentLoaded', async () => {
   });
 });
 
-<<<<<<< HEAD
-// Evento de botón publicar
-publishBtn.addEventListener("click", () => {
-=======
 // ------------------------------------------- Eventos  ----------------------------------------- //
 
 // Evento del botón "Publicar"
 publishBtn.addEventListener('click', () => {
->>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
   getValues().then(() => {
     postInRealTime();
   });

@@ -66,26 +66,6 @@ signUpForm.addEventListener('click', (e) => {
 
 // Función para registrarse
 const checkIn = (email, password, name) => {
-<<<<<<< HEAD
-  all
-    .userSignUp(email, password, name)
-    .then((result) => {
-      let email = result.user.email;
-      console.log(email);
-      console.log('registro exitoso');
-      result.user.updateProfile({
-        displayName: name,
-      });
-      const configuration = {
-        url: 'http://localhost:5000/',
-      };
-      result.user.sendEmailVerification(configuration).catch((error) => {
-        console.log(error);
-      });
-      all.signOut;
-      alert(`Bienvenido ${name}, debes realizar el proceso de verificación`);
-    })
-=======
   all.userSignUp(email, password, name).then((result) => {
     const email = result.user.email;
     console.log(email);
@@ -103,7 +83,6 @@ const checkIn = (email, password, name) => {
     alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
 
   })
->>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
     .catch((error) => {
       console.log(error);
       const errorCode = error.code;
@@ -156,10 +135,6 @@ const login = (email, password) => {
     .userSignIn(email, password)
     .then((result) => {
       if (result.user.emailVerified) {
-<<<<<<< HEAD
-        alert(`Bienvenido ${result.user.displayName}`);
-=======
->>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
         authStateChange();
       } else {
         all.signOut;
@@ -199,15 +174,8 @@ const loginGoogle = () => {
 
 // Función de  inicio con Facebook
 const loginFacebook = () => {
-<<<<<<< HEAD
-  all
-    .facebookLogin()
-    .then((result) => {
-      alert(`Bienvenido ${result.user.displayName}`);
-=======
   all.facebookLogin()
     .then(() => {
->>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
       authStateChange();
     })
     .catch((error) => {
@@ -218,10 +186,6 @@ const loginFacebook = () => {
 // ------------------------------------------- Eventos  ----------------------------------------- //
 
 // Evento para registrarse
-<<<<<<< HEAD
-const signUpBtn = document.querySelector('#signup-btn');
-=======
->>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
 signUpBtn.addEventListener('click', (e) => {
   e.preventDefault();
   const name = document.querySelector('#signup-name').value;
@@ -231,11 +195,7 @@ signUpBtn.addEventListener('click', (e) => {
   document.querySelector('#signup-form').reset();
 });
 
-<<<<<<< HEAD
-// Evento de inciar sección
-=======
 // Evento para inciar sección
->>>>>>> 7fedc78dbf53391f20a01f03a658e6ef5c5e2443
 const signInBtn = document.querySelector('#signin-btn');
 signInBtn.addEventListener('click', (e) => {
   e.preventDefault();
