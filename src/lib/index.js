@@ -112,7 +112,6 @@ const getValues = () => {
       console.log(error);
     });
 };
-
 // ---------------------------------- Publicaciones --------------------------------------- //
 
 // Función para el muro => vaciar el input
@@ -150,8 +149,8 @@ window.addEventListener('DOMContentLoaded', async () => {
         </div>
 
         <div class="date-likes">
-          <img class="like-post" src='../images/like1.svg' >
-          <img class="like-post" src='../images/like2.svg' style="display: none">
+          <img class="like_post" src='../images/like1.svg' >
+          <img class="like-post" src='../images/like2.svg' style="display: none"><p id="counter"></p>
         </div>
       </div>
       `;
@@ -169,10 +168,3 @@ publishBtn.addEventListener('click', () => {
   });
   inputTimeline.value = '';
 });
-const like = document.querySelector('.like-post');
-
-// const likeCounter = () => {
-//   let counter = '';
-// le
-
-// }
