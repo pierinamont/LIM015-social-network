@@ -93,6 +93,15 @@ showProfileImg();
 // ----------------------------------------- Muro ------------------------------------------- //
 const publishBtn = document.querySelector('#publish-btn'); // Botón para publicar
 const inputTimeline = document.querySelector('.input-timeline');
+
+// Función para el muro => vaciar el input
+// const emptyInput = () => {
+//   if (inputTimeline.value === '') {
+//     alert('Rellenar espacios ');
+//   }
+// };
+
+
 // Función que obtiene el valor del input y lo envía a Firestore
 const getValues = () => {
   const user = config.currentUser();
@@ -114,13 +123,6 @@ const getValues = () => {
 };
 
 // ---------------------------------- Publicaciones --------------------------------------- //
-
-// Función para el muro => vaciar el input
-// const emptyInput = () => {
-//   if (inputTimeline.value === '') {
-//     alert('Rellenar espacios ');
-//   }
-// };
 
 // Función que trae la colección de datos para las publicaciones
 
@@ -157,8 +159,9 @@ window.addEventListener('DOMContentLoaded', async () => {
         </div>
 
         <div class="date-likes">
-          <img class="like-post" src='../images/like1.svg' >
-          <img class="like-post" src='../images/like2.svg' style="display: none">
+          <img class="like1-post" src='../images/like1.svg' >
+          <img class="like2-post" src='../images/like2.svg' style="display: none">
+          <p id="p-likes"></p>
         </div>
       </div>
       `;
