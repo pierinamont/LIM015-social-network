@@ -319,6 +319,7 @@ body {
 }
 .container-btn img {
     cursor: pointer;
+    width: 34px;
 }
 
 /*contenedor del perfil*/
@@ -370,7 +371,6 @@ body {
     height: 50px;
     margin-top: 20px;
     border: 1px solid #E5E5E5;
-
     border-radius: 10px;
 }
 .input-timeline::placeholder {
@@ -410,14 +410,25 @@ body {
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0px 0px 4px 1px rgb(0 0 0 / 10%);
-    font-family: 'Poppins', sans-serif;
 }
-.campaign-img {
-    height: 200px;
-    width: 230px;
-    background-image: url(./images/file.jpg);
+.campaign-container #campaign-img {
+    background-image: url(./images/campaign2.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
+    backface-visibility: inherit;
+    height: 200px;
+    width: 100%;
+    margin: 0 auto;
+}
+.github-container {
+    display: none;
+    background-color: white;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0px 0px 4px 1px rgb(0 0 0 / 10%);
+    width: 100%;
+    padding: 20px;
 }
 
 /* a partir de 768 se hace el responsive */
@@ -488,11 +499,35 @@ body {
         cursor: pointer;
         margin-top: 20px;
         font-size: 1.4rem;
-
+        font-family: 'Poppins', sans-serif;
     }
     
     .campaign-content button:hover {
         background-color: var(--settings-color);
+    }
+
+    .github-container {
+        display: inline;
+        grid-column: 3;
+        grid-row: 3;
+        font-size: 1.3rem;
+    }
+    .github-container .github-content {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .github-content a {
+        text-decoration: none;
+        color: black;
+        height: 25px;
+        display: flex;
+        align-items: center;
+    }
+    .github-content a img {
+        width: 22px;
+        height: auto;
+        margin-right: 15px;
     }
 }
 
@@ -513,6 +548,10 @@ body {
     display: flex;
     align-items: center;
 }
+.post-body .img-name span {
+    margin-right: 2%;
+}
+
 .post-body .img-name .name {
     font-size: 1.3rem;
     font-weight: 500;

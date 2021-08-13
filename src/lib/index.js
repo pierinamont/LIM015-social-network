@@ -55,18 +55,18 @@ container.innerHTML = `
   <!----------------muro---------------->
   <div class = 'timeline-container'>
     <div class= 'timeline'>
-    <input class='input-timeline' type='text' placeholder='Crear publicación'><br>
-    <div class= 'container-btn'>
-    <img src='../images/picture.svg'>
-    <input id="publish-btn" type=button value='Publicar'>
-    </div>
+      <input class='input-timeline' type='text' placeholder='Crear publicación'><br>
+      <div class= 'container-btn'>
+        <img src='../images/picture.svg'>
+        <input id="publish-btn" type=button value='Publicar'>
+      </div>
     </div>
   </div>
-  <!--------publicaciones---------->
+  <!----------- publicaciones---------->
   <div class = 'posts-container'>
     <div id="post"></div>
   </div>
-  <!--------Campañas y github----------->
+  <!----------- Campañas ----------->
   <div class="campaign-container">
     <div class="campaign-content">
       <h3>Campañas 📢</h3>
@@ -75,6 +75,20 @@ container.innerHTML = `
       </figure>-->
       <div id="campaign-img"></div>
       <button>Información</button>
+    </div>
+  </div>
+  <!----------- github ----------->
+  <div class="github-container style="display: none">
+    <div class="github-content">
+      <a href="https://github.com/yesireth">
+        <img src="../images/github.svg"></img><p>Yesireth S</p>
+      </a>
+      <a href="https://github.com/makemile">
+        <img src="../images/github.svg"></img><p>Kengya M</p>
+      </a>
+      <a href="https://github.com/pierinamont">
+        <img src="../images/github.svg"></img><p>Pierina M</p>
+      </a>
     </div>
   </div>
   `;
@@ -102,15 +116,8 @@ const showProfileImg = () => {
 showProfileImg();
 
 // ----------------------------------------- Muro ------------------------------------------- //
-const publishBtn = document.querySelector('#publish-btn'); // Botón para publicar
+const publishBtn = document.querySelector('#publish-btn'); 
 const inputTimeline = document.querySelector('.input-timeline');
-
-// Función para el muro => vaciar el input
-// const emptyInput = () => {
-//   if (inputTimeline.value === '') {
-//     alert('Rellenar espacios ');
-//   }
-// };
 
 
 // Función que obtiene el valor del input y lo envía a Firestore
@@ -158,12 +165,13 @@ window.addEventListener('DOMContentLoaded', async () => {
         <div class="img-name">
           <img class="profile-user-img" src='${doc.data().photo}'>
           <span>
-          <p class="name">${doc.data().name}</p>
-          <p class="date">${doc.data().day}</p>
+            <p class="name">${doc.data().name}</p>
+            <p class="date">${doc.data().day}</p>
           </span>
+          
           <i>
-          <img class="edit-img" src='../images/edit3.svg'>
-          <img class="close-img" src='../images/close-1.svg'>
+            <img class="edit-img" src='../images/edit3.svg'>
+            <img class="close-img" src='../images/close-1.svg'>
           </i>
         </div>
         <div class="description-div">
@@ -190,10 +198,3 @@ publishBtn.addEventListener('click', () => {
   });
   inputTimeline.value = '';
 });
-const like = document.querySelector('.like-post');
-
-// const likeCounter = () => {
-//   let counter = '';
-// le
-
-// }
