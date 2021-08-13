@@ -50,12 +50,13 @@ container.innerHTML = `
     <div class="profile">
       <img class="profile-user-img" src=''>
       <p id='name-profile'></p>
+      <p id='email-profile'></p>
     </div>
   </div>
   <!----------------muro---------------->
   <div class = 'timeline-container'>
     <div class= 'timeline'>
-      <input class='input-timeline' type='text' placeholder='Crear publicación'><br>
+      <input class='input-timeline' type='text' placeholder='Comparte algo'><br>
       <div class= 'container-btn'>
         <img src='../images/picture.svg'>
         <input id="publish-btn" type=button value='Publicar'>
@@ -97,12 +98,14 @@ mainPage.appendChild(container);
 // ----------------------------------------- Perfil ------------------------------------------- //
 const profileUserImg = document.querySelector('.profile-user-img');
 const nameProfile = document.querySelector('#name-profile');
+const emailProfile = document.querySelector('#email-profile');
 
 // Función para motrar la imagen de perfil y su nombre
 const showProfileImg = () => {
   firebase.authStateChange((user) => {
     if (user) {
       nameProfile.innerHTML = `${user.displayName}`;
+      emailProfile.innerHTML = `${user.email}`;
       if (user.photoURL === null) {
         profileUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
       } else {
@@ -154,7 +157,7 @@ const getValues = () => {
 const postInRealTime = (callback) => db.collection('posts').onSnapshot(callback);
 
 window.addEventListener('DOMContentLoaded', async () => {
-  const arrayPosts = [];
+  // const arrayPosts = [];
   /* const  = await getPost(); */
   postInRealTime((querySnapshot) => {
     const post = document.getElementById('post');
@@ -184,12 +187,13 @@ window.addEventListener('DOMContentLoaded', async () => {
         </div>
       </div>
       `;
-      arrayPosts.push(doc.data());
+      // arrayPosts.push(doc.data());
     });
   });
 });
 
 // ------------------------------------------- Eventos  ----------------------------------------- //
+
 
 // Evento del botón "Publicar"
 publishBtn.addEventListener('click', () => {
