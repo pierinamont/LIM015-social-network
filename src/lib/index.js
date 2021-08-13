@@ -66,6 +66,17 @@ container.innerHTML = `
   <div class = 'posts-container'>
     <div id="post"></div>
   </div>
+  <!--------Campañas y github----------->
+  <div class="campaign-container">
+    <div class="campaign-content">
+      <h3>Campañas 📢</h3>
+      <!--<figure>
+        <img src='./images/file.jpg'></img>
+      </figure>-->
+      <div id="campaign-img"></div>
+      <button>Información</button>
+    </div>
+  </div>
   `;
 mainPage.appendChild(container);
 
@@ -104,15 +115,17 @@ const inputTimeline = document.querySelector('.input-timeline');
 
 // Función que obtiene el valor del input y lo envía a Firestore
 const getValues = () => {
+  
   const user = config.currentUser();
   const day = Date.now();
   const objectoAccion = new Date(day);
-  return db.collection('posts').add({
-    photo: user.photoURL,
-    name: user.displayName,
-    description: inputTimeline.value,
-    day: objectoAccion.toLocaleString(),
-  })
+  if(inputTimeline.value != 0) {
+    return  db.collection('posts').add({
+      photo: user.photoURL,
+      name: user.displayName,
+      description: inputTimeline.value,
+      day: objectoAccion.toLocaleString(),
+    })
     .then((docRef) => {
       console.log(docRef);
       console.log('Documento escrito con el ID: ', docRef.id);
@@ -120,6 +133,10 @@ const getValues = () => {
     .catch((error) => {
       console.log(error);
     });
+  } else {
+    alert('Por favor, llena los campos');
+  }
+  
 };
 
 // ---------------------------------- Publicaciones --------------------------------------- //
@@ -138,26 +155,20 @@ window.addEventListener('DOMContentLoaded', async () => {
     querySnapshot.forEach((doc) => {
       post.innerHTML += `
       <div class='post-body'>
-
         <div class="img-name">
           <img class="profile-user-img" src='${doc.data().photo}'>
-
           <span>
           <p class="name">${doc.data().name}</p>
           <p class="date">${doc.data().day}</p>
           </span>
-
           <i>
           <img class="edit-img" src='../images/edit3.svg'>
           <img class="close-img" src='../images/close-1.svg'>
           </i>
-
         </div>
-
         <div class="description-div">
           <p>${doc.data().description}</p>
         </div>
-
         <div class="date-likes">
           <img class="like-post" src='../images/like1.svg' >
           <img class="dislike-post" src='../images/like2.svg' style="display: none">

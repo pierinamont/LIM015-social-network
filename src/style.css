@@ -32,7 +32,7 @@ body {
 }
 
     
-/* SECCION PARA LOGIN */
+/***************** SECCION PARA LOGIN ******************/
 
 .content-container {
     /*margin-top: 100px;*/
@@ -72,7 +72,7 @@ body {
 #signup-container {
     display: flex;
     text-align: center;
-    font-size: 1.4rem; /*14px*/
+    font-size: 1.4rem; 
 }
 
 .content-container #login-form {
@@ -144,7 +144,7 @@ body {
 }
 
 
-/* SECCION PARA REGISTRARSE */
+/**************** SECCION PARA REGISTRARSE ***************/
 #signup-form img {
     width: 120px;
     height: auto;
@@ -200,7 +200,7 @@ body {
     color: var(--settings-color);
 }
 
-/*Estilos para navbar*/
+/************************HEADER*****************/
 .header-bar-nav {
     margin: 0;
 }
@@ -294,7 +294,7 @@ body {
 
 
 
-/*contenedor pagina principal*/
+/************************PAGINA PRINCIPAL************************/
 .container{
     display: grid;
     grid-template-columns: 1fr;
@@ -349,7 +349,7 @@ body {
     font-size: 1.6rem;
     font-weight: 500;
 }
-/*contenedor del muro/timeline*/
+/***************contenedor del muro/timeline**********/
 
 .container .timeline-container{
     width: 100%;
@@ -392,7 +392,7 @@ body {
     background: var(--settings-color);
 }
 
-/*contenedor del posts*/
+/*****************contenedor del posts**************/
 .container .posts-container{
     width: 100%;
     height: 100%;
@@ -403,6 +403,21 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 100%;
+}
+.campaign-container {
+    display: none;
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 0px 4px 1px rgb(0 0 0 / 10%);
+    font-family: 'Poppins', sans-serif;
+}
+.campaign-img {
+    height: 200px;
+    width: 230px;
+    background-image: url(./images/file.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /* a partir de 768 se hace el responsive */
@@ -427,8 +442,60 @@ body {
         grid-column: 2 ;
         grid-row: 2;
     }
-
 }
+
+@media (min-width: 991px) {   /****************EDITANDO***********************/
+    .container{
+        grid-template-columns:  minmax(0,7fr) minmax(0,17fr)  minmax(0,7fr);
+        grid-auto-rows: minmax(100px, auto);
+    }
+    .campaign-container {
+        display: grid;
+        grid-column: 3;
+        grid-row: 1/3;
+        width: 100%;
+        height: 100%;
+        background: white;
+        text-align: center;
+        padding: 0px 20px 0px 20px;
+    }
+
+    .campaign-content h3 {
+        font-size: 1.6rem;
+        font-weight: 500;
+        margin-bottom: 10px;
+        background-color: var(--btn-color);
+    }
+
+    /* .campaign-content figure {
+        width: fit-content;
+        height: 200px;
+        margin: 0 auto;
+    }
+
+    .campaign-content img {
+        width: 100%;
+        height: 100%;
+    } */
+
+    .campaign-content button {
+        width: 100%;
+        border: none;
+        height: 35px;
+        border-radius: 9px;
+        color: white;
+        background-color: var(--logo-color);
+        cursor: pointer;
+        margin-top: 20px;
+        font-size: 1.4rem;
+
+    }
+    
+    .campaign-content button:hover {
+        background-color: var(--settings-color);
+    }
+}
+
 
 .post-body {
     background-color: white;
