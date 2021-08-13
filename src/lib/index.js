@@ -101,7 +101,6 @@ const inputTimeline = document.querySelector('.input-timeline');
 //   }
 // };
 
-
 // Función que obtiene el valor del input y lo envía a Firestore
 const getValues = () => {
   const user = config.currentUser();
@@ -158,14 +157,9 @@ window.addEventListener('DOMContentLoaded', async () => {
         </div>
 
         <div class="date-likes">
-<<<<<<< HEAD
-          <img class="like_post" src='../images/like1.svg' >
-          <img class="like-post" src='../images/like2.svg' style="display: none"><p id="counter"></p>
-=======
           <img class="like-post" src='../images/like1.svg' >
           <img class="dislike-post" src='../images/like2.svg' style="display: none">
           <p id="p-likes"></p>
->>>>>>> edde78b0eddeb1d2207666123853ee870ce8df8a
         </div>
       </div>
       `;
