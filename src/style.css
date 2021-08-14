@@ -654,12 +654,18 @@ body {
     display: flex;
     justify-content: space-between;
 }
+.date-likes .likes-container {
+    display: flex;
+    align-items: center;
+}
 
 .date-likes .like-post,
-.date-likes .dislike-post {
+.date-likes .dislike-post,
+.date-likes .send-post {
     width: 25px;
     height: auto;
     cursor: pointer;
+    margin-right: 18px;
 }
 
 .date-likes .likes-counter #p-likes {

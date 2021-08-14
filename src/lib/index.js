@@ -180,8 +180,12 @@ window.addEventListener('DOMContentLoaded', async () => {
           <p>${doc.data().description}</p>
         </div>
         <div class="date-likes">
+         <div class="likes-container">
           <img class="like-post" src='../images/like1.svg' >
           <img class="dislike-post" src='../images/like2.svg' style="display: none">
+          <img class="send-post" src='../images/send.svg' >
+         </div>
+         
           <div class="likes-counter">
              <span></span><p id="p-likes">Likes</p>
           </div>
