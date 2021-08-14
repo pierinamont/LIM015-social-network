@@ -204,6 +204,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 publishBtn.addEventListener('click', () => {
   getValues().then(() => {
     postInRealTime();
+  })
+  .catch((error) => {
+    console.log(error);
   });
   inputTimeline.value = '';
 });

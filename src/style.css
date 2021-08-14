@@ -642,10 +642,11 @@ body {
 
 .post-body .description-div {
     padding: 10px;
-    height: 50px;
+    height: 100%;
     /*fondo*/
     background-color: #f9f9f9;
     border-radius: 10px 10px 0px 0px;
+
 }
 
 .date-likes {
