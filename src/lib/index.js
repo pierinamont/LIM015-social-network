@@ -155,6 +155,7 @@ const getValues = () => {
   
 };
 // ---------------------------------- Publicaciones --------------------------------------- //
+
 // -------------------LIKE--------------------//
 const dislike = document.querySelector('.dislike-post');
 // const counterLike = document.getElementById('"p-likes');
@@ -268,10 +269,10 @@ window.addEventListener('DOMContentLoaded', async () => {
           <p>${doc.data().description}</p>
         </div>
         <div class="date-likes">
-         ${htmlCorazon}
+         
          
          <div class="likes-container">
-      
+         ${htmlCorazon}
           <img class="send-post" src='../images/send.svg' >
          </div>
          
