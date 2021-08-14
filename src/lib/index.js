@@ -141,7 +141,6 @@ const getValues = () => {
       user: user.uid,
       likesUser: [],
     })
-
     .then((docRef) => {
       console.log(docRef);
       console.log("Documento escrito con el ID: ", docRef.id);
@@ -250,9 +249,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 
       post.innerHTML += `
       <div class='post-body' data-idpost='${doc.id}'>
- 
-
-      
         <div class="img-name">
           <img class="profile-user-img" src='${doc.data().photo}'>
           <span>
@@ -282,7 +278,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         </div>
       </div>
       `;
-      // arrayPosts.push(doc.data());
     });
     agregarEventoLike();
   });

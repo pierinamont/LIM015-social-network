@@ -12,8 +12,8 @@ loginDiv.innerHTML = `
         <form id="login-form">
                 <img class="logo" src="./images/petPlace.svg" alt="">
                 <p>¡Bienvenid@ Pet Lover!</p>
-                <input type="email" placeholder="Coloca tu correo" id="email" required>
-                <input type="password" placeholder="Coloca tu contraseña" name="" id="password" required>
+                <input class="login-email" type="email" placeholder="Coloca tu correo" id="email" required>
+                <input class="login-password" type="password" placeholder="Coloca tu contraseña" name="" id="password" required>
                 <button id="signin-btn">Iniciar Sesión</button>
                 <p>O bien ingresa por...</p>
                 <div class="options">
@@ -23,6 +23,16 @@ loginDiv.innerHTML = `
                 <p>¿No tienes cuenta? <strong id="sign-up">Regístrate</strong></p>
          </form>
     </div>
+    <!----------MODAL-------------->
+
+    <div class="modal-container" style="display: none">
+      <div class="modal-content">
+        <p id="error-message"></p>
+        <p id="message" style="display:none"></p>
+        <button class="modal-btn">Aceptar</button>
+      </div>
+    </div>
+
     <!--SECCION PARA REGISTRARSE-->
     <div id="signup-container" style= "display: none">
         <form id="signup-form">
@@ -54,6 +64,14 @@ const mainPage = document.querySelector('#main-page');
 const signOutBtn = document.querySelector('#sign-out');
 const google = document.querySelector('#gmail-btn');
 const facebook = document.querySelector('#facebook-btn');
+const modal = document.querySelector('.modal-container');
+const errorMessage = document.querySelector('#error-message');
+const modalBtn = document.querySelector('.modal-btn');
+const loginEmail = document.querySelector('.login-email');
+const loginPassword = document.querySelector('.login-password');
+const signupName = document.querySelector('#signup-name');
+const signupEmail = document.querySelector('#signup-email');
+const signupPassword = document.querySelector('#signup-password');
 
 // ----------------------------------------- Registro ----------------------------------------- //
 
@@ -80,21 +98,38 @@ const checkIn = (email, password, name) => {
       console.log(error);
     });
     all.signOut;
-    alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
+    modal.style.display = 'flex';
+    modal.style.backgroundColor='#F8C908';
+    message.style.display = 'inline';
+    message.textContent=`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`;
+    // alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
   })
     .catch((error) => {
       console.log(error);
       const errorCode = error.code;
       if (errorCode === 'auth/invalid-email') {
-        alert('Por favor, completa los campos');
+        errorMessage.textContent = 'Por favor, completa los campos';
+        modal.style.display = 'flex';
+        signupName.disabled = true;
+        signupEmail.disabled = true;
+        signupPassword.disabled = true;
+        // alert('Por favor, completa los campos');
       }
       if (errorCode === 'auth/email-already-in-use') {
-        alert(
-          'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido'
-        );
+        errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
+        modal.style.display = 'flex';
+        signupName.disabled = true;
+        signupEmail.disabled = true;
+        signupPassword.disabled = true;
+        // alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
       }
       if (errorCode === 'auth/weak-password') {
-        alert('La contraseña debe tener al menos 6 caracteres');
+        errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
+        modal.style.display = 'flex';
+        signupName.disabled = true;
+        signupEmail.disabled = true;
+        signupPassword.disabled = true;
+        // alert('La contraseña debe tener al menos 6 caracteres');
       }
     });
 };
@@ -153,15 +188,25 @@ const login = (email, password) => {
       console.log(error);
       const errorCode = error.code;
       if (errorCode === 'auth/invalid-email') {
-        alert('Por favor ingrese su usuario y contraseña');
+        errorMessage.textContent = 'Por favor ingrese su usuario y contraseña';
+        modal.style.display = 'flex';
+        loginEmail.disabled = true;
+        loginPassword.disabled = true;
+        // alert('Por favor ingrese su usuario y contraseña');
       }
       if (errorCode === 'auth/wrong-password') {
-        alert('Contraseña incorrecta, inténtelo de nuevo');
+        errorMessage.textContent = 'Contraseña incorrecta, inténtelo de nuevo';
+        modal.style.display = 'flex';
+        loginEmail.disabled = true;
+        loginPassword.disabled = true;
+        // alert('Contraseña incorrecta, inténtelo de nuevo');
       }
       if (errorCode === 'auth/user-not-found') {
-        alert(
-          'El correo que ingresó no está registrado, por favor, regístrece'
-        );
+        errorMessage.textContent = 'El correo que ingresó no está registrado, por favor, regístrece';
+        modal.style.display = 'flex';
+        loginEmail.disabled = true;
+        loginPassword.disabled = true;
+        // alert('El correo que ingresó no está registrado, por favor, regístrece');
       }
     });
 };
@@ -239,3 +284,13 @@ google.addEventListener('click', () => {
 facebook.addEventListener('click', () => {
   loginFacebook();
 });
+
+// Evento para cerrar modal
+modalBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+  loginEmail.disabled = false;
+  loginPassword.disabled = false;
+  signupName.disabled = false;
+  signupEmail.disabled = false;
+  signupPassword.disabled = false;
+})
