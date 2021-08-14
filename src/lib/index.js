@@ -51,6 +51,7 @@ container.innerHTML = `
       <img class="profile-user-img" src=''>
       <p id='name-profile'></p>
       <p id='email-profile'></p>
+      <img class="line-decor" src="../images/line.svg"></img>
     </div>
   </div>
   <!----------------muro---------------->
@@ -71,9 +72,6 @@ container.innerHTML = `
   <div class="campaign-container">
     <div class="campaign-content">
       <h3>Campañas 📢</h3>
-      <!--<figure>
-        <img src='./images/file.jpg'></img>
-      </figure>-->
       <div id="campaign-img"></div>
       <button>Información</button>
     </div>

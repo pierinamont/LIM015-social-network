@@ -300,7 +300,7 @@ body {
     grid-template-columns: 1fr;
     margin: 0 auto;
     width: 90%;
-    grid-template-rows: 180px 150px 120px;
+    grid-template-rows: 200px 150px 120px;
     gap: 30px;
     justify-content: center;
 }
@@ -334,8 +334,13 @@ body {
     background-color: white;
     border-radius: 15px;
     width: 100%;
-    height: 180px;
+    height: 100%;
     box-shadow: 0px 0px 4px 1px rgb(0 0 0 / 10%);
+}
+
+.profile .line-decor {
+    width: 40px;
+    margin-top: -15px;
 }
 
 /*Sección de perfil*/
@@ -426,12 +431,11 @@ body {
     box-shadow: 0px 0px 4px 1px rgb(0 0 0 / 10%);
 }
 .campaign-container #campaign-img {
-    background-image: url(./images/campaign2.jpg);
+    background-image: url(./images/vet.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    backface-visibility: inherit;
-    height: 240px;
+    height: 262px;
     width: 100%;
     margin: 0 auto;
 }
@@ -570,7 +574,7 @@ body {
         font-weight: 100;
         text-align: center;
     }
-    .github-content p:hover {
+    .github-content a:hover {
         font-weight: 500;
     }
     .github-content a img {
@@ -609,9 +613,10 @@ body {
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 0px;
+    line-height: 18px;
 }
 .post-body .img-name .date {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: grey;
     margin-top: 0px;
 }
