@@ -81,14 +81,15 @@ container.innerHTML = `
   <!----------- github ----------->
   <div class="github-container style="display: none">
     <div class="github-content">
+    <p class="copyright">Pet Place ® 2021</p>
       <a href="https://github.com/yesireth">
-        <img src="../images/github.svg"></img><p>Yesireth S</p>
+        <img src="../images/github-white.svg"></img><p>Y. Suárez</p>
       </a>
       <a href="https://github.com/makemile">
-        <img src="../images/github.svg"></img><p>Kengya M</p>
+        <img src="../images/github-white.svg"></img><p>K. Moncada</p>
       </a>
       <a href="https://github.com/pierinamont">
-        <img src="../images/github.svg"></img><p>Pierina M</p>
+        <img src="../images/github-white.svg"></img><p>P. Montalva</p>
       </a>
     </div>
   </div>
@@ -183,7 +184,9 @@ window.addEventListener('DOMContentLoaded', async () => {
         <div class="date-likes">
           <img class="like-post" src='../images/like1.svg' >
           <img class="dislike-post" src='../images/like2.svg' style="display: none">
-          <p id="p-likes"></p>
+          <div class="likes-counter">
+             <span></span><p id="p-likes">Likes</p>
+          </div>
         </div>
       </div>
       `;

@@ -103,7 +103,7 @@ body {
 }
 
 #login-form button {
-    width: 164px;
+    width: 100%;
     height: 40px;
     background-color: var(--btn-color);
     border: none;
@@ -412,6 +412,12 @@ body {
     height: 40px;
     border-radius: 100%;
 }
+.img-name i {
+    width: 17%;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .campaign-container {
     display: none;
     background-color: white;
@@ -425,13 +431,13 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     backface-visibility: inherit;
-    height: 200px;
+    height: 240px;
     width: 100%;
     margin: 0 auto;
 }
 .github-container {
     display: none;
-    background-color: white;
+    background-color: var(--logo-color);
     border-radius: 15px;
     padding: 10px;
     box-shadow: 0px 0px 4px 1px rgb(0 0 0 / 10%);
@@ -470,6 +476,20 @@ body {
         grid-column: 2 ;
         grid-row: 2;
     }
+    .img-name i {
+        width: 50%;
+    }
+}
+@media(min-width: 767) {
+    .img-name i {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 790px)  {
+    .img-name i {
+        width: 62%;
+    }
 }
 
 @media (min-width: 991px) {   /****************EDITANDO***********************/
@@ -477,12 +497,16 @@ body {
         grid-template-columns:  minmax(0,7fr) minmax(0,17fr)  minmax(0,7fr);
         grid-auto-rows: minmax(100px, auto);
     }
-
+   
+    .img-name i {
+        width: 64%;
+    }
+    
     .campaign-container {
         display: grid;
         grid-column: 3;
         grid-row: 1/3;
-        height: 90%;
+        height: 100%;
         background: white;
         text-align: center;
         padding: 0px 20px 0px 20px;
@@ -498,12 +522,12 @@ body {
     .campaign-content button {
         width: 100%;
         border: none;
-        height: 35px;
+        height: 36px;
         border-radius: 9px;
         color: white;
         background-color: var(--logo-color);
         cursor: pointer;
-        margin-top: 20px;
+        margin-top: 14px;
         font-size: 1.4rem;
         font-family: 'Poppins', sans-serif;
     }
@@ -517,24 +541,45 @@ body {
         grid-column: 3;
         grid-row: 3;
         font-size: 1.3rem;
-        width: auto;
+        height: 100px;
+        margin: 0 auto;
+        width: 80%;
+        background-color: var(--settings-color);
     }
     .github-container .github-content {
-        align-items: center;
+        /* align-items: center; */
         display: flex;
         flex-direction: column;
+        width: 120px;
+        justify-content: center;
+        margin: 0 auto;
     }
     .github-content a {
         text-decoration: none;
-        color: black;
+        color: white;
         height: 25px;
         display: flex;
         align-items: center;
+    }
+    .github-content p {
+        color: white;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    .github-content .copyright {
+        font-weight: 100;
+        text-align: center;
+    }
+    .github-content p:hover {
+        font-weight: 500;
     }
     .github-content a img {
         width: 22px;
         height: auto;
         margin-right: 15px;
+    }
+    .github-content a img:hover {
+        transform: rotate(20deg);
     }
 }
 
@@ -551,6 +596,7 @@ body {
     width: 48px;
     margin-right: 15px;
 }
+
 .post-body .img-name {
     display: flex;
     align-items: center;
@@ -592,11 +638,16 @@ body {
 .post-body .description-div {
     padding: 10px;
     height: 50px;
+    /*fondo*/
+    background-color: #f9f9f9;
+    border-radius: 10px 10px 0px 0px;
 }
 
 .date-likes {
     border-top: 2px solid #ebebeb;
     padding-top: 17px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .date-likes .like-post,
@@ -604,5 +655,13 @@ body {
     width: 25px;
     height: auto;
     cursor: pointer;
-    
+}
+
+.date-likes .likes-counter #p-likes {
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: var(--logo-color);
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
 }

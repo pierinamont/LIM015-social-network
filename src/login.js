@@ -115,6 +115,15 @@ const authStateChange = () => {
   });
 };
 
+// Guarda el uid del usuario en el localStorage
+all.authStateChange((user) => {
+  if(user) {
+    localStorage.setItem('user', user.uid);
+  } else {
+    console.log('Ningún usuario a iniciado sesión');
+  }
+})
+
 // ------------------------------------- Inicio de sesión --------------------------------------- //
 
 // Función para mostrar contenedor de iniciar sesión
