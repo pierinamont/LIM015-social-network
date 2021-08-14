@@ -1,5 +1,5 @@
-import * as firebase from '../firebase/firebase-login.js';
-import * as config from '../firebase/firebase-config.js';
+import * as firebase from "../firebase/firebase-login.js";
+import * as config from "../firebase/firebase-config.js";
 
 // ---------------------------------- Constantes  ------------------------------------ //
 const headerBarNav = document.getElementById('header-bar-nav');
@@ -106,9 +106,12 @@ const showProfileImg = () => {
       nameProfile.innerHTML = `${user.displayName}`;
       emailProfile.innerHTML = `${user.email}`;
       if (user.photoURL === null) {
-        profileUserImg.setAttribute('src', 'https://i.postimg.cc/6pRsrH91/user-2.png');
+        profileUserImg.setAttribute(
+          "src",
+          "https://i.postimg.cc/6pRsrH91/user-2.png"
+        );
       } else {
-        profileUserImg.setAttribute('src', `${user.photoURL}`);
+        profileUserImg.setAttribute("src", `${user.photoURL}`);
       }
     } else {
       // ningun usuario conectado
@@ -137,7 +140,7 @@ const getValues = () => {
     })
     .then((docRef) => {
       console.log(docRef);
-      console.log('Documento escrito con el ID: ', docRef.id);
+      console.log("Documento escrito con el ID: ", docRef.id);
     })
     .catch((error) => {
       console.log(error);

@@ -90,7 +90,9 @@ const checkIn = (email, password, name) => {
         alert('Por favor, completa los campos');
       }
       if (errorCode === 'auth/email-already-in-use') {
-        alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
+        alert(
+          'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido'
+        );
       }
       if (errorCode === 'auth/weak-password') {
         alert('La contraseña debe tener al menos 6 caracteres');
@@ -138,7 +140,8 @@ signInForm.addEventListener('click', (e) => {
 
 // Función para iniciar sesión
 const login = (email, password) => {
-  all.userSignIn(email, password)
+  all
+    .userSignIn(email, password)
     .then((result) => {
       if (result.user.emailVerified) {
         authStateChange();
@@ -157,14 +160,17 @@ const login = (email, password) => {
         alert('Contraseña incorrecta, inténtelo de nuevo');
       }
       if (errorCode === 'auth/user-not-found') {
-        alert('El correo que ingresó no está registrado, por favor, regístrece');
+        alert(
+          'El correo que ingresó no está registrado, por favor, regístrece'
+        );
       }
     });
 };
 
 // Función de inicio con Google
 const loginGoogle = () => {
-  all.googleLogIn()
+  all
+    .googleLogIn()
     .then((result) => {
       console.log(result);
       authStateChange();
