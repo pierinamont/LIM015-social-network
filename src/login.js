@@ -1,57 +1,66 @@
 import * as all from './firebase/firebase-login.js';
 import * as todo from './firebase/firebase-config.js';
+import './view/login-view.js';
+import './view/signup-view.js';
+import './view/mainPage-view.js';
+import './view/header-view.js';
+import './view/change-view.js'
 
 // ------------------------------------ Estructura del login ------------------------------------ //
-const loginSection = document.getElementById('login-section');
-const loginDiv = document.createElement('div');
-loginDiv.className = 'login-div';
-loginDiv.innerHTML = `
-    <!--SECCION PRINCIPAL DEL LOGIN-->
-    <div class="content-container">
-        <img class="illustration" src="./images/dog-walking.svg" alt="">
-        <form id="login-form">
-                <img class="logo" src="./images/petPlace.svg" alt="">
-                <p>¡Bienvenid@ Pet Lover!</p>
-                <input class="login-email" type="email" placeholder="Coloca tu correo" id="email" required>
-                <input class="login-password" type="password" placeholder="Coloca tu contraseña" name="" id="password" required>
-                <button id="signin-btn">Iniciar Sesión</button>
-                <p>O bien ingresa por...</p>
-                <div class="options">
-                    <img class="img" id="facebook-btn" src="./images/facebook.svg" alt="">
-                    <img class="img" id="gmail-btn" src="./images/google.svg" alt="">
-                </div>
-                <p>¿No tienes cuenta? <strong id="sign-up">Regístrate</strong></p>
-         </form>
-    </div>
-    <!----------MODAL-------------->
 
-    <div class="modal-container" style="display: none">
-      <div class="modal-content">
-        <p id="error-message"></p>
-        <p id="message" style="display:none"></p>
-        <button class="modal-btn">Aceptar</button>
-      </div>
-    </div>
+// const loginSection = document.getElementById('login-section');
+// const loginDiv = document.createElement('div');
+// loginDiv.className = 'login-div';
+// loginDiv.innerHTML = `
+//     <!--SECCION PRINCIPAL DEL LOGIN-->
+//     <div class="content-container">
+//         <img class="illustration" src="./images/dog-walking.svg" alt="">
+//         <form id="login-form">
+//                 <img class="logo" src="./images/petPlace.svg" alt="">
+//                 <p>¡Bienvenid@ Pet Lover!</p>
+//                 <input class="login-email" type="email" placeholder="Coloca tu correo" id="email" required>
+//                 <input class="login-password" type="password" placeholder="Coloca tu contraseña" name="" id="password" required>
+//                 <button id="signin-btn">Iniciar Sesión</button>
+//                 <p>O bien ingresa por...</p>
+//                 <div class="options">
+//                     <img class="img" id="facebook-btn" src="./images/facebook.svg" alt="">
+//                     <img class="img" id="gmail-btn" src="./images/google.svg" alt="">
+//                 </div>
+//                 <p>¿No tienes cuenta?  <a href="#/signup" id="sign-up">Regístrate</a></p>
+//          </form>
+//     </div>
+//     <!----------MODAL-------------->
 
-    <!--SECCION PARA REGISTRARSE-->
-    <div id="signup-container" style= "display: none">
-        <form id="signup-form">
-                <img class="logo" src="./images/petPlace.svg" alt="">
-                <h2>Regístrate gratis</h2>
-                <div class="labels-container">
-                    <label for="signup-name">Coloca tu nombre:</label>
-                    <input class="input" type="text" placeholder="Coloca tu nombre" id="signup-name" required>
-                    <label for="signup-email">Coloca tu correo:</label>
-                    <input class="input" type="email" placeholder="Coloca tu correo" id="signup-email" required>
-                    <label for="signup-password">Crea tu contraseña:</label>
-                    <input class="input" type="password" placeholder="Coloca tu contraseña" name="" id="signup-password" required>
-                </div>
-                <button id="signup-btn">Resgistrarse</button>
-                <p>¿Ya tienes cuenta? <strong id="sign-in">Inicia Sesión</strong></p>
-            </form>
-    </div>
-    `;
-loginSection.appendChild(loginDiv);
+//     <div class="modal-container" style="display: none">
+//       <div class="modal-content">
+//         <p id="error-message"></p>
+//         <p id="message" style="display:none"></p>
+//         <button class="modal-btn">Aceptar</button>
+//       </div>
+//     </div>
+
+//     <!--SECCION PARA REGISTRARSE-->
+//     <div id="signup-container" style= "display: none">
+//         <form id="signup-form">
+//                 <img class="logo" src="./images/petPlace.svg" alt="">
+//                 <h2>Regístrate gratis</h2>
+//                 <div class="labels-container">
+//                     <label for="signup-name">Coloca tu nombre:</label>
+//                     <input class="input" type="text" placeholder="Coloca tu nombre" id="signup-name" required>
+//                     <label for="signup-email">Coloca tu correo:</label>
+//                     <input class="input" type="email" placeholder="Coloca tu correo" id="signup-email" required>
+//                     <label for="signup-password">Crea tu contraseña:</label>
+//                     <input class="input" type="password" placeholder="Coloca tu contraseña" name="" id="signup-password" required>
+//                 </div>
+//                 <button id="signup-btn">Resgistrarse</button>
+//                 <p>¿Ya tienes cuenta? <a id="sign-in" href="#/">Inicia Sesión</a></p>
+//             </form>
+//     </div>
+//     `;
+// loginSection.appendChild(loginDiv);
+
+
+
 
 // ------------------------------------ Variables / Constantes ---------------------------------- //
 const contentContainer = document.querySelector('.content-container');
@@ -76,11 +85,11 @@ const signupPassword = document.querySelector('#signup-password');
 // ----------------------------------------- Registro ----------------------------------------- //
 
 // Función para mostrar contenedor de registro
-signUpForm.addEventListener('click', (e) => {
-  e.preventDefault();
-  contentContainer.style.display = 'none';
-  signUpContainer.style.display = 'block';
-});
+// signUpForm.addEventListener('click', (e) => {
+//   e.preventDefault();
+//   contentContainer.style.display = 'none';
+//   signUpContainer.style.display = 'block';
+// });
 
 // Función para registrarse
 const checkIn = (email, password, name) => {
@@ -163,14 +172,14 @@ all.authStateChange((user) => {
 // ------------------------------------- Inicio de sesión --------------------------------------- //
 
 // Función para mostrar contenedor de iniciar sesión
-signInForm.addEventListener('click', (e) => {
-  e.preventDefault();
-  contentContainer.style.display = 'flex';
-  signUpContainer.style.display = 'none';
+// signInForm.addEventListener('click', (e) => {
+//   e.preventDefault();
+//   contentContainer.style.display = 'flex';
+//   signUpContainer.style.display = 'none';
 
-  document.querySelector('#signup-form').reset();
-  document.querySelector('#login-form').reset();
-});
+//   document.querySelector('#signup-form').reset();
+//   document.querySelector('#login-form').reset();
+// });
 
 // Función para iniciar sesión
 const login = (email, password) => {
@@ -238,15 +247,15 @@ const loginFacebook = () => {
 
 // ------------------------------------------- Eventos  ----------------------------------------- //
 
-// Evento para registrarse
-signUpBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  const name = document.querySelector('#signup-name').value;
-  const email = document.querySelector('#signup-email').value;
-  const password = document.querySelector('#signup-password').value;
-  checkIn(email, password, name);
-  document.querySelector('#signup-form').reset();
-});
+//Evento para registrarse
+// signUpBtn.addEventListener('click', (e) => {
+//   e.preventDefault();
+//   const name = document.querySelector('#signup-name').value;
+//   const email = document.querySelector('#signup-email').value;
+//   const password = document.querySelector('#signup-password').value;
+//   checkIn(email, password, name);
+//   document.querySelector('#signup-form').reset();
+// });
 
 // Evento para inciar sección
 const signInBtn = document.querySelector('#signin-btn');

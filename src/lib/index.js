@@ -1,36 +1,37 @@
 import * as firebase from "../firebase/firebase-login.js";
 import * as config from "../firebase/firebase-config.js";
-
+import '../view/login-view.js';
+import '../view/signup-view.js';
+import '../view/mainPage-view.js';
+import '../view/header-view.js';
 // ---------------------------------- Constantes  ------------------------------------ //
-const headerBarNav = document.getElementById('header-bar-nav');
-const headerNav = document.createElement('nav');
-const mainPage = document.getElementById('main-page');
-const container = document.createElement('div');
 const db = config.firestore;
 
 // ----------------------------------- Estructura del header ------------------------------------ //
 
-headerNav.className = 'headerNav';
-headerNav.innerHTML = `
-    <div class="menu-hamburger" id="toggle-button">
-        <div class="menu-line"></div>
-        <div class="menu-line"></div>
-        <div class="menu-line"></div>
-    </div>     
-    <img class="logo-nav" src="../images/logo-horizontal(2).svg"></img>
-    <ul class="ul-nav" id="nav-list">
-        <li class="li-nav">
-            <a>Inicio</a>
-        </li>
-        <li class="li-nav">
-            <a>Mi perfil</a>
-        </li>
-        <li class="li-nav" id="sign-out">
-        <img src="../images/sign-out.svg"></img><a>Cerrar Sesión</a>
-        </li>
-    </ul>
-`;
-headerBarNav.appendChild(headerNav);
+// headerNav.className = 'headerNav';
+// headerNav.innerHTML = `
+//     <div class="menu-hamburger" id="toggle-button">
+//         <div class="menu-line"></div>
+//         <div class="menu-line"></div>
+//         <div class="menu-line"></div>
+//     </div>     
+//     <img class="logo-nav" src="../images/logo-horizontal(2).svg"></img>
+//     <ul class="ul-nav" id="nav-list">
+//         <li class="li-nav">
+//             <a>Inicio</a>
+//         </li>
+//         <li class="li-nav">
+//             <a>Mi perfil</a>
+//         </li>
+//         <li class="li-nav" id="sign-out">
+//         <img src="../images/sign-out.svg"></img><a>Cerrar Sesión</a>
+//         </li>
+//     </ul>
+// `;
+// const headerBarNav = document.getElementById('header-bar-nav');
+// const headerNav = document.createElement('nav');
+// headerBarNav.appendChild(headerNav);
 
 // ------------------------------------ Header ------------------------------------------- //
 const toggleButton = document.getElementById('toggle-button');
@@ -43,56 +44,58 @@ toggleButton.addEventListener('click', () => {
 
 // ----------------------------------- Página principal ----------------------------------------- //
 // Estructura de la página principal
-container.className = 'container';
-container.innerHTML = `
-  <!----------------perfil---------------->
-  <div class = 'profile-container'> 
-    <div class="profile">
-      <img class="profile-user-img" src=''>
-      <p id='name-profile'></p>
-      <p id='email-profile'></p>
-      <img class="line-decor" src="../images/line.svg"></img>
-    </div>
-  </div>
-  <!----------------muro---------------->
-  <div class = 'timeline-container'>
-    <div class= 'timeline'>
-      <input class='input-timeline' type='text' placeholder='Comparte algo'><br>
-      <div class= 'container-btn'>
-        <img src='../images/picture.svg'>
-        <input id="publish-btn" type=button value='Publicar'>
-      </div>
-    </div>
-  </div>
-  <!----------- publicaciones---------->
-  <div class = 'posts-container'>
-    <div id="post"></div>
-  </div>
-  <!----------- Campañas ----------->
-  <div class="campaign-container">
-    <div class="campaign-content">
-      <h3>Campañas 📢</h3>
-      <div id="campaign-img"></div>
-      <button>Información</button>
-    </div>
-  </div>
-  <!----------- github ----------->
-  <div class="github-container style="display: none">
-    <div class="github-content">
-    <p class="copyright">Pet Place ® 2021</p>
-      <a href="https://github.com/yesireth">
-        <img src="../images/github-white.svg"></img><p>Y. Suárez</p>
-      </a>
-      <a href="https://github.com/makemile">
-        <img src="../images/github-white.svg"></img><p>K. Moncada</p>
-      </a>
-      <a href="https://github.com/pierinamont">
-        <img src="../images/github-white.svg"></img><p>P. Montalva</p>
-      </a>
-    </div>
-  </div>
-  `;
-mainPage.appendChild(container);
+// container.className = 'container';
+// container.innerHTML = `
+//   <!----------------perfil---------------->
+//   <div class = 'profile-container'> 
+//     <div class="profile">
+//       <img class="profile-user-img" src=''>
+//       <p id='name-profile'></p>
+//       <p id='email-profile'></p>
+//       <img class="line-decor" src="../images/line.svg"></img>
+//     </div>
+//   </div>
+//   <!----------------muro---------------->
+//   <div class = 'timeline-container'>
+//     <div class= 'timeline'>
+//       <input class='input-timeline' type='text' placeholder='Comparte algo'><br>
+//       <div class= 'container-btn'>
+//         <img src='../images/picture.svg'>
+//         <input id="publish-btn" type=button value='Publicar'>
+//       </div>
+//     </div>
+//   </div>
+//   <!----------- publicaciones---------->
+//   <div class = 'posts-container'>
+//     <div id="post"></div>
+//   </div>
+//   <!----------- Campañas ----------->
+//   <div class="campaign-container">
+//     <div class="campaign-content">
+//       <h3>Campañas 📢</h3>
+//       <div id="campaign-img"></div>
+//       <button>Información</button>
+//     </div>
+//   </div>
+//   <!----------- github ----------->
+//   <div class="github-container style="display: none">
+//     <div class="github-content">
+//     <p class="copyright">Pet Place ® 2021</p>
+//       <a href="https://github.com/yesireth">
+//         <img src="../images/github-white.svg"></img><p>Y. Suárez</p>
+//       </a>
+//       <a href="https://github.com/makemile">
+//         <img src="../images/github-white.svg"></img><p>K. Moncada</p>
+//       </a>
+//       <a href="https://github.com/pierinamont">
+//         <img src="../images/github-white.svg"></img><p>P. Montalva</p>
+//       </a>
+//     </div>
+//   </div>
+//   `;
+// const mainPage = document.getElementById('main-page');
+// const container = document.createElement('div');
+// mainPage.appendChild(container);
 
 // ----------------------------------------- Perfil ------------------------------------------- //
 const profileUserImg = document.querySelector('.profile-user-img');
@@ -284,12 +287,12 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 // ------------------------------------------- Eventos  ----------------------------------------- //
 // Evento del botón "Publicar"
-publishBtn.addEventListener('click', () => {
-  getValues().then(() => {
-    postInRealTime();
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-  inputTimeline.value = '';
-});
+// publishBtn.addEventListener('click', () => {
+//   getValues().then(() => {
+//     postInRealTime();
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+//   inputTimeline.value = '';
+// });
