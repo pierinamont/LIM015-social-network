@@ -107,38 +107,38 @@ const checkIn = (email, password, name) => {
       console.log(error);
     });
     all.signOut;
-    modal.style.display = 'flex';
-    modal.style.backgroundColor='#F8C908';
-    message.style.display = 'inline';
-    message.textContent=`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`;
-    // alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
+    // modal.style.display = 'flex';
+    // modal.style.backgroundColor='#F8C908';
+    // message.style.display = 'inline';
+    // message.textContent=`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`;
+    alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
   })
     .catch((error) => {
       console.log(error);
       const errorCode = error.code;
       if (errorCode === 'auth/invalid-email') {
-        errorMessage.textContent = 'Por favor, completa los campos';
-        modal.style.display = 'flex';
-        signupName.disabled = true;
-        signupEmail.disabled = true;
-        signupPassword.disabled = true;
-        // alert('Por favor, completa los campos');
+        // errorMessage.textContent = 'Por favor, completa los campos';
+        // modal.style.display = 'flex';
+        // signupName.disabled = true;
+        // signupEmail.disabled = true;
+        // signupPassword.disabled = true;
+        alert('Por favor, completa los campos');
       }
       if (errorCode === 'auth/email-already-in-use') {
-        errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
-        modal.style.display = 'flex';
-        signupName.disabled = true;
-        signupEmail.disabled = true;
-        signupPassword.disabled = true;
-        // alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
+        // errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
+        // modal.style.display = 'flex';
+        // signupName.disabled = true;
+        // signupEmail.disabled = true;
+        // signupPassword.disabled = true;
+        alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
       }
       if (errorCode === 'auth/weak-password') {
-        errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
-        modal.style.display = 'flex';
-        signupName.disabled = true;
-        signupEmail.disabled = true;
-        signupPassword.disabled = true;
-        // alert('La contraseña debe tener al menos 6 caracteres');
+        // errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
+        // modal.style.display = 'flex';
+        // signupName.disabled = true;
+        // signupEmail.disabled = true;
+        // signupPassword.disabled = true;
+        alert('La contraseña debe tener al menos 6 caracteres');
       }
     });
 };
@@ -146,19 +146,19 @@ const checkIn = (email, password, name) => {
 // ----------------- authStateChange para mostrar y ocultar contenedores ------------------------ //
 
 // Función para gestionar el estado del usuario
-const authStateChange = () => {
-  all.authStateChange((user) => {
-    if (user) {
-      headerBarNav.style.display = 'inline';
-      loginSection.style.display = 'none';
-      mainPage.style.display = 'flex';
-    } else {
-      loginSection.style.display = 'inline';
-      mainPage.style.display = 'none';
-      headerBarNav.style.display = 'none';
-    }
-  });
-};
+// const authStateChange = () => {
+//   all.authStateChange((user) => {
+//     if (user) {
+//       headerBarNav.style.display = 'inline';
+//       loginSection.style.display = 'none';
+//       mainPage.style.display = 'flex';
+//     } else {
+//       loginSection.style.display = 'inline';
+//       mainPage.style.display = 'none';
+//       headerBarNav.style.display = 'none';
+//     }
+//   });
+// };
 
 // Guarda el uid del usuario en el localStorage
 all.authStateChange((user) => {
@@ -182,68 +182,69 @@ all.authStateChange((user) => {
 // });
 
 // Función para iniciar sesión
-const login = (email, password) => {
-  all
-    .userSignIn(email, password)
-    .then((result) => {
-      if (result.user.emailVerified) {
-        authStateChange();
-      } else {
-        all.signOut;
-        alert(`${result.user.displayName} por favor, realiza la verificación`);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      const errorCode = error.code;
-      if (errorCode === 'auth/invalid-email') {
-        errorMessage.textContent = 'Por favor ingrese su usuario y contraseña';
-        modal.style.display = 'flex';
-        loginEmail.disabled = true;
-        loginPassword.disabled = true;
-        // alert('Por favor ingrese su usuario y contraseña');
-      }
-      if (errorCode === 'auth/wrong-password') {
-        errorMessage.textContent = 'Contraseña incorrecta, inténtelo de nuevo';
-        modal.style.display = 'flex';
-        loginEmail.disabled = true;
-        loginPassword.disabled = true;
-        // alert('Contraseña incorrecta, inténtelo de nuevo');
-      }
-      if (errorCode === 'auth/user-not-found') {
-        errorMessage.textContent = 'El correo que ingresó no está registrado, por favor, regístrece';
-        modal.style.display = 'flex';
-        loginEmail.disabled = true;
-        loginPassword.disabled = true;
-        // alert('El correo que ingresó no está registrado, por favor, regístrece');
-      }
-    });
-};
+// const login = (email, password) => {
+//   all
+//     .userSignIn(email, password)
+//     .then((result) => {
+//       if (result.user.emailVerified) {
+//         authStateChange();
+//       } else {
+//         all.signOut;
+//         alert(`${result.user.displayName} por favor, realiza la verificación`);
+//       }
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       const errorCode = error.code;
+//       if (errorCode === 'auth/invalid-email') {
+//         errorMessage.textContent = 'Por favor ingrese su usuario y contraseña';
+//         modal.style.display = 'flex';
+//         loginEmail.disabled = true;
+//         loginPassword.disabled = true;
+//         // alert('Por favor ingrese su usuario y contraseña');
+//       }
+//       if (errorCode === 'auth/wrong-password') {
+//         errorMessage.textContent = 'Contraseña incorrecta, inténtelo de nuevo';
+//         modal.style.display = 'flex';
+//         loginEmail.disabled = true;
+//         loginPassword.disabled = true;
+//         // alert('Contraseña incorrecta, inténtelo de nuevo');
+//       }
+//       if (errorCode === 'auth/user-not-found') {
+//         errorMessage.textContent = 'El correo que ingresó no está registrado, por favor, regístrece';
+//         modal.style.display = 'flex';
+//         loginEmail.disabled = true;
+//         loginPassword.disabled = true;
+//         // alert('El correo que ingresó no está registrado, por favor, regístrece');
+//       }
+//     });
+// };
+
 
 // Función de inicio con Google
-const loginGoogle = () => {
-  all
-    .googleLogIn()
-    .then((result) => {
-      console.log(result);
-      authStateChange();
-    })
-    .catch((error) => {
-      console.log(error);
-      console.log('no funciona');
-    });
-};
+// const loginGoogle = () => {
+//   all
+//     .googleLogIn()
+//     .then((result) => {
+//       console.log(result);
+//       authStateChange();
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       console.log('no funciona');
+//     });
+// };
 
-// Función de  inicio con Facebook
-const loginFacebook = () => {
-  all.facebookLogin()
-    .then(() => {
-      authStateChange();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
+// // Función de  inicio con Facebook
+// const loginFacebook = () => {
+//   all.facebookLogin()
+//     .then(() => {
+//       authStateChange();
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
 
 // ------------------------------------------- Eventos  ----------------------------------------- //
 
@@ -258,14 +259,15 @@ const loginFacebook = () => {
 // });
 
 // Evento para inciar sección
-const signInBtn = document.querySelector('#signin-btn');
-signInBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  const email = document.querySelector('#email').value;
-  const password = document.querySelector('#password').value;
-  document.querySelector('#login-form').reset();
-  login(email, password);
-});
+// const signInBtn = document.querySelector('#signin-btn');
+// signInBtn.addEventListener('click', (e) => {
+//   e.preventDefault();
+//   const email = document.querySelector('#email').value;
+//   const password = document.querySelector('#password').value;
+//   document.querySelector('#login-form').reset();
+//   login(email, password);
+// });
+
 
 // Evento para cerrar sesión
 signOutBtn.addEventListener('click', () => {
@@ -285,21 +287,21 @@ signOutBtn.addEventListener('click', () => {
 });
 
 // Evento de google login
-google.addEventListener('click', () => {
-  loginGoogle();
-});
+// google.addEventListener('click', () => {
+//   loginGoogle();
+// });
 
 // Evento de facebook login
-facebook.addEventListener('click', () => {
-  loginFacebook();
-});
+// facebook.addEventListener('click', () => {
+//   loginFacebook();
+// });
 
-// Evento para cerrar modal
-modalBtn.addEventListener('click', () => {
-  modal.style.display = 'none';
-  loginEmail.disabled = false;
-  loginPassword.disabled = false;
-  signupName.disabled = false;
-  signupEmail.disabled = false;
-  signupPassword.disabled = false;
-})
+// Evento para cerrar modal // FALTAAAAAA
+// modalBtn.addEventListener('click', () => {
+//   modal.style.display = 'none';
+//   loginEmail.disabled = false;
+//   loginPassword.disabled = false;
+//   signupName.disabled = false;
+//   signupEmail.disabled = false;
+//   signupPassword.disabled = false;
+// })

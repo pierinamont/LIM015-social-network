@@ -1,4 +1,5 @@
 
+
 export const viewHeader = () => {
     const headerSection = `
     <div class="menu-hamburger" id="toggle-button">

@@ -8,6 +8,7 @@ const changeView = (route) => {
     loginSection.innerHTML='';
     headerBarNav.innerHTML= '';
     mainPage.innerHTML = '';
+
     switch (route) {
         case '#/':
             { return loginSection.appendChild(components.login());}
@@ -23,5 +24,6 @@ const changeView = (route) => {
 
 export {changeView} 
 
+    
 
 

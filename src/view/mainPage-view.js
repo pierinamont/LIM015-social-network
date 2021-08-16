@@ -1,4 +1,6 @@
 
+
+
 export const viewMainPage = () => {
     const mainPageSection = `
     <!----------------perfil---------------->
