@@ -1,5 +1,5 @@
-import * as firebase from "../firebase/firebase-login.js";
-import * as config from "../firebase/firebase-config.js";
+import * as firebase from '../firebase/firebase-login.js';
+import * as config from '../firebase/firebase-config.js';
 
 // ---------------------------------- Constantes  ------------------------------------ //
 const headerBarNav = document.getElementById('header-bar-nav');
@@ -107,11 +107,11 @@ const showProfileImg = () => {
       emailProfile.innerHTML = `${user.email}`;
       if (user.photoURL === null) {
         profileUserImg.setAttribute(
-          "src",
-          "https://i.postimg.cc/6pRsrH91/user-2.png"
+          'src',
+          'https://i.postimg.cc/6pRsrH91/user-2.png',
         );
       } else {
-        profileUserImg.setAttribute("src", `${user.photoURL}`);
+        profileUserImg.setAttribute('src', `${user.photoURL}`);
       }
     } else {
       // ningun usuario conectado
@@ -121,19 +121,17 @@ const showProfileImg = () => {
 showProfileImg();
 
 // ----------------------------------------- Muro ------------------------------------------- //
-const publishBtn = document.querySelector('#publish-btn'); 
+const publishBtn = document.querySelector('#publish-btn');
 const inputTimeline = document.querySelector('.input-timeline');
-
 
 // Función que obtiene el valor del input y lo envía a Firestore
 const getValues = () => {
-  
   const user = config.currentUser();
   const day = Date.now();
   const objectoAccion = new Date(day);
 
-  if(inputTimeline.value != 0) {
-    return  db.collection('posts').add({
+  if (inputTimeline.value != 0) {
+    return db.collection('posts').add({
       photo: user.photoURL,
       name: user.displayName,
       description: inputTimeline.value,
@@ -142,45 +140,37 @@ const getValues = () => {
       likesUser: [],
     })
 
-    .then((docRef) => {
-      console.log(docRef);
-      console.log("Documento escrito con el ID: ", docRef.id);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  } else {
-    alert('Por favor, llena los campos');
+      .then((docRef) => {
+        console.log(docRef);
+        console.log('Documento escrito con el ID: ', docRef.id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
-  
+  alert('Por favor, llena los campos');
 };
 // ---------------------------------- Publicaciones --------------------------------------- //
 
-// -------------------LIKE--------------------//
-const dislike = document.querySelector('.dislike-post');
-// const counterLike = document.getElementById('"p-likes');
+// ****************LIKE*************//
 const likePost = document.getElementsByClassName('like-post');
-const agregarEventoLike = () => {
+const addEventLike = () => {
   for (let i = 0; i < likePost.length; i++) {
     likePost[i].addEventListener('click', (e) => {
       const currentUser = config.currentUser();
-      const idPost = e.target.parentElement.parentElement.getAttribute('data-idpost');
+      const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+      // const idPost = e.target.parentElement.parentElement.parentElement.getAttribute('data-idpost');
       const post = db.collection('posts').doc(idPost);
       post.get().then((res) => {
         if (res.exists) {
-          console.log(res.data());
           const arrayLikes = res.data().likesUser;
           const userLikes = arrayLikes.filter((a) => a.user === currentUser.uid);
-          console.log(userLikes);
           // si el usuario dio like, ELIMINAMOS DICHO REGISTRO DEL ARRAY
           if (userLikes.length !== 0) {
-            console.log('DISLIKEEEE');
-
             post.update({
               likesUser: arrayLikes.filter((a) => a.user !== currentUser.uid),
             });
           } else { // no existe like para ese usuario, entonces añadir al array
-            console.log('LIKE!');
             const newLike = {
               userName: currentUser.displayName,
               user: currentUser.uid,
@@ -200,20 +190,19 @@ const agregarEventoLike = () => {
   }
 };
 // eliminar
-const removePost = document.getElementsByClassName('.close-img');
+const removePost = document.getElementsByClassName('close-img');
 
-const delePOst = () => {
+const addEventDeletePOst = () => {
   for (let i = 0; i < removePost.length; i++) {
-    removePost[i].addEventListener('click', () => {
-      alert('eliminaaa');
-      // const eliminar = ((user) => {
-      //   db.collection('post').delete().then(() => {
-      //     console.log('Document successfully deleted!');
-      //   })
-      //     .catch((error) => {
-      //       console.error('Error removing document: ', error);
-      //     });
-      // });
+    removePost[i].addEventListener('click', (e) => {
+      const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+      const post = db.collection('posts').doc(idPost);
+      post.delete().then(() => {
+        console.log('Document successfully deleted!');
+      })
+        .catch((error) => {
+          console.error('Error removing document: ', error);
+        });
     });
   }
 };
@@ -230,36 +219,31 @@ window.addEventListener('DOMContentLoaded', async () => {
     const post = document.getElementById('post');
     post.innerHTML = '';
     querySnapshot.forEach((doc) => {
-
+      const currentUser = config.currentUser();
+      const arrayLikesPost = doc.data().likesUser;
       let likeMe = false;
       let htmlCorazon;
-      if (config.currentUser() != null) {
-        const currentUser = config.currentUser();
-        const arrayLikesPost = doc.data().likesUser;
+      if (currentUser != null) {
+        // userLikes: likes del usuario en sección
         const userLikes = arrayLikesPost.filter((a) => a.user === currentUser.uid);
         if (userLikes.length >= 1) {
           likeMe = true;
         }
       }
       if (likeMe === true) {
-        htmlCorazon = `<img class="dislike-post" src='../images/like2.svg' style="display: none">`;
-      } 
-      else {
-        htmlCorazon = `<img class="like-post" src='../images/like1.svg' ></img>`;
+        htmlCorazon = '<img class="dislike like-post" src=\'../images/like2.svg\'>';
+      } else {
+        htmlCorazon = '<img class="like-post" src=\'../images/like1.svg\' ></img>';
       }
 
       post.innerHTML += `
       <div class='post-body' data-idpost='${doc.id}'>
- 
-
-      
         <div class="img-name">
           <img class="profile-user-img" src='${doc.data().photo}'>
           <span>
             <p class="name">${doc.data().name}</p>
             <p class="date">${doc.data().day}</p>
           </span>
-          
           <i>
             <img class="edit-img" src='../images/edit3.svg'>
             <img class="close-img" src='../images/close-1.svg'>
@@ -269,22 +253,19 @@ window.addEventListener('DOMContentLoaded', async () => {
           <p>${doc.data().description}</p>
         </div>
         <div class="date-likes">
-         
-         
          <div class="likes-container">
          ${htmlCorazon}
           <img class="send-post" src='../images/send.svg' >
          </div>
-         
           <div class="likes-counter">
-             <span></span><p id="p-likes">Likes</p>
+             <span></span><p id="p-likes">${arrayLikesPost.length} Likes</p>
           </div>
         </div>
       </div>
       `;
-      // arrayPosts.push(doc.data());
     });
-    agregarEventoLike();
+    addEventDeletePOst();
+    addEventLike();
   });
 });
 // ------------------------------------------- Eventos  ----------------------------------------- //
@@ -293,8 +274,8 @@ publishBtn.addEventListener('click', () => {
   getValues().then(() => {
     postInRealTime();
   })
-  .catch((error) => {
-    console.log(error);
-  });
+    .catch((error) => {
+      console.log(error);
+    });
   inputTimeline.value = '';
 });
