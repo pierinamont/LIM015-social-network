@@ -95,7 +95,8 @@ document.addEventListener('click', (e) => {
         .googleLogIn()
         .then((result) => {
           console.log(result);
-          // authStateChange();  Mandar a la ruta #/mainPage
+          const hash = '#/mainPage';
+          window.location.hash = hash;
         })
         .catch((error) => {
           console.log(error);
@@ -109,7 +110,8 @@ document.addEventListener('click', (e) => {
   if(e.target.id === 'facebook-btn') {
       all.facebookLogin()
         .then(() => {
-          // authStateChange();
+          const hash = '#/mainPage';
+          window.location.hash = hash;
         })
         .catch((error) => {
           console.log(error);

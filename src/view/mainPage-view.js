@@ -1,5 +1,4 @@
-
-
+import * as firebase from "../firebase/firebase-login.js";
 
 export const viewMainPage = () => {
     const mainPageSection = `
@@ -58,4 +57,40 @@ export const viewMainPage = () => {
 } 
  
 // console.log(viewMainPage());
+
+
+
+
+
+
+const showProfileImg = () => {
+
+  firebase.authStateChange((user) => {
+
+    const profileUserImg = document.querySelector('.profile-user-img');
+    const nameProfile = document.querySelector('#name-profile');
+    const emailProfile = document.querySelector('#email-profile');
+
+    console.log( document.querySelector('#name-profile'));
+    console.log(emailProfile);
+    
+    if (user) {
+      console.log(user);
+      console.log(nameProfile);
+      nameProfile.innerHTML = `${user.displayName}`;
+      emailProfile.innerHTML = `${user.email}`;
+
+      if (user.photoURL === null) {
+        profileUserImg.setAttribute("src","https://i.postimg.cc/6pRsrH91/user-2.png");
+      } else {
+        profileUserImg.setAttribute("src", `${user.photoURL}`);
+      }
+    } else {
+      // ningun usuario conectado
+    }
+  })
+  
+  
+};
+showProfileImg();
 

@@ -92,56 +92,56 @@ const signupPassword = document.querySelector('#signup-password');
 // });
 
 // Función para registrarse
-const checkIn = (email, password, name) => {
-  all.userSignUp(email, password, name).then((result) => {
-    const email = result.user.email;
-    console.log(email);
-    console.log('registro exitoso');
-    result.user.updateProfile({
-      displayName: name,
-    });
-    const configuration = {
-      url: 'http://localhost:5000/',
-    };
-    result.user.sendEmailVerification(configuration).catch((error) => {
-      console.log(error);
-    });
-    all.signOut;
-    // modal.style.display = 'flex';
-    // modal.style.backgroundColor='#F8C908';
-    // message.style.display = 'inline';
-    // message.textContent=`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`;
-    alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
-  })
-    .catch((error) => {
-      console.log(error);
-      const errorCode = error.code;
-      if (errorCode === 'auth/invalid-email') {
-        // errorMessage.textContent = 'Por favor, completa los campos';
-        // modal.style.display = 'flex';
-        // signupName.disabled = true;
-        // signupEmail.disabled = true;
-        // signupPassword.disabled = true;
-        alert('Por favor, completa los campos');
-      }
-      if (errorCode === 'auth/email-already-in-use') {
-        // errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
-        // modal.style.display = 'flex';
-        // signupName.disabled = true;
-        // signupEmail.disabled = true;
-        // signupPassword.disabled = true;
-        alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
-      }
-      if (errorCode === 'auth/weak-password') {
-        // errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
-        // modal.style.display = 'flex';
-        // signupName.disabled = true;
-        // signupEmail.disabled = true;
-        // signupPassword.disabled = true;
-        alert('La contraseña debe tener al menos 6 caracteres');
-      }
-    });
-};
+// const checkIn = (email, password, name) => {
+//   all.userSignUp(email, password, name).then((result) => {
+//     const email = result.user.email;
+//     console.log(email);
+//     console.log('registro exitoso');
+//     result.user.updateProfile({
+//       displayName: name,
+//     });
+//     const configuration = {
+//       url: 'http://localhost:5000/',
+//     };
+//     result.user.sendEmailVerification(configuration).catch((error) => {
+//       console.log(error);
+//     });
+//     all.signOut;
+//     // modal.style.display = 'flex';
+//     // modal.style.backgroundColor='#F8C908';
+//     // message.style.display = 'inline';
+//     // message.textContent=`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`;
+//     alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
+//   })
+//     .catch((error) => {
+//       console.log(error);
+//       const errorCode = error.code;
+//       if (errorCode === 'auth/invalid-email') {
+//         // errorMessage.textContent = 'Por favor, completa los campos';
+//         // modal.style.display = 'flex';
+//         // signupName.disabled = true;
+//         // signupEmail.disabled = true;
+//         // signupPassword.disabled = true;
+//         alert('Por favor, completa los campos');
+//       }
+//       if (errorCode === 'auth/email-already-in-use') {
+//         // errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
+//         // modal.style.display = 'flex';
+//         // signupName.disabled = true;
+//         // signupEmail.disabled = true;
+//         // signupPassword.disabled = true;
+//         alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
+//       }
+//       if (errorCode === 'auth/weak-password') {
+//         // errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
+//         // modal.style.display = 'flex';
+//         // signupName.disabled = true;
+//         // signupEmail.disabled = true;
+//         // signupPassword.disabled = true;
+//         alert('La contraseña debe tener al menos 6 caracteres');
+//       }
+//     });
+// };
 
 // ----------------- authStateChange para mostrar y ocultar contenedores ------------------------ //
 
@@ -270,21 +270,21 @@ all.authStateChange((user) => {
 
 
 // Evento para cerrar sesión
-signOutBtn.addEventListener('click', () => {
-  todo.signOut
-    .then(() => {
-      console.log('cerraste sesión');
-      headerBarNav.style.display = 'none';
-      loginSection.style.display = 'inline';
-      mainPage.style.display = 'none';
-    })
-    .catch((error) => {
-      console.log(error);
-      headerBarNav.style.display = 'inline';
-      loginSection.style.display = 'none';
-      mainPage.style.display = 'flex';
-    });
-});
+// signOutBtn.addEventListener('click', () => {
+//   todo.signOut
+//     .then(() => {
+//       console.log('cerraste sesión');
+//       headerBarNav.style.display = 'none';
+//       loginSection.style.display = 'inline';
+//       mainPage.style.display = 'none';
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       headerBarNav.style.display = 'inline';
+//       loginSection.style.display = 'none';
+//       mainPage.style.display = 'flex';
+//     });
+// });
 
 // Evento de google login
 // google.addEventListener('click', () => {

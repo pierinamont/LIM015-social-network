@@ -34,13 +34,13 @@ const db = config.firestore;
 // headerBarNav.appendChild(headerNav);
 
 // ------------------------------------ Header ------------------------------------------- //
-const toggleButton = document.getElementById('toggle-button');
-const navList = document.getElementById('nav-list');
+// const toggleButton = document.getElementById('toggle-button');
+// const navList = document.getElementById('nav-list');
 
 // Evento para el menu de hamburguesa
-toggleButton.addEventListener('click', () => {
-  navList.classList.toggle('active');
-});
+// toggleButton.addEventListener('click', () => {
+//   navList.classList.toggle('active');
+// });
 
 // ----------------------------------- Página principal ----------------------------------------- //
 // Estructura de la página principal
@@ -98,30 +98,30 @@ toggleButton.addEventListener('click', () => {
 // mainPage.appendChild(container);
 
 // ----------------------------------------- Perfil ------------------------------------------- //
-const profileUserImg = document.querySelector('.profile-user-img');
-const nameProfile = document.querySelector('#name-profile');
-const emailProfile = document.querySelector('#email-profile');
+// const profileUserImg = document.querySelector('.profile-user-img');
+// const nameProfile = document.querySelector('#name-profile');
+// const emailProfile = document.querySelector('#email-profile');
 
 // Función para motrar la imagen de perfil y su nombre
-const showProfileImg = () => {
-  firebase.authStateChange((user) => {
-    if (user) {
-      nameProfile.innerHTML = `${user.displayName}`;
-      emailProfile.innerHTML = `${user.email}`;
-      if (user.photoURL === null) {
-        profileUserImg.setAttribute(
-          "src",
-          "https://i.postimg.cc/6pRsrH91/user-2.png"
-        );
-      } else {
-        profileUserImg.setAttribute("src", `${user.photoURL}`);
-      }
-    } else {
-      // ningun usuario conectado
-    }
-  });
-};
-showProfileImg();
+// const showProfileImg = () => {
+//   firebase.authStateChange((user) => {
+//     if (user) {
+//       nameProfile.innerHTML = `${user.displayName}`;
+//       emailProfile.innerHTML = `${user.email}`;
+//       if (user.photoURL === null) {
+//         profileUserImg.setAttribute(
+//           "src",
+//           "https://i.postimg.cc/6pRsrH91/user-2.png"
+//         );
+//       } else {
+//         profileUserImg.setAttribute("src", `${user.photoURL}`);
+//       }
+//     } else {
+//       // ningun usuario conectado
+//     }
+//   });
+// };
+// showProfileImg();
 
 // ----------------------------------------- Muro ------------------------------------------- //
 const publishBtn = document.querySelector('#publish-btn'); 

@@ -49,6 +49,7 @@ document.addEventListener('click', (e) => {
             const email = result.user.email;
             console.log(email);
             console.log('registro exitoso');
+           
             result.user.updateProfile({
               displayName: name,
             });
@@ -63,6 +64,7 @@ document.addEventListener('click', (e) => {
             // modal.style.backgroundColor='#F8C908';
             // message.style.display = 'inline';
             // message.textContent=`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`;
+            document.querySelector('#signup-form').reset();
             alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
           })
             .catch((error) => {
