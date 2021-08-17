@@ -1,4 +1,5 @@
-import * as firebase from "../firebase/firebase-login.js";
+// import * as firebase from "../firebase/firebase-login.js";
+import * as todo from '../firebase/firebase-config.js';
 
 export const viewMainPage = () => {
     const mainPageSection = `
@@ -56,41 +57,87 @@ export const viewMainPage = () => {
     return container;
 } 
  
-// console.log(viewMainPage());
+
+const uid = localStorage.getItem('uid');
+const name = localStorage.getItem('name');
+const photo = localStorage.getItem('photo');
+const email = localStorage.getItem('email');
+
+
+// const showProfile = () => {
+//   const profileUserImg = document.querySelector('.profile-user-img');
+//   const nameProfile = document.querySelector('#name-profile');
+//   const emailProfile = document.querySelector('#email-profile');
+
+// console.log(profileUserImg);
+//   if(uid) {
+//     console.log(name);
+//      nameProfile.innerHTML = `${name}`;
+//      emailProfile.innerHTML = `${email}`;
+      
+//       if (photo === null) {
+//         // debugger
+//         profileUserImg.setAttribute("src","https://i.postimg.cc/6pRsrH91/user-2.png");
+//       } else {
+//         // debugger
+//         profileUserImg.setAttribute("src", `${photo}`);
+//       }
+//     } else {
+//       // ningun usuario conectado
+//     }
+// }
+
+// showProfile();
+
+
+// const showProfile = () => {
+//   const currentUser = todo.currentUser();
+//   console.log(currentUser);
+// }
+
+// showProfile();
+
+// const showProfile = () => {
+//   todo.auth.onAuthStateChanged
+// }
+
+// showProfile();
 
 
 
 
 
+// const showProfileImg = () => {
 
-const showProfileImg = () => {
-
-  firebase.authStateChange((user) => {
-
-    const profileUserImg = document.querySelector('.profile-user-img');
-    const nameProfile = document.querySelector('#name-profile');
-    const emailProfile = document.querySelector('#email-profile');
-
-    console.log( document.querySelector('#name-profile'));
-    console.log(emailProfile);
+//   todo.auth.onAuthStateChanged((user) => {
+  
+//     const profileUserImg = document.querySelector('.profile-user-img');
+//     const nameProfile = document.querySelector('#name-profile');
+//     const emailProfile = document.querySelector('#email-profile');
+//     // console.log(user);
+//     // console.log(profileUserImg);
+//     // console.log(emailProfile);
     
-    if (user) {
-      console.log(user);
-      console.log(nameProfile);
-      nameProfile.innerHTML = `${user.displayName}`;
-      emailProfile.innerHTML = `${user.email}`;
-
-      if (user.photoURL === null) {
-        profileUserImg.setAttribute("src","https://i.postimg.cc/6pRsrH91/user-2.png");
-      } else {
-        profileUserImg.setAttribute("src", `${user.photoURL}`);
-      }
-    } else {
-      // ningun usuario conectado
-    }
-  })
+//     if (user) {
+//       // console.log(user);
+//       // console.log(user.uid);
+//       // console.log(nameProfile);
+//       nameProfile.innerHTML = `${user.displayName}`;
+//       emailProfile.innerHTML = `${user.email}`;
+//       console.log(user.photoURL);
+//       if (user.photoURL === null) {
+//         debugger
+//         profileUserImg.setAttribute("src","https://i.postimg.cc/6pRsrH91/user-2.png");
+//       } else {
+//         debugger
+//         profileUserImg.setAttribute("src", `${user.photoURL}`);
+//       }
+//     } else {
+//       // ningun usuario conectado
+//     }
+//   })
   
   
-};
-showProfileImg();
+// };
+// showProfileImg();
 

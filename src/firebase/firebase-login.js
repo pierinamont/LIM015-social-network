@@ -16,4 +16,4 @@ export const googleLogIn = () => auth.signInWithPopup(todo.providerG);
 export const facebookLogin = () => auth.signInWithPopup(todo.providerF);
 
 // FUCIÓN PARA DETECTAR CAMBIOS EN LA AUTENTIFICACIÓN
-export const authStateChange = (user) => auth.onAuthStateChanged(user);
+// export const authStateChange = auth.onAuthStateChanged;
