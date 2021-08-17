@@ -159,132 +159,132 @@ const getValues = () => {
 // ---------------------------------- Publicaciones --------------------------------------- //
 
 // -------------------LIKE--------------------//
-const dislike = document.querySelector('.dislike-post');
-// const counterLike = document.getElementById('"p-likes');
-const likePost = document.getElementsByClassName('like-post');
-const agregarEventoLike = () => {
-  for (let i = 0; i < likePost.length; i++) {
-    likePost[i].addEventListener('click', (e) => {
-      const currentUser = config.currentUser();
-      const idPost = e.target.parentElement.parentElement.getAttribute('data-idpost');
-      const post = db.collection('posts').doc(idPost);
-      post.get().then((res) => {
-        if (res.exists) {
-          console.log(res.data());
-          const arrayLikes = res.data().likesUser;
-          const userLikes = arrayLikes.filter((a) => a.user === currentUser.uid);
-          console.log(userLikes);
-          // si el usuario dio like, ELIMINAMOS DICHO REGISTRO DEL ARRAY
-          if (userLikes.length !== 0) {
-            console.log('DISLIKEEEE');
+// const dislike = document.querySelector('.dislike-post');
+// // const counterLike = document.getElementById('"p-likes');
+// const likePost = document.getElementsByClassName('like-post');
+// const agregarEventoLike = () => {
+//   for (let i = 0; i < likePost.length; i++) {
+//     likePost[i].addEventListener('click', (e) => {
+//       const currentUser = config.currentUser();
+//       const idPost = e.target.parentElement.parentElement.getAttribute('data-idpost');
+//       const post = db.collection('posts').doc(idPost);
+//       post.get().then((res) => {
+//         if (res.exists) {
+//           console.log(res.data());
+//           const arrayLikes = res.data().likesUser;
+//           const userLikes = arrayLikes.filter((a) => a.user === currentUser.uid);
+//           console.log(userLikes);
+//           // si el usuario dio like, ELIMINAMOS DICHO REGISTRO DEL ARRAY
+//           if (userLikes.length !== 0) {
+//             console.log('DISLIKEEEE');
 
-            post.update({
-              likesUser: arrayLikes.filter((a) => a.user !== currentUser.uid),
-            });
-          } else { // no existe like para ese usuario, entonces añadir al array
-            console.log('LIKE!');
-            const newLike = {
-              userName: currentUser.displayName,
-              user: currentUser.uid,
-            };
-            arrayLikes.push(newLike);
-            // actualizar arrayLikes a la coleccion en firestore
-            post.update({
-              likesUser: arrayLikes,
-            });
-          }
-        }
-      })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
-  }
-};
+//             post.update({
+//               likesUser: arrayLikes.filter((a) => a.user !== currentUser.uid),
+//             });
+//           } else { // no existe like para ese usuario, entonces añadir al array
+//             console.log('LIKE!');
+//             const newLike = {
+//               userName: currentUser.displayName,
+//               user: currentUser.uid,
+//             };
+//             arrayLikes.push(newLike);
+//             // actualizar arrayLikes a la coleccion en firestore
+//             post.update({
+//               likesUser: arrayLikes,
+//             });
+//           }
+//         }
+//       })
+//         .catch((error) => {
+//           console.log(error);
+//         });
+//     });
+//   }
+// };
 // eliminar
-const removePost = document.getElementsByClassName('.close-img');
+// const removePost = document.getElementsByClassName('.close-img');
 
-const delePOst = () => {
-  for (let i = 0; i < removePost.length; i++) {
-    removePost[i].addEventListener('click', () => {
-      alert('eliminaaa');
-      // const eliminar = ((user) => {
-      //   db.collection('post').delete().then(() => {
-      //     console.log('Document successfully deleted!');
-      //   })
-      //     .catch((error) => {
-      //       console.error('Error removing document: ', error);
-      //     });
-      // });
-    });
-  }
-};
+// const delePOst = () => {
+//   for (let i = 0; i < removePost.length; i++) {
+//     removePost[i].addEventListener('click', () => {
+//       alert('eliminaaa');
+//       // const eliminar = ((user) => {
+//       //   db.collection('post').delete().then(() => {
+//       //     console.log('Document successfully deleted!');
+//       //   })
+//       //     .catch((error) => {
+//       //       console.error('Error removing document: ', error);
+//       //     });
+//       // });
+//     });
+//   }
+// };
 
 // Función que trae la colección de datos para las publicaciones
 
 // const getPost = () => db.collection('posts').get();
-const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc').onSnapshot(callback);
+// const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc').onSnapshot(callback);
 
-window.addEventListener('DOMContentLoaded', async () => {
-  // const arrayPosts = [];
-  /* const  = await getPost(); */
-  postInRealTime((querySnapshot) => {
-    const post = document.getElementById('post');
-    post.innerHTML = '';
-    querySnapshot.forEach((doc) => {
+// window.addEventListener('DOMContentLoaded', async () => {
+//   // const arrayPosts = [];
+//   /* const  = await getPost(); */
+//   postInRealTime((querySnapshot) => {
+//     const post = document.getElementById('post');
+//     post.innerHTML = '';
+//     querySnapshot.forEach((doc) => {
 
-      let likeMe = false;
-      let htmlCorazon;
-      if (config.currentUser() != null) {
-        const currentUser = config.currentUser();
-        const arrayLikesPost = doc.data().likesUser;
-        const userLikes = arrayLikesPost.filter((a) => a.user === currentUser.uid);
-        if (userLikes.length >= 1) {
-          likeMe = true;
-        }
-      }
-      if (likeMe === true) {
-        htmlCorazon = `<img class="dislike-post" src='../images/like2.svg' style="display: none">`;
-      } 
-      else {
-        htmlCorazon = `<img class="like-post" src='../images/like1.svg' ></img>`;
-      }
+//       let likeMe = false;
+//       let htmlCorazon;
+//       if (config.currentUser() != null) {
+//         const currentUser = config.currentUser();
+//         const arrayLikesPost = doc.data().likesUser;
+//         const userLikes = arrayLikesPost.filter((a) => a.user === currentUser.uid);
+//         if (userLikes.length >= 1) {
+//           likeMe = true;
+//         }
+//       }
+//       if (likeMe === true) {
+//         htmlCorazon = `<img class="dislike-post" src='../images/like2.svg' style="display: none">`;
+//       } 
+//       else {
+//         htmlCorazon = `<img class="like-post" src='../images/like1.svg' ></img>`;
+//       }
 
-      post.innerHTML += `
-      <div class='post-body' data-idpost='${doc.id}'>
-        <div class="img-name">
-          <img class="profile-user-img" src='${doc.data().photo}'>
-          <span>
-            <p class="name">${doc.data().name}</p>
-            <p class="date">${doc.data().day}</p>
-          </span>
+//       post.innerHTML += `
+//       <div class='post-body' data-idpost='${doc.id}'>
+//         <div class="img-name">
+//           <img class="profile-user-img" src='${doc.data().photo}'>
+//           <span>
+//             <p class="name">${doc.data().name}</p>
+//             <p class="date">${doc.data().day}</p>
+//           </span>
           
-          <i>
-            <img class="edit-img" src='../images/edit3.svg'>
-            <img class="close-img" src='../images/close-1.svg'>
-          </i>
-        </div>
-        <div class="description-div">
-          <p>${doc.data().description}</p>
-        </div>
-        <div class="date-likes">
+//           <i>
+//             <img class="edit-img" src='../images/edit3.svg'>
+//             <img class="close-img" src='../images/close-1.svg'>
+//           </i>
+//         </div>
+//         <div class="description-div">
+//           <p>${doc.data().description}</p>
+//         </div>
+//         <div class="date-likes">
          
          
-         <div class="likes-container">
-         ${htmlCorazon}
-          <img class="send-post" src='../images/send.svg' >
-         </div>
+//          <div class="likes-container">
+//          ${htmlCorazon}
+//           <img class="send-post" src='../images/send.svg' >
+//          </div>
          
-          <div class="likes-counter">
-             <span></span><p id="p-likes">Likes</p>
-          </div>
-        </div>
-      </div>
-      `;
-    });
-    agregarEventoLike();
-  });
-});
+//           <div class="likes-counter">
+//              <span></span><p id="p-likes">Likes</p>
+//           </div>
+//         </div>
+//       </div>
+//       `;
+//     });
+//     agregarEventoLike();
+//   });
+// });
 // ------------------------------------------- Eventos  ----------------------------------------- //
 // Evento del botón "Publicar"
 // publishBtn.addEventListener('click', () => {

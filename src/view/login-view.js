@@ -1,4 +1,4 @@
-// import login from '../login.js';
+import * as todo from '../firebase/firebase-config.js';
 import * as all from '../firebase/firebase-login.js';
 
 export const viewLogin = () => {
@@ -39,7 +39,28 @@ export const viewLogin = () => {
  
 // console.log(viewLogin());
 
-// ------------------------------------- Inicio de sesión --------------------------------------- //
+// ------------------- Obtener y guardar datos del usuario ---------------------------- //
+const getUserInfo = () => {
+  const currentUser = todo.currentUser();
+  console.log(currentUser);
+  // Obtener la info del usuario
+  const uid = currentUser.uid;
+  const name = currentUser.displayName;
+  const email = currentUser.email;
+  const photo = currentUser.photoURL;
+
+  // Guardar la info en localStorage
+  localStorage.setItem('uid', uid);
+  localStorage.setItem('name', name);
+  localStorage.setItem('email', email);
+  localStorage.setItem('photo', photo);
+  
+  console.log(photo, name, email);
+}
+
+
+
+// ----------------------------- Inicio de sesión ------------------------------ //
  document.addEventListener('click', (e) => {
   
     if(e.target.id === 'signin-btn') {
@@ -53,6 +74,7 @@ export const viewLogin = () => {
             if (result.user.emailVerified) {
               window.location.hash = hash;
               console.log('verificado');
+              getUserInfo();
             } else {
               all.signOut;
               alert(`${result.user.displayName} por favor, realiza la verificación`);
@@ -94,7 +116,8 @@ document.addEventListener('click', (e) => {
       all
         .googleLogIn()
         .then((result) => {
-          console.log(result);
+          // console.log(result);
+          getUserInfo();
           const hash = '#/mainPage';
           window.location.hash = hash;
         })
@@ -110,6 +133,7 @@ document.addEventListener('click', (e) => {
   if(e.target.id === 'facebook-btn') {
       all.facebookLogin()
         .then(() => {
+          getUserInfo();
           const hash = '#/mainPage';
           window.location.hash = hash;
         })
@@ -118,3 +142,32 @@ document.addEventListener('click', (e) => {
         });
   };
 })
+
+// ----------- vistas de la ruta segun la autentificación del usuario ------------- //
+// todo.auth.onAuthStateChanged((user) => {
+//   if(user) {
+//     // debugger
+//     // const hash = '#/mainPage';
+//     // window.location.hash = hash;
+//     // console.log(user.displayName);
+//     // localStorage.setItem('user', user.uid);
+//     // localStorage.setItem('name', user.displayName);
+//     // console.log(window.localStorage);
+//     console.log(user)
+//     getUserInfo();
+
+//   } else {
+//     // const hash = '#/';
+//     // window.location.hash = hash;
+//     // localStorage.removeItem('user');
+//     // localStorage.removeItem('name');
+//     console.log('Ningún usuario a iniciado sesión');
+//   }
+// })
+
+// ---------------------- Obtener data del usuario ------------------- //
+
+
+
+
+

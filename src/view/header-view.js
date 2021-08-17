@@ -39,10 +39,12 @@ document.addEventListener('click', (e) => {
 document.addEventListener('click', (e) => {
     if(e.target.id === 'signOut') {
         todo.signOut
+
         .then(() => {
           console.log('cerraste sesión');
           const hash = '#/';
           window.location.hash = hash;
+          localStorage.clear(); // PRUEBA
         })
         .catch((error) => {
           console.log(error);
