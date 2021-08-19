@@ -46,11 +46,11 @@ import './view/change-view.js'
 //                 <h2>Regístrate gratis</h2>
 //                 <div class="labels-container">
 //                     <label for="signup-name">Coloca tu nombre:</label>
-//                     <input class="input" type="text" placeholder="Coloca tu nombre" id="signup-name" required>
+//       <input class="input" type="text" placeholder="Coloca tu nombre" id="signup-name" required>
 //                     <label for="signup-email">Coloca tu correo:</label>
-//                     <input class="input" type="email" placeholder="Coloca tu correo" id="signup-email" required>
+//      <input class="input" type="email" placeholder="Coloca tu correo" id="signup-email" required>
 //                     <label for="signup-password">Crea tu contraseña:</label>
-//                     <input class="input" type="password" placeholder="Coloca tu contraseña" name="" id="signup-password" required>
+//      <input class="input" type="password" placeholder="Coloca tu contraseña" name="" id="signup-password" required>
 //                 </div>
 //                 <button id="signup-btn">Resgistrarse</button>
 //                 <p>¿Ya tienes cuenta? <a id="sign-in" href="#/">Inicia Sesión</a></p>

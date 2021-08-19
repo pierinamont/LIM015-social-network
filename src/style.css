@@ -115,6 +115,7 @@ body {
     display: flex;
     text-align: center;
     font-size: 1.4rem; 
+    justify-content: center;
 }
 
 .content-container #login-form {

@@ -1,7 +1,7 @@
 import * as all from '../firebase/firebase-login.js';
 
 export const viewSignup = () => {
-    const signupSection = `
+  const signupSection = `
     <div class="modal-container" style="display: none">
          <div class="modal-content">
            <p id="error-message"></p>
@@ -24,79 +24,73 @@ export const viewSignup = () => {
                     <input class="input" type="password" placeholder="Coloca tu contraseña" name="" id="signup-password" required>
                 </div>
                 <button id="signup-btn">Resgistrarse</button>
-                <p>¿Ya tienes cuenta? <a id="sign-in" href="#/">Inicia Sesión</a></p>
+                <p>¿Ya tienes cuenta? <a id="sign-in" href="#/login">Inicia Sesión</a></p>
             </form>
     </div>
     
     `;
-    const loginDiv = document.createElement('div');
-    loginDiv.className = 'login-div'
-    loginDiv.innerHTML = signupSection;
-    return loginDiv;
-    
-} 
-
-//console.log(viewSignup());
+  const loginDiv = document.createElement('div');
+  loginDiv.className = 'login-div';
+  loginDiv.innerHTML = signupSection;
+  return loginDiv;
+};
 
 // ----------------------------- Botón de registro ------------------------------ //
 document.addEventListener('click', (e) => {
-    if(e.target.id === 'signup-btn') {
-        const name = document.querySelector('#signup-name').value;
-        const email = document.querySelector('#signup-email').value;
-        const password = document.querySelector('#signup-password').value;
+  if (e.target.id === 'signup-btn') {
+    const name = document.querySelector('#signup-name').value;
+    const email = document.querySelector('#signup-email').value;
+    const password = document.querySelector('#signup-password').value;
 
-        all.userSignUp(email, password, name).then((result) => {
-            const email = result.user.email;
-            console.log(email);
-            console.log('registro exitoso');
-           
-            result.user.updateProfile({
-              displayName: name,
-            });
-            const configuration = {
-              url: 'http://localhost:5000/#/',
-            };
-            result.user.sendEmailVerification(configuration).catch((error) => {
-              console.log(error);
-            });
-            all.signOut;
-            // modal.style.display = 'flex';
-            // modal.style.backgroundColor='#F8C908';
-            // message.style.display = 'inline';
-            // message.textContent=`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`;
-            document.querySelector('#signup-form').reset();
-            alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
-          })
-            .catch((error) => {
-              console.log(error);
-              const errorCode = error.code;
-              if (errorCode === 'auth/invalid-email') {
-                // errorMessage.textContent = 'Por favor, completa los campos';
-                // modal.style.display = 'flex';
-                // signupName.disabled = true;
-                // signupEmail.disabled = true;
-                // signupPassword.disabled = true;
-                alert('Por favor, completa los campos');
-              }
-              if (errorCode === 'auth/email-already-in-use') {
-                // errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
-                // modal.style.display = 'flex';
-                // signupName.disabled = true;
-                // signupEmail.disabled = true;
-                // signupPassword.disabled = true;
-                alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
-              }
-              if (errorCode === 'auth/weak-password') {
-                // errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
-                // modal.style.display = 'flex';
-                // signupName.disabled = true;
-                // signupEmail.disabled = true;
-                // signupPassword.disabled = true;
-                alert('La contraseña debe tener al menos 6 caracteres');
-              }
-            });
-    }
-    
-})
+    all.userSignUp(email, password, name).then((result) => {
+      const email = result.user.email;
+      console.log(email);
+      console.log('registro exitoso');
 
-
+      result.user.updateProfile({
+        displayName: name,
+      });
+      const configuration = {
+        url: 'http://localhost:5000/#/login',
+      };
+      result.user.sendEmailVerification(configuration).catch((error) => {
+        console.log(error);
+      });
+      all.signOut;
+      // modal.style.display = 'flex';
+      // modal.style.backgroundColor='#F8C908';
+      // message.style.display = 'inline';
+      // message.textContent=`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`;
+      document.querySelector('#signup-form').reset();
+      alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
+    })
+      .catch((error) => {
+        console.log(error);
+        const errorCode = error.code;
+        if (errorCode === 'auth/invalid-email') {
+          // errorMessage.textContent = 'Por favor, completa los campos';
+          // modal.style.display = 'flex';
+          // signupName.disabled = true;
+          // signupEmail.disabled = true;
+          // signupPassword.disabled = true;
+          alert('Por favor, completa los campos');
+        }
+        if (errorCode === 'auth/email-already-in-use') {
+          // errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
+          // modal.style.display = 'flex';
+          // signupName.disabled = true;
+          // signupEmail.disabled = true;
+          // signupPassword.disabled = true;
+          alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
+        }
+        if (errorCode === 'auth/weak-password') {
+          // errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
+          // modal.style.display = 'flex';
+          // signupName.disabled = true;
+          // signupEmail.disabled = true;
+          // signupPassword.disabled = true;
+          alert('La contraseña debe tener al menos 6 caracteres');
+        }
+      });
+  }
+});
