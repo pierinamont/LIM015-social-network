@@ -42,7 +42,7 @@ export const viewLogin = () => {
 // ------------------- Obtener y guardar datos del usuario ---------------------------- //
 const getUserInfo = () => {
   const currentUser = todo.currentUser();
-  console.log(currentUser);
+ 
   // Obtener la info del usuario
   const uid = currentUser.uid;
   const name = currentUser.displayName;
@@ -59,6 +59,56 @@ const getUserInfo = () => {
 };
 
 // ----------------------------- Inicio de sesión ------------------------------ //
+ document.addEventListener('click', (e) => {
+  
+    if(e.target.id === 'signin-btn') {
+      const email = document.querySelector('#email').value;
+      const password = document.querySelector('#password').value;
+      const login = (email, password) => {
+        all
+          .userSignIn(email, password)
+          .then((result) => {
+            const hash = '#/mainPage';
+            if (result.user.emailVerified) {
+              window.location.hash = hash;
+              console.log('verificado');
+              getUserInfo();
+            } else {
+              all.signOut;
+              alert(`${result.user.displayName} por favor, realiza la verificación`);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            const errorCode = error.code;
+            if (errorCode === 'auth/invalid-email') {
+              // errorMessage.textContent = 'Por favor ingrese su usuario y contraseña';
+              // modal.style.display = 'flex';
+              // loginEmail.disabled = true;
+              // loginPassword.disabled = true;
+               alert('Por favor ingrese su usuario y contraseña');
+            }
+            if (errorCode === 'auth/wrong-password') {
+              // errorMessage.textContent = 'Contraseña incorrecta, inténtelo de nuevo';
+              // modal.style.display = 'flex';
+              // loginEmail.disabled = true;
+              // loginPassword.disabled = true;
+              alert('Contraseña incorrecta, inténtelo de nuevo');
+            }
+            if (errorCode === 'auth/user-not-found') {
+              // errorMessage.textContent = 'El correo que ingresó no está registrado, por favor, regístrece';
+              // modal.style.display = 'flex';
+              // loginEmail.disabled = true;
+              // loginPassword.disabled = true;
+               alert('El correo que ingresó no está registrado, por favor, regístrece');
+            }
+          });
+      };
+      login(email, password);
+    };
+ })
+
+// ----------------------------- Inicio de sesión Google ------------------------------ //
 document.addEventListener('click', (e) => {
   if (e.target.id === 'signin-btn') {
     const email = document.querySelector('#email').value;
@@ -138,27 +188,3 @@ document.addEventListener('click', (e) => {
       });
   }
 });
-
-// ----------- vistas de la ruta segun la autentificación del usuario ------------- //
-// todo.auth.onAuthStateChanged((user) => {
-//   if(user) {
-//     // debugger
-//     // const hash = '#/mainPage';
-//     // window.location.hash = hash;
-//     // console.log(user.displayName);
-//     // localStorage.setItem('user', user.uid);
-//     // localStorage.setItem('name', user.displayName);
-//     // console.log(window.localStorage);
-//     console.log(user)
-//     getUserInfo();
-
-//   } else {
-//     // const hash = '#/';
-//     // window.location.hash = hash;
-//     // localStorage.removeItem('user');
-//     // localStorage.removeItem('name');
-//     console.log('Ningún usuario a iniciado sesión');
-//   }
-// })
-
-// ---------------------- Obtener data del usuario ------------------- //

@@ -35,8 +35,6 @@ export const viewSignup = () => {
   return loginDiv;
 };
 
-// console.log(viewSignup());
-
 // ----------------------------- Botón de registro ------------------------------ //
 document.addEventListener('click', (e) => {
   if (e.target.id === 'signup-btn') {

@@ -58,7 +58,6 @@ export const viewMainPage = () => {
   return container;
 };
 
-// const publishBtn = document.querySelector('#publish-btn');
 
 // Función que obtiene el valor del input y lo envía a Firestore
 const getValues = () => {
