@@ -73,6 +73,7 @@ document.addEventListener('click', (e) => {
           // signupName.disabled = true;
           // signupEmail.disabled = true;
           // signupPassword.disabled = true;
+          document.querySelector('#signup-form').reset();
           alert('Por favor, completa los campos');
         }
         if (errorCode === 'auth/email-already-in-use') {
@@ -81,6 +82,7 @@ document.addEventListener('click', (e) => {
           // signupName.disabled = true;
           // signupEmail.disabled = true;
           // signupPassword.disabled = true;
+          document.querySelector('#signup-form').reset();
           alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
         }
         if (errorCode === 'auth/weak-password') {
@@ -89,6 +91,7 @@ document.addEventListener('click', (e) => {
           // signupName.disabled = true;
           // signupEmail.disabled = true;
           // signupPassword.disabled = true;
+         
           alert('La contraseña debe tener al menos 6 caracteres');
         }
       });
