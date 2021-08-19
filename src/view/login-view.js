@@ -42,7 +42,7 @@ export const viewLogin = () => {
 // ------------------- Obtener y guardar datos del usuario ---------------------------- //
 const getUserInfo = () => {
   const currentUser = todo.currentUser();
-  console.log(currentUser);
+ 
   // Obtener la info del usuario
   const uid = currentUser.uid;
   const name = currentUser.displayName;
@@ -75,6 +75,7 @@ const getUserInfo = () => {
               window.location.hash = hash;
               console.log('verificado');
               getUserInfo();
+              getPostsFromFirebase(); //nuevo
             } else {
               all.signOut;
               alert(`${result.user.displayName} por favor, realiza la verificación`);

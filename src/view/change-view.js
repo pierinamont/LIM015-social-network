@@ -10,7 +10,7 @@ const changeView = (route) => {
     mainPage.innerHTML = '';
 
     switch (route) {
-        case '#/':
+        case '':
             { return loginSection.appendChild(components.login());}
         case '#/signup':
             {return loginSection.appendChild(components.signup());}

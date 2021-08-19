@@ -42,7 +42,7 @@ document.addEventListener('click', (e) => {
 
         .then(() => {
           console.log('cerraste sesión');
-          const hash = '#/';
+          const hash = '';
           window.location.hash = hash;
           localStorage.clear(); // PRUEBA
         })

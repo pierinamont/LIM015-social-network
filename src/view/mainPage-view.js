@@ -158,10 +158,10 @@ window.addEventListener('DOMContentLoaded', async () => {
     const post = document.getElementById('post');
     post.innerHTML = '';
     querySnapshot.forEach((doc) => {
-      const currentUser = todo.currentUser();
+      const currentUser = todo.currentUser(); // null
       const arrayLikesPost = doc.data().likesUser;
       let likeMe = false;
-      let htmlCorazon;
+      let htmlCorazon; // undefined
       if (currentUser != null) {
         // userLikes: likes del usuario en sección
         const userLikes = arrayLikesPost.filter((a) => a.user === localStorage.getItem('uid'));
@@ -224,4 +224,3 @@ document.addEventListener('click', (e) => {
   }
     
 });
-
