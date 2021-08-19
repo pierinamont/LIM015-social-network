@@ -4,7 +4,7 @@ import * as todo from '../firebase/firebase-config.js';
 const db = todo.firestore;
 
 export const viewMainPage = () => {
-  const mainPageSection = `
+    const mainPageSection = `
     <!----------------perfil---------------->
     <div class = 'profile-container'> 
       <div class="profile">
@@ -52,21 +52,26 @@ export const viewMainPage = () => {
       </div>
     </div>
     `;
-  const container = document.createElement('div');
-  container.className = 'container';
-  container.innerHTML = mainPageSection;
-  return container;
-};
+  
+    const container = document.createElement('div');
+    container.className = 'container';
+    container.innerHTML = mainPageSection;
+    return container;
+}
+
+// const publishBtn = document.querySelector('#publish-btn'); 
+
 
 
 // Función que obtiene el valor del input y lo envía a Firestore
 const getValues = () => {
-  const inputTimeline = document.querySelector('.input-timeline');
+  let inputTimeline = document.querySelector('.input-timeline');
+  const user = todo.currentUser();
   const day = Date.now();
   const objectoAccion = new Date(day);
 
-  if (inputTimeline.value != 0) {
-    return db.collection('posts').add({
+  if(inputTimeline.value != 0) {
+    return  db.collection('posts').add({
       photo: localStorage.getItem('photo'),
       name: localStorage.getItem('name'),
       description: inputTimeline.value,
@@ -74,21 +79,24 @@ const getValues = () => {
       user: localStorage.getItem('uid'),
       likesUser: [],
     })
-      .then((docRef) => {
-        console.log(docRef);
-        console.log('Documento escrito con el ID: ', docRef.id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .then((docRef) => {
+      console.log(docRef);
+      console.log("Documento escrito con el ID: ", docRef.id);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  } else {
+    alert('Por favor, llena los campos');
   }
-  alert('Por favor, llena los campos');
+  
 };
 // ****************LIKE*************//
 const likePost = document.getElementsByClassName('like-post');
 const addEventLike = () => {
   for (let i = 0; i < likePost.length; i++) {
     likePost[i].addEventListener('click', (e) => {
+      const currentUser = todo.currentUser();
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
       // const idPost = e.target.parentElement.parentElement.parentElement.getAttribute('data-idpost');
       const post = db.collection('posts').doc(idPost);
@@ -143,26 +151,29 @@ const addEventDeletePOst = () => {
 // const getPost = () => db.collection('posts').get();
 const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc').onSnapshot(callback);
 
-export const getPublish = () => {
+window.addEventListener('DOMContentLoaded', async () => {
+  // const arrayPosts = [];
+  /* const  = await getPost(); */
   postInRealTime((querySnapshot) => {
     const post = document.getElementById('post');
     post.innerHTML = '';
     querySnapshot.forEach((doc) => {
-      const uidUser = localStorage.getItem('uid');
+      const currentUser = todo.currentUser();
       const arrayLikesPost = doc.data().likesUser;
       let likeMe = false;
       let htmlCorazon;
-      if (uidUser != null) {
+      if (currentUser != null) {
         // userLikes: likes del usuario en sección
-        const userLikes = arrayLikesPost.filter((a) => a.user === uidUser);
+        const userLikes = arrayLikesPost.filter((a) => a.user === localStorage.getItem('uid'));
         if (userLikes.length >= 1) {
           likeMe = true;
         }
       }
       if (likeMe === true) {
-        htmlCorazon = '<img class="dislike like-post" src="../images/like2.svg">';
+        debugger
+        htmlCorazon = `<img class="dislike like-post" src="../images/like2.svg">`;
       } else {
-        htmlCorazon = '<img class="like-post" src="../images/like1.svg">';
+        htmlCorazon = `<img class="like-post" src="../images/like1.svg">`;
       }
 
       post.innerHTML += `
@@ -196,12 +207,13 @@ export const getPublish = () => {
     addEventDeletePOst();
     addEventLike();
   });
-};
+});
 // ------------------------------------------- Eventos  ----------------------------------------- //
 // Evento del botón "Publicar"
 document.addEventListener('click', (e) => {
-  if (e.target.id === 'publish-btn') {
-    const inputTimeline = document.querySelector('.input-timeline');
+  
+  if(e.target.id === 'publish-btn'){
+    let inputTimeline = document.querySelector('.input-timeline');
     getValues().then(() => {
       postInRealTime();
     })
@@ -210,4 +222,6 @@ document.addEventListener('click', (e) => {
       });
     inputTimeline.value = '';
   }
+    
 });
+
