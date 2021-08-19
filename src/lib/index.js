@@ -1,9 +1,11 @@
+
 import * as firebase from "../firebase/firebase-login.js";
 import * as config from "../firebase/firebase-config.js";
 import '../view/login-view.js';
 import '../view/signup-view.js';
 import '../view/mainPage-view.js';
 import '../view/header-view.js';
+
 // ---------------------------------- Constantes  ------------------------------------ //
 const db = config.firestore;
 
@@ -103,6 +105,7 @@ const db = config.firestore;
 // const emailProfile = document.querySelector('#email-profile');
 
 // Función para motrar la imagen de perfil y su nombre
+
 // const showProfileImg = () => {
 //   firebase.authStateChange((user) => {
 //     if (user) {
@@ -123,39 +126,40 @@ const db = config.firestore;
 // };
 // showProfileImg();
 
+
 // ----------------------------------------- Muro ------------------------------------------- //
-const publishBtn = document.querySelector('#publish-btn'); 
-const inputTimeline = document.querySelector('.input-timeline');
+// const publishBtn = document.querySelector('#publish-btn');
+// const inputTimeline = document.querySelector('.input-timeline');
 
+// // Función que obtiene el valor del input y lo envía a Firestore
+// const getValues = () => {
+//   const user = config.currentUser();
+//   const day = Date.now();
+//   const objectoAccion = new Date(day);
 
-// Función que obtiene el valor del input y lo envía a Firestore
-const getValues = () => {
-  
-  const user = config.currentUser();
-  const day = Date.now();
-  const objectoAccion = new Date(day);
+//   if (inputTimeline.value != 0) {
+//     return db.collection('posts').add({
+//       photo: user.photoURL,
+//       name: user.displayName,
+//       description: inputTimeline.value,
+//       day: objectoAccion.toLocaleString(),
+//       user: user.uid,
+//       likesUser: [],
+//     })
 
-  if(inputTimeline.value != 0) {
-    return  db.collection('posts').add({
-      photo: user.photoURL,
-      name: user.displayName,
-      description: inputTimeline.value,
-      day: objectoAccion.toLocaleString(),
-      user: user.uid,
-      likesUser: [],
-    })
-    .then((docRef) => {
-      console.log(docRef);
-      console.log("Documento escrito con el ID: ", docRef.id);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  } else {
-    alert('Por favor, llena los campos');
-  }
-  
-};
+//     .then((docRef) => {
+//       console.log(docRef);
+//       console.log("Documento escrito con el ID: ", docRef.id);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+//   } else {
+//     alert('Por favor, llena los campos');
+
+//   }
+//   alert('Por favor, llena los campos');
+// };
 // ---------------------------------- Publicaciones --------------------------------------- //
 
 // -------------------LIKE--------------------//
@@ -268,13 +272,10 @@ const getValues = () => {
 //           <p>${doc.data().description}</p>
 //         </div>
 //         <div class="date-likes">
-         
-         
 //          <div class="likes-container">
 //          ${htmlCorazon}
 //           <img class="send-post" src='../images/send.svg' >
 //          </div>
-         
 //           <div class="likes-counter">
 //              <span></span><p id="p-likes">Likes</p>
 //           </div>

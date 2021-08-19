@@ -1,7 +1,7 @@
 import * as todo from '../firebase/firebase-config.js';
 
 export const viewHeader = () => {
-    const headerSection = `
+  const headerSection = `
     <div class="menu-hamburger" id="toggle-button">
         <div class="menu-line"></div>
         <div class="menu-line"></div>
@@ -20,37 +20,35 @@ export const viewHeader = () => {
         </li>
     </ul>
 `;
-    const headerNav = document.createElement('nav');
-    headerNav.className = 'headerNav';
-    headerNav.innerHTML = headerSection;
-    return headerNav;
-} 
+  const headerNav = document.createElement('nav');
+  headerNav.className = 'headerNav';
+  headerNav.innerHTML = headerSection;
+  return headerNav;
+};
 // console.log(viewHeader());
 
 // --------------------------- menú hamburguesa --------------------------- //
 document.addEventListener('click', (e) => {
-    if(e.target.id === 'toggle-button') {
-        const navList = document.getElementById('nav-list');
-        navList.classList.toggle('active');
-    }
-})
+  if (e.target.id === 'toggle-button') {
+    const navList = document.getElementById('nav-list');
+    navList.classList.toggle('active');
+  }
+});
 
 // --------------------------- Cerrar sesión --------------------------- //
 document.addEventListener('click', (e) => {
-    if(e.target.id === 'signOut') {
-        todo.signOut
-
-        .then(() => {
-          console.log('cerraste sesión');
-          const hash = '';
-          window.location.hash = hash;
-          localStorage.clear(); // PRUEBA
-        })
-        .catch((error) => {
-          console.log(error);
-          const hash = '#/mainPage';
-          window.location.hash = hash;
-        });
-    }
+  if (e.target.id === 'signOut') {
+    todo.signOut
+      .then(() => {
+        console.log('cerraste sesión');
+        const hash = '#/login';
+        window.location.hash = hash;
+        localStorage.clear(); // PRUEBA
+      })
+      .catch((error) => {
+        console.log(error);
+        const hash = '#/mainPage';
+        window.location.hash = hash;
+      });
+  }
 });
-
