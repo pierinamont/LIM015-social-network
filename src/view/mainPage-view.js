@@ -141,21 +141,6 @@ const addEventDeletePOst = () => {
 };
 
 
-
-// -------------------- Editar posts ---------------------- //
-const  editImg = document.getElementsByClassName('edit-img');
-const modalEdit = document.querySelector('.modal-edit');
-
-const editPost = () => {
-  for ( let i = 0; i < editImg.length; i++){
-    editImg[i].addEventListener('click', (e) => {
-      // al presionar ícono de editar, obtiene el uid
-      
-      // aparece modal
-    })
-  }
-}
-
 // Función que trae la colección de datos para las publicaciones
 
 // const getPost = () => db.collection('posts').get();
@@ -198,6 +183,8 @@ const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc
         </div>
         <div class="description-div">
           <p>${doc.data().description}</p>
+      <input id='txteditPost-${doc.id}' class= 'editar' type='text' value = '${doc.data().description}'></input>
+      <button class="save-edit-btn">Guardar</button>
         </div>
         <div class="date-likes">
          <div class="likes-container">
@@ -209,18 +196,10 @@ const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc
           </div>
         </div>
       </div>
-
-      
-      <!-------modal editar y guardar publicacion------!>
-      <div class="modal-edit"  data-idpost='${doc.id}'>
-      <input class= 'editar' type='text' value = '${doc.data().description}'></input>
-      <button class="save-edit-btn">Guardar</button>
-      </div>
       `;
     });
     addEventDeletePOst();
     addEventLike();
-    editPost();
   });
 };
 
@@ -245,6 +224,46 @@ document.addEventListener('click', (e) => {
 
 
 
+
+function editar (idPost, newText) {
+
+  let post = db.collection('posts').doc(idPost);
+
+     
+// get trae eñ post, luego donde valida es en el 243 si existe el docuemento//
+  post.get().then((res) => {
+    if (res.exists) {
+      post.update({
+        description:  newText
+      })
+      .then((result) => {
+        console.log(result);
+
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
+  })
+    .catch((error) => {
+      console.log(error);
+    });
+
+}
+
+// guardar publicacion//
+
+document.addEventListener('click', (e) => {
+
+  if(e.target.className === 'save-edit-btn') {
+    alert('guardar');
+
+    const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+    console.log(idPost);
+    const newValue = document.getElementById('txteditPost-' + idPost).value; //obtenemos el elemento//
+    editar(idPost, newValue);
+  }
+  });
 
 
 
