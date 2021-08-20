@@ -212,7 +212,7 @@ const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc
 
       
       <!-------modal editar y guardar publicacion------!>
-      <div class="modal-edit">
+      <div class="modal-edit"  data-idpost='${doc.id}'>
       <input class= 'editar' type='text' value = '${doc.data().description}'></input>
       <button class="save-edit-btn">Guardar</button>
       </div>
@@ -255,29 +255,43 @@ document.addEventListener('click', (e) => {
 
 
 document.addEventListener('click', (e) => {
+
   if(e.target.className === 'save-edit-btn') {
+    alert('guardar');
+
+    const idPost = e.target.closest('.modal-edit').getAttribute('data-idpost');
+    // console.log(idPost);
+    const input = e.target.closest('.editar').value; // prueba
+    console.log(input);
+
+    // const post = db.collection('posts').doc(idPost, description);
+    // console.log(post);
+      // post.edit().then(() => {
+      //   console.log('Document successfully deleted!');
+      // })
+      //   .catch((error) => {
+      //     console.error('Error removing document: ', error);
+      //   });
+    
+
+    // const getId = (callback) => db.collection('posts').orderBy('day', 'desc').onSnapshot(callback);
+    // getId((querySnapshot) => {
+    // querySnapshot.forEach(doc => {
+    //   // Obtener id del post
+    //   const description = doc.data().description;
+    //   console.log(description);
+      
+      
+    // })
+    // });
 
     // Obtener valor del input
-    const editValue = document.querySelector('.editar').value;
-    console.log(editValue);
-    
-    const getId = (callback) => db.collection('posts').orderBy('day', 'desc').onSnapshot(callback);
-    getId((querySnapshot) => {
-    querySnapshot.forEach(doc => {
-      // Obtener uid del usuario
-      const uidUser = localStorage.getItem('uid');
-      console.log(uidUser);
-      // Obtener id del post
-      const idPost = doc.id;
-      console.log(idPost);
+    // const editValue = document.querySelector('.editar').value;
+    // console.log(editValue);
 
-      
-    })
-    });
-    // const uidUser = localStorage.getItem('uid');
-    // const post = db.collection('posts').doc(id);
-    // console.log(post);
-    // console.log(doc.id);
+    
+    
+  
   }
 });
 
