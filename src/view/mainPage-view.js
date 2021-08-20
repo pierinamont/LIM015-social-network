@@ -244,56 +244,7 @@ document.addEventListener('click', (e) => {
 
 
 
-// Evento del ícono para editar
-// const editValue = document.querySelector('.editar');
-// console.log(editValue);
-// document.addEventListener('click', (e) => {
-//   if (e.target.id === 'editar') {
-//     console.log('funcion editar');
-//   }
-// });
 
-
-document.addEventListener('click', (e) => {
-
-  if(e.target.className === 'save-edit-btn') {
-    alert('guardar');
-
-    const idPost = e.target.closest('.modal-edit').getAttribute('data-idpost');
-    // console.log(idPost);
-    const input = e.target.closest('.editar').value; // prueba
-    console.log(input);
-
-    // const post = db.collection('posts').doc(idPost, description);
-    // console.log(post);
-      // post.edit().then(() => {
-      //   console.log('Document successfully deleted!');
-      // })
-      //   .catch((error) => {
-      //     console.error('Error removing document: ', error);
-      //   });
-    
-
-    // const getId = (callback) => db.collection('posts').orderBy('day', 'desc').onSnapshot(callback);
-    // getId((querySnapshot) => {
-    // querySnapshot.forEach(doc => {
-    //   // Obtener id del post
-    //   const description = doc.data().description;
-    //   console.log(description);
-      
-      
-    // })
-    // });
-
-    // Obtener valor del input
-    // const editValue = document.querySelector('.editar').value;
-    // console.log(editValue);
-
-    
-    
-  
-  }
-});
 
 
 
