@@ -4,7 +4,7 @@ import * as todo from '../firebase/firebase-config.js';
 const db = todo.firestore;
 
 export const viewMainPage = () => {
-  const mainPageSection = `
+    const mainPageSection = `
     <!----------------perfil---------------->
     <div class = 'profile-container'> 
       <div class="profile">
@@ -52,10 +52,11 @@ export const viewMainPage = () => {
       </div>
     </div>
     `;
-  const container = document.createElement('div');
-  container.className = 'container';
-  container.innerHTML = mainPageSection;
-  return container;
+  
+    const container = document.createElement('div');
+    container.className = 'container';
+    container.innerHTML = mainPageSection;
+    return container;
 };
 
 
@@ -74,15 +75,15 @@ const getValues = () => {
       user: localStorage.getItem('uid'),
       likesUser: [],
     })
-      .then((docRef) => {
-        console.log(docRef);
-        console.log('Documento escrito con el ID: ', docRef.id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  alert('Por favor, llena los campos');
+    .then((docRef) => {
+      console.log(docRef);
+      console.log('Documento escrito con el ID: ', docRef.id);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }  
+    alert('Por favor, llena los campos');
 };
 // ****************LIKE*************//
 const likePost = document.getElementsByClassName('like-post');
@@ -120,7 +121,7 @@ const addEventLike = () => {
     });
   }
 };
-// eliminar
+// eliminar los post publicados// pendiente!
 const removePost = document.getElementsByClassName('close-img');
 
 const addEventDeletePOst = () => {
@@ -138,12 +139,28 @@ const addEventDeletePOst = () => {
   }
 };
 
+
+
+//*input class= 'editar' type='text' value = '${doc.data().description}'></input>
+     
+
+
+const  editImg = document.getElementsByClassName('edit-img');
+const editPost = () => {
+  for ( let i = 0; i < editImg.length; i++){
+    editImg[i].addEventListener('click', (e) => {
+      const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+      
+    })
+  }
+}
+
 // Función que trae la colección de datos para las publicaciones
 
 // const getPost = () => db.collection('posts').get();
 const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc').onSnapshot(callback);
 
-export const getPublish = () => {
+ export const getPublish = () => { 
   postInRealTime((querySnapshot) => {
     const post = document.getElementById('post');
     post.innerHTML = '';
@@ -191,12 +208,31 @@ export const getPublish = () => {
           </div>
         </div>
       </div>
+
+      
+      <!-------modal editar y guardar publicacion------!>
+      <div>
+      <input class= 'editar' type='text' value = '${doc.data().description}'></input>
+      <button class = 'guardar'> Guardar </button>
+      </div>
       `;
     });
     addEventDeletePOst();
     addEventLike();
+    editPost();
   });
 };
+
+//------editar post----//
+
+const editValue = document.querySelector('.editar');
+console.log(editValue);
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'editar') {
+    
+  }
+});
+
 // ------------------------------------------- Eventos  ----------------------------------------- //
 // Evento del botón "Publicar"
 document.addEventListener('click', (e) => {

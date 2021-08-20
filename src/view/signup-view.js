@@ -74,6 +74,8 @@ document.addEventListener('click', (e) => {
           // signupEmail.disabled = true;
           // signupPassword.disabled = true;
           alert('Por favor, completa los campos');
+          document.querySelector('#signup-form').reset();
+          
         }
         if (errorCode === 'auth/email-already-in-use') {
           // errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
@@ -82,6 +84,8 @@ document.addEventListener('click', (e) => {
           // signupEmail.disabled = true;
           // signupPassword.disabled = true;
           alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
+          document.querySelector('#signup-form').reset();
+         
         }
         if (errorCode === 'auth/weak-password') {
           // errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
