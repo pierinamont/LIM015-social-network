@@ -121,7 +121,7 @@ const addEventLike = () => {
     });
   }
 };
-// eliminar
+// eliminar los post publicados// pendiente!
 const removePost = document.getElementsByClassName('close-img');
 
 const addEventDeletePOst = () => {
@@ -138,6 +138,22 @@ const addEventDeletePOst = () => {
     });
   }
 };
+
+
+
+//*input class= 'editar' type='text' value = '${doc.data().description}'></input>
+     
+
+
+const  editImg = document.getElementsByClassName('edit-img');
+const editPost = () => {
+  for ( let i = 0; i < editImg.length; i++){
+    editImg[i].addEventListener('click', (e) => {
+      const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+      
+    })
+  }
+}
 
 // Función que trae la colección de datos para las publicaciones
 
@@ -192,12 +208,30 @@ const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc
           </div>
         </div>
       </div>
+
+      
+      <!-------modal editar y guardar publicacion------!>
+      <div>
+      <input class= 'editar' type='text' value = '${doc.data().description}'></input>
+      <button class = 'guardar'> Guardar </button>
+      </div>
       `;
     });
     addEventDeletePOst();
     addEventLike();
+    editPost();
   });
 };
+
+//------editar post----//
+
+const editValue = document.querySelector('.editar');
+console.log(editValue);
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'editar') {
+    
+  }
+});
 
 // ------------------------------------------- Eventos  ----------------------------------------- //
 // Evento del botón "Publicar"
