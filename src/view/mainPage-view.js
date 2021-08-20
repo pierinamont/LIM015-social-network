@@ -25,7 +25,7 @@ export const viewMainPage = () => {
       </div>
     </div>
     <!----------- publicaciones---------->
-    <div class = 'posts-container'>
+    <div class="posts-container">
       <div id="post"></div>
     </div>
     <!----------- Campañas ----------->
@@ -60,7 +60,8 @@ export const viewMainPage = () => {
 };
 
 
-// Función que obtiene el valor del input y lo envía a Firestore
+// -------------------- Envia valores de los inputs a Firebase ---------------------- //
+
 const getValues = () => {
   const inputTimeline = document.querySelector('.input-timeline');
   const day = Date.now();
@@ -85,13 +86,13 @@ const getValues = () => {
   }  
     alert('Por favor, llena los campos');
 };
-// ****************LIKE*************//
+
+// -------------------- Likes de usuarios ---------------------- //
 const likePost = document.getElementsByClassName('like-post');
 const addEventLike = () => {
   for (let i = 0; i < likePost.length; i++) {
     likePost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
-      // const idPost = e.target.parentElement.parentElement.parentElement.getAttribute('data-idpost');
       const post = db.collection('posts').doc(idPost);
       post.get().then((res) => {
         if (res.exists) {
@@ -121,9 +122,9 @@ const addEventLike = () => {
     });
   }
 };
-// eliminar los post publicados// pendiente!
-const removePost = document.getElementsByClassName('close-img');
 
+// -------------------- Eliminar posts ---------------------- //
+const removePost = document.getElementsByClassName('close-img');
 const addEventDeletePOst = () => {
   for (let i = 0; i < removePost.length; i++) {
     removePost[i].addEventListener('click', (e) => {
@@ -141,16 +142,16 @@ const addEventDeletePOst = () => {
 
 
 
-//*input class= 'editar' type='text' value = '${doc.data().description}'></input>
-     
-
-
+// -------------------- Editar posts ---------------------- //
 const  editImg = document.getElementsByClassName('edit-img');
+const modalEdit = document.querySelector('.modal-edit');
+
 const editPost = () => {
   for ( let i = 0; i < editImg.length; i++){
     editImg[i].addEventListener('click', (e) => {
-      const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+      // al presionar ícono de editar, obtiene el uid
       
+      // aparece modal
     })
   }
 }
@@ -211,9 +212,9 @@ const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc
 
       
       <!-------modal editar y guardar publicacion------!>
-      <div>
+      <div class="modal-edit">
       <input class= 'editar' type='text' value = '${doc.data().description}'></input>
-      <button class = 'guardar'> Guardar </button>
+      <button class="save-edit-btn">Guardar</button>
       </div>
       `;
     });
@@ -223,15 +224,8 @@ const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc
   });
 };
 
-//------editar post----//
 
-const editValue = document.querySelector('.editar');
-console.log(editValue);
-document.addEventListener('click', (e) => {
-  if (e.target.id === 'editar') {
-    
-  }
-});
+
 
 // ------------------------------------------- Eventos  ----------------------------------------- //
 // Evento del botón "Publicar"
@@ -247,3 +241,45 @@ document.addEventListener('click', (e) => {
     inputTimeline.value = '';
   }
 });
+
+
+
+// Evento del ícono para editar
+// const editValue = document.querySelector('.editar');
+// console.log(editValue);
+// document.addEventListener('click', (e) => {
+//   if (e.target.id === 'editar') {
+//     console.log('funcion editar');
+//   }
+// });
+
+
+document.addEventListener('click', (e) => {
+  if(e.target.className === 'save-edit-btn') {
+
+    // Obtener valor del input
+    const editValue = document.querySelector('.editar').value;
+    console.log(editValue);
+    
+    const getId = (callback) => db.collection('posts').orderBy('day', 'desc').onSnapshot(callback);
+    getId((querySnapshot) => {
+    querySnapshot.forEach(doc => {
+      // Obtener uid del usuario
+      const uidUser = localStorage.getItem('uid');
+      console.log(uidUser);
+      // Obtener id del post
+      const idPost = doc.id;
+      console.log(idPost);
+
+      
+    })
+    });
+    // const uidUser = localStorage.getItem('uid');
+    // const post = db.collection('posts').doc(id);
+    // console.log(post);
+    // console.log(doc.id);
+  }
+});
+
+
+
