@@ -4,7 +4,7 @@ import * as todo from '../firebase/firebase-config.js';
 const db = todo.firestore;
 
 export const viewMainPage = () => {
-    const mainPageSection = `
+  const mainPageSection = `
     <!----------------perfil---------------->
     <div class = 'profile-container'> 
       <div class="profile">
@@ -52,13 +52,12 @@ export const viewMainPage = () => {
       </div>
     </div>
     `;
-  
-    const container = document.createElement('div');
-    container.className = 'container';
-    container.innerHTML = mainPageSection;
-    return container;
-};
 
+  const container = document.createElement('div');
+  container.className = 'container';
+  container.innerHTML = mainPageSection;
+  return container;
+};
 
 // Función que obtiene el valor del input y lo envía a Firestore
 const getValues = () => {
@@ -66,7 +65,7 @@ const getValues = () => {
   const day = Date.now();
   const objectoAccion = new Date(day);
 
-  if (inputTimeline.value != 0) {
+  if (inputTimeline.value !== 0) {
     return db.collection('posts').add({
       photo: localStorage.getItem('photo'),
       name: localStorage.getItem('name'),
@@ -75,15 +74,15 @@ const getValues = () => {
       user: localStorage.getItem('uid'),
       likesUser: [],
     })
-    .then((docRef) => {
-      console.log(docRef);
-      console.log('Documento escrito con el ID: ', docRef.id);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }  
-    alert('Por favor, llena los campos');
+      .then((docRef) => {
+        console.log(docRef);
+        console.log('Documento escrito con el ID: ', docRef.id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  alert('Por favor, llena los campos');
 };
 // ****************LIKE*************//
 const likePost = document.getElementsByClassName('like-post');
@@ -91,7 +90,6 @@ const addEventLike = () => {
   for (let i = 0; i < likePost.length; i++) {
     likePost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
-      // const idPost = e.target.parentElement.parentElement.parentElement.getAttribute('data-idpost');
       const post = db.collection('posts').doc(idPost);
       post.get().then((res) => {
         if (res.exists) {
@@ -139,28 +137,23 @@ const addEventDeletePOst = () => {
   }
 };
 
+//* input class= 'editar' type='text' value = '${doc.data().description}'></input>
 
-
-//*input class= 'editar' type='text' value = '${doc.data().description}'></input>
-     
-
-
-const  editImg = document.getElementsByClassName('edit-img');
+const editImg = document.getElementsByClassName('edit-img');
 const editPost = () => {
-  for ( let i = 0; i < editImg.length; i++){
+  for (let i = 0; i < editImg.length; i++) {
     editImg[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
-      
-    })
+    });
   }
-}
+};
 
 // Función que trae la colección de datos para las publicaciones
 
 // const getPost = () => db.collection('posts').get();
 const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc').onSnapshot(callback);
 
- export const getPublish = () => { 
+export const getPublish = () => {
   postInRealTime((querySnapshot) => {
     const post = document.getElementById('post');
     post.innerHTML = '';
@@ -223,16 +216,14 @@ const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc
   });
 };
 
-//------editar post----//
-
-const editValue = document.querySelector('.editar');
-console.log(editValue);
-document.addEventListener('click', (e) => {
-  if (e.target.id === 'editar') {
-    
+// ------editar post----//
+const a = (e) => {
+  for ( )
+  if (e.target.class === 'guardar') {
+    alert('editasteeee')
   }
-});
-
+};
+console.log(a);
 // ------------------------------------------- Eventos  ----------------------------------------- //
 // Evento del botón "Publicar"
 document.addEventListener('click', (e) => {
