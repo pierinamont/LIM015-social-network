@@ -66,6 +66,7 @@ document.addEventListener('click', (e) => {
       .catch((error) => {
         const errorMessage = document.querySelector('#error-message');
         errorMessage.style.display = 'flex';
+        document.querySelector('#signup-form').reset();
 
         console.log(error);
         const errorCode = error.code;

@@ -31,7 +31,7 @@ body {
 /*****************MODAL***********************/
 .modal-container {
     margin: 0 auto;
-    background-color: var(--settings-color);
+    background-color: var(--btn-color);
     width: 300px;
     height: 130px;
     border-radius: 5px;
@@ -212,6 +212,14 @@ body {
     color: var(--settings-color);
 }
 
+#login-form #error-message {
+    display: inline;
+    width: 264px;
+    color: red;
+    margin-top: 0px;
+    font-weight: 500;
+}
+
 
 /**************** SECCION PARA REGISTRARSE ***************/
 #signup-form img {
@@ -245,6 +253,13 @@ body {
 }
 #signup-container .labels-container label { 
     margin-bottom: 6px;
+}
+.labels-container #error-message {
+    display: inline;
+    width: 264px;
+    color: red;
+    margin-top: 0px;
+    font-weight: 500;
 }
 #signup-form button {
     width: 164px;
