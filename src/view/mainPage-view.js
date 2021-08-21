@@ -222,9 +222,6 @@ document.addEventListener('click', (e) => {
 });
 
 
-
-
-
 function editar (idPost, newText) {
 
   let post = db.collection('posts').doc(idPost);
