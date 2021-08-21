@@ -773,7 +773,7 @@ body {
 }
 .notFound-content h3 {
     font-size: 2.3rem;
-    margin-top: 11px;
+    margin-top: 30px;
     color: var(--settings-color);
 }
 .notFound-content .not-found-img {
