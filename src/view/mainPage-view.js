@@ -25,7 +25,7 @@ export const viewMainPage = () => {
       </div>
     </div>
     <!----------- publicaciones---------->
-    <div class = 'posts-container'>
+    <div class="posts-container">
       <div id="post"></div>
     </div>
     <!----------- Campañas ----------->
@@ -59,16 +59,14 @@ export const viewMainPage = () => {
   return container;
 };
 
-// Función que obtiene el valor del input y lo envía a Firestore
+// -------------------- Envia valores de los inputs a Firebase ---------------------- //
+
 const getValues = () => {
   const inputTimeline = document.querySelector('.input-timeline');
   const day = Date.now();
   const objectoAccion = new Date(day);
 
-  let imgBase64=obtenerBase64()
-
-
-  if (inputTimeline.value !== 0) {
+  if (inputTimeline.value != 0) {
     return db.collection('posts').add({
       photo: localStorage.getItem('photo'),
       name: localStorage.getItem('name'),
@@ -76,7 +74,6 @@ const getValues = () => {
       day: objectoAccion.toLocaleString(),
       user: localStorage.getItem('uid'),
       likesUser: [],
-
     })
       .then((docRef) => {
         console.log(docRef);
@@ -88,7 +85,8 @@ const getValues = () => {
   }
   alert('Por favor, llena los campos');
 };
-// ****************LIKE*************//
+
+// -------------------- Likes de usuarios ---------------------- //
 const likePost = document.getElementsByClassName('like-post');
 const addEventLike = () => {
   for (let i = 0; i < likePost.length; i++) {
@@ -123,34 +121,52 @@ const addEventLike = () => {
     });
   }
 };
-// eliminar los post publicados// pendiente!
-const removePost = document.getElementsByClassName('close-img');
 
+// -------------------- Eliminar posts ---------------------- //
+
+// const addEventDeletePOst = () => {
+//   for (let i = 0; i < removePost.length; i++) {
+//     removePost[i].addEventListener('click', (e) => {
+//       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+//       const post = db.collection('posts').doc(idPost);
+//       post.delete().then(() => {
+//         console.log('Document successfully deleted!');
+//       })
+//         .catch((error) => {
+//           console.error('Error removing document: ', error);
+//         });
+//     });
+//   }
+// };
+const removePost = document.getElementsByClassName('close-img');
+document.addEventListener('click', (e) => {
+  if (e.target.  === 'delete-btn') {
+    const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+    const post = db.collection('posts').doc(idPost);
+    post.delete().then(() => {
+      console.log('Document successfully deleted!');
+    })
+      .catch((error) => {
+        console.error('Error removing document: ', error);
+      });
+    alert('eliminado');
+  }
+  if (e.target.className === 'cancel-btn') {
+    const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+    const divConfir = document.getElementById(`deletePost-${idPost}`);
+    divConfir.style.display = 'none';
+  }
+});
 const addEventDeletePOst = () => {
   for (let i = 0; i < removePost.length; i++) {
     removePost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
-      const post = db.collection('posts').doc(idPost);
-      post.delete().then(() => {
-        console.log('Document successfully deleted!');
-      })
-        .catch((error) => {
-          console.error('Error removing document: ', error);
-        });
+      const divConfir = document.getElementById(`deletePost-${idPost}`); // obtenemos el div confirmacion eliminacion del post
+      divConfir.style.display = 'flex';
     });
   }
 };
 
-//* input class= 'editar' type='text' value = '${doc.data().description}'></input>
-
-const editImg = document.getElementsByClassName('edit-img');
-const editPost = () => {
-  for (let i = 0; i < editImg.length; i++) {
-    editImg[i].addEventListener('click', (e) => {
-      const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
-    });
-  }
-};
 
 // Función que trae la colección de datos para las publicaciones
 
@@ -194,6 +210,8 @@ export const getPublish = () => {
         </div>
         <div class="description-div">
           <p>${doc.data().description}</p>
+      <input id='txteditPost-${doc.id}' class= 'editar' type='text' value = '${doc.data().description}'></input>
+      <button class="save-edit-btn">Guardar</button>
         </div>
         <div class="date-likes">
          <div class="likes-container">
@@ -204,19 +222,20 @@ export const getPublish = () => {
              <span></span><p id="p-likes">${arrayLikesPost.length} Likes</p>
           </div>
         </div>
-      </div>
-
-      
-      <!-------modal editar y guardar publicacion------!>
-      <div>
-      <input class= 'editar' type='text' value = '${doc.data().description}'></input>
-      <button class = 'guardar'> Guardar </button>
+        <!----------- Modal para eliminar---------->
+    <div  style="display: none" id='deletePost-${doc.id}'>
+    <div class = 'delete'>
+      <p id='question-delete'>¿Eliminar post?</p>
+      <p id='message-delete'>Una vez ya eliminado no podras recuperar el post</p>
+      <button class='delete-btn'>Borrar</button>
+      <button class='cancel-btn'>Cancelar</button>
+     </div>
+    </div>
       </div>
       `;
     });
     addEventDeletePOst();
     addEventLike();
-    editPost();
   });
 };
 
@@ -232,5 +251,40 @@ document.addEventListener('click', (e) => {
         console.log(error);
       });
     inputTimeline.value = '';
+  }
+});
+
+function editar(idPost, newText) {
+  const post = db.collection('posts').doc(idPost);
+
+  // get trae eñ post, luego donde valida es en el 243 si existe el docuemento//
+  post.get().then((res) => {
+    if (res.exists) {
+      post.update({
+        description: newText,
+      })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+// guardar publicacion//
+
+document.addEventListener('click', (e) => {
+  if (e.target.className === 'save-edit-btn') {
+    alert('guardar');
+
+    const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+    console.log(idPost);
+    const newValue = document.getElementById(`txteditPost-${idPost}`).value; // obtenemos el elemento//
+    editar(idPost, newValue);
   }
 });
