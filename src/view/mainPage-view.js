@@ -4,7 +4,7 @@ import * as todo from '../firebase/firebase-config.js';
 const db = todo.firestore;
 
 export const viewMainPage = () => {
-    const mainPageSection = `
+  const mainPageSection = `
     <!----------------perfil---------------->
     <div class = 'profile-container'> 
       <div class="profile">
@@ -52,13 +52,12 @@ export const viewMainPage = () => {
       </div>
     </div>
     `;
-  
-    const container = document.createElement('div');
-    container.className = 'container';
-    container.innerHTML = mainPageSection;
-    return container;
-};
 
+  const container = document.createElement('div');
+  container.className = 'container';
+  container.innerHTML = mainPageSection;
+  return container;
+};
 
 // -------------------- Envia valores de los inputs a Firebase ---------------------- //
 
@@ -76,15 +75,15 @@ const getValues = () => {
       user: localStorage.getItem('uid'),
       likesUser: [],
     })
-    .then((docRef) => {
-      console.log(docRef);
-      console.log('Documento escrito con el ID: ', docRef.id);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }  
-    alert('Por favor, llena los campos');
+      .then((docRef) => {
+        console.log(docRef);
+        console.log('Documento escrito con el ID: ', docRef.id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  alert('Por favor, llena los campos');
 };
 
 // -------------------- Likes de usuarios ---------------------- //
@@ -124,18 +123,46 @@ const addEventLike = () => {
 };
 
 // -------------------- Eliminar posts ---------------------- //
+
+// const addEventDeletePOst = () => {
+//   for (let i = 0; i < removePost.length; i++) {
+//     removePost[i].addEventListener('click', (e) => {
+//       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+//       const post = db.collection('posts').doc(idPost);
+//       post.delete().then(() => {
+//         console.log('Document successfully deleted!');
+//       })
+//         .catch((error) => {
+//           console.error('Error removing document: ', error);
+//         });
+//     });
+//   }
+// };
 const removePost = document.getElementsByClassName('close-img');
+document.addEventListener('click', (e) => {
+  if (e.target.  === 'delete-btn') {
+    const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+    const post = db.collection('posts').doc(idPost);
+    post.delete().then(() => {
+      console.log('Document successfully deleted!');
+    })
+      .catch((error) => {
+        console.error('Error removing document: ', error);
+      });
+    alert('eliminado');
+  }
+  if (e.target.className === 'cancel-btn') {
+    const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+    const divConfir = document.getElementById(`deletePost-${idPost}`);
+    divConfir.style.display = 'none';
+  }
+});
 const addEventDeletePOst = () => {
   for (let i = 0; i < removePost.length; i++) {
     removePost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
-      const post = db.collection('posts').doc(idPost);
-      post.delete().then(() => {
-        console.log('Document successfully deleted!');
-      })
-        .catch((error) => {
-          console.error('Error removing document: ', error);
-        });
+      const divConfir = document.getElementById(`deletePost-${idPost}`); // obtenemos el div confirmacion eliminacion del post
+      divConfir.style.display = 'flex';
     });
   }
 };
@@ -146,7 +173,7 @@ const addEventDeletePOst = () => {
 // const getPost = () => db.collection('posts').get();
 const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc').onSnapshot(callback);
 
- export const getPublish = () => { 
+export const getPublish = () => {
   postInRealTime((querySnapshot) => {
     const post = document.getElementById('post');
     post.innerHTML = '';
@@ -195,6 +222,15 @@ const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc
              <span></span><p id="p-likes">${arrayLikesPost.length} Likes</p>
           </div>
         </div>
+        <!----------- Modal para eliminar---------->
+    <div  style="display: none" id='deletePost-${doc.id}'>
+    <div class = 'delete'>
+      <p id='question-delete'>¿Eliminar post?</p>
+      <p id='message-delete'>Una vez ya eliminado no podras recuperar el post</p>
+      <button class='delete-btn'>Borrar</button>
+      <button class='cancel-btn'>Cancelar</button>
+     </div>
+    </div>
       </div>
       `;
     });
@@ -202,9 +238,6 @@ const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc
     addEventLike();
   });
 };
-
-
-
 
 // ------------------------------------------- Eventos  ----------------------------------------- //
 // Evento del botón "Publicar"
@@ -221,46 +254,37 @@ document.addEventListener('click', (e) => {
   }
 });
 
+function editar(idPost, newText) {
+  const post = db.collection('posts').doc(idPost);
 
-function editar (idPost, newText) {
-
-  let post = db.collection('posts').doc(idPost);
-
-     
-// get trae eñ post, luego donde valida es en el 243 si existe el docuemento//
+  // get trae eñ post, luego donde valida es en el 243 si existe el docuemento//
   post.get().then((res) => {
     if (res.exists) {
       post.update({
-        description:  newText
+        description: newText,
       })
-      .then((result) => {
-        console.log(result);
-
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   })
     .catch((error) => {
       console.log(error);
     });
-
 }
 
 // guardar publicacion//
 
 document.addEventListener('click', (e) => {
-
-  if(e.target.className === 'save-edit-btn') {
+  if (e.target.className === 'save-edit-btn') {
     alert('guardar');
 
     const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
     console.log(idPost);
-    const newValue = document.getElementById('txteditPost-' + idPost).value; //obtenemos el elemento//
+    const newValue = document.getElementById(`txteditPost-${idPost}`).value; // obtenemos el elemento//
     editar(idPost, newValue);
   }
-  });
-
-
-
+});
