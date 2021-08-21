@@ -222,31 +222,31 @@ document.addEventListener('click', (e) => {
 });
 
 
-     function editar (idPost, newText) {
+function editar (idPost, newText) {
 
-      let post = db.collection('posts').doc(idPost);
+  let post = db.collection('posts').doc(idPost);
 
      
 // get trae eñ post, luego donde valida es en el 243 si existe el docuemento//
-      post.get().then((res) => {
-        if (res.exists) {
-          post.update({
-            description:  newText
-          })
-          .then((result) => {
-            console.log(result);
-
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-        }
+  post.get().then((res) => {
+    if (res.exists) {
+      post.update({
+        description:  newText
       })
-        .catch((error) => {
-          console.log(error);
-        });
+      .then((result) => {
+        console.log(result);
 
-  }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
+  })
+    .catch((error) => {
+      console.log(error);
+    });
+
+}
 
 // guardar publicacion//
 

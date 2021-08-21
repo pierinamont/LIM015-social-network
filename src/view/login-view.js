@@ -11,6 +11,7 @@ export const viewLogin = () => {
                 <p>¡Bienvenid@ Pet Lover!</p>
                 <input class="login-email" type="email" placeholder="Coloca tu correo" id="email" required>
                 <input class="login-password" type="password" placeholder="Coloca tu contraseña" name="" id="password" required>
+                <p id="error-message" style="display:none"></p>
                 <a id="signin-btn">Iniciar Sesión</a>
                 <p>O bien ingresa por...</p>
                 <div class="options">
@@ -20,14 +21,7 @@ export const viewLogin = () => {
                 <p>¿No tienes cuenta?  <a href="#/signup" id="sign-up">Regístrate</a></p>
          </form>
     </div>
-    <!----------MODAL-------------->
-  
-    <div class="modal-container" style="display: none">
-      <div class="modal-content">
-        <p id="error-message"></p>
-        <button class="modal-btn">Aceptar</button>
-      </div>
-    </div>
+    
     `;
 
   const loginDiv = document.createElement('div');
@@ -75,32 +69,25 @@ const getUserInfo = () => {
               getUserInfo();
             } else {
               all.signOut;
-              alert(`${result.user.displayName} por favor, realiza la verificación`);
+              const errorMessage = document.querySelector('#error-message');
+              errorMessage.style.display = 'inline';
+              errorMessage.textContent = `${result.user.displayName} por favor, realiza la verificación`;
+              // alert(`${result.user.displayName} por favor, realiza la verificación`);
             }
           })
           .catch((error) => {
+            const errorMessage = document.querySelector('#error-message');
+            errorMessage.style.display = 'inline';
             console.log(error);
             const errorCode = error.code;
             if (errorCode === 'auth/invalid-email') {
-              // errorMessage.textContent = 'Por favor ingrese su usuario y contraseña';
-              // modal.style.display = 'flex';
-              // loginEmail.disabled = true;
-              // loginPassword.disabled = true;
-               alert('Por favor ingrese su usuario y contraseña');
+              errorMessage.textContent = 'Por favor ingrese su usuario y contraseña';
             }
             if (errorCode === 'auth/wrong-password') {
-              // errorMessage.textContent = 'Contraseña incorrecta, inténtelo de nuevo';
-              // modal.style.display = 'flex';
-              // loginEmail.disabled = true;
-              // loginPassword.disabled = true;
-              alert('Contraseña incorrecta, inténtelo de nuevo');
+              errorMessage.textContent = 'Contraseña incorrecta, inténtelo de nuevo';
             }
             if (errorCode === 'auth/user-not-found') {
-              // errorMessage.textContent = 'El correo que ingresó no está registrado, por favor, regístrece';
-              // modal.style.display = 'flex';
-              // loginEmail.disabled = true;
-              // loginPassword.disabled = true;
-               alert('El correo que ingresó no está registrado, por favor, regístrece');
+               errorMessage.textContent = 'El correo que ingresó no está registrado, por favor, regístrece';
             }
           });
       };
@@ -128,28 +115,16 @@ document.addEventListener('click', (e) => {
         })
         .catch((error) => {
           console.log(error);
-          const errorCode = error.code;
-          if (errorCode === 'auth/invalid-email') {
-            // errorMessage.textContent = 'Por favor ingrese su usuario y contraseña';
-            // modal.style.display = 'flex';
-            // loginEmail.disabled = true;
-            // loginPassword.disabled = true;
-            alert('Por favor ingrese su usuario y contraseña');
-          }
-          if (errorCode === 'auth/wrong-password') {
-            // errorMessage.textContent = 'Contraseña incorrecta, inténtelo de nuevo';
-            // modal.style.display = 'flex';
-            // loginEmail.disabled = true;
-            // loginPassword.disabled = true;
-            alert('Contraseña incorrecta, inténtelo de nuevo');
-          }
-          if (errorCode === 'auth/user-not-found') {
-            // errorMessage.textContent = 'El correo que ingresó no está registrado, por favor, regístrece';
-            // modal.style.display = 'flex';
-            // loginEmail.disabled = true;
-            // loginPassword.disabled = true;
-            alert('El correo que ingresó no está registrado, por favor, regístrece');
-          }
+          // const errorCode = error.code;
+          // if (errorCode === 'auth/invalid-email') {
+          //   alert('Por favor ingrese su usuario y contraseña');
+          // }
+          // if (errorCode === 'auth/wrong-password') {
+          //   alert('Contraseña incorrecta, inténtelo de nuevo');
+          // }
+          // if (errorCode === 'auth/user-not-found') {
+          //   alert('El correo que ingresó no está registrado, por favor, regístrece');
+          // }
         });
     };
     login(email, password);
