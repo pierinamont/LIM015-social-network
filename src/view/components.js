@@ -3,6 +3,7 @@ import { viewSignup } from './signup-view.js';
 import { viewHeader } from './header-view.js';
 import { getPublish, viewMainPage } from './mainPage-view.js';
 import { viewProfile } from './view-profile.js';
+import { viewNotFound } from './notFound-view.js';
 
 const components = {
   login: viewLogin,
@@ -10,9 +11,8 @@ const components = {
   header: viewHeader,
   mainPage: viewMainPage,
   profile: viewProfile,
-  
+  notFound: viewNotFound,
 
-  // errorPage:
 };
 const metodosPublicos = {
   mGetPublish: getPublish,

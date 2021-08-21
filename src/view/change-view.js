@@ -5,11 +5,13 @@ const changeView = (route) => {
   const headerBarNav = document.getElementById('header-bar-nav');
   const mainPage = document.getElementById('main-page');
   const mainProfile = document.getElementById('main-profile');
+  const notFound = document.getElementById('not-found');
 
   loginSection.innerHTML = '';
   headerBarNav.innerHTML = '';
   mainPage.innerHTML = '';
   mainProfile.innerHTML = '';
+  notFound.innerHTML = '';
 
   switch (route) {
     case '#/login':
@@ -23,7 +25,7 @@ const changeView = (route) => {
     { return headerBarNav.appendChild(components.header()) && mainProfile.appendChild(components.profile()); }
 
     default:
-      break;
+    { return notFound.appendChild(components.notFound()); }
   }
   console.log(route);
 };

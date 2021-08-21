@@ -30,5 +30,5 @@ const profile = `
 const containerProfile = document.createElement('div');
 containerProfile.className = 'contentProfile';
 containerProfile.innerHTML = profile;
-return profile;
+return containerProfile;
 };

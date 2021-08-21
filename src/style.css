@@ -749,3 +749,41 @@ body {
     justify-content: flex-end;
     width: 100%;
 }
+
+/**************** 404 ******************/
+#not-found {
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    margin-top: 50px;
+}
+.notFound-div {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.notFound-container {
+    border: 2px solid #d1d0d0;
+    width: 320px;
+    height: 410px;
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: inherit;
+}
+.notFound-content h3 {
+    font-size: 2.3rem;
+    margin-top: 11px;
+    color: var(--settings-color);
+}
+.notFound-content .not-found-img {
+    height: auto;
+    width: 300px;
+}
+.txt-404 {
+    font-size: 1.3rem;
+    text-align: justify;
+    width: 290px;
+    margin-left: 13px;
+    margin-top: 0px;
+}
