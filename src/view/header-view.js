@@ -8,14 +8,13 @@ export const viewHeader = () => {
         <div class="menu-line"></div>
     </div>     
     <img class="logo-nav" src="../images/logo-horizontal(2).svg"></img>
-    <ul class="ul-nav" id="nav-list">
+    <ul class="ul-nav" id="navList">
         <li class="li-nav">
-            <a>Inicio</a>
+            <a href ='/#/mainPage'>Inicio</a>
+        </li>
+        <li class="li-nav"><a id="profile">Mi perfil</a>
         </li>
         <li class="li-nav">
-            <a>Mi perfil</a>
-        </li>
-        <li class="li-nav" id="sign-out">
         <img src="../images/sign-out.svg"></img><a id="signOut">Cerrar Sesión</a>
         </li>
     </ul>
@@ -49,6 +48,15 @@ document.addEventListener('click', (e) => {
         console.log(error);
         const hash = '#/mainPage';
         window.location.hash = hash;
-      });
+      })  
   }
 });
+
+// ingresando a la sesion de perfil//
+
+  document.addEventListener('click', (e) => {
+    if(e.target.id === 'profile') {
+           const hash = '#/profile';
+             window.location.hash = hash;
+           }
+         });

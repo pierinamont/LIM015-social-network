@@ -51,7 +51,7 @@ document.addEventListener('click', (e) => {
         displayName: name,
       });
       const configuration = {
-        url: 'http://localhost:5000/#/login',
+        url: 'http://localhost:5000',
       };
       result.user.sendEmailVerification(configuration).catch((error) => {
         console.log(error);
