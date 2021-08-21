@@ -4,13 +4,13 @@ const changeView = (route) => {
   const loginSection = document.getElementById('login-section');
   const headerBarNav = document.getElementById('header-bar-nav');
   const mainPage = document.getElementById('main-page');
-  const Profile = document.getElementById('main-profile');
+  const mainProfile = document.getElementById('main-profile');
 
 
   loginSection.innerHTML = '';
   headerBarNav.innerHTML = '';
   mainPage.innerHTML = '';
-  Profile.innerHTML = '';
+  mainProfile.innerHTML = '';
 
 
 
@@ -23,7 +23,7 @@ const changeView = (route) => {
       { metodosPublicos.mGetPublish();
          return headerBarNav.appendChild(components.header()) && mainPage.appendChild(components.mainPage()); }
     case '#/profile':
-    { return headerBarNav.appendChild(components.header()) && Profile.appendChild(components.profile()); }
+    { return headerBarNav.appendChild(components.header()) && mainProfile.appendChild(components.profile()); }
    
 
     default:

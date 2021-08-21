@@ -10,7 +10,7 @@ export const viewHeader = () => {
     <img class="logo-nav" src="../images/logo-horizontal(2).svg"></img>
     <ul class="ul-nav" id="navList">
         <li class="li-nav">
-            <a>Inicio</a>
+            <a href ='/#/mainPage'>Inicio</a>
         </li>
         <li class="li-nav"><a id="profile">Mi perfil</a>
         </li>
@@ -56,18 +56,7 @@ document.addEventListener('click', (e) => {
 
   document.addEventListener('click', (e) => {
     if(e.target.id === 'profile') {
-      alert('hola')
-
-      // todo.profile
-        //  .then(() => {
-        //    const hash = '#/profile';
-        //      window.location.hash = hash;
-        //    })
-        //       .catch((error) => {
-        //        console.log(error);
-        //         const hash = '#/mainPage';
-        //          window.location.hash = hash;
-        //       })
+           const hash = '#/profile';
+             window.location.hash = hash;
            }
          });
-
