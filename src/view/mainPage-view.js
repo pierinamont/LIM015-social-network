@@ -222,17 +222,6 @@ document.addEventListener('click', (e) => {
 });
 
 
-
-// Evento del ícono para editar
-// const editValue = document.querySelector('.editar');
-// console.log(editValue);
-// document.addEventListener('click', (e) => {
-//   if (e.target.id === 'editar') {
-//     console.log('funcion editar');
-//   }
-// });
-
-
      function editar (idPost, newText) {
 
       let post = db.collection('posts').doc(idPost);
