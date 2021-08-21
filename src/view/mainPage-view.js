@@ -220,14 +220,6 @@ export const getPublish = () => {
   });
 };
 
-// ------editar post----//
-const a = (e) => {
-  for ( )
-  if (e.target.class === 'guardar') {
-    alert('editasteeee')
-  }
-};
-console.log(a);
 // ------------------------------------------- Eventos  ----------------------------------------- //
 // Evento del botón "Publicar"
 document.addEventListener('click', (e) => {
