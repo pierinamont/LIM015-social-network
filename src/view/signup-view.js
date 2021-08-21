@@ -4,11 +4,10 @@ export const viewSignup = () => {
   const signupSection = `
     <div class="modal-container" style="display: none">
          <div class="modal-content">
-           <p id="error-message"></p>
-           <p id="message" style="display:none"></p>
+           <p id="message"></p>
            <button class="modal-btn">Aceptar</button>
-           </div>
-         </div>
+          </div>
+    </div>
 
     <!--SECCION PARA REGISTRARSE-->
     <div id="signup-container">
@@ -22,6 +21,7 @@ export const viewSignup = () => {
                     <input class="input" type="email" placeholder="Coloca tu correo" id="signup-email" required>
                     <label for="signup-password">Crea tu contraseña:</label>
                     <input class="input" type="password" placeholder="Coloca tu contraseña" name="" id="signup-password" required>
+                    <p id="error-message" style="display:none"></p>
                 </div>
                 <button id="signup-btn">Resgistrarse</button>
                 <p>¿Ya tienes cuenta? <a id="sign-in" href="#/login">Inicia Sesión</a></p>
@@ -51,50 +51,45 @@ document.addEventListener('click', (e) => {
         displayName: name,
       });
       const configuration = {
-        url: 'http://localhost:5000/#/login',
+        url: 'http://localhost:5000',
       };
       result.user.sendEmailVerification(configuration).catch((error) => {
         console.log(error);
       });
       all.signOut;
-      // modal.style.display = 'flex';
-      // modal.style.backgroundColor='#F8C908';
-      // message.style.display = 'inline';
-      // message.textContent=`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`;
       document.querySelector('#signup-form').reset();
-      alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
+      const modal = document.querySelector('.modal-container');
+      modal.style.display = 'flex';
+      message.textContent = `Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`;
+      // alert(`Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`);
     })
       .catch((error) => {
+        const errorMessage = document.querySelector('#error-message');
+        errorMessage.style.display = 'flex';
+
         console.log(error);
         const errorCode = error.code;
         if (errorCode === 'auth/invalid-email') {
-          // errorMessage.textContent = 'Por favor, completa los campos';
-          // modal.style.display = 'flex';
-          // signupName.disabled = true;
-          // signupEmail.disabled = true;
-          // signupPassword.disabled = true;
-          alert('Por favor, completa los campos');
+          errorMessage.textContent = 'Por favor, completa los campos';
           document.querySelector('#signup-form').reset();
           
         }
         if (errorCode === 'auth/email-already-in-use') {
-          // errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
-          // modal.style.display = 'flex';
-          // signupName.disabled = true;
-          // signupEmail.disabled = true;
-          // signupPassword.disabled = true;
-          alert('El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido');
+          errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
           document.querySelector('#signup-form').reset();
          
         }
         if (errorCode === 'auth/weak-password') {
-          // errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
-          // modal.style.display = 'flex';
-          // signupName.disabled = true;
-          // signupEmail.disabled = true;
-          // signupPassword.disabled = true;
-          alert('La contraseña debe tener al menos 6 caracteres');
+          errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
         }
       });
   }
 });
+
+//-------- Botón de Aceptar ----------//
+document.addEventListener('click', (e) => {
+  if(e.target.className === 'modal-btn') {
+    const modal = document.querySelector('.modal-container');
+    modal.style.display = 'none';
+  }
+})

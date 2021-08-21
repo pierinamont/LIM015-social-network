@@ -25,7 +25,7 @@ export const viewMainPage = () => {
       </div>
     </div>
     <!----------- publicaciones---------->
-    <div class = 'posts-container'>
+    <div class="posts-container">
       <div id="post"></div>
     </div>
     <!----------- Campañas ----------->
@@ -59,7 +59,8 @@ export const viewMainPage = () => {
   return container;
 };
 
-// Función que obtiene el valor del input y lo envía a Firestore
+// -------------------- Envia valores de los inputs a Firebase ---------------------- //
+
 const getValues = () => {
   const inputTimeline = document.querySelector('.input-timeline');
   const day = Date.now();
@@ -84,7 +85,8 @@ const getValues = () => {
   }
   alert('Por favor, llena los campos');
 };
-// ****************LIKE*************//
+
+// -------------------- Likes de usuarios ---------------------- //
 const likePost = document.getElementsByClassName('like-post');
 const addEventLike = () => {
   for (let i = 0; i < likePost.length; i++) {
@@ -119,9 +121,9 @@ const addEventLike = () => {
     });
   }
 };
-// eliminar los post publicados// pendiente!
-const removePost = document.getElementsByClassName('close-img');
 
+// -------------------- Eliminar posts ---------------------- //
+const removePost = document.getElementsByClassName('close-img');
 const addEventDeletePOst = () => {
   for (let i = 0; i < removePost.length; i++) {
     removePost[i].addEventListener('click', (e) => {
@@ -139,6 +141,7 @@ const addEventDeletePOst = () => {
 
 //* input class= 'editar' type='text' value = '${doc.data().description}'></input>
 
+<<<<<<< HEAD
 const editImg = document.getElementsByClassName('edit-img');
 const editPost = () => {
   for (let i = 0; i < editImg.length; i++) {
@@ -148,6 +151,8 @@ const editPost = () => {
   }
 };
 
+=======
+>>>>>>> a5a08ebcc45365e1f708bb89c62b73e88f84b4df
 // Función que trae la colección de datos para las publicaciones
 
 // const getPost = () => db.collection('posts').get();
@@ -190,6 +195,8 @@ export const getPublish = () => {
         </div>
         <div class="description-div">
           <p>${doc.data().description}</p>
+      <input id='txteditPost-${doc.id}' class= 'editar' type='text' value = '${doc.data().description}'></input>
+      <button class="save-edit-btn">Guardar</button>
         </div>
         <div class="date-likes">
          <div class="likes-container">
@@ -201,21 +208,14 @@ export const getPublish = () => {
           </div>
         </div>
       </div>
-
-      
-      <!-------modal editar y guardar publicacion------!>
-      <div>
-      <input class= 'editar' type='text' value = '${doc.data().description}'></input>
-      <button class = 'guardar'> Guardar </button>
-      </div>
       `;
     });
     addEventDeletePOst();
     addEventLike();
-    editPost();
   });
 };
 
+<<<<<<< HEAD
 // ------editar post----//
 const a = (e) => {
   for ( )
@@ -224,6 +224,11 @@ const a = (e) => {
   }
 };
 console.log(a);
+=======
+
+
+
+>>>>>>> a5a08ebcc45365e1f708bb89c62b73e88f84b4df
 // ------------------------------------------- Eventos  ----------------------------------------- //
 // Evento del botón "Publicar"
 document.addEventListener('click', (e) => {
@@ -238,3 +243,47 @@ document.addEventListener('click', (e) => {
     inputTimeline.value = '';
   }
 });
+
+
+function editar (idPost, newText) {
+
+  let post = db.collection('posts').doc(idPost);
+
+     
+// get trae eñ post, luego donde valida es en el 243 si existe el docuemento//
+  post.get().then((res) => {
+    if (res.exists) {
+      post.update({
+        description:  newText
+      })
+      .then((result) => {
+        console.log(result);
+
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
+  })
+    .catch((error) => {
+      console.log(error);
+    });
+
+}
+
+// guardar publicacion//
+
+document.addEventListener('click', (e) => {
+
+  if(e.target.className === 'save-edit-btn') {
+    alert('guardar');
+
+    const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+    console.log(idPost);
+    const newValue = document.getElementById('txteditPost-' + idPost).value; //obtenemos el elemento//
+    editar(idPost, newValue);
+  }
+  });
+
+
+
