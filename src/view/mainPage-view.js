@@ -140,7 +140,11 @@ const addEventLike = () => {
 // };
 const removePost = document.getElementsByClassName('close-img');
 document.addEventListener('click', (e) => {
+<<<<<<< HEAD
   if (e.target.className  === 'delete-btn') {
+=======
+  if (e.target.className === 'delete-btn') {
+>>>>>>> f9496ad392351add3004572b46704c9f11ab3be9
     const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
     const post = db.collection('posts').doc(idPost);
     post.delete().then(() => {
@@ -157,6 +161,17 @@ document.addEventListener('click', (e) => {
     divConfir.style.display = 'none';
   }
 });
+// función para editar post
+const editPost = document.getElementsByClassName('edit-img');
+const addEventEdit = () => {
+  for (let i = 0; i < editPost.length; i++) {
+    editPost[i].addEventListener('click', (e) => {
+      const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+      document.getElementById(`txteditPost-${idPost}`).style.display = 'block';
+      document.getElementById(`btneditPost-${idPost}`).style.display = 'block';
+    });
+  }
+};
 const addEventDeletePOst = () => {
   for (let i = 0; i < removePost.length; i++) {
     removePost[i].addEventListener('click', (e) => {
@@ -208,10 +223,10 @@ export const getPublish = () => {
             <img class="close-img" src='../images/close-1.svg'>
           </i>
         </div>
-        <div class="description-div">
+        <div class="description-div" >
           <p>${doc.data().description}</p>
-      <input id='txteditPost-${doc.id}' class= 'editar' type='text' value = '${doc.data().description}'></input>
-      <button class="save-edit-btn">Guardar</button>
+      <input id='txteditPost-${doc.id}' class= 'editar' type='text' value = '${doc.data().description}' style="display: none"></input>
+      <button id='btneditPost-${doc.id}'class="save-edit-btn" style="display: none">Guardar</button>
         </div>
         <div class="date-likes">
          <div class="likes-container">
@@ -236,6 +251,7 @@ export const getPublish = () => {
     });
     addEventDeletePOst();
     addEventLike();
+    addEventEdit();
   });
 };
 
@@ -278,13 +294,14 @@ function editar(idPost, newText) {
 
 // guardar publicacion//
 
+
 document.addEventListener('click', (e) => {
   if (e.target.className === 'save-edit-btn') {
-    alert('guardar');
-
     const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
     console.log(idPost);
     const newValue = document.getElementById(`txteditPost-${idPost}`).value; // obtenemos el elemento//
     editar(idPost, newValue);
+    e.target.style.display = 'none';
+    document.getElementById(`txteditPost-${idPost}`).style.display = 'none';
   }
 });

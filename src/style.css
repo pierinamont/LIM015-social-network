@@ -31,7 +31,7 @@ body {
 /*****************MODAL***********************/
 .modal-container {
     margin: 0 auto;
-    background-color: var(--settings-color);
+    background-color: var(--btn-color);
     width: 300px;
     height: 130px;
     border-radius: 5px;
@@ -212,6 +212,14 @@ body {
     color: var(--settings-color);
 }
 
+#login-form #error-message {
+    display: inline;
+    width: 264px;
+    color: red;
+    margin-top: 0px;
+    font-weight: 500;
+}
+
 
 /**************** SECCION PARA REGISTRARSE ***************/
 #signup-form img {
@@ -245,6 +253,13 @@ body {
 }
 #signup-container .labels-container label { 
     margin-bottom: 6px;
+}
+.labels-container #error-message {
+    display: inline;
+    width: 264px;
+    color: red;
+    margin-top: 0px;
+    font-weight: 500;
 }
 #signup-form button {
     width: 164px;
@@ -718,7 +733,29 @@ body {
     /*fondo*/
     background-color: #f9f9f9;
     border-radius: 10px 10px 0px 0px;
-
+}
+.post-body .save-edit-btn{
+    width: 101px;
+    height: 35px;
+    left: 796px;
+    border-radius: 20px;
+    border: none;
+    font-size: 1.4rem;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background: #08CAB3;
+    cursor: pointer;
+}
+.description-div .editar{
+    border: none;
+    display: block;
+    width: 100px;
+    height: 30px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(229, 229, 229);
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 10px
 }
 
 .date-likes {
@@ -748,4 +785,42 @@ body {
     display: flex;
     justify-content: flex-end;
     width: 100%;
+}
+
+/**************** 404 ******************/
+#not-found {
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    margin-top: 50px;
+}
+.notFound-div {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.notFound-container {
+    border: 2px solid #d1d0d0;
+    width: 320px;
+    height: 410px;
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: inherit;
+}
+.notFound-content h3 {
+    font-size: 2.3rem;
+    margin-top: 30px;
+    color: var(--settings-color);
+}
+.notFound-content .not-found-img {
+    height: auto;
+    width: 300px;
+}
+.txt-404 {
+    font-size: 1.3rem;
+    text-align: justify;
+    width: 290px;
+    margin-left: 13px;
+    margin-top: 0px;
 }

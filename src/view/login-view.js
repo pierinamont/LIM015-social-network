@@ -71,6 +71,7 @@ document.addEventListener('click', (e) => {
             const errorMessage = document.querySelector('#error-message');
             errorMessage.style.display = 'inline';
             errorMessage.textContent = `${result.user.displayName} por favor, realiza la verificación`;
+            
             // alert(`${result.user.displayName} por favor, realiza la verificación`);
           }
         })
@@ -81,12 +82,15 @@ document.addEventListener('click', (e) => {
           const errorCode = error.code;
           if (errorCode === 'auth/invalid-email') {
             errorMessage.textContent = 'Por favor ingrese su usuario y contraseña';
+            document.querySelector('#login-form').reset();
           }
           if (errorCode === 'auth/wrong-password') {
             errorMessage.textContent = 'Contraseña incorrecta, inténtelo de nuevo';
+            document.querySelector('#login-form').reset();
           }
           if (errorCode === 'auth/user-not-found') {
             errorMessage.textContent = 'El correo que ingresó no está registrado, por favor, regístrece';
+            document.querySelector('#login-form').reset();
           }
         });
     };
