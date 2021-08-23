@@ -248,12 +248,6 @@ function editar(idPost, newText) {
       post.update({ // Aquí se actualiza
         description: newText,
       })
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     }
   })
     .catch((error) => {
@@ -294,5 +288,5 @@ document.addEventListener('click', (e) => {
     document.getElementById(`txteditPost-${idPost}`).style.display = 'none';
     document.getElementById(`btn-container-${idPost}`).style.display = 'none';
     document.getElementById(`txtDescription-${idPost}`).style.display = 'inline';
-  }
+  } 
 });
