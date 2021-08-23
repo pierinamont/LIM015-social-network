@@ -28,7 +28,7 @@ export const viewHeader = () => {
 // --------------------------- menú hamburguesa --------------------------- //
 document.addEventListener('click', (e) => {
   if (e.target.id === 'toggle-button') {
-    const navList = document.getElementById('nav-list');
+    const navList = document.getElementById('navList');
     navList.classList.toggle('active');
   }
 });
@@ -47,13 +47,13 @@ document.addEventListener('click', (e) => {
         console.log(error);
         const hash = '#/mainPage';
         window.location.hash = hash;
-      })  
+      });
   }
 });
 
 // ingresando a la sesion de perfil//
 document.addEventListener('click', (e) => {
-  if(e.target.id === 'profile') {
+  if (e.target.id === 'profile') {
     const hash = '#/profile';
     window.location.hash = hash;
   }
