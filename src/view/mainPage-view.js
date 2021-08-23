@@ -1,5 +1,6 @@
 // import * as firebase from "../firebase/firebase-login.js";
 import * as todo from '../firebase/firebase-config.js';
+
 const db = todo.firestore;
 
 export const viewMainPage = () => {
@@ -65,7 +66,7 @@ const getValues = () => {
   const day = Date.now();
   const objectoAccion = new Date(day);
 
-  if (inputTimeline.value != 0) {
+  if (inputTimeline.value !== 0) {
     return db.collection('posts').add({
       photo: localStorage.getItem('photo'),
       name: localStorage.getItem('name'),
@@ -145,7 +146,7 @@ document.addEventListener('click', (e) => {
 // función para editar post
 const editPost = document.getElementsByClassName('edit-img');
 const addEventEdit = () => {
-  for (let i = 0; i < editPost.length; i++) {
+  for (let i = 0; i < editPost.length; i + 1) {
     editPost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
       document.getElementById(`txteditPost-${idPost}`).style.display = 'block';
@@ -238,7 +239,7 @@ export const getPublish = () => {
   });
 };
 
-// Función para editar post 
+// Función para editar post
 function editar(idPost, newText) {
   const post = db.collection('posts').doc(idPost);
 
