@@ -28,7 +28,7 @@ export const viewHeader = () => {
 // --------------------------- menú hamburguesa --------------------------- //
 document.addEventListener('click', (e) => {
   if (e.target.id === 'toggle-button') {
-    const navList = document.getElementById('nav-list');
+    const navList = document.getElementById('navList');
     navList.classList.toggle('active');
   }
 });
