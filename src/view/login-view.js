@@ -31,8 +31,6 @@ export const viewLogin = () => {
   return loginDiv;
 };
 
-// console.log(viewLogin());
-
 // ------------------- Obtener y guardar datos del usuario ---------------------------- //
 const getUserInfo = () => {
   const currentUser = todo.currentUser();
@@ -62,17 +60,17 @@ document.addEventListener('click', (e) => {
         .userSignIn(email, password)
         .then((result) => {
           const hash = '#/mainPage';
+          //Si el correo está verificado ingresa a la página(mainPage)
           if (result.user.emailVerified) {
             window.location.hash = hash;
             console.log('verificado');
             getUserInfo();
           } else {
-            all.signOut;
+            //De lo contrario su sesión se mantiene cerrado
+            all.signOut; 
             const errorMessage = document.querySelector('#error-message');
             errorMessage.style.display = 'inline';
             errorMessage.textContent = `${result.user.displayName} por favor, realiza la verificación`;
-            
-            // alert(`${result.user.displayName} por favor, realiza la verificación`);
           }
         })
         .catch((error) => {
@@ -92,42 +90,6 @@ document.addEventListener('click', (e) => {
             errorMessage.textContent = 'El correo que ingresó no está registrado, por favor, regístrece';
             document.querySelector('#login-form').reset();
           }
-        });
-    };
-    login(email, password);
-  }
-});
-
-// ----------------------------- Inicio de sesión Google ------------------------------ //
-document.addEventListener('click', (e) => {
-  if (e.target.id === 'signin-btn') {
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
-    const login = (email, password) => {
-      all.userSignIn(email, password)
-        .then((result) => {
-          const hash = '#/mainPage';
-          if (result.user.emailVerified) {
-            window.location.hash = hash;
-            console.log('verificado');
-            getUserInfo();
-          } else {
-            all.signOut;
-            alert(`${result.user.displayName} por favor, realiza la verificación`);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          // const errorCode = error.code;
-          // if (errorCode === 'auth/invalid-email') {
-          //   alert('Por favor ingrese su usuario y contraseña');
-          // }
-          // if (errorCode === 'auth/wrong-password') {
-          //   alert('Contraseña incorrecta, inténtelo de nuevo');
-          // }
-          // if (errorCode === 'auth/user-not-found') {
-          //   alert('El correo que ingresó no está registrado, por favor, regístrece');
-          // }
         });
     };
     login(email, password);

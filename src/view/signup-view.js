@@ -87,7 +87,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
-//-------- Botón de Aceptar ----------//
+//-------------------- Botón de Aceptar del modal ------------------------//
 document.addEventListener('click', (e) => {
   if(e.target.className === 'modal-btn') {
     const modal = document.querySelector('.modal-container');

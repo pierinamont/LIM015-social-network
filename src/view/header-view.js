@@ -10,7 +10,7 @@ export const viewHeader = () => {
     <img class="logo-nav" src="../images/logo-horizontal(2).svg"></img>
     <ul class="ul-nav" id="navList">
         <li class="li-nav">
-            <a href ='/#/mainPage'>Inicio</a>
+            <a href ='/#/mainPage' id="init">Inicio</a>
         </li>
         <li class="li-nav"><a id="profile">Mi perfil</a>
         </li>
@@ -24,7 +24,6 @@ export const viewHeader = () => {
   headerNav.innerHTML = headerSection;
   return headerNav;
 };
-// console.log(viewHeader());
 
 // --------------------------- menú hamburguesa --------------------------- //
 document.addEventListener('click', (e) => {
@@ -53,10 +52,9 @@ document.addEventListener('click', (e) => {
 });
 
 // ingresando a la sesion de perfil//
-
-  document.addEventListener('click', (e) => {
-    if(e.target.id === 'profile') {
-           const hash = '#/profile';
-             window.location.hash = hash;
-           }
-         });
+document.addEventListener('click', (e) => {
+  if(e.target.id === 'profile') {
+    const hash = '#/profile';
+    window.location.hash = hash;
+  }
+});
