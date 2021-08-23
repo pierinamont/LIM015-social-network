@@ -140,11 +140,7 @@ const addEventLike = () => {
 // };
 const removePost = document.getElementsByClassName('close-img');
 document.addEventListener('click', (e) => {
-<<<<<<< HEAD
-  if (e.target.className  === 'delete-btn') {
-=======
   if (e.target.className === 'delete-btn') {
->>>>>>> f9496ad392351add3004572b46704c9f11ab3be9
     const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
     const post = db.collection('posts').doc(idPost);
     post.delete().then(() => {
