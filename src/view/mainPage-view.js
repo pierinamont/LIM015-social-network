@@ -296,4 +296,3 @@ document.addEventListener('click', (e) => {
     document.getElementById(`txtDescription-${idPost}`).style.display = 'inline';
   }
 });
-
