@@ -1,6 +1,5 @@
 // import * as firebase from "../firebase/firebase-login.js";
 import * as todo from '../firebase/firebase-config.js';
-
 const db = todo.firestore;
 
 export const viewMainPage = () => {
@@ -122,22 +121,7 @@ const addEventLike = () => {
   }
 };
 
-// -------------------- Eliminar posts ---------------------- //
-
-// const addEventDeletePOst = () => {
-//   for (let i = 0; i < removePost.length; i++) {
-//     removePost[i].addEventListener('click', (e) => {
-//       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
-//       const post = db.collection('posts').doc(idPost);
-//       post.delete().then(() => {
-//         console.log('Document successfully deleted!');
-//       })
-//         .catch((error) => {
-//           console.error('Error removing document: ', error);
-//         });
-//     });
-//   }
-// };
+// ------------------------------- Eliminar posts ----------------------------- //
 const removePost = document.getElementsByClassName('close-img');
 document.addEventListener('click', (e) => {
   if (e.target.className === 'delete-btn') {
@@ -149,14 +133,15 @@ document.addEventListener('click', (e) => {
       .catch((error) => {
         console.error('Error removing document: ', error);
       });
-    alert('eliminado');
   }
+
   if (e.target.className === 'cancel-btn') {
     const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
     const divConfir = document.getElementById(`deletePost-${idPost}`);
     divConfir.style.display = 'none';
   }
 });
+
 // función para editar post
 const editPost = document.getElementsByClassName('edit-img');
 const addEventEdit = () => {
@@ -164,10 +149,12 @@ const addEventEdit = () => {
     editPost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
       document.getElementById(`txteditPost-${idPost}`).style.display = 'block';
-      document.getElementById(`btneditPost-${idPost}`).style.display = 'block';
+      document.getElementById(`btn-container-${idPost}`).style.display = 'block';
+      document.getElementById(`txtDescription-${idPost}`).style.display = 'none';
     });
   }
 };
+
 const addEventDeletePOst = () => {
   for (let i = 0; i < removePost.length; i++) {
     removePost[i].addEventListener('click', (e) => {
@@ -178,10 +165,7 @@ const addEventDeletePOst = () => {
   }
 };
 
-
-// Función que trae la colección de datos para las publicaciones
-
-// const getPost = () => db.collection('posts').get();
+// -------------------- Trae colección de datos en tiempo real ---------------------- //
 const postInRealTime = (callback) => db.collection('posts').orderBy('day', 'desc').onSnapshot(callback);
 
 export const getPublish = () => {
@@ -219,10 +203,13 @@ export const getPublish = () => {
             <img class="close-img" src='../images/close-1.svg'>
           </i>
         </div>
-        <div class="description-div" >
-          <p>${doc.data().description}</p>
-      <input id='txteditPost-${doc.id}' class= 'editar' type='text' value = '${doc.data().description}' style="display: none"></input>
-      <button id='btneditPost-${doc.id}'class="save-edit-btn" style="display: none">Guardar</button>
+        <div class="description-div">
+          <p id='txtDescription-${doc.id}'>${doc.data().description}</p>
+          <input id='txteditPost-${doc.id}' class= 'editar' type='text' value = '${doc.data().description}' style="display: none"></input>
+          <div class="btn-container" id="btn-container-${doc.id}" style="display: none">
+            <button id='btneditPost-${doc.id}'class="save-edit-btn">Guardar</button>
+            <button id='btnCancelEdit-${doc.id}'class="cancel-edit-btn">Cancelar</button>
+          </div>
         </div>
         <div class="date-likes">
          <div class="likes-container">
@@ -234,15 +221,15 @@ export const getPublish = () => {
           </div>
         </div>
         <!----------- Modal para eliminar---------->
-    <div  style="display: none" id='deletePost-${doc.id}'>
-    <div class = 'delete'>
-      <p id='question-delete'>¿Eliminar post?</p>
-      <p id='message-delete'>Una vez ya eliminado no podras recuperar el post</p>
-      <button class='delete-btn'>Borrar</button>
-      <button class='cancel-btn'>Cancelar</button>
-     </div>
-    </div>
+      <div  style="display: none" id='deletePost-${doc.id}' class="delete-post">
+        <div class = 'delete'>
+          <p id='question-delete'>¿Eliminar post?</p>
+          <p id='message-delete'>Una vez ya eliminado no podras recuperar el post</p>
+          <button class='delete-btn'>Borrar</button>
+          <button class='cancel-btn'>Cancelar</button>
+        </div>
       </div>
+    </div>
       `;
     });
     addEventDeletePOst();
@@ -250,6 +237,29 @@ export const getPublish = () => {
     addEventEdit();
   });
 };
+
+// Función para editar post 
+function editar(idPost, newText) {
+  const post = db.collection('posts').doc(idPost);
+
+  // get trae el post
+  post.get().then((res) => {
+    if (res.exists) { // Aquí se valida si existe el doc
+      post.update({ // Aquí se actualiza
+        description: newText,
+      })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 
 // ------------------------------------------- Eventos  ----------------------------------------- //
 // Evento del botón "Publicar"
@@ -266,38 +276,24 @@ document.addEventListener('click', (e) => {
   }
 });
 
-function editar(idPost, newText) {
-  const post = db.collection('posts').doc(idPost);
-
-  // get trae eñ post, luego donde valida es en el 243 si existe el docuemento//
-  post.get().then((res) => {
-    if (res.exists) {
-      post.update({
-        description: newText,
-      })
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  })
-    .catch((error) => {
-      console.log(error);
-    });
-}
-
-// guardar publicacion//
-
-
+// Evento del botón guardar y cancelar //
 document.addEventListener('click', (e) => {
+  // botón guardar
   if (e.target.className === 'save-edit-btn') {
     const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
     console.log(idPost);
     const newValue = document.getElementById(`txteditPost-${idPost}`).value; // obtenemos el elemento//
     editar(idPost, newValue);
-    e.target.style.display = 'none';
+    document.getElementById(`btn-container-${idPost}`).style.display = 'none';
     document.getElementById(`txteditPost-${idPost}`).style.display = 'none';
+    document.getElementById(`txtDescription-${idPost}`).style.display = 'inline';
+  }
+  // botón cancelar
+  if (e.target.className === 'cancel-edit-btn') {
+    const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+    document.getElementById(`txteditPost-${idPost}`).style.display = 'none';
+    document.getElementById(`btn-container-${idPost}`).style.display = 'none';
+    document.getElementById(`txtDescription-${idPost}`).style.display = 'inline';
   }
 });
+
