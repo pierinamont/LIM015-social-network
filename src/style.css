@@ -733,7 +733,29 @@ body {
     /*fondo*/
     background-color: #f9f9f9;
     border-radius: 10px 10px 0px 0px;
-
+}
+.post-body .save-edit-btn{
+    width: 101px;
+    height: 35px;
+    left: 796px;
+    border-radius: 20px;
+    border: none;
+    font-size: 1.4rem;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background: #08CAB3;
+    cursor: pointer;
+}
+.description-div .editar{
+    border: none;
+    display: block;
+    width: 100px;
+    height: 30px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(229, 229, 229);
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 10px
 }
 
 .date-likes {
