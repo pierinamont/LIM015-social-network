@@ -1,9 +1,9 @@
-/*import * as todo from '../firebase/firebase-config.js';*/
+/* import * as todo from '../firebase/firebase-config.js'; */
 
 // const db = todo.firestore;
 
 export const viewProfile = () => {
-const profile = `
+  const profile = `
 <!-----------------perfil----------------->
 <div class = 'container-profile'>
   <div class = 'profile-date'>
@@ -23,12 +23,9 @@ const profile = `
           </div>
         </div>
         </div>
-<!----------- publicaciones------->
-
-
 `;
-const containerProfile = document.createElement('div');
-containerProfile.className = 'contentProfile';
-containerProfile.innerHTML = profile;
-return containerProfile;
+  const containerProfile = document.createElement('div');
+  containerProfile.className = 'contentProfile';
+  containerProfile.innerHTML = profile;
+  return containerProfile;
 };

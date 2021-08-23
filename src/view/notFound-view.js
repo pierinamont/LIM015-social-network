@@ -1,4 +1,3 @@
-
 export const viewNotFound = () => {
   const notFoundSection = `
     <div class="notFound-container">
