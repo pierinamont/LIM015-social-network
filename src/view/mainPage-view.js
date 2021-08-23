@@ -176,6 +176,7 @@ export const getPublish = () => {
       const uidUser = localStorage.getItem('uid');
       const arrayLikesPost = doc.data().likesUser;
       let likeMe = false;
+      let htmlOpDeleteUpdate  = '';
       let htmlCorazon;
       if (uidUser != null) {
         // userLikes: likes del usuario en sección
@@ -183,7 +184,15 @@ export const getPublish = () => {
         if (userLikes.length >= 1) {
           likeMe = true;
         }
+        if (uidUser === doc.data().user) {
+          htmlOpDeleteUpdate = `
+          <i>
+            <img class="edit-img" src=\'../images/edit3.svg\'>
+            <img class="close-img" src=\'../images/close-1.svg\'>
+          </i>`;
+          }
       }
+      
       if (likeMe === true) {
         htmlCorazon = '<img class="dislike like-post" src="../images/like2.svg">';
       } else {
@@ -198,10 +207,7 @@ export const getPublish = () => {
             <p class="name">${doc.data().name}</p>
             <p class="date">${doc.data().day}</p>
           </span>
-          <i>
-            <img class="edit-img" src='../images/edit3.svg'>
-            <img class="close-img" src='../images/close-1.svg'>
-          </i>
+          ${htmlOpDeleteUpdate}
         </div>
         <div class="description-div">
           <p id='txtDescription-${doc.id}'>${doc.data().description}</p>
@@ -248,12 +254,6 @@ function editar(idPost, newText) {
       post.update({ // Aquí se actualiza
         description: newText,
       })
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     }
   })
     .catch((error) => {
@@ -294,5 +294,5 @@ document.addEventListener('click', (e) => {
     document.getElementById(`txteditPost-${idPost}`).style.display = 'none';
     document.getElementById(`btn-container-${idPost}`).style.display = 'none';
     document.getElementById(`txtDescription-${idPost}`).style.display = 'inline';
-  }
+  } 
 });

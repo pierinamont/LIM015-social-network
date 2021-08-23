@@ -16,7 +16,7 @@ export const viewProfile = () => {
 <!-----------muro------------------>
 <div class = 'container-muro'>
   <div class= 'muro'>
-    <input class= 'input-muro' type= 'texto' placeholder='Crear Publicación><br>
+    <input class= 'input-muro' type= 'texto' placeholder='Crear Publicación'><br>
       <div class= 'container-publish-img'>
         <img src= '../images/picture.svg'>
           <input id='publish-btn2' type= button value='Publicar'>
