@@ -1,7 +1,5 @@
-import * as todo from './firebase-config.js';
-
-todo.firebaseInit;
-const auth = todo.auth;
+// import * as todo from './firebase-config.js';
+import { auth, providerG, providerF } from './firebase-config.js';
 
 // FUNCIÓN PARA REGISTRARSE
 export const userSignUp = (email, password) => auth.createUserWithEmailAndPassword(email, password);
@@ -10,10 +8,7 @@ export const userSignUp = (email, password) => auth.createUserWithEmailAndPasswo
 export const userSignIn = (email, password) => auth.signInWithEmailAndPassword(email, password);
 
 // FUNCIÓN CON GOOGLE
-export const googleLogIn = () => auth.signInWithPopup(todo.providerG);
+export const googleLogIn = () => auth.signInWithPopup(providerG);
 
 // FUNCIÓN CON FACEBOOK
-export const facebookLogin = () => auth.signInWithPopup(todo.providerF);
-
-// FUCIÓN PARA DETECTAR CAMBIOS EN LA AUTENTIFICACIÓN
-// export const authStateChange = auth.onAuthStateChanged;
+export const facebookLogin = () => auth.signInWithPopup(providerF);
