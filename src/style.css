@@ -85,24 +85,35 @@ body {
     margin-top: 50px;
 }
 
-.content-container .illustration {
+.content-container .div-h3-img {
     display: none;
 }
+.div-h3-img h2{
+    margin-bottom: 0px;
+    font-weight: 500;
+}
+.content-container .illustration {
+    width: 390px;
+    height: 390px;
+}
+
 
 @media (min-width: 1000px) {
-    .content-container .illustration {
+    .content-container .div-h3-img {
         display: inline;
-        width: 390px;
-        height: 390px;
         margin-left: 100px;
+        display: flex;
+        flex-direction: column;
+        width: 470px;
     }
+    
     .content-container .login-form {
         margin-right: 200px;
     }
 }
 
 @media (min-width: 1180px) {
-    .content-container .illustration {
+    .content-container .div-h3-img {
         margin-left: 200px;
     }
     .content-container .login-form {
@@ -891,7 +902,7 @@ body {
 
 
 
-
+/* 
 button {
     display: block;
     margin: 20px auto;
@@ -901,11 +912,11 @@ button {
     padding: 6px 10px;
     cursor: pointer;
 }
- 
-button:hover {
+  */
+/* button:hover {
     background: palevioletred;
     transition: all 0.2s;
-}
+} */
  
 .popup-wrapper {
     background: rgba(0, 0, 0, 0.5);
@@ -925,6 +936,7 @@ button:hover {
     margin: 10% auto;
     padding: 20px;
     position: relative;
+    border-radius: 10px;
 }
  
 .popup a {
@@ -948,4 +960,5 @@ button:hover {
     right: 15px;
     cursor: pointer;
     font-size: 1.5rem;
+    font-weight: bold;
 }

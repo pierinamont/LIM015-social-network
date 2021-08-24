@@ -6,14 +6,14 @@ const db = todo.firestore;
 export const viewMainPage = () => {
   const mainPageSection = `
 
-<div class="popup-wrapper" style="display:none;">
-  <div class="popup">
-      <div class="popup-close">X</div>
-      <div id="div-contenido-likes" class="popup-content">
+  <div class="popup-wrapper" style="display:none;">
+    <div class="popup">
+        <div class="popup-close">X</div>
+        <div id="div-contenido-likes" class="popup-content">
 
-      </div>
+        </div>
+    </div>
   </div>
-</div>
 
     <!----------------perfil---------------->
     <div class = 'profile-container'> 

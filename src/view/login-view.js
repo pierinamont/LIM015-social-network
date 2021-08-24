@@ -5,7 +5,10 @@ export const viewLogin = () => {
   const loginSection = `
     <!--SECCION PRINCIPAL DEL LOGIN-->
     <div class="content-container">
-        <img class="illustration" src="./images/dog-walking.svg" alt="">
+        <div class="div-h3-img">
+          <h2>Únete y forma parte de la <span style="font-weight: bold">comunidad</span> para <span  style="font-weight: bold">buscar</span>, <span  style="font-weight: bold">encontrar</span> y <span  style="font-weight: bold">adoptar</span> mascotas.</h2>
+          <img class="illustration" src="./images/dog-walking.svg" alt="">
+        </div>
         <form id="login-form">
                 <img class="logo" src="./images/petPlace.svg" alt="">
                 <p>¡Bienvenid@ Pet Lover!</p>
