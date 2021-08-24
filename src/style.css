@@ -887,3 +887,65 @@ body {
     margin-left: 13px;
     margin-top: 0px;
 }
+
+
+
+
+
+button {
+    display: block;
+    margin: 20px auto;
+    background: salmon;
+    color: white;
+    border: 0;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+ 
+button:hover {
+    background: palevioletred;
+    transition: all 0.2s;
+}
+ 
+.popup-wrapper {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+ 
+.popup {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    background: white;
+    margin: 10% auto;
+    padding: 20px;
+    position: relative;
+}
+ 
+.popup a {
+    background: salmon;
+    color: white;
+    text-decoration: none;
+    padding: 6px 10px;
+    margin: 30px auto;
+    display: block;
+    width: 50%;
+}
+ 
+.popup a:hover {
+    background: palevioletred;
+    transition: all 0.2s;
+}
+ 
+.popup-close {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 1.5rem;
+}

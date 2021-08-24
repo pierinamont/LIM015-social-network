@@ -5,6 +5,16 @@ const db = todo.firestore;
 
 export const viewMainPage = () => {
   const mainPageSection = `
+
+<div class="popup-wrapper" style="display:none;">
+  <div class="popup">
+      <div class="popup-close">X</div>
+      <div id="div-contenido-likes" class="popup-content">
+
+      </div>
+  </div>
+</div>
+
     <!----------------perfil---------------->
     <div class = 'profile-container'> 
       <div class="profile">
@@ -66,7 +76,7 @@ const getValues = () => {
   const day = Date.now();
   const objectoAccion = new Date(day);
 
-  if (inputTimeline.value !== 0) {
+  if (inputTimeline.value != 0) {
     return db.collection('posts').add({
       photo: localStorage.getItem('photo'),
       name: localStorage.getItem('name'),
@@ -141,12 +151,37 @@ document.addEventListener('click', (e) => {
     const divConfir = document.getElementById(`deletePost-${idPost}`);
     divConfir.style.display = 'none';
   }
+  if (e.target.className === 'mostrar-likes') {
+    const popup = document.querySelector('.popup-wrapper');
+    popup.style.display = 'block';
+    const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
+    const post = db.collection('posts').doc(idPost);
+
+    post.get().then((res) => {
+      if (res.exists) {
+        const arrayLikes = res.data().likesUser;
+        const divLikes = document.getElementById('div-contenido-likes');
+        //obtener la division donde va a pintar todos los likes
+        divLikes.innerHTML = '';
+        arrayLikes.forEach((elemento) => {
+          divLikes.innerHTML += `<h1>${elemento.userName}</h1> <br>`;
+        });
+      }
+    })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  if (e.target.className === 'popup-close') {
+    const popup = document.querySelector('.popup-wrapper');
+    popup.style.display = 'none';
+  }
 });
 
 // función para editar post
 const editPost = document.getElementsByClassName('edit-img');
 const addEventEdit = () => {
-  for (let i = 0; i < editPost.length; i + 1) {
+  for (let i = 0; i < editPost.length; i++) {
     editPost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
       document.getElementById(`txteditPost-${idPost}`).style.display = 'block';
@@ -177,7 +212,7 @@ export const getPublish = () => {
       const uidUser = localStorage.getItem('uid');
       const arrayLikesPost = doc.data().likesUser;
       let likeMe = false;
-      let htmlOpDeleteUpdate  = '';
+      let htmlOpDeleteUpdate = '';
       let htmlCorazon;
       if (uidUser != null) {
         // userLikes: likes del usuario en sección
@@ -191,9 +226,9 @@ export const getPublish = () => {
             <img class="edit-img" src=\'../images/edit3.svg\'>
             <img class="close-img" src=\'../images/close-1.svg\'>
           </i>`;
-          }
+        }
       }
-      
+
       if (likeMe === true) {
         htmlCorazon = '<img class="dislike like-post" src="../images/like2.svg">';
       } else {
@@ -224,7 +259,7 @@ export const getPublish = () => {
           <img class="send-post" src='../images/send.svg' >
          </div>
           <div class="likes-counter">
-             <span></span><p id="p-likes">${arrayLikesPost.length} Likes</p>
+             <span></span><a id="p-likes" class="mostrar-likes" style="cursor:pointer;">${arrayLikesPost.length} Likes</a>
           </div>
         </div>
         <!----------- Modal para eliminar---------->
@@ -254,7 +289,7 @@ function editar(idPost, newText) {
     if (res.exists) { // Aquí se valida si existe el doc
       post.update({ // Aquí se actualiza
         description: newText,
-      })
+      });
     }
   })
     .catch((error) => {
@@ -295,5 +330,5 @@ document.addEventListener('click', (e) => {
     document.getElementById(`txteditPost-${idPost}`).style.display = 'none';
     document.getElementById(`btn-container-${idPost}`).style.display = 'none';
     document.getElementById(`txtDescription-${idPost}`).style.display = 'inline';
-  } 
+  }
 });

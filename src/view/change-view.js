@@ -20,14 +20,15 @@ const changeView = (route) => {
     { return loginSection.appendChild(components.signup()); }
     case '#/mainPage':
     { metodosPublicos.mGetPublish();
-      return headerBarNav.appendChild(components.header()) && mainPage.appendChild(components.mainPage()); }
+      return headerBarNav.appendChild(components.header())
+                                      && mainPage.appendChild(components.mainPage()) }
     case '#/profile':
-    { return headerBarNav.appendChild(components.header()) && mainProfile.appendChild(components.profile()); }
+    { return headerBarNav.appendChild(components.header())
+                                      && mainProfile.appendChild(components.profile()); }
 
     default:
     { return notFound.appendChild(components.notFound()); }
   }
-  console.log(route);
 };
 
 export { changeView };

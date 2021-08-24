@@ -12,7 +12,6 @@ const components = {
   mainPage: viewMainPage,
   profile: viewProfile,
   notFound: viewNotFound,
-
 };
 const metodosPublicos = {
   mGetPublish: getPublish,
