@@ -902,22 +902,7 @@ body {
 
 
 
-/* 
-button {
-    display: block;
-    margin: 20px auto;
-    background: salmon;
-    color: white;
-    border: 0;
-    padding: 6px 10px;
-    cursor: pointer;
-}
-  */
-/* button:hover {
-    background: palevioletred;
-    transition: all 0.2s;
-} */
- 
+
 .popup-wrapper {
     background: rgba(0, 0, 0, 0.5);
     position: fixed;
