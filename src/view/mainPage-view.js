@@ -71,13 +71,12 @@ export const viewMainPage = () => {
 
 // -------------------- Envia valores de los inputs a Firebase ---------------------- //
 
-const getValues = () => {
+const sendValues = () => {
   const inputTimeline = document.querySelector('.input-timeline');
   const day = Date.now();
   const objectoAccion = new Date(day);
-
-  if (inputTimeline.value != 0) {
-    return db.collection('posts').add({
+  if (inputTimeline.value.length > 0) {
+    db.collection('posts').add({
       photo: localStorage.getItem('photo'),
       name: localStorage.getItem('name'),
       description: inputTimeline.value,
@@ -99,7 +98,7 @@ const getValues = () => {
 // -------------------- Likes de usuarios ---------------------- //
 const likePost = document.getElementsByClassName('like-post');
 const addEventLike = () => {
-  for (let i = 0; i < likePost.length; i++) {
+  for (let i = 0; i < likePost.length; i += 1) {
     likePost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
       const post = db.collection('posts').doc(idPost);
@@ -161,7 +160,7 @@ document.addEventListener('click', (e) => {
       if (res.exists) {
         const arrayLikes = res.data().likesUser;
         const divLikes = document.getElementById('div-contenido-likes');
-        //obtener la division donde va a pintar todos los likes
+        // obtener la division donde va a pintar todos los likes
         divLikes.innerHTML = '';
         arrayLikes.forEach((elemento) => {
           divLikes.innerHTML += `<h1>${elemento.userName}</h1> <br>`;
@@ -302,12 +301,15 @@ function editar(idPost, newText) {
 document.addEventListener('click', (e) => {
   if (e.target.id === 'publish-btn') {
     const inputTimeline = document.querySelector('.input-timeline');
-    getValues().then(() => {
-      postInRealTime();
-    })
-      .catch((error) => {
-        console.log(error);
-      });
+    sendValues();
+
+    // sendValues().then((resolve) => {
+    //  console.log(resolve);
+    //   postInRealTime();
+    // })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
     inputTimeline.value = '';
   }
 });
