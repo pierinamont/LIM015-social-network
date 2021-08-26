@@ -29,7 +29,7 @@ export const viewMainPage = () => {
       <div class= 'timeline'>
         <input class='input-timeline' type='text' placeholder='Comparte algo'><br>
         <div class= 'container-btn'>
-          <img src='../images/picture.svg'>
+          <img class="imgpicture" src='../images/picture.svg'>
           <input id="publish-btn" type=button value='Publicar'>
         </div>
       </div>
@@ -71,13 +71,12 @@ export const viewMainPage = () => {
 
 // -------------------- Envia valores de los inputs a Firebase ---------------------- //
 
-const getValues = () => {
+const sendValues = () => {
   const inputTimeline = document.querySelector('.input-timeline');
   const day = Date.now();
   const objectoAccion = new Date(day);
-
-  if (inputTimeline.value != 0) {
-    return db.collection('posts').add({
+  if (inputTimeline.value.length > 0) {
+    db.collection('posts').add({
       photo: localStorage.getItem('photo'),
       name: localStorage.getItem('name'),
       description: inputTimeline.value,
@@ -92,14 +91,13 @@ const getValues = () => {
       .catch((error) => {
         console.log(error);
       });
-  }
-  alert('Por favor, llena los campos');
+  } else alert('Por favor, llena los campos');
 };
 
 // -------------------- Likes de usuarios ---------------------- //
 const likePost = document.getElementsByClassName('like-post');
 const addEventLike = () => {
-  for (let i = 0; i < likePost.length; i++) {
+  for (let i = 0; i < likePost.length; i += 1) {
     likePost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
       const post = db.collection('posts').doc(idPost);
@@ -161,7 +159,7 @@ document.addEventListener('click', (e) => {
       if (res.exists) {
         const arrayLikes = res.data().likesUser;
         const divLikes = document.getElementById('div-contenido-likes');
-        //obtener la division donde va a pintar todos los likes
+        // obtener la division donde va a pintar todos los likes
         divLikes.innerHTML = '';
         arrayLikes.forEach((elemento) => {
           divLikes.innerHTML += `<h1>${elemento.userName}</h1> <br>`;
@@ -181,7 +179,7 @@ document.addEventListener('click', (e) => {
 // función para editar post
 const editPost = document.getElementsByClassName('edit-img');
 const addEventEdit = () => {
-  for (let i = 0; i < editPost.length; i++) {
+  for (let i = 0; i < editPost.length; i += 1) {
     editPost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
       document.getElementById(`txteditPost-${idPost}`).style.display = 'block';
@@ -192,7 +190,7 @@ const addEventEdit = () => {
 };
 
 const addEventDeletePOst = () => {
-  for (let i = 0; i < removePost.length; i++) {
+  for (let i = 0; i < removePost.length; i += 1) {
     removePost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
       const divConfir = document.getElementById(`deletePost-${idPost}`); // obtenemos el div confirmacion eliminacion del post
@@ -223,8 +221,8 @@ export const getPublish = () => {
         if (uidUser === doc.data().user) {
           htmlOpDeleteUpdate = `
           <i>
-            <img class="edit-img" src=\'../images/edit3.svg\'>
-            <img class="close-img" src=\'../images/close-1.svg\'>
+            <img class="edit-img" src='../images/edit3.svg'>
+            <img class="close-img" src='../images/close-1.svg'>
           </i>`;
         }
       }
@@ -302,12 +300,15 @@ function editar(idPost, newText) {
 document.addEventListener('click', (e) => {
   if (e.target.id === 'publish-btn') {
     const inputTimeline = document.querySelector('.input-timeline');
-    getValues().then(() => {
-      postInRealTime();
-    })
-      .catch((error) => {
-        console.log(error);
-      });
+    sendValues();
+
+    // sendValues().then((resolve) => {
+    //  console.log(resolve);
+    //   postInRealTime();
+    // })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
     inputTimeline.value = '';
   }
 });

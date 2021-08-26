@@ -39,11 +39,12 @@ export const viewSignup = () => {
 document.addEventListener('click', (e) => {
   if (e.target.id === 'signup-btn') {
     const name = document.querySelector('#signup-name').value;
-    const email = document.querySelector('#signup-email').value;
+    let email = document.querySelector('#signup-email').value;
     const password = document.querySelector('#signup-password').value;
+    const message = document.getElementById('message');
 
     all.userSignUp(email, password, name).then((result) => {
-      const email = result.user.email;
+      email = result.user.email;
       console.log(email);
       console.log('registro exitoso');
 
@@ -56,7 +57,7 @@ document.addEventListener('click', (e) => {
       result.user.sendEmailVerification(configuration).catch((error) => {
         console.log(error);
       });
-      all.signOut;
+      all.signOut();
       document.querySelector('#signup-form').reset();
       const modal = document.querySelector('.modal-container');
       modal.style.display = 'flex';
@@ -71,14 +72,12 @@ document.addEventListener('click', (e) => {
         console.log(error);
         const errorCode = error.code;
         if (errorCode === 'auth/invalid-email') {
-          errorMessage.textContent = 'Por favor, completa los campos';
+          errorMessage.textContent = ' Por favor, completa los campos ';
           document.querySelector('#signup-form').reset();
-          
         }
         if (errorCode === 'auth/email-already-in-use') {
           errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
           document.querySelector('#signup-form').reset();
-         
         }
         if (errorCode === 'auth/weak-password') {
           errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
@@ -87,10 +86,10 @@ document.addEventListener('click', (e) => {
   }
 });
 
-//-------------------- Botón de Aceptar del modal ------------------------//
+// -------------------- Botón de Aceptar del modal ------------------------//
 document.addEventListener('click', (e) => {
-  if(e.target.className === 'modal-btn') {
+  if (e.target.className === 'modal-btn') {
     const modal = document.querySelector('.modal-container');
     modal.style.display = 'none';
   }
-})
+});

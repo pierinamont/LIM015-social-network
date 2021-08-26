@@ -1,10 +1,3 @@
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 html { 
 font-size: 62.5%;
 font-family: 'Poppins', sans-serif;
@@ -37,7 +30,6 @@ body {
     border-radius: 5px;
     position: absolute;
     top: 20px;
-    margin: 0 auto;
     left: 0;
     right: 0;
   }
@@ -100,7 +92,6 @@ body {
 
 @media (min-width: 1000px) {
     .content-container .div-h3-img {
-        display: inline;
         margin-left: 100px;
         display: flex;
         flex-direction: column;
@@ -223,13 +214,6 @@ body {
     color: var(--settings-color);
 }
 
-#login-form #error-message {
-    display: inline;
-    width: 264px;
-    color: red;
-    margin-top: 0px;
-    font-weight: 500;
-}
 
 
 /**************** SECCION PARA REGISTRARSE ***************/
@@ -265,14 +249,14 @@ body {
 #signup-container .labels-container label { 
     margin-bottom: 6px;
 }
-.labels-container #error-message {
+ #error-message {
     display: inline;
     width: 264px;
     color: red;
     margin-top: 0px;
     font-weight: 500;
 }
-#signup-form button {
+#signup-form #signup-btn{
     width: 164px;
     height: 40px;
     background-color: var(--btn-color);
@@ -332,7 +316,7 @@ body {
     cursor: pointer;
     display: flex;
 }
-.li-nav img {
+.li-nav .signOutImg {
     margin-right: 5px;
 }
 .menu-hamburger {
@@ -422,7 +406,7 @@ body {
     width: 80%;
     margin: 0 auto;
 }
-.container-btn img {
+.container-btn .imgpicture {
     cursor: pointer;
     width: 34px;
 }
@@ -522,11 +506,7 @@ body {
     height: 40px;
     border-radius: 100%;
 }
-.img-name i {
-    width: 17%;
-    display: flex;
-    justify-content: flex-end;
-}
+
 
 .campaign-container {
     display: none;
@@ -548,7 +528,6 @@ body {
     display: none;
     background-color: var(--logo-color);
     border-radius: 15px;
-    padding: 10px;
     box-shadow: 0px 0px 4px 1px rgb(0 0 0 / 10%);
     width: 100%;
     padding: 20px;
@@ -726,8 +705,10 @@ body {
     margin-top: 0px;
 }
 .img-name i {
-    align-items: center;
+    width: 17%;
     display: flex;
+    justify-content: flex-end;
+    align-items: center;
     margin-left: 35px; /*Corregir*/
 }
 .img-name i .edit-img {
@@ -784,10 +765,7 @@ body {
     box-sizing: border-box;
     border-radius: 10px;
     margin-bottom: 10px;
-    border: none;
     background-color: #f9f9f9;
-}
-.description-div .editar {
     font-family: 'Poppins', sans-serif;
 }
 .description-div .btn-container {
