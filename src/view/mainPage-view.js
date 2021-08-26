@@ -96,6 +96,7 @@ const getValues = () => {
   alert('Por favor, llena los campos');
 };
 
+
 // -------------------- Likes de usuarios ---------------------- //
 const likePost = document.getElementsByClassName('like-post');
 const addEventLike = () => {
