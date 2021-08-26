@@ -15,7 +15,7 @@ export const viewHeader = () => {
         <li class="li-nav"><a id="profile">Mi perfil</a>
         </li>
         <li class="li-nav">
-        <img src="../images/sign-out.svg"></img><a id="signOut">Cerrar Sesión</a>
+         <img class="signOutImg" src="../images/sign-out.svg"></img><a id="signOut">Cerrar Sesión</a>
         </li>
     </ul>
 `;
@@ -36,7 +36,7 @@ document.addEventListener('click', (e) => {
 // --------------------------- Cerrar sesión --------------------------- //
 document.addEventListener('click', (e) => {
   if (e.target.id === 'signOut') {
-    todo.signOut
+    todo.signOut()
       .then(() => {
         console.log('cerraste sesión');
         const hash = '#/login';

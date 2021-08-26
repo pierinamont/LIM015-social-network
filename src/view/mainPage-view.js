@@ -29,7 +29,7 @@ export const viewMainPage = () => {
       <div class= 'timeline'>
         <input class='input-timeline' type='text' placeholder='Comparte algo'><br>
         <div class= 'container-btn'>
-          <img src='../images/picture.svg'>
+          <img class="imgpicture" src='../images/picture.svg'>
           <input id="publish-btn" type=button value='Publicar'>
         </div>
       </div>
@@ -91,8 +91,7 @@ const sendValues = () => {
       .catch((error) => {
         console.log(error);
       });
-  }
-  alert('Por favor, llena los campos');
+  } else alert('Por favor, llena los campos');
 };
 
 // -------------------- Likes de usuarios ---------------------- //
@@ -180,7 +179,7 @@ document.addEventListener('click', (e) => {
 // función para editar post
 const editPost = document.getElementsByClassName('edit-img');
 const addEventEdit = () => {
-  for (let i = 0; i < editPost.length; i++) {
+  for (let i = 0; i < editPost.length; i += 1) {
     editPost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
       document.getElementById(`txteditPost-${idPost}`).style.display = 'block';
@@ -191,7 +190,7 @@ const addEventEdit = () => {
 };
 
 const addEventDeletePOst = () => {
-  for (let i = 0; i < removePost.length; i++) {
+  for (let i = 0; i < removePost.length; i += 1) {
     removePost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
       const divConfir = document.getElementById(`deletePost-${idPost}`); // obtenemos el div confirmacion eliminacion del post
@@ -222,8 +221,8 @@ export const getPublish = () => {
         if (uidUser === doc.data().user) {
           htmlOpDeleteUpdate = `
           <i>
-            <img class="edit-img" src=\'../images/edit3.svg\'>
-            <img class="close-img" src=\'../images/close-1.svg\'>
+            <img class="edit-img" src='../images/edit3.svg'>
+            <img class="close-img" src='../images/close-1.svg'>
           </i>`;
         }
       }

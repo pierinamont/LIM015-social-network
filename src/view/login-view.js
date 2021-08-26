@@ -54,48 +54,50 @@ const getUserInfo = () => {
 };
 
 // ----------------------------- Inicio de sesión ------------------------------ //
+
+export const loginIn = (email, password) => {
+  all
+    .userSignIn(email, password)
+    .then((result) => {
+      const hash = '#/mainPage';
+      // Si el correo está verificado ingresa a la página(mainPage)
+      if (result.user.emailVerified) {
+        window.location.hash = hash;
+        console.log('verificado');
+        getUserInfo();
+      } else {
+        // De lo contrario su sesión se mantiene cerrado
+        all.signOut();
+        const errorMessage = document.querySelector('#error-message');
+        errorMessage.style.display = 'inline';
+        errorMessage.textContent = `${result.user.displayName} por favor, realiza la verificación`;
+      }
+    })
+    .catch((error) => {
+      const errorMessage = document.querySelector('#error-message');
+      errorMessage.style.display = 'inline';
+      console.log(error);
+      const errorCode = error.code;
+      if (errorCode === 'auth/invalid-email') {
+        errorMessage.textContent = 'Por favor ingrese su usuario y contraseña';
+        document.querySelector('#login-form').reset();
+      }
+      if (errorCode === 'auth/wrong-password') {
+        errorMessage.textContent = 'Contraseña incorrecta, inténtelo de nuevo';
+        document.querySelector('#login-form').reset();
+      }
+      if (errorCode === 'auth/user-not-found') {
+        errorMessage.textContent = 'El correo que ingresó no está registrado, por favor, regístrece';
+        document.querySelector('#login-form').reset();
+      }
+    });
+};
+
 document.addEventListener('click', (e) => {
   if (e.target.id === 'signin-btn') {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
-    const login = (email, password) => {
-      all
-        .userSignIn(email, password)
-        .then((result) => {
-          const hash = '#/mainPage';
-          //Si el correo está verificado ingresa a la página(mainPage)
-          if (result.user.emailVerified) {
-            window.location.hash = hash;
-            console.log('verificado');
-            getUserInfo();
-          } else {
-            //De lo contrario su sesión se mantiene cerrado
-            all.signOut; 
-            const errorMessage = document.querySelector('#error-message');
-            errorMessage.style.display = 'inline';
-            errorMessage.textContent = `${result.user.displayName} por favor, realiza la verificación`;
-          }
-        })
-        .catch((error) => {
-          const errorMessage = document.querySelector('#error-message');
-          errorMessage.style.display = 'inline';
-          console.log(error);
-          const errorCode = error.code;
-          if (errorCode === 'auth/invalid-email') {
-            errorMessage.textContent = 'Por favor ingrese su usuario y contraseña';
-            document.querySelector('#login-form').reset();
-          }
-          if (errorCode === 'auth/wrong-password') {
-            errorMessage.textContent = 'Contraseña incorrecta, inténtelo de nuevo';
-            document.querySelector('#login-form').reset();
-          }
-          if (errorCode === 'auth/user-not-found') {
-            errorMessage.textContent = 'El correo que ingresó no está registrado, por favor, regístrece';
-            document.querySelector('#login-form').reset();
-          }
-        });
-    };
-    login(email, password);
+    loginIn(email, password);
   }
 });
 
@@ -104,8 +106,7 @@ document.addEventListener('click', (e) => {
   if (e.target.id === 'gmail-btn') {
     all
       .googleLogIn()
-      .then((result) => {
-        // console.log(result);
+      .then(() => {
         getUserInfo();
         const hash = '#/mainPage';
         window.location.hash = hash;
