@@ -21,7 +21,7 @@ const changeView = (route) => {
     case '#/mainPage':
     { metodosPublicos.mGetPublish();
       return headerBarNav.appendChild(components.header())
-                                      && mainPage.appendChild(components.mainPage()) }
+                                      && mainPage.appendChild(components.mainPage()); }
     case '#/profile':
     { return headerBarNav.appendChild(components.header())
                                       && mainProfile.appendChild(components.profile()); }
