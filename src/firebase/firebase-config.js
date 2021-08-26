@@ -13,7 +13,7 @@ export const signOut = () => firebase.auth().signOut();
 export const currentUser = () => firebase.auth().currentUser;
 
 // Nos permite conectar con google
-export const providerG = new firebase.auth.GoogleAuthProvider();
+// export const providerG = new firebase.auth.GoogleAuthProvider();
 
 // Nos permite conectar con facebook
-export const providerF = new firebase.auth.FacebookAuthProvider();
+// export const providerF = new firebase.auth.FacebookAuthProvider();

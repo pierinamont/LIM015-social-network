@@ -1,8 +1,10 @@
 // import * as mocks from '../src/view/mocks.js';
+import {} from '../src/firebase/prueba.js';
 import { loginIn } from '../src/view/login-view.js';
 
+console.log(loginIn);
 // MockFirebase.override();
-const firebaseMock = require('firebase-mock');
+// const firebaseMock = require('firebase-mock');
 
 // const mockauth = new firebasemock.MockAuthentication();
 // const mockdatabase = new firebasemock.MockFirebase();
@@ -24,20 +26,33 @@ const firebaseMock = require('firebase-mock');
 // );
 
 // mocksdk.database().flush();
-global.firebase = firebaseMock.MockFirebaseSdk(
-  () => null,
-  // () => mockauth,
-);
+// global.firebase = firebaseMock.MockFirebaseSdk(
+//   () => null,
+//   // () => mockauth,
+// );
 
 // const mockauth = new firebaseMock.MockFirebase();
 // mockauth.autoFlush();
 
-describe('Inicio de sesión user password', () => {
-  it('deberí iniciar sesió con email password', () => loginIn('user@gmail.com', '123456')
+describe('loginInn', () => {
+  // beforeEach(() => {
+  //   global.firebase = {
+  //     auth: () => {},
+  //   };
+  // });
+
+  it('debería iniciar sesión con email password', () => loginIn('user@gmail.com', '123456')
     .then((result) => {
       expect(result.email).toBe('user@gmail.com');
     }));
 });
+
+// describe('Inicio de sesión user password', () => {
+//   it('deberí iniciar sesió con email password', () => loginIn('user@gmail.com', '123456')
+//     .then((result) => {
+//       expect(result.email).toBe('user@gmail.com');
+//     }));
+// });
 
 // const MockFirebase = require('mockfirebase').MockFirebase;
 
