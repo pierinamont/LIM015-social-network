@@ -1,5 +1,3 @@
-import * as todo from '../firebase/firebase-config.js';
-
 export const viewHeader = () => {
   const headerSection = `
     <div class="menu-hamburger" id="toggle-button">
@@ -36,7 +34,7 @@ document.addEventListener('click', (e) => {
 // --------------------------- Cerrar sesión --------------------------- //
 document.addEventListener('click', (e) => {
   if (e.target.id === 'signOut') {
-    todo.signOut()
+    firebase.auth().signOut()
       .then(() => {
         console.log('cerraste sesión');
         const hash = '#/login';

@@ -2,7 +2,6 @@
 import {} from '../src/firebase/prueba.js';
 import { loginIn } from '../src/view/login-view.js';
 
-console.log(loginIn);
 // MockFirebase.override();
 // const firebaseMock = require('firebase-mock');
 
