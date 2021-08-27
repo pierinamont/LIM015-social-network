@@ -1,6 +1,3 @@
-import * as todo from '../firebase/firebase-config.js';
-import * as all from '../firebase/firebase-login.js';
-
 export const viewLogin = () => {
   const loginSection = `
     <!--SECCION PRINCIPAL DEL LOGIN-->
@@ -36,7 +33,7 @@ export const viewLogin = () => {
 
 // ------------------- Obtener y guardar datos del usuario ---------------------------- //
 const getUserInfo = () => {
-  const currentUser = todo.currentUser();
+  const currentUser = firebase.auth().currentUser;
 
   // Obtener la info del usuario
   const uid = currentUser.uid;
@@ -56,8 +53,7 @@ const getUserInfo = () => {
 // ----------------------------- Inicio de sesión ------------------------------ //
 
 export const loginIn = (email, password) => {
-  all
-    .userSignIn(email, password)
+  firebase.auth().signInWithEmailAndPassword(email, password)
     .then((result) => {
       const hash = '#/mainPage';
       // Si el correo está verificado ingresa a la página(mainPage)
@@ -67,7 +63,7 @@ export const loginIn = (email, password) => {
         getUserInfo();
       } else {
         // De lo contrario su sesión se mantiene cerrado
-        all.signOut();
+        firebase.auth().signOut();
         const errorMessage = document.querySelector('#error-message');
         errorMessage.style.display = 'inline';
         errorMessage.textContent = `${result.user.displayName} por favor, realiza la verificación`;
@@ -102,33 +98,40 @@ document.addEventListener('click', (e) => {
 });
 
 // ----------------------------- Inicio de sesión Google ------------------------------ //
+const signInGoogle = () => {
+  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    .then(() => {
+      getUserInfo();
+      const hash = '#/mainPage';
+      window.location.hash = hash;
+    })
+    .catch((error) => {
+      console.log(error);
+      console.log('no funciona');
+    });
+};
+
 document.addEventListener('click', (e) => {
   if (e.target.id === 'gmail-btn') {
-    all
-      .googleLogIn()
-      .then(() => {
-        getUserInfo();
-        const hash = '#/mainPage';
-        window.location.hash = hash;
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log('no funciona');
-      });
+    signInGoogle();
   }
 });
 
 // --------------------------- Inicio de sesión Facebook --------------------------- //
+
+const signInFacebook = () => {
+  firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
+    .then(() => {
+      getUserInfo();
+      const hash = '#/mainPage';
+      window.location.hash = hash;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 document.addEventListener('click', (e) => {
   if (e.target.id === 'facebook-btn') {
-    all.facebookLogin()
-      .then(() => {
-        getUserInfo();
-        const hash = '#/mainPage';
-        window.location.hash = hash;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    signInFacebook();
   }
 });
