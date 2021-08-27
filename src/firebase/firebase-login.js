@@ -1,5 +1,5 @@
 // import * as todo from './firebase-config.js';
-import { auth, providerG, providerF } from './firebase-config.js';
+import { auth } from './firebase-config.js';
 
 // FUNCIÓN PARA REGISTRARSE
 export const userSignUp = (email, password) => auth.createUserWithEmailAndPassword(email, password);
@@ -8,7 +8,11 @@ export const userSignUp = (email, password) => auth.createUserWithEmailAndPasswo
 export const userSignIn = (email, password) => auth.signInWithEmailAndPassword(email, password);
 
 // FUNCIÓN CON GOOGLE
-export const googleLogIn = () => auth.signInWithPopup(providerG);
+export const googleLogIn = () => {
+  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+};
 
 // FUNCIÓN CON FACEBOOK
-export const facebookLogin = () => auth.signInWithPopup(providerF);
+export const facebookLogin = () => {
+  firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider());
+};
