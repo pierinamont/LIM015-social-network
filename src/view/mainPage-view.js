@@ -1,7 +1,7 @@
 // import * as firebase from "../firebase/firebase-login.js";
 import * as todo from '../firebase/firebase-config.js';
 
-const db = todo.firestore;
+const db = firebase.firestore();
 
 export const viewMainPage = () => {
   const mainPageSection = `
