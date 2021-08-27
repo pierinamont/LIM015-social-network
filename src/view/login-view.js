@@ -93,42 +93,42 @@ export const loginIn = (email, password) => {
     });
 };
 
-// document.addEventListener('click', (e) => {
-//   if (e.target.id === 'signin-btn') {
-//     const email = document.querySelector('#email').value;
-//     const password = document.querySelector('#password').value;
-//     loginIn(email, password);
-//   }
-// });
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'signin-btn') {
+    const email = document.querySelector('#email').value;
+    const password = document.querySelector('#password').value;
+    loginIn(email, password);
+  }
+});
 
 // ----------------------------- Inicio de sesión Google ------------------------------ //
-// document.addEventListener('click', (e) => {
-//   if (e.target.id === 'gmail-btn') {
-//     all
-//       .googleLogIn()
-//       .then(() => {
-//         getUserInfo();
-//         const hash = '#/mainPage';
-//         window.location.hash = hash;
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//         console.log('no funciona');
-//       });
-//   }
-// });
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'gmail-btn') {
+    all
+      .googleLogIn()
+      .then(() => {
+        getUserInfo();
+        const hash = '#/mainPage';
+        window.location.hash = hash;
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log('no funciona');
+      });
+  }
+});
 
 // --------------------------- Inicio de sesión Facebook --------------------------- //
-// document.addEventListener('click', (e) => {
-//   if (e.target.id === 'facebook-btn') {
-//     all.facebookLogin()
-//       .then(() => {
-//         getUserInfo();
-//         const hash = '#/mainPage';
-//         window.location.hash = hash;
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   }
-// });
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'facebook-btn') {
+    all.facebookLogin()
+      .then(() => {
+        getUserInfo();
+        const hash = '#/mainPage';
+        window.location.hash = hash;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+});
