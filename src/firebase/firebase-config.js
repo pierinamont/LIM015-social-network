@@ -1,5 +1,3 @@
-// Your web app's Firebase configuration
-
 // Se agrega el auth => Nos ayuda a enviar los datos a Firebase
 export const auth = firebase.auth();
 
