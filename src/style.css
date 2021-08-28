@@ -256,7 +256,7 @@ body {
     margin-top: 0px;
     font-weight: 500;
 }
-#signup-form #signup-btn{
+#signup-form #signup-btn, #signup-btn-cancel{
     width: 164px;
     height: 40px;
     background-color: var(--btn-color);
@@ -268,7 +268,10 @@ body {
     font-weight: bold;
     cursor: pointer;
 }
-#signup-form button:hover {
+#signup-form #signup-btn:hover  {
+    background-color: var( --settings-color);
+}
+#signup-form #signup-btn-cancel:hover{
     background-color: var( --settings-color);
 }
 #signup-form #sign-in {

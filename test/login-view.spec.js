@@ -1,6 +1,7 @@
 // import * as mocks from '../src/view/mocks.js';
 import {} from '../src/firebase/prueba.js';
-import { loginIn } from '../src/view/login-view.js';
+// import { loginIn } from '../src/view/login-view.js';
+import { signup } from '../src/view/signup-view.js';
 
 // MockFirebase.override();
 // const firebaseMock = require('firebase-mock');
@@ -33,16 +34,16 @@ import { loginIn } from '../src/view/login-view.js';
 // const mockauth = new firebaseMock.MockFirebase();
 // mockauth.autoFlush();
 
-describe('loginInn', () => {
+describe('signup', () => {
   // beforeEach(() => {
   //   global.firebase = {
   //     auth: () => {},
   //   };
   // });
 
-  it('debería iniciar sesión con email password', () => loginIn('user@gmail.com', '123456')
+  it('debería registrarse', () => signup('pepita', 'pepita@gmail.com', '123456')
     .then((result) => {
-      expect(result.email).toBe('user@gmail.com');
+      expect(result.email.password).toBe('user@gmail.com');
     }));
 });
 
