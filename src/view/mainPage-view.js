@@ -1,6 +1,4 @@
-// import * as firebase from "../firebase/firebase-login.js";
-
-const db = firebase.firestore();
+import { sendValues } from './funciones/funciones-firebase.js';
 
 export const viewMainPage = () => {
   const mainPageSection = `
@@ -68,32 +66,9 @@ export const viewMainPage = () => {
   return container;
 };
 
-// -------------------- Envia valores de los inputs a Firebase ---------------------- //
-
-const sendValues = () => {
-  const inputTimeline = document.querySelector('.input-timeline');
-  const day = Date.now();
-  const objectoAccion = new Date(day);
-  if (inputTimeline.value.length > 0) {
-    db.collection('posts').add({
-      photo: localStorage.getItem('photo'),
-      name: localStorage.getItem('name'),
-      description: inputTimeline.value,
-      day: objectoAccion.toLocaleString(),
-      user: localStorage.getItem('uid'),
-      likesUser: [],
-    })
-      .then((docRef) => {
-        console.log(docRef);
-        console.log('Documento escrito con el ID: ', docRef.id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  } else alert('Por favor, llena los campos');
-};
-
 // -------------------- Likes de usuarios ---------------------- //
+const db = firebase.firestore();
+
 const likePost = document.getElementsByClassName('like-post');
 const addEventLike = () => {
   for (let i = 0; i < likePost.length; i += 1) {

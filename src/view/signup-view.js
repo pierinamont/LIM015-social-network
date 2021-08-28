@@ -1,3 +1,5 @@
+import { signup } from './funciones/funciones-firebase.js';
+
 export const viewSignup = () => {
   const signupSection = `
     <div class="modal-container" style="display: none">
@@ -33,65 +35,12 @@ export const viewSignup = () => {
   loginDiv.innerHTML = signupSection;
   return loginDiv;
 };
-
 // ----------------------------- evento click de registro ------------------------------ //
-
-export const signup = () => {
-  const name = document.querySelector('#signup-name').value;
-  let email = document.querySelector('#signup-email').value;
-  const password = document.querySelector('#signup-password').value;
-  const message = document.getElementById('message');
-
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((result) => {
-      email = result.user.email;
-      console.log(email);
-
-      result.user.updateProfile({
-        displayName: name,
-      });
-      const configuration = {
-        url: 'http://localhost:5000',
-      };
-      result.user.sendEmailVerification(configuration)
-        .catch((error) => {
-          console.log(error);
-        });
-      firebase.auth().signOut();
-      document.querySelector('#signup-form').reset();
-      const modal = document.querySelector('.modal-container');
-      modal.style.display = 'inline';
-      message.textContent = `Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`;
-    })
-    .catch((error) => {
-      const errorMessage = document.querySelector('#error-message');
-      errorMessage.style.display = 'flex';
-      document.querySelector('#signup-form').reset();
-
-      console.log(error);
-      const errorCode = error.code;
-      if (errorCode === 'auth/invalid-email') {
-        errorMessage.textContent = ' Por favor, completa los campos ';
-        document.querySelector('#signup-form').reset();
-      }
-      if (errorCode === 'auth/email-already-in-use') {
-        errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
-        document.querySelector('#signup-form').reset();
-      }
-      if (errorCode === 'auth/weak-password') {
-        errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
-      }
-    });
-  signupBtn();
-};
-
-const signupBtn = () => {
-  document.addEventListener('click', (e) => {
-    if (e.target.id === 'signup-btn') {
-      signup();
-    }
-  });
-};
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'signup-btn') {
+    signup();
+  }
+});
 
 // -----Botón cancelar registro--------//
 
