@@ -2,9 +2,8 @@
 // import { auth } from './firebase-config.js';
 
 // FUNCIÓN PARA REGISTRARSE
-// export const userSignUp = (email, password) => {
-//   auth.createUserWithEmailAndPassword(email, password);
-// }
+// export const userSignUp = (email, password) =>
+// {auth.createUserWithEmailAndPassword(email, password);}
 
 // FUNCIÓN PARA INICIAR SESIÓN
 // export const userSignIn = (email, password) => auth.signInWithEmailAndPassword(email, password);

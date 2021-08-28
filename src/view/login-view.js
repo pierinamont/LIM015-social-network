@@ -1,3 +1,5 @@
+import { loginIn, signInGoogle, signInFacebook } from './funciones/funciones-firebase.js';
+
 export const viewLogin = () => {
   const loginSection = `
     <!--SECCION PRINCIPAL DEL LOGIN-->
@@ -30,85 +32,16 @@ export const viewLogin = () => {
   return loginDiv;
 };
 
-// ------------------- Obtener y guardar datos del usuario ---------------------------- //
-const getUserInfo = () => {
-  const currentUser = firebase.auth().currentUser;
-
-  // Obtener la info del usuario
-  const uid = currentUser.uid;
-  const name = currentUser.displayName;
-  const email = currentUser.email;
-  const photo = currentUser.photoURL;
-
-  // Guardar la info en localStorage
-  localStorage.setItem('uid', uid);
-  localStorage.setItem('name', name);
-  localStorage.setItem('email', email);
-  localStorage.setItem('photo', photo);
-
-  console.log(photo, name, email);
-};
-
 // ----------------------------- Inicio de sesión ------------------------------ //
-
-export const loginIn = (email, password) => {
-  firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((result) => {
-      const hash = '#/mainPage';
-      // Si el correo está verificado ingresa a la página(mainPage)
-      if (result.user.emailVerified) {
-        window.location.hash = hash;
-        console.log('verificado');
-        getUserInfo();
-      } else {
-        // De lo contrario su sesión se mantiene cerrado
-        firebase.auth().signOut();
-        const errorMessage = document.querySelector('#error-message');
-        errorMessage.style.display = 'inline';
-        errorMessage.textContent = `${result.user.displayName} por favor, realiza la verificación`;
-      }
-    })
-    .catch((error) => {
-      const errorMessage = document.querySelector('#error-message');
-      errorMessage.style.display = 'inline';
-      console.log(error);
-      const errorCode = error.code;
-      if (errorCode === 'auth/invalid-email') {
-        errorMessage.textContent = 'Por favor ingrese su usuario y contraseña';
-        document.querySelector('#login-form').reset();
-      }
-      if (errorCode === 'auth/wrong-password') {
-        errorMessage.textContent = 'Contraseña incorrecta, inténtelo de nuevo';
-        document.querySelector('#login-form').reset();
-      }
-      if (errorCode === 'auth/user-not-found') {
-        errorMessage.textContent = 'El correo que ingresó no está registrado, por favor, regístrece';
-        document.querySelector('#login-form').reset();
-      }
-    });
-};
-
-// document.addEventListener('click', (e) => {
-//   if (e.target.id === 'signin-btn') {
-//     const email = document.querySelector('#email').value;
-//     const password = document.querySelector('#password').value;
-//     loginIn(email, password);
-//   }
-// });
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'signin-btn') {
+    const email = document.querySelector('#email').value;
+    const password = document.querySelector('#password').value;
+    loginIn(email, password);
+  }
+});
 
 // ----------------------------- Inicio de sesión Google ------------------------------ //
-// const signInGoogle = () => {
-//   firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
-//     .then(() => {
-//       getUserInfo();
-//       const hash = '#/mainPage';
-//       window.location.hash = hash;
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       console.log('no funciona');
-//     });
-// };
 
 // document.addEventListener('click', (e) => {
 //   if (e.target.id === 'gmail-btn') {
@@ -118,19 +51,8 @@ export const loginIn = (email, password) => {
 
 // --------------------------- Inicio de sesión Facebook --------------------------- //
 
-// const signInFacebook = () => {
-//   firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
-//     .then(() => {
-//       getUserInfo();
-//       const hash = '#/mainPage';
-//       window.location.hash = hash;
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// };
-// document.addEventListener('click', (e) => {
-//   if (e.target.id === 'facebook-btn') {
-//     signInFacebook();
-//   }
-// });
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'facebook-btn') {
+    signInFacebook();
+  }
+});
