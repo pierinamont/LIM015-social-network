@@ -43,11 +43,11 @@ document.addEventListener('click', (e) => {
 
 // ----------------------------- Inicio de sesión Google ------------------------------ //
 
-// document.addEventListener('click', (e) => {
-//   if (e.target.id === 'gmail-btn') {
-//     signInGoogle();
-//   }
-// });
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'gmail-btn') {
+    signInGoogle();
+  }
+});
 
 // --------------------------- Inicio de sesión Facebook --------------------------- //
 
