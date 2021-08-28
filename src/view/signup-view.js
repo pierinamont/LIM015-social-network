@@ -22,6 +22,7 @@ export const viewSignup = () => {
                     <p id="error-message" style="display:none"></p>
                 </div>
                 <button id="signup-btn">Resgistrarse</button>
+                <button id="signup-btn-cancel">Cancelar</button>
                 <p>¿Ya tienes cuenta? <a id="sign-in" href="#/login">Inicia Sesión</a></p>
             </form>
     </div>
@@ -33,9 +34,9 @@ export const viewSignup = () => {
   return loginDiv;
 };
 
-// ----------------------------- Botón de registro ------------------------------ //
+// ----------------------------- evento click de registro ------------------------------ //
 
-const signup = () => {
+export const signup = () => {
   const name = document.querySelector('#signup-name').value;
   let email = document.querySelector('#signup-email').value;
   const password = document.querySelector('#signup-password').value;
@@ -45,7 +46,6 @@ const signup = () => {
     .then((result) => {
       email = result.user.email;
       console.log(email);
-      console.log('registro exitoso');
 
       result.user.updateProfile({
         displayName: name,
@@ -82,11 +82,23 @@ const signup = () => {
         errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
       }
     });
+  signupBtn();
 };
 
+const signupBtn = () => {
+  document.addEventListener('click', (e) => {
+    if (e.target.id === 'signup-btn') {
+      signup();
+    }
+  });
+};
+
+// -----Botón cancelar registro--------//
+
 document.addEventListener('click', (e) => {
-  if (e.target.id === 'signup-btn') {
-    signup();
+  if (e.target.id === 'signup-btn-cancel') {
+    const hash = '#/login';
+    window.location.hash = hash;
   }
 });
 
