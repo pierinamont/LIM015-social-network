@@ -1,52 +1,28 @@
 // ----------------------------- evento click de registro ------------------------------ //
 
-export const signup = () => {
-  const name = document.querySelector('#signup-name').value;
-  let email = document.querySelector('#signup-email').value;
-  const password = document.querySelector('#signup-password').value;
-  const message = document.getElementById('message');
-
-  firebase.auth().createUserWithEmailAndPassword(email, password)
+export const signup = (name, email, password) => new Promise((resolve, reject) => {
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
     .then((result) => {
-      email = result.user.email;
-      console.log(email);
-
       result.user.updateProfile({
         displayName: name,
       });
+
       const configuration = {
         url: 'http://localhost:5000',
       };
-      result.user.sendEmailVerification(configuration)
-        .catch((error) => {
-          console.log(error);
-        });
+
+      result.user.sendEmailVerification(configuration).catch((error) => {
+        console.log(error);
+      });
       firebase.auth().signOut();
-      document.querySelector('#signup-form').reset();
-      const modal = document.querySelector('.modal-container');
-      modal.style.display = 'inline';
-      message.textContent = `Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`;
+      resolve();
     })
     .catch((error) => {
-      const errorMessage = document.querySelector('#error-message');
-      errorMessage.style.display = 'flex';
-      document.querySelector('#signup-form').reset();
-
-      console.log(error);
-      const errorCode = error.code;
-      if (errorCode === 'auth/invalid-email') {
-        errorMessage.textContent = ' Por favor, completa los campos ';
-        document.querySelector('#signup-form').reset();
-      }
-      if (errorCode === 'auth/email-already-in-use') {
-        errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
-        document.querySelector('#signup-form').reset();
-      }
-      if (errorCode === 'auth/weak-password') {
-        errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
-      }
+      reject(error);
     });
-};
+});
 
 // ------------------- Obtener y guardar datos del usuario ---------------------------- //
 export const getUserInfo = () => {
@@ -69,7 +45,9 @@ export const getUserInfo = () => {
 // ----------------------------- Inicio de sesión ------------------------------ //
 
 export const loginIn = (email, password) => {
-  firebase.auth().signInWithEmailAndPassword(email, password)
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
     .then((result) => {
       const hash = '#/mainPage';
       // Si el correo está verificado ingresa a la página(mainPage)
@@ -107,7 +85,9 @@ export const loginIn = (email, password) => {
 
 // ----------------------------- Inicio de sesión Google ------------------------------ //
 export const signInGoogle = () => {
-  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+  firebase
+    .auth()
+    .signInWithPopup(new firebase.auth.GoogleAuthProvider())
     .then(() => {
       getUserInfo();
       const hash = '#/mainPage';
@@ -121,7 +101,9 @@ export const signInGoogle = () => {
 
 // --------------------------- Inicio de sesión Facebook --------------------------- //
 export const signInFacebook = () => {
-  firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
+  firebase
+    .auth()
+    .signInWithPopup(new firebase.auth.FacebookAuthProvider())
     .then(() => {
       getUserInfo();
       const hash = '#/mainPage';
@@ -134,7 +116,9 @@ export const signInFacebook = () => {
 
 // --------------------------- seccion header// cerrar sesión --------------------------- //
 export const signOut = () => {
-  firebase.auth().signOut()
+  firebase
+    .auth()
+    .signOut()
     .then(() => {
       console.log('cerraste sesión');
       const hash = '#/login';
@@ -156,14 +140,15 @@ export const sendValues = () => {
   const day = Date.now();
   const objectoAccion = new Date(day);
   if (inputTimeline.value.length > 0) {
-    db.collection('posts').add({
-      photo: localStorage.getItem('photo'),
-      name: localStorage.getItem('name'),
-      description: inputTimeline.value,
-      day: objectoAccion.toLocaleString(),
-      user: localStorage.getItem('uid'),
-      likesUser: [],
-    })
+    db.collection('posts')
+      .add({
+        photo: localStorage.getItem('photo'),
+        name: localStorage.getItem('name'),
+        description: inputTimeline.value,
+        day: objectoAccion.toLocaleString(),
+        user: localStorage.getItem('uid'),
+        likesUser: [],
+      })
       .then((docRef) => {
         console.log(docRef);
         console.log('Documento escrito con el ID: ', docRef.id);
@@ -177,28 +162,35 @@ export const sendValues = () => {
 // -------------------- Likes de usuarios ---------------------- //
 export const likepublish = (idPost) => {
   const post = db.collection('posts').doc(idPost);
-  post.get().then((res) => {
-    if (res.exists) {
-      const arrayLikes = res.data().likesUser;
-      const userLikes = arrayLikes.filter((a) => a.user === localStorage.getItem('uid'));
-      // si el usuario dio like, ELIMINAMOS DICHO REGISTRO DEL ARRAY
-      if (userLikes.length !== 0) {
-        post.update({
-          likesUser: arrayLikes.filter((a) => a.user !== localStorage.getItem('uid')),
-        });
-      } else { // no existe like para ese usuario, entonces añadir al array
-        const newLike = {
-          userName: localStorage.getItem('name'),
-          user: localStorage.getItem('uid'),
-        };
-        arrayLikes.push(newLike);
-        // actualizar arrayLikes a la coleccion en firestore
-        post.update({
-          likesUser: arrayLikes,
-        });
+  post
+    .get()
+    .then((res) => {
+      if (res.exists) {
+        const arrayLikes = res.data().likesUser;
+        const userLikes = arrayLikes.filter(
+          (a) => a.user === localStorage.getItem('uid'),
+        );
+        // si el usuario dio like, ELIMINAMOS DICHO REGISTRO DEL ARRAY
+        if (userLikes.length !== 0) {
+          post.update({
+            likesUser: arrayLikes.filter(
+              (a) => a.user !== localStorage.getItem('uid'),
+            ),
+          });
+        } else {
+          // no existe like para ese usuario, entonces añadir al array
+          const newLike = {
+            userName: localStorage.getItem('name'),
+            user: localStorage.getItem('uid'),
+          };
+          arrayLikes.push(newLike);
+          // actualizar arrayLikes a la coleccion en firestore
+          post.update({
+            likesUser: arrayLikes,
+          });
+        }
       }
-    }
-  })
+    })
     .catch((error) => {
       console.log(error);
     });
@@ -207,9 +199,11 @@ export const likepublish = (idPost) => {
 // ------------------------------- Eliminar posts ----------------------------- //
 export const deletePost = (idPost) => {
   const post = db.collection('posts').doc(idPost);
-  post.delete().then(() => {
-    console.log('Document successfully deleted!');
-  })
+  post
+    .delete()
+    .then(() => {
+      console.log('Document successfully deleted!');
+    })
     .catch((error) => {
       console.error('Error removing document: ', error);
     });
@@ -218,17 +212,19 @@ export const deletePost = (idPost) => {
 // ------mostrar los like de los usuarios-------//
 export const showlike = (idPost) => {
   const post = db.collection('posts').doc(idPost);
-  post.get().then((res) => {
-    if (res.exists) {
-      const arrayLikes = res.data().likesUser;
-      const divLikes = document.getElementById('div-contenido-likes');
-      // obtener la division donde va a pintar todos los likes
-      divLikes.innerHTML = '';
-      arrayLikes.forEach((elemento) => {
-        divLikes.innerHTML += `<h1>${elemento.userName}</h1> <br>`;
-      });
-    }
-  })
+  post
+    .get()
+    .then((res) => {
+      if (res.exists) {
+        const arrayLikes = res.data().likesUser;
+        const divLikes = document.getElementById('div-contenido-likes');
+        // obtener la division donde va a pintar todos los likes
+        divLikes.innerHTML = '';
+        arrayLikes.forEach((elemento) => {
+          divLikes.innerHTML += `<h1>${elemento.userName}</h1> <br>`;
+        });
+      }
+    })
     .catch((error) => {
       console.log(error);
     });
@@ -241,13 +237,17 @@ export const editar = (idPost, newText) => {
   const post = db.collection('posts').doc(idPost);
 
   // ------promesa para traer el post---------//
-  post.get().then((res) => {
-    if (res.exists) { // Aquí se valida si existe el doc
-      post.update({ // Aquí se actualiza
-        description: newText,
-      });
-    }
-  })
+  post
+    .get()
+    .then((res) => {
+      if (res.exists) {
+        // Aquí se valida si existe el doc
+        post.update({
+          // Aquí se actualiza
+          description: newText,
+        });
+      }
+    })
     .catch((error) => {
       console.log(error);
     });

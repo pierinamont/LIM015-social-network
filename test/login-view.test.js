@@ -1,7 +1,7 @@
 // import * as mocks from '../src/view/mocks.js';
 import {} from '../src/firebase/prueba.js';
 // import { loginIn } from '../src/view/login-view.js';
-import { signup } from '../src/view/signup-view.js';
+import { signup } from '../src/view/funciones/funciones-firebase';
 
 // MockFirebase.override();
 // const firebaseMock = require('firebase-mock');
