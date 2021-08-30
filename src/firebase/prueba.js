@@ -4,7 +4,13 @@ global.firebase = {
     GoogleAuthProvider: () => {},
     FacebookAuthProvider: () => {},
     signInWithEmailAndPassword: () => {},
-    createUserWithEmailAndPassword: () => {},
+    createUserWithEmailAndPassword: jest.fn(() => new Promise((resolve, reject) => {
+      resolve({
+        email: 'pepita@gmail.com',
+        password: '123456',
+      });
+      reject();
+    })),
   }),
   firestore: () => {},
 };

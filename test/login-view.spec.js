@@ -1,7 +1,8 @@
 // import * as mocks from '../src/view/mocks.js';
 import {} from '../src/firebase/prueba.js';
 // import { loginIn } from '../src/view/login-view.js';
-import { signup } from '../src/view/signup-view.js';
+// import { signup } from '../src/view/signup-view.js';
+import { signup } from '../src/view/funciones/funciones-firebase.js';
 
 // MockFirebase.override();
 // const firebaseMock = require('firebase-mock');
@@ -40,10 +41,9 @@ describe('signup', () => {
   //     auth: () => {},
   //   };
   // });
-
   it('debería registrarse', () => signup('pepita', 'pepita@gmail.com', '123456')
     .then((result) => {
-      expect(result.email.password).toBe('user@gmail.com');
+      expect(result.email).toBe('pepita@gmail.com');
     }));
 });
 

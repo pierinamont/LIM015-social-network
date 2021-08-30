@@ -1,5 +1,4 @@
 // ----------------------------- evento click de registro ------------------------------ //
-
 export const signup = () => {
   const name = document.querySelector('#signup-name').value;
   let email = document.querySelector('#signup-email').value;
