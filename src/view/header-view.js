@@ -1,3 +1,5 @@
+import { signOut } from './funciones/funciones-firebase.js';
+
 export const viewHeader = () => {
   const headerSection = `
     <div class="menu-hamburger" id="toggle-button">
@@ -31,21 +33,11 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// --------------------------- Cerrar sesión --------------------------- //
+// --------------------------- seccion header// cerrar sesión --------------------------- //
+
 document.addEventListener('click', (e) => {
   if (e.target.id === 'signOut') {
-    firebase.auth().signOut()
-      .then(() => {
-        console.log('cerraste sesión');
-        const hash = '#/login';
-        window.location.hash = hash;
-        localStorage.clear(); // PRUEBA
-      })
-      .catch((error) => {
-        console.log(error);
-        const hash = '#/mainPage';
-        window.location.hash = hash;
-      });
+    signOut();
   }
 });
 

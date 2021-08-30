@@ -1,4 +1,6 @@
-const db = firebase.firestore();
+import {
+  publishPost, likepublish, deletePost, showlike, editar,
+} from './funciones/funciones-firebase.js';
 
 export const viewMainPage = () => {
   const mainPageSection = `
@@ -66,63 +68,16 @@ export const viewMainPage = () => {
   return container;
 };
 
-// -------------------- Envia valores de los inputs a Firebase ---------------------- //
-
-const sendValues = () => {
-  const inputTimeline = document.querySelector('.input-timeline');
-  const day = Date.now();
-  const objectoAccion = new Date(day);
-  if (inputTimeline.value.length > 0) {
-    db.collection('posts').add({
-      photo: localStorage.getItem('photo'),
-      name: localStorage.getItem('name'),
-      description: inputTimeline.value,
-      day: objectoAccion.toLocaleString(),
-      user: localStorage.getItem('uid'),
-      likesUser: [],
-    })
-      .then((docRef) => {
-        console.log(docRef);
-        console.log('Documento escrito con el ID: ', docRef.id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  } else alert('Por favor, llena los campos');
-};
-
+const db = firebase.firestore();
 // -------------------- Likes de usuarios ---------------------- //
+
 const likePost = document.getElementsByClassName('like-post');
+
 const addEventLike = () => {
   for (let i = 0; i < likePost.length; i += 1) {
     likePost[i].addEventListener('click', (e) => {
       const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
-      const post = db.collection('posts').doc(idPost);
-      post.get().then((res) => {
-        if (res.exists) {
-          const arrayLikes = res.data().likesUser;
-          const userLikes = arrayLikes.filter((a) => a.user === localStorage.getItem('uid'));
-          // si el usuario dio like, ELIMINAMOS DICHO REGISTRO DEL ARRAY
-          if (userLikes.length !== 0) {
-            post.update({
-              likesUser: arrayLikes.filter((a) => a.user !== localStorage.getItem('uid')),
-            });
-          } else { // no existe like para ese usuario, entonces añadir al array
-            const newLike = {
-              userName: localStorage.getItem('name'),
-              user: localStorage.getItem('uid'),
-            };
-            arrayLikes.push(newLike);
-            // actualizar arrayLikes a la coleccion en firestore
-            post.update({
-              likesUser: arrayLikes,
-            });
-          }
-        }
-      })
-        .catch((error) => {
-          console.log(error);
-        });
+      likepublish(idPost);
     });
   }
 };
@@ -132,48 +87,38 @@ const removePost = document.getElementsByClassName('close-img');
 document.addEventListener('click', (e) => {
   if (e.target.className === 'delete-btn') {
     const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
-    const post = db.collection('posts').doc(idPost);
-    post.delete().then(() => {
-      console.log('Document successfully deleted!');
-    })
-      .catch((error) => {
-        console.error('Error removing document: ', error);
-      });
+    deletePost(idPost);
   }
+});
 
+// -----------evento para cancelar, cuando ya no se quiere eliminar el post----//
+document.addEventListener('click', (e) => {
   if (e.target.className === 'cancel-btn') {
     const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
     const divConfir = document.getElementById(`deletePost-${idPost}`);
     divConfir.style.display = 'none';
   }
+});
+
+// ------mostrar los like de los usuarios-------//
+document.addEventListener('click', (e) => {
   if (e.target.className === 'mostrar-likes') {
     const popup = document.querySelector('.popup-wrapper');
     popup.style.display = 'block';
     const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
-    const post = db.collection('posts').doc(idPost);
-
-    post.get().then((res) => {
-      if (res.exists) {
-        const arrayLikes = res.data().likesUser;
-        const divLikes = document.getElementById('div-contenido-likes');
-        // obtener la division donde va a pintar todos los likes
-        divLikes.innerHTML = '';
-        arrayLikes.forEach((elemento) => {
-          divLikes.innerHTML += `<h1>${elemento.userName}</h1> <br>`;
-        });
-      }
-    })
-      .catch((error) => {
-        console.log(error);
-      });
+    showlike(idPost);
   }
+});
+
+// ------evento para cerrar el popup de  los likes-------//
+document.addEventListener('click', (e) => {
   if (e.target.className === 'popup-close') {
     const popup = document.querySelector('.popup-wrapper');
     popup.style.display = 'none';
   }
 });
 
-// función para editar post
+// ----- funcion para editar post-----//
 const editPost = document.getElementsByClassName('edit-img');
 const addEventEdit = () => {
   for (let i = 0; i < editPost.length; i += 1) {
@@ -275,44 +220,38 @@ export const getPublish = () => {
   });
 };
 
-// Función para editar post
-function editar(idPost, newText) {
-  const post = db.collection('posts').doc(idPost);
-
-  // get trae el post
-  post.get().then((res) => {
-    if (res.exists) { // Aquí se valida si existe el doc
-      post.update({ // Aquí se actualiza
-        description: newText,
-      });
-    }
-  })
-    .catch((error) => {
-      console.log(error);
-    });
-}
-
-// ------------------------------------------- Eventos  ----------------------------------------- //
-// Evento del botón "Publicar"
+// --------- Evento del botón "Publicar"-----------//
 document.addEventListener('click', (e) => {
   if (e.target.id === 'publish-btn') {
-    const inputTimeline = document.querySelector('.input-timeline');
-    sendValues();
-
-    // sendValues().then((resolve) => {
-    //  console.log(resolve);
-    //   postInRealTime();
-    // })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    inputTimeline.value = '';
+    const inputPost = document.querySelector('.input-timeline');
+    if (inputPost.value.trim().length > 0) {
+      const date = new Date(Date.now());
+      const objPublicacion = {
+        photo: localStorage.getItem('photo'),
+        name: localStorage.getItem('name'),
+        description: inputPost.value,
+        day: date.toLocaleString(),
+        user: localStorage.getItem('uid'),
+        likesUser: [],
+      };
+      publishPost(objPublicacion)
+        .then((resolve) => {
+          console.log(resolve);
+        })
+        .catch((reject) => {
+          console.log(reject);
+        });
+    } else {
+      alert('Por favor, llena los campos');
+    }
+    inputPost.value = '';
   }
 });
 
-// Evento del botón guardar y cancelar //
+// -------- Evento del botón guardar y cancelar-------- //
+
 document.addEventListener('click', (e) => {
-  // botón guardar
+  // botón guardar//
   if (e.target.className === 'save-edit-btn') {
     const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
     console.log(idPost);
@@ -322,7 +261,8 @@ document.addEventListener('click', (e) => {
     document.getElementById(`txteditPost-${idPost}`).style.display = 'none';
     document.getElementById(`txtDescription-${idPost}`).style.display = 'inline';
   }
-  // botón cancelar
+
+  // botón cancelar//
   if (e.target.className === 'cancel-edit-btn') {
     const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
     document.getElementById(`txteditPost-${idPost}`).style.display = 'none';

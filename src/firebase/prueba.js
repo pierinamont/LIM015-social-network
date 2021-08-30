@@ -1,10 +1,10 @@
-global.firebase = {
-  auth: () => ({
-    // signOut: () => {},
-    GoogleAuthProvider: () => {},
-    FacebookAuthProvider: () => {},
-    signInWithEmailAndPassword: () => {},
-    createUserWithEmailAndPassword: () => {},
-  }),
-  firestore: () => {},
-};
+// global.firebase = {
+//   auth: () => ({
+//     // signOut: () => {},
+//     GoogleAuthProvider: () => {},
+//     FacebookAuthProvider: () => {},
+//     signInWithEmailAndPassword: () => {},
+//     createUserWithEmailAndPassword: () => {},
+//   }),
+//   firestore: () => {},
+// };
