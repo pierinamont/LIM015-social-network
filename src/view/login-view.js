@@ -89,49 +89,49 @@ export const loginIn = (email, password) => {
     });
 };
 
-document.addEventListener('click', (e) => {
-  if (e.target.id === 'signin-btn') {
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
-    loginIn(email, password);
-  }
-});
+// document.addEventListener('click', (e) => {
+//   if (e.target.id === 'signin-btn') {
+//     const email = document.querySelector('#email').value;
+//     const password = document.querySelector('#password').value;
+//     loginIn(email, password);
+//   }
+// });
 
-// ----------------------------- Inicio de sesión Google ------------------------------ //
-const signInGoogle = () => {
-  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    .then(() => {
-      getUserInfo();
-      const hash = '#/mainPage';
-      window.location.hash = hash;
-    })
-    .catch((error) => {
-      console.log(error);
-      console.log('no funciona');
-    });
-};
+// // ----------------------------- Inicio de sesión Google ------------------------------ //
+// const signInGoogle = () => {
+//   firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+//     .then(() => {
+//       getUserInfo();
+//       const hash = '#/mainPage';
+//       window.location.hash = hash;
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       console.log('no funciona');
+//     });
+// };
 
-document.addEventListener('click', (e) => {
-  if (e.target.id === 'gmail-btn') {
-    signInGoogle();
-  }
-});
+// document.addEventListener('click', (e) => {
+//   if (e.target.id === 'gmail-btn') {
+//     signInGoogle();
+//   }
+// });
 
 // --------------------------- Inicio de sesión Facebook --------------------------- //
 
-const signInFacebook = () => {
-  firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
-    .then(() => {
-      getUserInfo();
-      const hash = '#/mainPage';
-      window.location.hash = hash;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-document.addEventListener('click', (e) => {
-  if (e.target.id === 'facebook-btn') {
-    signInFacebook();
-  }
-});
+// const signInFacebook = () => {
+//   firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
+//     .then(() => {
+//       getUserInfo();
+//       const hash = '#/mainPage';
+//       window.location.hash = hash;
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
+// document.addEventListener('click', (e) => {
+//   if (e.target.id === 'facebook-btn') {
+//     signInFacebook();
+//   }
+// });
