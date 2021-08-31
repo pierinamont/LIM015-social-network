@@ -1,6 +1,5 @@
 import MockFirebase from 'mock-cloud-firestore';
 import { publishPost, signup } from '../src/view/funciones/funciones-firebase.js';
-import {} from '../src/firebase/prueba.js';
 
 const fixtureData = {
   __collection__: {
