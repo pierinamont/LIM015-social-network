@@ -236,13 +236,13 @@ document.addEventListener('click', (e) => {
       };
       publishPost(objPublicacion)
         .then((resolve) => {
-          console.log(resolve);
+          console.log(resolve);// eslint-disable-line
         })
         .catch((reject) => {
-          console.log(reject);
+          console.log(reject);// eslint-disable-line
         });
     } else {
-      alert('Por favor, llena los campos');
+      alert('Por favor, llena los campos'); // eslint-disable-line
     }
     inputPost.value = '';
   }
@@ -254,7 +254,7 @@ document.addEventListener('click', (e) => {
   // botón guardar//
   if (e.target.className === 'save-edit-btn') {
     const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
-    console.log(idPost);
+    console.log(idPost); // eslint-disable-line
     const newValue = document.getElementById(`txteditPost-${idPost}`).value; // obtenemos el elemento//
     editar(idPost, newValue);
     document.getElementById(`btn-container-${idPost}`).style.display = 'none';
