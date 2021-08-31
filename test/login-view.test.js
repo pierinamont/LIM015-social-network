@@ -1,58 +1,66 @@
-// import * as mocks from '../src/view/mocks.js';
+import MockFirebase from 'mock-cloud-firestore';
+import { publishPost, signup } from '../src/view/funciones/funciones-firebase.js';
 import {} from '../src/firebase/prueba.js';
-// import { loginIn } from '../src/view/login-view.js';
-import { signup } from '../src/view/funciones/funciones-firebase.js';
 
-// MockFirebase.override();
-// const firebaseMock = require('firebase-mock');
+const fixtureData = {
+  __collection__: {
+    posts: {
+      __doc__: {
+        abc1234: {
+          photo: 'https://lh3.googleusercontent.com/a-/AOh14GgWmX1pQaGuol_AxXYzpQisOIJaJhVwyil3xjysig=s96-c',
+          name: 'Pierina',
+          description: 'Quiero un unicornio',
+          day: '23/8/2021 18:48:20',
+          user: '1111',
+          likesUser: [],
+        },
+        abc456: {
+          photo: 'https://lh3.googleusercontent.com/a-/AOh14GgWmX1pQaGuol_AxXYzpQisOIJaJhVwyil3xjysig=s96-c',
+          name: 'Kengya',
+          description: 'Quiero un dragon',
+          day: '24/8/2021 18:48:20',
+          user: '2222',
+          likesUser: [],
+        },
+        abc789: {
+          photo: 'https://lh3.googleusercontent.com/a-/AOh14GgzE8r5CtsNZ7-Spe4JCRuU7FR_aEYaBQbH2jlhaWA=s96-c',
+          name: 'Yesireth',
+          description: 'Quiero un dinosaurio',
+          day: '24/8/2021 18:48:20',
+          user: '3333',
+          likesUser: [],
+        },
+      },
+    },
+  },
+};
 
-// const mockauth = new firebasemock.MockAuthentication();
-// const mockdatabase = new firebasemock.MockFirebase();
-// const mockfirestore = new firebasemock.MockFirestore();
-// const mockstorage = new firebasemock.MockStorage();
-// const mockmessaging = new firebasemock.MockMessaging();
+global.firebase = new MockFirebase(fixtureData);
 
-// const mocksdk = new firebasemock.MockFirebaseSdk(
-//   // use null if your code does not use RTDB
-//   (path) => (path ? mockdatabase.child(path) : mockdatabase),
-//   // use null if your code does not use AUTHENTICATION
-//   () => mockauth,
-//   // use null if your code does not use FIRESTORE
-//   () => mockfirestore,
-//   // use null if your code does not use STORAGE
-//   () => mockstorage,
-//   // use null if your code does not use MESSAGING
-//   () => null,
-// );
+// ----------------------- Añadir post -----------------------//
+describe('addpost', () => {
+  const date = new Date(Date.now());
+  const objPublicacion = {
+    photo: 'https://lh3.googleusercontent.com/a-/AOh14GgzE8r5CtsNZ7-Spe4JCRuU7FR_aEYaBQbH2jlhaWA=s96-c',
+    name: 'Yesireth-test',
+    description: 'descripcion test',
+    day: date.toLocaleString(),
+    user: '3333',
+    likesUser: [],
+  };
 
-// mocksdk.database().flush();
-// global.firebase = firebaseMock.MockFirebaseSdk(
-//   () => null,
-//   // () => mockauth,
-// );
+  it('debería insertar un nuevo post', () => publishPost(objPublicacion)
+    .then((resolver) => {
+      expect(resolver).toBe('documeto registrado');
+    }).catch((reject) => {
+      console.log(reject);
+    }));
+});
 
-// const mockauth = new firebaseMock.MockFirebase();
-// mockauth.autoFlush();
-
+// ----------------------- Añadir post -----------------------//
 describe('signup', () => {
-  // beforeEach(() => {
-  //   global.firebase = {
-  //     auth: () => {},
-  //   };
-  // });
   it('debería registrarse', () => signup('pepita', 'pepita@gmail.com', '123456')
     .then((result) => {
       expect(result.email).toBe('pepita@gmail.com');
     }));
 });
-
-// describe('Inicio de sesión user password', () => {
-//   it('deberí iniciar sesió con email password', () => loginIn('user@gmail.com', '123456')
-//     .then((result) => {
-//       expect(result.email).toBe('user@gmail.com');
-//     }));
-// });
-
-// const MockFirebase = require('mockfirebase').MockFirebase;
-
-// console.log(MockFirebase);

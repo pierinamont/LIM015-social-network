@@ -133,65 +133,45 @@ export const signOut = () => {
     });
 };
 // ------seccion mainpage-------//
-const db = firebase.firestore();
-
 // -----Envia valores de los inputs a Firebase ---- //
-export const sendValues = () => {
-  const inputTimeline = document.querySelector('.input-timeline');
-  const day = Date.now();
-  const objectoAccion = new Date(day);
-  if (inputTimeline.value.length > 0) {
-    db.collection('posts')
-      .add({
-        photo: localStorage.getItem('photo'),
-        name: localStorage.getItem('name'),
-        description: inputTimeline.value,
-        day: objectoAccion.toLocaleString(),
-        user: localStorage.getItem('uid'),
-        likesUser: [],
-      })
-      .then((docRef) => {
-        console.log(docRef);
-        console.log('Documento escrito con el ID: ', docRef.id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  } else alert('Por favor, llena los campos');
-};
+export const publishPost = (objPublicacion) => new Promise((resolver, rechazar) => {
+  firebase.firestore().collection('posts').add(objPublicacion)
+    .then((docRef) => {
+      console.log('Documento escrito con el ID: ', docRef.id);
+      resolver('documeto registrado');
+    })
+    .catch((error) => {
+      console.log(error);
+      // eslint-disable-next-line prefer-promise-reject-errors
+      rechazar('documeto no registrado');
+    });
+});
 
 // -------------------- Likes de usuarios ---------------------- //
 export const likepublish = (idPost) => {
-  const post = db.collection('posts').doc(idPost);
-  post
-    .get()
-    .then((res) => {
-      if (res.exists) {
-        const arrayLikes = res.data().likesUser;
-        const userLikes = arrayLikes.filter(
-          (a) => a.user === localStorage.getItem('uid'),
-        );
-        // si el usuario dio like, ELIMINAMOS DICHO REGISTRO DEL ARRAY
-        if (userLikes.length !== 0) {
-          post.update({
-            likesUser: arrayLikes.filter(
-              (a) => a.user !== localStorage.getItem('uid'),
-            ),
-          });
-        } else {
-          // no existe like para ese usuario, entonces añadir al array
-          const newLike = {
-            userName: localStorage.getItem('name'),
-            user: localStorage.getItem('uid'),
-          };
-          arrayLikes.push(newLike);
-          // actualizar arrayLikes a la coleccion en firestore
-          post.update({
-            likesUser: arrayLikes,
-          });
-        }
+  const post = firebase.firestore().collection('posts').doc(idPost);
+  post.get().then((res) => {
+    if (res.exists) {
+      const arrayLikes = res.data().likesUser;
+      const userLikes = arrayLikes.filter((a) => a.user === localStorage.getItem('uid'));
+      // si el usuario dio like, ELIMINAMOS DICHO REGISTRO DEL ARRAY
+      if (userLikes.length !== 0) {
+        post.update({
+          likesUser: arrayLikes.filter((a) => a.user !== localStorage.getItem('uid')),
+        });
+      } else { // no existe like para ese usuario, entonces añadir al array
+        const newLike = {
+          userName: localStorage.getItem('name'),
+          user: localStorage.getItem('uid'),
+        };
+        arrayLikes.push(newLike);
+        // actualizar arrayLikes a la coleccion en firestore
+        post.update({
+          likesUser: arrayLikes,
+        });
       }
-    })
+    }
+  })
     .catch((error) => {
       console.log(error);
     });
@@ -199,12 +179,11 @@ export const likepublish = (idPost) => {
 
 // ------------------------------- Eliminar posts ----------------------------- //
 export const deletePost = (idPost) => {
-  const post = db.collection('posts').doc(idPost);
-  post
-    .delete()
-    .then(() => {
-      console.log('Document successfully deleted!');
-    })
+  const post = firebase.firestore().collection('posts').doc(idPost);
+  post.delete().then(() => {
+    console.log('Document successfully deleted!');
+  })
+
     .catch((error) => {
       console.error('Error removing document: ', error);
     });
@@ -212,20 +191,18 @@ export const deletePost = (idPost) => {
 
 // ------mostrar los like de los usuarios-------//
 export const showlike = (idPost) => {
-  const post = db.collection('posts').doc(idPost);
-  post
-    .get()
-    .then((res) => {
-      if (res.exists) {
-        const arrayLikes = res.data().likesUser;
-        const divLikes = document.getElementById('div-contenido-likes');
-        // obtener la division donde va a pintar todos los likes
-        divLikes.innerHTML = '';
-        arrayLikes.forEach((elemento) => {
-          divLikes.innerHTML += `<h1>${elemento.userName}</h1> <br>`;
-        });
-      }
-    })
+  const post = firebase.firestore().collection('posts').doc(idPost);
+  post.get().then((res) => {
+    if (res.exists) {
+      const arrayLikes = res.data().likesUser;
+      const divLikes = document.getElementById('div-contenido-likes');
+      // obtener la division donde va a pintar todos los likes
+      divLikes.innerHTML = '';
+      arrayLikes.forEach((elemento) => {
+        divLikes.innerHTML += `<h1>${elemento.userName}</h1> <br>`;
+      });
+    }
+  })
     .catch((error) => {
       console.log(error);
     });
@@ -235,7 +212,7 @@ export const showlike = (idPost) => {
 
 // ----Función para editar post----//
 export const editar = (idPost, newText) => {
-  const post = db.collection('posts').doc(idPost);
+  const post = firebase.firestore().collection('posts').doc(idPost);
 
   // ------promesa para traer el post---------//
   post
