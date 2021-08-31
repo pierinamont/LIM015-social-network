@@ -5,6 +5,7 @@ export const signup = (name, email, password) => new Promise((resolve, reject) =
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((result) => {
+      console.log(result);
       result.user.updateProfile({
         displayName: name,
       });
