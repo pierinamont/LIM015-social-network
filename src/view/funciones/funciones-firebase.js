@@ -1,11 +1,13 @@
 // ----------------------------- evento click de registro ------------------------------ //
+// export const signup = (email, password) => firebase
+//   .auth()
+//   .createUserWithEmailAndPassword(email, password);
 
 export const signup = (name, email, password) => new Promise((resolve, reject) => {
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((result) => {
-      console.log(result);
       result.user.updateProfile({
         displayName: name,
       });
@@ -15,7 +17,7 @@ export const signup = (name, email, password) => new Promise((resolve, reject) =
       };
 
       result.user.sendEmailVerification(configuration).catch((error) => {
-        console.log(error);
+        console.log(error); // eslint-disable-line
       });
       firebase.auth().signOut();
       resolve();
@@ -41,7 +43,7 @@ export const getUserInfo = () => {
   localStorage.setItem('email', email);
   localStorage.setItem('photo', photo);
 
-  console.log(photo, name, email);
+  console.log(photo, name, email); // eslint-disable-line
 };
 // ----------------------------- Inicio de sesión ------------------------------ //
 
@@ -54,7 +56,7 @@ export const loginIn = (email, password) => {
       // Si el correo está verificado ingresa a la página(mainPage)
       if (result.user.emailVerified) {
         window.location.hash = hash;
-        console.log('verificado');
+        console.log('verificado'); // eslint-disable-line
         getUserInfo();
       } else {
         // De lo contrario su sesión se mantiene cerrado
@@ -67,7 +69,7 @@ export const loginIn = (email, password) => {
     .catch((error) => {
       const errorMessage = document.querySelector('#error-message');
       errorMessage.style.display = 'inline';
-      console.log(error);
+      console.log(error); // eslint-disable-line
       const errorCode = error.code;
       if (errorCode === 'auth/invalid-email') {
         errorMessage.textContent = 'Por favor ingrese su usuario y contraseña';
@@ -95,8 +97,8 @@ export const signInGoogle = () => {
       window.location.hash = hash;
     })
     .catch((error) => {
-      console.log(error);
-      console.log('no funciona');
+      console.log(error); // eslint-disable-line
+      console.log('no funciona'); // eslint-disable-line
     });
 };
 
@@ -111,7 +113,7 @@ export const signInFacebook = () => {
       window.location.hash = hash;
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error); // eslint-disable-line
     });
 };
 
@@ -121,13 +123,13 @@ export const signOut = () => {
     .auth()
     .signOut()
     .then(() => {
-      console.log('cerraste sesión');
+      console.log('cerraste sesión'); // eslint-disable-line
       const hash = '#/login';
       window.location.hash = hash;
       localStorage.clear(); // PRUEBA
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error); // eslint-disable-line
       const hash = '#/mainPage';
       window.location.hash = hash;
     });
@@ -137,11 +139,11 @@ export const signOut = () => {
 export const publishPost = (objPublicacion) => new Promise((resolver, rechazar) => {
   firebase.firestore().collection('posts').add(objPublicacion)
     .then((docRef) => {
-      console.log('Documento escrito con el ID: ', docRef.id);
+      console.log('Documento escrito con el ID: ', docRef.id); // eslint-disable-line
       resolver('documeto registrado');
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error); // eslint-disable-line
       // eslint-disable-next-line prefer-promise-reject-errors
       rechazar('documeto no registrado');
     });
@@ -173,7 +175,8 @@ export const likepublish = (idPost) => {
     }
   })
     .catch((error) => {
-      console.log(error);
+  console.log(error); // eslint-disable-line
+
     });
 };
 
@@ -181,11 +184,11 @@ export const likepublish = (idPost) => {
 export const deletePost = (idPost) => {
   const post = firebase.firestore().collection('posts').doc(idPost);
   post.delete().then(() => {
-    console.log('Document successfully deleted!');
+    console.log('Document successfully deleted!'); // eslint-disable-line
   })
 
     .catch((error) => {
-      console.error('Error removing document: ', error);
+      console.error('Error removing document: ', error); // eslint-disable-line
     });
 };
 
@@ -204,7 +207,7 @@ export const showlike = (idPost) => {
     }
   })
     .catch((error) => {
-      console.log(error);
+      console.log(error); // eslint-disable-line
     });
 };
 
@@ -227,6 +230,6 @@ export const editar = (idPost, newText) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error); // eslint-disable-line
     });
 };
