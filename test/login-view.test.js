@@ -33,7 +33,11 @@ const fixtureData = {
     },
   },
 };
-
+const objData = {
+  name: 'pepita',
+  email: 'pepita@gmail.com',
+  password: '123456',
+};
 global.firebase = new MockFirebase(fixtureData);
 
 // ----------------------- Añadir post -----------------------//
@@ -47,7 +51,7 @@ describe('addpost', () => {
     user: '3333',
     likesUser: [],
   };
-
+  it('deberia ser una funcion', () => { expect(typeof publishPost).toBe('function'); });
   it('debería insertar un nuevo post', () => publishPost(objPublicacion)
     .then((resolver) => {
       expect(resolver).toBe('documeto registrado');
@@ -55,11 +59,9 @@ describe('addpost', () => {
       console.log(reject);
     }));
 });
-
 // ----------------------- Añadir post -----------------------//
 describe('signup', () => {
-  it('debería registrarse', () => signup('pepita', 'pepita@gmail.com', '123456')
-    .then((result) => {
-      expect(result.email).toBe('pepita@gmail.com');
-    }));
+  it('deberia ser una funcion', () => { expect(typeof signup).toBe('function'); });
+  it('deberia registrarse', () => signup(objData.name, objData.email, objData.pasword)
+    .then((usuario) => { expect(usuario.email).tobe(objData.email); }));
 });
