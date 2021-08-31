@@ -1,30 +1,5 @@
-
-// import * as mocks from '../src/view/mocks.js';
-// import {} from '../src/firebase/prueba.js';
-// import { loginIn } from '../src/view/login-view.js';
-
-// eslint-disable-next-line import/no-unresolved
-import firebasemock from 'firebase-mock';
-import { signup } from '../src/view/funciones/funciones-firebase';
-// configurando firebase mock
-// const firebasemock = require('firebase-mock'); // eslint-disable-line
-// CONFIGURA FIREBASE MOCK
-const mockauth = new firebasemock.MockAuthentication();
-mockauth.autoFlush();
-
-// simula los mét y prop de firebase auth
-global.firebase = new firebasemock.MockFirebaseSdk(
-  null,
-  () => mockauth,
-);
-
-describe('signup', () => {
-  it('Debería poder registrarse con correo y contraseña', () => signup('net@gmail.com', '12345678')
-    .then((user) => {
-      expect(user.email).toBe('net@gmail.com');
-
-/*import MockFirebase from 'mock-cloud-firestore';
-import { publishPost, signup } from '../src/view/funciones/funciones-firebase.js';
+import MockFirebase from 'mock-cloud-firestore';
+import { publishPost } from '../src/view/funciones/funciones-firebase.js';
 
 const fixtureData = {
   __collection__: {
@@ -58,15 +33,12 @@ const fixtureData = {
     },
   },
 };
-const objData = {
-  name: 'pepita',
-  email: 'pepita@gmail.com',
-  password: '123456',
-};
 global.firebase = new MockFirebase(fixtureData);
-
 // ----------------------- Añadir post -----------------------//
 describe('addpost', () => {
+  console.log('SEGUNDO VALOR FIREBASE');
+  console.log(global.firebase);
+
   const date = new Date(Date.now());
   const objPublicacion = {
     photo: 'https://lh3.googleusercontent.com/a-/AOh14GgzE8r5CtsNZ7-Spe4JCRuU7FR_aEYaBQbH2jlhaWA=s96-c',
@@ -81,12 +53,6 @@ describe('addpost', () => {
     .then((resolver) => {
       expect(resolver).toBe('documeto registrado');
     }).catch((reject) => {
-      console.log(reject);*/
+      console.log(reject);
     }));
-});
-// ----------------------- Añadir post -----------------------//
-describe('signup', () => {
-  it('deberia ser una funcion', () => { expect(typeof signup).toBe('function'); });
-  it('deberia registrarse', () => signup(objData.name, objData.email, objData.pasword)
-    .then((usuario) => { expect(usuario.email).tobe(objData.email); }));
 });

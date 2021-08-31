@@ -1,13 +1,11 @@
 // ----------------------------- evento click de registro ------------------------------ //
-export const signup = (email, password) => firebase
-  .auth()
-  .createUserWithEmailAndPassword(email, password);
+// export const signup = (email, password) => firebase
+//   .auth()
+//   .createUserWithEmailAndPassword(email, password);
 
-
-/* export const signup = (name, email, password) => new Promise((resolve, reject) => {
+export const signup = (name, email, password) => new Promise((resolve, reject) => {
   firebase
     .auth()
-
     .createUserWithEmailAndPassword(email, password)
     .then((result) => {
       result.user.updateProfile({
@@ -28,7 +26,7 @@ export const signup = (email, password) => firebase
       reject(error);
     });
 });
-*/
+
 // ------------------- Obtener y guardar datos del usuario ---------------------------- //
 export const getUserInfo = () => {
   const currentUser = firebase.auth().currentUser;
@@ -177,7 +175,6 @@ export const likepublish = (idPost) => {
     }
   })
     .catch((error) => {
-
   console.log(error); // eslint-disable-line
 
     });
