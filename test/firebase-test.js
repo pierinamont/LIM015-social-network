@@ -1,5 +1,5 @@
 import MockFirebase from 'mock-cloud-firestore';
-import { publishPost, signup } from '../src/view/funciones/funciones-firebase.js';
+import { publishPost, likepublish } from '../src/view/funciones/funciones-firebase.js';
 
 const fixtureData = {
   __collection__: {
@@ -36,7 +36,7 @@ const fixtureData = {
 
 global.firebase = new MockFirebase(fixtureData);
 
-// ----------------------- Añadir post -----------------------//
+// ----------------------- Test de añadir post -----------------------//
 describe('addpost', () => {
   const date = new Date(Date.now());
   const objPublicacion = {
@@ -56,10 +56,30 @@ describe('addpost', () => {
     }));
 });
 
-// ----------------------- Añadir post -----------------------//
-describe('signup', () => {
-  it('debería registrarse', () => signup('pepita', 'pepita@gmail.com', '123456')
+// ----------------------- Test de registro -----------------------//
+// describe('signup', () => {
+//   it('debería registrarse', () => signup('pepita', 'pepita@gmail.com', '123456')
+//     .then((result) => {
+//       expect(result.email).toBe('pepita@gmail.com');
+//     }));
+// });
+
+// ----------------------- Test de likes -----------------------//
+describe('likepublish', () => {
+  const idPost = {
+    abc1234: {
+      photo: 'https://lh3.googleusercontent.com/a-/AOh14GgWmX1pQaGuol_AxXYzpQisOIJaJhVwyil3xjysig=s96-c',
+      name: 'Pierina',
+      description: 'Quiero un unicornio',
+      day: '23/8/2021 18:48:20',
+      user: '1111',
+      likesUser: [],
+    },
+  };
+  it('debería dar like a un post', (done) => {
+    likepublish(idPost)
+  }
     .then((result) => {
-      expect(result.email).toBe('pepita@gmail.com');
+      expect(result).toBe();
     }));
 });
