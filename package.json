@@ -17,9 +17,9 @@
     "eslint": "eslint --ext .js src/ test/",
     "stylelint": "stylelint --aei src/**/*.css",
     "pretest": "npm run htmlhint && npm run eslint && npm run stylelint",
-    "test": "jest --coverage",
     "start": "serve src/",
-    "lint:fix": "eslint --fix --ext .js,.jsx ."
+    "lint:fix": "eslint --fix --ext .js,.jsx .",
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
@@ -32,7 +32,7 @@
     "firebase-mock": "^2.3.2",
     "gh-pages": "^3.2.3",
     "htmlhint": "^0.14.0",
-    "jest": "^27.0.6",
+    "jest": "^27.1.0",
     "mock-cloud-firestore": "^0.12.0",
     "regenerator-runtime": "^0.13.1",
     "serve": "^12.0.0",

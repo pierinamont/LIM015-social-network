@@ -23,7 +23,6 @@ export const viewLogin = () => {
                 <p>¿No tienes cuenta?  <a href="#/signup" id="sign-up">Regístrate</a></p>
          </form>
     </div>
-
     `;
 
   const loginDiv = document.createElement('div');

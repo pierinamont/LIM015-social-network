@@ -3,9 +3,11 @@ export const signup = (email, password) => firebase
   .auth()
   .createUserWithEmailAndPassword(email, password);
 
+
 /* export const signup = (name, email, password) => new Promise((resolve, reject) => {
   firebase
     .auth()
+
     .createUserWithEmailAndPassword(email, password)
     .then((result) => {
       result.user.updateProfile({
@@ -175,7 +177,9 @@ export const likepublish = (idPost) => {
     }
   })
     .catch((error) => {
+
   console.log(error); // eslint-disable-line
+
     });
 };
 
