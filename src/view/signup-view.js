@@ -38,7 +38,36 @@ export const viewSignup = () => {
 // ----------------------------- evento click de registro ------------------------------ //
 document.addEventListener('click', (e) => {
   if (e.target.id === 'signup-btn') {
-    signup();
+    const name = document.querySelector('#signup-name').value;
+    const email = document.querySelector('#signup-email').value;
+    const password = document.querySelector('#signup-password').value;
+
+    signup(name, email, password)
+      .then(() => {
+        document.querySelector('#signup-form').reset();
+        const modal = document.querySelector('.modal-container');
+        modal.style.display = 'inline';
+        const message = document.getElementById('message');
+        message.textContent = `Bienvenido ${name}, revisa tu correo para poder verificar tu cuenta`;
+      })
+      .catch((error) => {
+        const errorMessage = document.querySelector('#error-message');
+        errorMessage.style.display = 'flex';
+        document.querySelector('#signup-form').reset();
+
+        const errorCode = error.code;
+        if (errorCode === 'auth/invalid-email') {
+          errorMessage.textContent = ' Por favor, completa los campos ';
+          document.querySelector('#signup-form').reset();
+        }
+        if (errorCode === 'auth/email-already-in-use') {
+          errorMessage.textContent = 'El correo ingresado ya está siendo utilizado, por favor, ingresa un correo válido';
+          document.querySelector('#signup-form').reset();
+        }
+        if (errorCode === 'auth/weak-password') {
+          errorMessage.textContent = 'La contraseña debe tener al menos 6 caracteres';
+        }
+      });
   }
 });
 
