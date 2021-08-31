@@ -1,5 +1,5 @@
 import {
-  sendValues, likepublish, deletePost, showlike, editar,
+  publishPost, likepublish, deletePost, showlike, editar,
 } from './funciones/funciones-firebase.js';
 
 export const viewMainPage = () => {
@@ -72,6 +72,7 @@ const db = firebase.firestore();
 // -------------------- Likes de usuarios ---------------------- //
 
 const likePost = document.getElementsByClassName('like-post');
+
 const addEventLike = () => {
   for (let i = 0; i < likePost.length; i += 1) {
     likePost[i].addEventListener('click', (e) => {
@@ -222,9 +223,28 @@ export const getPublish = () => {
 // --------- Evento del botón "Publicar"-----------//
 document.addEventListener('click', (e) => {
   if (e.target.id === 'publish-btn') {
-    const inputTimeline = document.querySelector('.input-timeline');
-    sendValues();
-    inputTimeline.value = '';
+    const inputPost = document.querySelector('.input-timeline');
+    if (inputPost.value.trim().length > 0) {
+      const date = new Date(Date.now());
+      const objPublicacion = {
+        photo: localStorage.getItem('photo'),
+        name: localStorage.getItem('name'),
+        description: inputPost.value,
+        day: date.toLocaleString(),
+        user: localStorage.getItem('uid'),
+        likesUser: [],
+      };
+      publishPost(objPublicacion)
+        .then((resolve) => {
+          console.log(resolve);
+        })
+        .catch((reject) => {
+          console.log(reject);
+        });
+    } else {
+      alert('Por favor, llena los campos');
+    }
+    inputPost.value = '';
   }
 });
 
