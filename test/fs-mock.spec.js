@@ -1,5 +1,5 @@
 import MockFirebase from 'mock-cloud-firestore';
-import { publishPost, signup } from '../src/view/funciones/funciones-firebase.js';
+import { publishPost } from '../src/view/funciones/funciones-firebase.js';
 
 const fixtureData = {
   __collection__: {
@@ -33,15 +33,12 @@ const fixtureData = {
     },
   },
 };
-const objData = {
-  name: 'pepita',
-  email: 'pepita@gmail.com',
-  password: '123456',
-};
 global.firebase = new MockFirebase(fixtureData);
-
 // ----------------------- Añadir post -----------------------//
 describe('addpost', () => {
+  console.log('SEGUNDO VALOR FIREBASE');
+  console.log(global.firebase);
+
   const date = new Date(Date.now());
   const objPublicacion = {
     photo: 'https://lh3.googleusercontent.com/a-/AOh14GgzE8r5CtsNZ7-Spe4JCRuU7FR_aEYaBQbH2jlhaWA=s96-c',
@@ -58,10 +55,4 @@ describe('addpost', () => {
     }).catch((reject) => {
       console.log(reject);
     }));
-});
-// ----------------------- Añadir post -----------------------//
-describe('signup', () => {
-  it('deberia ser una funcion', () => { expect(typeof signup).toBe('function'); });
-  it('deberia registrarse', () => signup(objData.name, objData.email, objData.pasword)
-    .then((usuario) => { expect(usuario.email).tobe(objData.email); }));
 });
