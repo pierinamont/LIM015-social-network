@@ -203,16 +203,18 @@ export const likepublish = (idPost) => {
 };
 
 // ------------------------------- Eliminar posts ----------------------------- //
-export const deletePost = (idPost) => {
+export const deletePost = (idPost) => new Promise((resolver, rechazar) => {
   const post = firebase.firestore().collection('posts').doc(idPost);
   post.delete().then(() => {
     console.log('Document successfully deleted!'); // eslint-disable-line
+    resolver('eliminado');
   })
-
     .catch((error) => {
       console.error('Error removing document: ', error); // eslint-disable-line
+      // eslint-disable-next-line prefer-promise-reject-errors
+      rechazar('no se pudo eliminar');
     });
-};
+});
 
 // ------mostrar los like de los usuarios-------//
 export const showlike = (idPost) => {
@@ -236,7 +238,7 @@ export const showlike = (idPost) => {
 // -----------funciones postrealtime---------//
 
 // ----Función para editar post----//
-export const editar = (idPost, newText) => {
+export const editar = (idPost, newText) => new Promise((resolver, rechazar) => {
   const post = firebase.firestore().collection('posts').doc(idPost);
 
   // ------promesa para traer el post---------//
@@ -249,9 +251,27 @@ export const editar = (idPost, newText) => {
           // Aquí se actualiza
           description: newText,
         });
+        resolver('editado');
       }
     })
     .catch((error) => {
       console.log(error); // eslint-disable-line
+      // eslint-disable-next-line prefer-promise-reject-errors
+      rechazar('edicion rechazada');
     });
-};
+});
+export const getPost = (callback) => firebase.firestore().collection('posts')
+  .onSnapshot((querySnapshot) => {
+    const arrayPost = [];
+    querySnapshot.forEach((doc) => {
+      arrayPost.push({
+        photo: doc.photo,
+        name: doc.name,
+        description: doc.description,
+        day: doc.day,
+        user: doc.user,
+        likesUser: doc.likesUser,
+      });
+    });
+    callback(arrayPost);
+  });

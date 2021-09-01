@@ -1,14 +1,16 @@
+
 import firebasemock from 'firebase-mock';
 import { signup, signInGoogle, signInFacebook } from '../src/view/funciones/funciones-firebase.js';
 
-const mockauth = new firebasemock.MockAuthentication();
+// const mockauth = new firebasemock.MockAuthentication();
 
-mockauth.autoFlush();
+// mockauth.autoFlush();
 
-global.firebase = new firebasemock.MockFirebaseSdk(
-  null,
-  () => mockauth,
-);
+// global.firebase = new firebasemock.MockFirebaseSdk(
+//   null,
+//   () => mockauth,
+// );
+
 
 // ----------------------- Registro -----------------------//
 describe('signup', () => {
