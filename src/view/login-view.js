@@ -1,4 +1,4 @@
-import { loginIn, signInFacebook, signInGoogle } from './funciones/funciones-firebase.js';
+import { loginIn, facebookPromise, googlePromise } from './funciones/funciones-firebase.js';
 
 export const viewLogin = () => {
   const loginSection = `
@@ -45,7 +45,7 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('click', (e) => {
   if (e.target.id === 'gmail-btn') {
-    signInGoogle();
+    googlePromise();
   }
 });
 
@@ -53,6 +53,6 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('click', (e) => {
   if (e.target.id === 'facebook-btn') {
-    signInFacebook();
+    facebookPromise();
   }
 });

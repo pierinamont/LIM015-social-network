@@ -1,5 +1,5 @@
 import MockFirebase from 'mock-cloud-firestore';
-import { publishPost } from '../src/view/funciones/funciones-firebase.js';
+import { publishPost, likepublish } from '../src/view/funciones/funciones-firebase.js';
 
 const fixtureData = {
   __collection__: {
@@ -34,6 +34,7 @@ const fixtureData = {
   },
 };
 global.firebase = new MockFirebase(fixtureData);
+
 // ----------------------- Añadir post -----------------------//
 describe('addpost', () => {
   console.log('SEGUNDO VALOR FIREBASE');
@@ -55,4 +56,12 @@ describe('addpost', () => {
     }).catch((reject) => {
       console.log(reject);
     }));
+});
+
+// ----------------------- Test de likes -----------------------//
+describe('likepublish', () => {
+  it('deberia ser una funcion', () => { expect(typeof likepublish).toBe('function'); });
+  // it('debería dar like a un post', () => {
+  //   likepublish(idPost);
+  // });
 });

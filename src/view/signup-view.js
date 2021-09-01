@@ -41,6 +41,7 @@ document.addEventListener('click', (e) => {
     const name = document.querySelector('#signup-name').value;
     const email = document.querySelector('#signup-email').value;
     const password = document.querySelector('#signup-password').value;
+    console.log(name, email, password);
 
     signup(name, email, password)
       .then(() => {
