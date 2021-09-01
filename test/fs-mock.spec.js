@@ -3,6 +3,7 @@ import {
   publishPost, editar, getPost, deletePost,
 } from '../src/view/funciones/funciones-firebase.js';
 
+
 const fixtureData = {
   __collection__: {
     posts: {
@@ -36,6 +37,7 @@ const fixtureData = {
   },
 };
 global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
+
 // ----------------------- Añadir post -----------------------//
 describe('addpost', () => {
   const date = new Date(Date.now());
@@ -81,3 +83,12 @@ describe('deletePost', () => {
     }));
 });
 describe ('')
+
+// ----------------------- Test de likes -----------------------//
+describe('likepublish', () => {
+  it('deberia ser una funcion', () => { expect(typeof likepublish).toBe('function'); });
+  // it('debería dar like a un post', () => {
+  //   likepublish(idPost);
+  // });
+});
+
