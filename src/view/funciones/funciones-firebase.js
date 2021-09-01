@@ -1,31 +1,31 @@
 // ----------------------------- evento click de registro ------------------------------ //
-// export const signup = (email, password) => firebase
-//   .auth()
-//   .createUserWithEmailAndPassword(email, password);
+export const signup = (email, password) => firebase
+  .auth()
+  .createUserWithEmailAndPassword(email, password);
 
-export const signup = (name, email, password) => new Promise((resolve, reject) => {
-  firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then((result) => {
-      result.user.updateProfile({
-        displayName: name,
-      });
+// export const signup = (name, email, password) => new Promise((resolve, reject) => {
+//   firebase
+//     .auth()
+//     .createUserWithEmailAndPassword(email, password)
+//     .then((result) => {
+//       result.user.updateProfile({
+//         displayName: name,
+//       });
 
-      const configuration = {
-        url: 'http://localhost:5000',
-      };
+//       const configuration = {
+//         url: 'http://localhost:5000',
+//       };
 
-      result.user.sendEmailVerification(configuration).catch((error) => {
-        console.log(error); // eslint-disable-line
-      });
-      firebase.auth().signOut();
-      resolve();
-    })
-    .catch((error) => {
-      reject(error);
-    });
-});
+//       result.user.sendEmailVerification(configuration).catch((error) => {
+//         console.log(error); // eslint-disable-line
+//       });
+//       firebase.auth().signOut();
+//       resolve();
+//     })
+//     .catch((error) => {
+//       reject(error);
+//     });
+// });
 
 // ------------------- Obtener y guardar datos del usuario ---------------------------- //
 export const getUserInfo = () => {
@@ -87,10 +87,29 @@ export const loginIn = (email, password) => {
 };
 
 // ----------------------------- Inicio de sesión Google ------------------------------ //
+// export const signInGoogle = () => {
+//   firebase
+//     .auth()
+//     .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+//     .then(() => {
+//       getUserInfo();
+//       const hash = '#/mainPage';
+//       window.location.hash = hash;
+//     })
+//     .catch((error) => {
+//       console.log(error); // eslint-disable-line
+//       console.log('no funciona'); // eslint-disable-line
+//     });
+// };
+
 export const signInGoogle = () => {
-  firebase
-    .auth()
-    .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+  const providerGoogle = new firebase.auth.GoogleAuthProvider();
+  const loginWithGoogle = firebase.auth().signInWithPopup(providerGoogle);
+  return loginWithGoogle;
+};
+
+export const googlePromise = () => {
+  signInGoogle()
     .then(() => {
       getUserInfo();
       const hash = '#/mainPage';
@@ -101,19 +120,22 @@ export const signInGoogle = () => {
       console.log('no funciona'); // eslint-disable-line
     });
 };
-
 // --------------------------- Inicio de sesión Facebook --------------------------- //
 export const signInFacebook = () => {
-  firebase
-    .auth()
-    .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+  const providerFacebook = new firebase.auth.FacebookAuthProvider();
+  const loginWithFacebook = firebase.auth().signInWithPopup(providerFacebook);
+  return loginWithFacebook;
+};
+
+export const facebookPromise = () => {
+  signInFacebook()
     .then(() => {
       getUserInfo();
       const hash = '#/mainPage';
       window.location.hash = hash;
     })
     .catch((error) => {
-      console.log(error); // eslint-disable-line
+  console.log(error); // eslint-disable-line
     });
 };
 
@@ -181,16 +203,18 @@ export const likepublish = (idPost) => {
 };
 
 // ------------------------------- Eliminar posts ----------------------------- //
-export const deletePost = (idPost) => {
+export const deletePost = (idPost) => new Promise((resolver, rechazar) => {
   const post = firebase.firestore().collection('posts').doc(idPost);
   post.delete().then(() => {
     console.log('Document successfully deleted!'); // eslint-disable-line
+    resolver('eliminado');
   })
-
     .catch((error) => {
       console.error('Error removing document: ', error); // eslint-disable-line
+      // eslint-disable-next-line prefer-promise-reject-errors
+      rechazar('no se pudo eliminar');
     });
-};
+});
 
 // ------mostrar los like de los usuarios-------//
 export const showlike = (idPost) => {
@@ -214,7 +238,7 @@ export const showlike = (idPost) => {
 // -----------funciones postrealtime---------//
 
 // ----Función para editar post----//
-export const editar = (idPost, newText) => {
+export const editar = (idPost, newText) => new Promise((resolver, rechazar) => {
   const post = firebase.firestore().collection('posts').doc(idPost);
 
   // ------promesa para traer el post---------//
@@ -227,9 +251,27 @@ export const editar = (idPost, newText) => {
           // Aquí se actualiza
           description: newText,
         });
+        resolver('editado');
       }
     })
     .catch((error) => {
       console.log(error); // eslint-disable-line
+      // eslint-disable-next-line prefer-promise-reject-errors
+      rechazar('edicion rechazada');
     });
-};
+});
+export const getPost = (callback) => firebase.firestore().collection('posts')
+  .onSnapshot((querySnapshot) => {
+    const arrayPost = [];
+    querySnapshot.forEach((doc) => {
+      arrayPost.push({
+        photo: doc.photo,
+        name: doc.name,
+        description: doc.description,
+        day: doc.day,
+        user: doc.user,
+        likesUser: doc.likesUser,
+      });
+    });
+    callback(arrayPost);
+  });

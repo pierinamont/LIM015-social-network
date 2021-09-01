@@ -1,5 +1,7 @@
 import MockFirebase from 'mock-cloud-firestore';
-import { deletePost, publishPost } from '../src/view/funciones/funciones-firebase.js';
+import {
+  publishPost, editar, getPost, deletePost,
+} from '../src/view/funciones/funciones-firebase.js';
 
 const fixtureData = {
   __collection__: {
@@ -33,12 +35,10 @@ const fixtureData = {
     },
   },
 };
-global.firebase = new MockFirebase(fixtureData);
+global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
+
 // ----------------------- Añadir post -----------------------//
 describe('addpost', () => {
-  console.log('SEGUNDO VALOR FIREBASE');
-  console.log(global.firebase);
-
   const date = new Date(Date.now());
   const objPublicacion = {
     photo: 'https://lh3.googleusercontent.com/a-/AOh14GgzE8r5CtsNZ7-Spe4JCRuU7FR_aEYaBQbH2jlhaWA=s96-c',
@@ -57,12 +57,36 @@ describe('addpost', () => {
     }));
 });
 
-// ----------------------- delete post -----------------------//
-
+describe('editar', () => {
+  it('deberia ser una funcion', () => { expect(typeof editar).toBe('function'); });
+  it('debería actualizar el texto del post', () => editar('abc789', 'Quiero un ponny')
+    .then(() => {
+      const callback = (arrayPost) => {
+        const objeto = arrayPost.find((elemento) => elemento.description === 'Quiero un ponny');
+        expect(objeto.description).toBe('Quiero un ponny');
+      };
+      getPost(callback);
+    }));
+});
 describe('deletePost', () => {
-  it('deberia poder eliminar el post con id: abc123', () => {
-    deletePost('abc123').then((postDoc) => {
-      expect(postDoc).toBe(undefined);
-    });
-  });
+  it('deberia ser una funcion', () => { expect(typeof deletePost).toBe('function'); });
+  it('debería eliminar el texto del post', () => deletePost('abc789')
+    .then(() => {
+      const callback = (arrayPost) => {
+        const objeto = arrayPost.find((elemento) => elemento.description === 'Quiero un dinosaurio');
+        let validacion = 'no eliminado';
+        if (objeto === undefined) validacion = 'eliminado';
+        expect(validacion).toBe('eliminado');
+      };
+      getPost(callback);
+    }));
+});
+describe('');
+
+// ----------------------- Test de likes -----------------------//
+describe('likepublish', () => {
+  it('deberia ser una funcion', () => { expect(typeof likepublish).toBe('function'); });
+  // it('debería dar like a un post', () => {
+  //   likepublish(idPost);
+  // });
 });

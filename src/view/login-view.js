@@ -1,4 +1,4 @@
-import { loginIn, signInFacebook } from './funciones/funciones-firebase.js';
+import { loginIn, facebookPromise, googlePromise } from './funciones/funciones-firebase.js';
 
 export const viewLogin = () => {
   const loginSection = `
@@ -43,16 +43,16 @@ document.addEventListener('click', (e) => {
 
 // ----------------------------- Inicio de sesión Google ------------------------------ //
 
-// document.addEventListener('click', (e) => {
-//   if (e.target.id === 'gmail-btn') {
-//     signInGoogle();
-//   }
-// });
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'gmail-btn') {
+    googlePromise();
+  }
+});
 
 // --------------------------- Inicio de sesión Facebook --------------------------- //
 
 document.addEventListener('click', (e) => {
   if (e.target.id === 'facebook-btn') {
-    signInFacebook();
+    facebookPromise();
   }
 });
