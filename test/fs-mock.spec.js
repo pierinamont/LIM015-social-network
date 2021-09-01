@@ -1,5 +1,5 @@
 import MockFirebase from 'mock-cloud-firestore';
-import { publishPost } from '../src/view/funciones/funciones-firebase.js';
+import { deletePost, publishPost } from '../src/view/funciones/funciones-firebase.js';
 
 const fixtureData = {
   __collection__: {
@@ -55,4 +55,14 @@ describe('addpost', () => {
     }).catch((reject) => {
       console.log(reject);
     }));
+});
+
+// ----------------------- delete post -----------------------//
+
+describe('deletePost', () => {
+  it('deberia poder eliminar el post con id: abc123', () => {
+    deletePost('abc123').then((postDoc) => {
+      expect(postDoc).toBe(undefined);
+    });
+  });
 });
