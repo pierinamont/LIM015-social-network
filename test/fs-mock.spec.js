@@ -1,6 +1,6 @@
 import MockFirebase from 'mock-cloud-firestore';
 import {
-  publishPost, editar, getPost, deletePost, showlike,
+  publishPost, editar, getPost, deletePost, showlike, likepublish,
 } from '../src/view/funciones/funciones-firebase.js';
 
 const fixtureData = {
@@ -96,15 +96,19 @@ describe('deletePost', () => {
 });
 
 // // ----------------------- Test de likes -----------------------//
-// describe('likepublish', () => {
-//   it('deberia ser una funcion', () => { expect(typeof likepublish).toBe('function'); });
-//   // it('debería dar like a un post', () => {
-//   //   likepublish(idPost);
-//   // });
-// });
+// Pintar y despintar corazón
+describe('likepublish', () => {
+  it('deberia ser una funcion', () => { expect(typeof likepublish).toBe('function'); });
+  // it('debería dar like a un post', () => likepublish('abc789')
+  //   .then(() => {
+  //     expect(fixtureData.data().likesUser).toBe(true);
+  //   }));
+});
 
 // ----------------------- mostrar like  -----------------------//
+// Modal con los usuarios que dieron likek
 describe('mostrar likes de usuarios', () => {
+  it('deberia ser una funcion', () => { expect(typeof showlike).toBe('function'); });
   it('deberia mostrar la cantidad de likes de un post', () => showlike('abc789')
     .then((result) => {
       expect(result.data().likesUser).toHaveLength(2);
