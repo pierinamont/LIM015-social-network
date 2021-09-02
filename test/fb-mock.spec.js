@@ -1,11 +1,7 @@
 import firebasemock from 'firebase-mock';
-<<<<<<< HEAD
-import { signup, signInGoogle, signInFacebook } from '../src/view/funciones/funciones-firebase.js';
-=======
 import {
   signup, signInGoogle, signInFacebook, signOut,
 } from '../src/view/funciones/funciones-firebase.js';
->>>>>>> 61f5ac702e35b9b50d64c3e55416585cbc292408
 
 const mockauth = new firebasemock.MockAuthentication();
 

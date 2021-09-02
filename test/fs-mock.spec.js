@@ -95,15 +95,6 @@ describe('deletePost', () => {
     }));
 });
 
-<<<<<<< HEAD
-// ----------------------- Test de likes -----------------------//
-// describe('likepublish', () => {
-// it('deberia ser una funcion', () => { expect(typeof likepublish).toBe('function'); });
-// it('debería dar like a un post', () => {
-//   likepublish(idPost);
-// });
-// });
-=======
 // // ----------------------- Test de likes -----------------------//
 // describe('likepublish', () => {
 //   it('deberia ser una funcion', () => { expect(typeof likepublish).toBe('function'); });
@@ -119,4 +110,3 @@ describe('mostrar likes de usuarios', () => {
       expect(result.data().likesUser).toHaveLength(2);
     }));
 });
->>>>>>> 61f5ac702e35b9b50d64c3e55416585cbc292408
