@@ -1,6 +1,12 @@
+// import {
+//   loginIn, facebookPromise, googlePromise,
+// } from './funciones/funciones-firebase.js';
+
 import {
-  loginIn, getUserInfo, facebookPromise, googlePromise,
+  loginIn, signInFacebook, signInGoogle,
 } from './funciones/funciones-firebase.js';
+
+import { getUserInfo } from '../firebase/firebase-user.js';
 
 export const viewLogin = () => {
   const loginSection = `
@@ -79,7 +85,17 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('click', (e) => {
   if (e.target.id === 'gmail-btn') {
-    googlePromise();
+    // googlePromise();
+    signInGoogle()
+      .then(() => {
+        getUserInfo();
+        const hash = '#/mainPage';
+        window.location.hash = hash;
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log('no funciona');
+      });
   }
 });
 
@@ -87,6 +103,15 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('click', (e) => {
   if (e.target.id === 'facebook-btn') {
-    facebookPromise();
+    // facebookPromise();
+    signInFacebook()
+      .then(() => {
+        getUserInfo();
+        const hash = '#/mainPage';
+        window.location.hash = hash;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 });

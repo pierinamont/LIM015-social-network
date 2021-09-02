@@ -1,6 +1,5 @@
 /* eslint-disable prefer-promise-reject-errors */
 // import { reject } from 'async';
-import { getUserInfo } from '../../firebase/firebase-user.js';
 // ----------------------------- evento click de registro ------------------------------ //
 export const signup = (email, password) => firebase
   .auth()
@@ -43,18 +42,19 @@ export const signInGoogle = () => {
   return loginWithGoogle;
 };
 
-export const googlePromise = () => {
-  signInGoogle()
-    .then(() => {
-      getUserInfo();
-      const hash = '#/mainPage';
-      window.location.hash = hash;
-    })
-    .catch((error) => {
-      console.log(error);
-      console.log('no funciona');
-    });
-};
+// export const googlePromise = () => {
+//   signInGoogle()
+//     .then(() => {
+//       getUserInfo();
+//       const hash = '#/mainPage';
+//       window.location.hash = hash;
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       console.log('no funciona');
+//     });
+// };
+
 // --------------------------- Inicio de sesión Facebook --------------------------- //
 export const signInFacebook = () => {
   const providerFacebook = new firebase.auth.FacebookAuthProvider();
@@ -62,35 +62,35 @@ export const signInFacebook = () => {
   return loginWithFacebook;
 };
 
-export const facebookPromise = () => {
-  signInFacebook()
-    .then(() => {
-      getUserInfo();
-      const hash = '#/mainPage';
-      window.location.hash = hash;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
+// export const facebookPromise = () => {
+//   signInFacebook()
+//     .then(() => {
+//       getUserInfo();
+//       const hash = '#/mainPage';
+//       window.location.hash = hash;
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
 
 // --------------------------- seccion header// cerrar sesión --------------------------- //
 export const signOut = () => firebase.auth().signOut();
 
-export const signOutPromise = () => {
-  signOut()
-    .then(() => {
-      console.log('cerraste sesión');
-      const hash = '#/login';
-      window.location.hash = hash;
-      localStorage.clear();
-    })
-    .catch((error) => {
-      console.log(error);
-      const hash = '#/mainPage';
-      window.location.hash = hash;
-    });
-};
+// export const signOutPromise = () => {
+//   signOut()
+//     .then(() => {
+//       console.log('cerraste sesión');
+//       const hash = '#/login';
+//       window.location.hash = hash;
+//       localStorage.clear();
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       const hash = '#/mainPage';
+//       window.location.hash = hash;
+//     });
+// };
 
 // ------seccion mainpage-------//
 // -----Envia valores de los inputs a Firebase ---- //

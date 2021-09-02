@@ -53,6 +53,9 @@ describe('signInFacebook', () => {
 
 // ----------------------- cerrar sesion -----------------------//
 describe('cerrar sesion', () => {
+  beforeEach(() => {
+    jest.setTimeout(10000);
+  });
   it('deberia cerrar sesion', () => signOut()
     .then((user) => {
       expect(user).toBe(undefined);
