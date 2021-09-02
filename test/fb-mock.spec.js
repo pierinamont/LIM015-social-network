@@ -1,16 +1,16 @@
-
 import firebasemock from 'firebase-mock';
-import { signup, signInGoogle, signInFacebook } from '../src/view/funciones/funciones-firebase.js';
+import {
+  signup, signInGoogle, signInFacebook, signOut,
+} from '../src/view/funciones/funciones-firebase.js';
 
-// const mockauth = new firebasemock.MockAuthentication();
+const mockauth = new firebasemock.MockAuthentication();
 
-// mockauth.autoFlush();
+mockauth.autoFlush();
 
-// global.firebase = new firebasemock.MockFirebaseSdk(
-//   null,
-//   () => mockauth,
-// );
-
+global.firebase = new firebasemock.MockFirebaseSdk(
+  null,
+  () => mockauth,
+);
 
 // ----------------------- Registro -----------------------//
 describe('signup', () => {
@@ -41,4 +41,12 @@ describe('signInFacebook', () => {
       expect(facebook.providerData[0].providerId).toBe('facebook.com');
     });
   });
+});
+
+// ----------------------- cerrar sesion -----------------------//
+describe('cerrar sesion', () => {
+  it('deberia cerrar sesion', () => signOut()
+    .then((user) => {
+      expect(user).toBe(undefined);
+    }));
 });
