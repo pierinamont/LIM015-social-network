@@ -1,7 +1,3 @@
-// import {
-//   loginIn, facebookPromise, googlePromise,
-// } from './funciones/funciones-firebase.js';
-
 import {
   loginIn, signInFacebook, signInGoogle,
 } from './funciones/funciones-firebase.js';
@@ -85,7 +81,6 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('click', (e) => {
   if (e.target.id === 'gmail-btn') {
-    // googlePromise();
     signInGoogle()
       .then(() => {
         getUserInfo();
@@ -103,7 +98,6 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('click', (e) => {
   if (e.target.id === 'facebook-btn') {
-    // facebookPromise();
     signInFacebook()
       .then(() => {
         getUserInfo();

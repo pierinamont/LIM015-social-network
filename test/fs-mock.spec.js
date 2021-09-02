@@ -99,18 +99,24 @@ describe('deletePost', () => {
 // Pintar y despintar corazón
 describe('likepublish', () => {
   it('deberia ser una funcion', () => { expect(typeof likepublish).toBe('function'); });
-  // it('debería dar like a un post', () => likepublish('abc789')
-  //   .then(() => {
-  //     expect(fixtureData.data().likesUser).toBe(true);
-  //   }));
+  it('debería recibir un objeto', () => likepublish('abc789')
+    .then((result) => {
+      expect(typeof result.data().likesUser).toBe('object');
+    }));
 });
 
 // ----------------------- mostrar like  -----------------------//
-// Modal con los usuarios que dieron likek
+// Modal con los usuarios que dieron like
 describe('mostrar likes de usuarios', () => {
   it('deberia ser una funcion', () => { expect(typeof showlike).toBe('function'); });
   it('deberia mostrar la cantidad de likes de un post', () => showlike('abc789')
     .then((result) => {
       expect(result.data().likesUser).toHaveLength(2);
     }));
+
+  // it('debería dar dislike a un post', () => likepublish('abc789', -1, [])
+  // .then((result) => {
+  //   const arrayLikes = result.data().likesUser;
+  //   const userLikes = arrayLikes.filter((a) => a.user === );
+  // }));
 });
