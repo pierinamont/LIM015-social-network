@@ -1,6 +1,7 @@
-
 import firebasemock from 'firebase-mock';
-import { signup, signInGoogle, signInFacebook } from '../src/view/funciones/funciones-firebase.js';
+import {
+  signup, signInGoogle, signInFacebook, signOut,
+} from '../src/view/funciones/funciones-firebase.js';
 
 const mockauth = new firebasemock.MockAuthentication();
 
@@ -40,4 +41,12 @@ describe('signInFacebook', () => {
       expect(facebook.providerData[0].providerId).toBe('facebook.com');
     });
   });
+});
+
+// ----------------------- cerrar sesion -----------------------//
+describe('cerrar sesion', () => {
+  it('deberia cerrar sesion', () => signOut()
+    .then((user) => {
+      expect(user).toBe(undefined);
+    }));
 });
