@@ -1,6 +1,6 @@
 import firebasemock from 'firebase-mock';
 import {
-  signup, signInGoogle, signInFacebook, signOut,
+  signup, signInGoogle, signInFacebook, signOut, loginIn,
 } from '../src/view/funciones/funciones-firebase.js';
 
 const mockauth = new firebasemock.MockAuthentication();
@@ -18,6 +18,14 @@ describe('signup', () => {
   it('Debería poder registrarse con correo y contraseña', () => signup('net@gmail.com', '12345678')
     .then((user) => {
       expect(user.email).toBe('net@gmail.com');
+    }));
+});
+
+// ----------------------- inicion de sesion -----------------------//
+describe('iniciar sesion correo, contraseña', () => {
+  it('deberia iniciar sesion', () => loginIn('pepito@gmail.com', '123456')
+    .then((user) => {
+      expect(user.email).toBe('pepito@gmail.com');
     }));
 });
 
