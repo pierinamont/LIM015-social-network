@@ -3,7 +3,6 @@ import {
   publishPost, editar, getPost, deletePost,
 } from '../src/view/funciones/funciones-firebase.js';
 
-
 const fixtureData = {
   __collection__: {
     posts: {
@@ -82,7 +81,6 @@ describe('deletePost', () => {
       getPost(callback);
     }));
 });
-describe ('')
 
 // ----------------------- Test de likes -----------------------//
 describe('likepublish', () => {
@@ -91,4 +89,3 @@ describe('likepublish', () => {
   //   likepublish(idPost);
   // });
 });
-
