@@ -103,7 +103,20 @@ document.addEventListener('click', (e) => {
     const popup = document.querySelector('.popup-wrapper');
     popup.style.display = 'block';
     const idPost = e.target.closest('.post-body').getAttribute('data-idpost');
-    showlike(idPost);
+    showlike(idPost).then((res) => {
+      if (res != null) {
+        const arrayLikes = res.data().likesUser;
+        const divLikes = document.getElementById('div-contenido-likes');
+        // obtener la division donde va a pintar todos los likes
+        divLikes.innerHTML = '';
+        arrayLikes.forEach((elemento) => {
+          divLikes.innerHTML += `<h1>${elemento.userName}</h1> <br>`;
+        });
+      }
+    })
+      .catch((error) => {
+        console.log(error); // eslint-disable-line
+      });
   }
 });
 

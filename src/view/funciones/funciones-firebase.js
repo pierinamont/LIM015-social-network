@@ -86,22 +86,6 @@ export const loginIn = (email, password) => {
     });
 };
 
-// ----------------------------- Inicio de sesión Google ------------------------------ //
-// export const signInGoogle = () => {
-//   firebase
-//     .auth()
-//     .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-//     .then(() => {
-//       getUserInfo();
-//       const hash = '#/mainPage';
-//       window.location.hash = hash;
-//     })
-//     .catch((error) => {
-//       console.log(error); // eslint-disable-line
-//       console.log('no funciona'); // eslint-disable-line
-//     });
-// };
-
 export const signInGoogle = () => {
   const providerGoogle = new firebase.auth.GoogleAuthProvider();
   const loginWithGoogle = firebase.auth().signInWithPopup(providerGoogle);
@@ -140,22 +124,23 @@ export const facebookPromise = () => {
 };
 
 // --------------------------- seccion header// cerrar sesión --------------------------- //
-export const signOut = () => {
-  firebase
-    .auth()
-    .signOut()
+export const signOut = () => firebase.auth().signOut();
+
+export const signOutPromise = () => {
+  signOut()
     .then(() => {
-      console.log('cerraste sesión'); // eslint-disable-line
+    console.log('cerraste sesión'); // eslint-disable-line
       const hash = '#/login';
       window.location.hash = hash;
       localStorage.clear(); // PRUEBA
     })
     .catch((error) => {
-      console.log(error); // eslint-disable-line
+    console.log(error); // eslint-disable-line
       const hash = '#/mainPage';
       window.location.hash = hash;
     });
 };
+
 // ------seccion mainpage-------//
 // -----Envia valores de los inputs a Firebase ---- //
 export const publishPost = (objPublicacion) => new Promise((resolver, rechazar) => {
@@ -217,25 +202,21 @@ export const deletePost = (idPost) => new Promise((resolver, rechazar) => {
 });
 
 // ------mostrar los like de los usuarios-------//
-export const showlike = (idPost) => {
-  const post = firebase.firestore().collection('posts').doc(idPost);
-  post.get().then((res) => {
-    if (res.exists) {
-      const arrayLikes = res.data().likesUser;
-      const divLikes = document.getElementById('div-contenido-likes');
-      // obtener la division donde va a pintar todos los likes
-      divLikes.innerHTML = '';
-      arrayLikes.forEach((elemento) => {
-        divLikes.innerHTML += `<h1>${elemento.userName}</h1> <br>`;
-      });
+export const showlike = (idPost) => new Promise((resolver, reject) => {
+  const showPostLike = firebase.firestore().collection('posts').doc(idPost);
+  // showlike(idPost).get().then((res)
+  showPostLike.get().then((res) => {
+    if (res.exists) resolver(res);
+    else {
+      // eslint-disable-next-line prefer-promise-reject-errors
+      reject(null);
     }
   })
-    .catch((error) => {
-      console.log(error); // eslint-disable-line
+    .catch(() => {
+      // eslint-disable-next-line prefer-promise-reject-errors
+      reject(null);
     });
-};
-
-// -----------funciones postrealtime---------//
+});
 
 // ----Función para editar post----//
 export const editar = (idPost, newText) => new Promise((resolver, rechazar) => {

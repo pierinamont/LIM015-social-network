@@ -1,6 +1,6 @@
 import MockFirebase from 'mock-cloud-firestore';
 import {
-  publishPost, editar, getPost, deletePost,
+  publishPost, editar, getPost, deletePost, showlike,
 } from '../src/view/funciones/funciones-firebase.js';
 
 const fixtureData = {
@@ -29,7 +29,17 @@ const fixtureData = {
           description: 'Quiero un dinosaurio',
           day: '24/8/2021 18:48:20',
           user: '3333',
-          likesUser: [],
+          likesUser: [
+            {
+              name: 'Kengya',
+              photo: 'https://lh3.googleusercontent.com/a-/AOh14GgWmX1pQaGuol_AxXYzpQisOIJaJhVwyil3xjysig=s96-c',
+              user: '2222',
+            },
+            {
+              name: 'Pierina',
+              photo: 'https://lh3.googleusercontent.com/a-/AOh14GgWmX1pQaGuol_AxXYzpQisOIJaJhVwyil3xjysig=s96-c',
+              user: '1111',
+            }],
         },
       },
     },
@@ -52,11 +62,12 @@ describe('addpost', () => {
   it('debería insertar un nuevo post', () => publishPost(objPublicacion)
     .then((resolver) => {
       expect(resolver).toBe('documeto registrado');
-    }).catch((reject) => {
-      console.log(reject);
+    }).catch(() => {
+
     }));
 });
 
+// ----------------------- editar post -----------------------//
 describe('editar', () => {
   it('deberia ser una funcion', () => { expect(typeof editar).toBe('function'); });
   it('debería actualizar el texto del post', () => editar('abc789', 'Quiero un ponny')
@@ -68,12 +79,14 @@ describe('editar', () => {
       getPost(callback);
     }));
 });
+
+// ----------------------- eliminar post -----------------------//
 describe('deletePost', () => {
   it('deberia ser una funcion', () => { expect(typeof deletePost).toBe('function'); });
-  it('debería eliminar el texto del post', () => deletePost('abc789')
+  it('debería eliminar  el post', () => deletePost('abc1234')
     .then(() => {
       const callback = (arrayPost) => {
-        const objeto = arrayPost.find((elemento) => elemento.description === 'Quiero un dinosaurio');
+        const objeto = arrayPost.find((elemento) => elemento.description === 'Quiero un unicornio');
         let validacion = 'no eliminado';
         if (objeto === undefined) validacion = 'eliminado';
         expect(validacion).toBe('eliminado');
@@ -82,10 +95,18 @@ describe('deletePost', () => {
     }));
 });
 
-// ----------------------- Test de likes -----------------------//
-describe('likepublish', () => {
-  it('deberia ser una funcion', () => { expect(typeof likepublish).toBe('function'); });
-  // it('debería dar like a un post', () => {
-  //   likepublish(idPost);
-  // });
+// // ----------------------- Test de likes -----------------------//
+// describe('likepublish', () => {
+//   it('deberia ser una funcion', () => { expect(typeof likepublish).toBe('function'); });
+//   // it('debería dar like a un post', () => {
+//   //   likepublish(idPost);
+//   // });
+// });
+
+// ----------------------- mostrar like  -----------------------//
+describe('mostrar likes de usuarios', () => {
+  it('deberia mostrar la cantidad de likes de un post', () => showlike('abc789')
+    .then((result) => {
+      expect(result.data().likesUser).toHaveLength(2);
+    }));
 });
