@@ -1,6 +1,7 @@
 import {
-  loginIn, getUserInfo, facebookPromise, googlePromise,
+  loginIn, facebookPromise, googlePromise,
 } from './funciones/funciones-firebase.js';
+import { getUserInfo } from '../../firebase/firebase-user.js';
 
 export const viewLogin = () => {
   const loginSection = `
