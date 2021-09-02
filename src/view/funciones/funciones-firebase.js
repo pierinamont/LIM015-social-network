@@ -1,3 +1,5 @@
+// import { reject } from 'async';
+import { getUserInfo } from '../../firebase/firebase-user.js';
 // ----------------------------- evento click de registro ------------------------------ //
 export const signup = (email, password) => firebase
   .auth()
@@ -27,24 +29,6 @@ export const signup = (email, password) => firebase
 //     });
 // });
 
-// ------------------- Obtener y guardar datos del usuario ---------------------------- //
-export const getUserInfo = () => {
-  const currentUser = firebase.auth().currentUser;
-
-  // Obtener la info del usuario
-  const uid = currentUser.uid;
-  const name = currentUser.displayName;
-  const email = currentUser.email;
-  const photo = currentUser.photoURL;
-
-  // Guardar la info en localStorage
-  localStorage.setItem('uid', uid);
-  localStorage.setItem('name', name);
-  localStorage.setItem('email', email);
-  localStorage.setItem('photo', photo);
-
-  console.log(photo, name, email); // eslint-disable-line
-};
 // ----------------------------- Inicio de sesión ------------------------------ //
 
 export const loginIn = (email, password) => {
@@ -157,33 +141,35 @@ export const publishPost = (objPublicacion) => new Promise((resolver, rechazar) 
 });
 
 // -------------------- Likes de usuarios ---------------------- //
+// eslint-disable-next-line no-shadow
 export const likepublish = (idPost) => {
   const post = firebase.firestore().collection('posts').doc(idPost);
-  post.get().then((res) => {
-    if (res.exists) {
-      const arrayLikes = res.data().likesUser;
-      const userLikes = arrayLikes.filter((a) => a.user === localStorage.getItem('uid'));
-      // si el usuario dio like, ELIMINAMOS DICHO REGISTRO DEL ARRAY
-      if (userLikes.length !== 0) {
-        post.update({
-          likesUser: arrayLikes.filter((a) => a.user !== localStorage.getItem('uid')),
-        });
-      } else { // no existe like para ese usuario, entonces añadir al array
-        const newLike = {
-          userName: localStorage.getItem('name'),
-          user: localStorage.getItem('uid'),
-        };
-        arrayLikes.push(newLike);
-        // actualizar arrayLikes a la coleccion en firestore
-        post.update({
-          likesUser: arrayLikes,
-        });
+  post.get()
+    .then((res) => {
+      if (res.exists) {
+        const arrayLikes = res.data().likesUser;
+        const userLikes = arrayLikes.filter((a) => a.user === localStorage.getItem('uid'));
+        // si el usuario dio like, ELIMINAMOS DICHO REGISTRO DEL ARRAY
+        if (userLikes.length !== 0) {
+          post.update({
+            likesUser: arrayLikes.filter((a) => a.user !== localStorage.getItem('uid')),
+          });
+        } else { // no existe like para ese usuario, entonces añadir al array
+          const newLike = {
+            userName: localStorage.getItem('name'),
+            user: localStorage.getItem('uid'),
+          };
+          arrayLikes.push(newLike);
+          // actualizar arrayLikes a la coleccion en firestore
+          post.update({
+            likesUser: arrayLikes,
+          });
+        }
       }
-    }
-  })
+    })
     .catch((error) => {
-  console.log(error); // eslint-disable-line
-
+      // eslint-disable-next-line prefer-promise-reject-errors
+      console.log(error); // eslint-disable-line
     });
 };
 
