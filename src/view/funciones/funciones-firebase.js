@@ -149,17 +149,18 @@ export const editar = (idPost, newText) => new Promise((resolver, rechazar) => {
       rechazar('edicion rechazada');
     });
 });
+
 export const getPost = (callback) => firebase.firestore().collection('posts')
   .onSnapshot((querySnapshot) => {
     const arrayPost = [];
     querySnapshot.forEach((doc) => {
       arrayPost.push({
-        photo: doc.photo,
-        name: doc.name,
-        description: doc.description,
-        day: doc.day,
-        user: doc.user,
-        likesUser: doc.likesUser,
+        photo: doc.data().photo,
+        name: doc.data().name,
+        description: doc.data().description,
+        day: doc.data().day,
+        user: doc.data().user,
+        likesUser: doc.data().likesUser,
       });
     });
     callback(arrayPost);
