@@ -1,8 +1,7 @@
 /* eslint-disable prefer-promise-reject-errors */
 // import { reject } from 'async';
 // ----------------------------- evento click de registro ------------------------------ //
-export const signup = (email, password) => firebase
-  .auth()
+export const signup = (email, password) => firebase.auth()
   .createUserWithEmailAndPassword(email, password);
 
 // export const signup = (name, email, password) => new Promise((resolve, reject) => {
@@ -18,9 +17,10 @@ export const signup = (email, password) => firebase
 //         url: 'http://localhost:5000',
 //       };
 
-//       result.user.sendEmailVerification(configuration).catch((error) => {
+//       result.user.sendEmailVerification(configuration)
+//         .catch((error) => {
 //         console.log(error); // eslint-disable-line
-//       });
+//         });
 //       firebase.auth().signOut();
 //       resolve();
 //     })
