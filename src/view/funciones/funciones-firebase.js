@@ -1,33 +1,33 @@
 /* eslint-disable prefer-promise-reject-errors */
 // import { reject } from 'async';
 // ----------------------------- evento click de registro ------------------------------ //
-export const signup = (email, password) => firebase.auth()
-  .createUserWithEmailAndPassword(email, password);
+// export const signup = (email, password) => firebase.auth()
+//   .createUserWithEmailAndPassword(email, password);
 
-// export const signup = (name, email, password) => new Promise((resolve, reject) => {
-//   firebase
-//     .auth()
-//     .createUserWithEmailAndPassword(email, password)
-//     .then((result) => {
-//       result.user.updateProfile({
-//         displayName: name,
-//       });
+export const signup = (name, email, password) => new Promise((resolve, reject) => {
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((result) => {
+      result.user.updateProfile({
+        displayName: name,
+      });
 
-//       const configuration = {
-//         url: 'http://localhost:5000',
-//       };
+      const configuration = {
+        url: 'http://localhost:5000',
+      };
 
-//       result.user.sendEmailVerification(configuration)
-//         .catch((error) => {
-//         console.log(error); // eslint-disable-line
-//         });
-//       firebase.auth().signOut();
-//       resolve();
-//     })
-//     .catch((error) => {
-//       reject(error);
-//     });
-// });
+      result.user.sendEmailVerification(configuration)
+        .catch((error) => {
+        console.log(error); // eslint-disable-line
+        });
+      firebase.auth().signOut();
+      resolve();
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
 
 // ----------------------------- Inicio de sesión ------------------------------ //
 
