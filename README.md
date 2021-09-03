@@ -38,15 +38,10 @@ Para el desarrollo del prototipo de alta fidelidad se buscó una paleta de color
 
 ## 3. Historias de Usuario
 
-Nuestro proyecto está enfocado a  crear una página web y,
-aplicativo web movil para los amantes de los animales, y,
-para aquellos que desean o puedan conectar con esta comunidad
-como: compartir información, contenido lleno de amor ♥, que
-aporte y ayude a estos animalitos que tanto lo necesitan así
-como también todas aquellas personas deseen adoptar, donar , 
-jornadas de vacunacíon, esterelización, siendo participes de 
-propagar la infornación.
+Nuestro proyecto está enfocado a  crear una página web y, aplicativo web movil para los amantes de los animales, y para aquellos que desean o puedan conectar con esta comunidad como: compartir información, contenido lleno de amor ♥, que aporte y ayude a estos animalitos que tanto lo necesitan así como también todas aquellas personas deseen adoptar, donar,  jornadas de vacunacíon, esterelización, siendo participes de propagar la infornación.
 Las siguientes historias de usuario se han organizado de acuerdo a órdenes de prioridad:
+
+[![Pet-Place-Historias-de-usuarios-page-0001.jpg](https://i.postimg.cc/7ZbfM84z/Pet-Place-Historias-de-usuarios-page-0001.jpg)](https://postimg.cc/PCsXT7Pf)
 
 ## 4. Objetivos de aprendizaje
 
@@ -88,9 +83,9 @@ Las siguientes historias de usuario se han organizado de acuerdo a órdenes de p
 
 - [x] **Objetos (key, value)**
 
-- [ ] **Diferenciar entre tipos de datos primitivos y no primitivos**
+- [x] **Diferenciar entre tipos de datos primitivos y no primitivos**
 
-- [ ] **Variables (declaración, asignación, ámbito)**
+- [x] **Variables (declaración, asignación, ámbito)**
 
 - [x] **Uso de condicionales (if-else, switch, operador ternario, lógica booleana)**
 
@@ -108,7 +103,7 @@ Las siguientes historias de usuario se han organizado de acuerdo a órdenes de p
 
 - [x] **Uso de linter (ESLINT)**
 
-- [ ] **Uso de identificadores descriptivos (Nomenclatura y Semántica)**
+- [x] **Uso de identificadores descriptivos (Nomenclatura y Semántica)**
 
 - [x] **Diferenciar entre expresiones (expressions) y sentencias (statements)**
 
@@ -126,7 +121,7 @@ Las siguientes historias de usuario se han organizado de acuerdo a órdenes de p
 
 - [x] **GitHub: Creación de cuenta y repos, configuración de llaves SSH**
 
-- [ ] **GitHub: Despliegue con GitHub Pages**
+- [x] **GitHub: Despliegue con GitHub Pages**
 
 - [ ] **GitHub: Colaboración en Github (branches | forks | pull requests | code review | tags)**
 
@@ -134,13 +129,13 @@ Las siguientes historias de usuario se han organizado de acuerdo a órdenes de p
 
 ### UX (User eXperience)
 
-- [ ] **Diseñar la aplicación pensando en y entendiendo al usuario**
+- [x] **Diseñar la aplicación pensando en y entendiendo al usuario**
 
-- [ ] **Crear prototipos para obtener feedback e iterar**
+- [x] **Crear prototipos para obtener feedback e iterar**
 
-- [ ] **Aplicar los principios de diseño visual (contraste, alineación, jerarquía)**
+- [x] **Aplicar los principios de diseño visual (contraste, alineación, jerarquía)**
 
-- [ ] **Planear y ejecutar tests de usabilidad**
+- [x] **Planear y ejecutar tests de usabilidad**
 
 ### Firebase
     
