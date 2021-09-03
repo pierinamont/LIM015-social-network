@@ -18,19 +18,17 @@ Desarrollado por: <br>
 
 * [3. Historias de usuario](#3-historias-de-usuario)
 
-* [4. Plan de acción](#4-plan-de-acción)
-
-* [5. Objetivos de aprendizaje](#5-objetivos-de-aprendizaje)
+* [4. Objetivos de aprendizaje](#5-objetivos-de-aprendizaje)
 
 ***
 
 ## 1. Prototipo de baja fidelidad
-agregar explicación.........
+Para el prototipo se trabajó 3 vistas: La parte de inicio de sesión, la de registro y la página principal de la red social
 
 [![prototipo.png](https://i.postimg.cc/dVvVCVr0/prototipo.png)](https://postimg.cc/kB1C39jr)
 
 ## 2. Prototipo de alta fidelidad
-El proyecto se trabajó bajo el esquema de *"mobile first"*
+Para el desarrollo del prototipo de alta fidelidad se buscó una paleta de colores adecuada para la marca y se desarrolló bajo el esquema de "mobile first"
 ### Mobile
 [![mobile.png](https://i.postimg.cc/CMB5Ttww/mobile.png)](https://postimg.cc/0rvP7V64)
 
@@ -39,12 +37,18 @@ El proyecto se trabajó bajo el esquema de *"mobile first"*
 
 
 ## 3. Historias de Usuario
-Agregar historias de usuario
 
-## 4. Plan de acción 
-Agregar
+Nuestro proyecto está enfocado a  crear una página web y,
+aplicativo web movil para los amantes de los animales, y,
+para aquellos que desean o puedan conectar con esta comunidad
+como: compartir información, contenido lleno de amor ♥, que
+aporte y ayude a estos animalitos que tanto lo necesitan así
+como también todas aquellas personas deseen adoptar, donar , 
+jornadas de vacunacíon, esterelización, siendo participes de 
+propagar la infornación.
+Las siguientes historias de usuario se han organizado de acuerdo a órdenes de prioridad:
 
-## 5. Objetivos de aprendizaje
+## 4. Objetivos de aprendizaje
 
 ### HTML
 
@@ -94,19 +98,19 @@ Agregar
 
 - [x] **Funciones (params, args, return)**
 
-- [ ] **Pruebas unitarias (unit tests)**
+- [x] **Pruebas unitarias (unit tests)**
 
-- [ ] **Pruebas asíncronas**
+- [x] **Pruebas asíncronas**
 
-- [ ] **Uso de mocks y espías**
+- [x] **Uso de mocks y espías**
 
-- [ ] **Módulos de ECMAScript (ES Modules)**
+- [x] **Módulos de ECMAScript (ES Modules)**
 
-- [ ] **Uso de linter (ESLINT)**
+- [x] **Uso de linter (ESLINT)**
 
 - [ ] **Uso de identificadores descriptivos (Nomenclatura y Semántica)**
 
-- [ ] **Diferenciar entre expresiones (expressions) y sentencias (statements)**
+- [x] **Diferenciar entre expresiones (expressions) y sentencias (statements)**
 
 - [x] **Callbacks**
 
@@ -120,7 +124,7 @@ Agregar
 
 - [ ] **Git: Integración de cambios entre ramas (branch, checkout, fetch, merge, reset, rebase, tag)**
 
-- [ ] **GitHub: Creación de cuenta y repos, configuración de llaves SSH**
+- [x] **GitHub: Creación de cuenta y repos, configuración de llaves SSH**
 
 - [ ] **GitHub: Despliegue con GitHub Pages**
 
@@ -139,7 +143,7 @@ Agregar
 - [ ] **Planear y ejecutar tests de usabilidad**
 
 ### Firebase
-
+    
 - [x] **Firebase Auth**
 
 - [x] **Firestore**
