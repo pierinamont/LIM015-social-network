@@ -337,27 +337,18 @@ que detalles:
 
 ### 5.3 Historias de usuario
 
-Una vez que entiendas las necesidades de tus usuarixs, escribe las Historias de
-Usuario que representen todo lo que necesitan hacer/ver en la Red Social. Cada
-una de tus Historias de Usuario debe tener:
+Nuestro proyecto está enfocado a  crear una página web y,
+aplicativo web movil para los amantes de los animales, y,
+para aquellos que desean o puedan conectar con esta comunidad
+como: compartir información, contenido lleno de amor ♥, que
+aporte y ayude a estos animalitos que tanto lo necesitan así
+como también todas aquellas personas deseen adoptar, donar , 
+jornadas de vacunacíon, esterelización, siendo participes de 
+propagar la infornación.
+Las siguientes historias de usuario se han organizado de acuerdo a órdenes de prioridad:
 
-* **Criterios de Aceptación:** todo lo que debe ocurrir para satisfacer las
-  necesidades del usuario.
 
-* **Definición de terminado:** todos los aspectos técnicos que deben cumplirse
-  para que, como equipo, sepan que esa historia está terminada y lista
-  para publicarse. **Todas** tus Historias de Usuario (salvo excepciones), deben
-  incluir estos aspectos en su Definición de Terminado (más todo lo que
-  necesiten agregar):
 
-  - Debe ser una SPA.
-  - Debe ser _responsive_.
-  - Deben haber recibido _code review_ de al menos una compañera de otro equipo.
-  - Hicieron los _test_ unitarios
-  - Testearon manualmente buscando errores e imperfecciones simples.
-  - Hicieron _pruebas_ de usabilidad e incorporaron el _feedback_ de los
-    usuarios como mejoras.
-  - Desplegaron su aplicación y etiquetaron la versión (git tag).
 
 ### 5.4 Diseño de la Interfaz de Usuario (prototipo de baja fidelidad)
 
