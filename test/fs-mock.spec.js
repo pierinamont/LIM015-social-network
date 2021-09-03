@@ -73,6 +73,7 @@ describe('editar', () => {
   it('debería actualizar el texto del post', () => editar('abc789', 'Quiero un ponny')
     .then(() => {
       const callback = (arrayPost) => {
+        console.log(arrayPost);
         const objeto = arrayPost.find((elemento) => elemento.description === 'Quiero un ponny');
         expect(objeto.description).toBe('Quiero un ponny');
       };
