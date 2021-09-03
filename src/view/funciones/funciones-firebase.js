@@ -149,6 +149,7 @@ export const editar = (idPost, newText) => new Promise((resolver, rechazar) => {
       rechazar('edicion rechazada');
     });
 });
+
 export const getPost = (callback) => firebase.firestore().collection('posts')
   .onSnapshot((querySnapshot) => {
     const arrayPost = [];
