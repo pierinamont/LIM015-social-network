@@ -1,4 +1,4 @@
-import { signOutPromise } from './funciones/funciones-firebase.js';
+import { signOut } from './funciones/funciones-firebase.js';
 
 export const viewHeader = () => {
   const headerSection = `
@@ -37,7 +37,18 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('click', (e) => {
   if (e.target.id === 'signOut') {
-    signOutPromise();
+    signOut()
+      .then(() => {
+        console.log('cerraste sesión');
+        const hash = '#/login';
+        window.location.hash = hash;
+        localStorage.clear();
+      })
+      .catch((error) => {
+        console.log(error);
+        const hash = '#/mainPage';
+        window.location.hash = hash;
+      });
   }
 });
 

@@ -1,6 +1,7 @@
 import {
-  loginIn, facebookPromise, googlePromise,
+  loginIn, signInFacebook, signInGoogle,
 } from './funciones/funciones-firebase.js';
+// eslint-disable-next-line import/no-unresolved
 import { getUserInfo } from '../../firebase/firebase-user.js';
 
 export const viewLogin = () => {
@@ -80,7 +81,16 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('click', (e) => {
   if (e.target.id === 'gmail-btn') {
-    googlePromise();
+    signInGoogle()
+      .then(() => {
+        getUserInfo();
+        const hash = '#/mainPage';
+        window.location.hash = hash;
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log('no funciona');
+      });
   }
 });
 
@@ -88,6 +98,14 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('click', (e) => {
   if (e.target.id === 'facebook-btn') {
-    facebookPromise();
+    signInFacebook()
+      .then(() => {
+        getUserInfo();
+        const hash = '#/mainPage';
+        window.location.hash = hash;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 });

@@ -1,6 +1,5 @@
 /* eslint-disable prefer-promise-reject-errors */
 // import { reject } from 'async';
-import { getUserInfo } from '../../firebase/firebase-user.js';
 // ----------------------------- evento click de registro ------------------------------ //
 export const signup = (email, password) => firebase
   .auth()
@@ -43,18 +42,6 @@ export const signInGoogle = () => {
   return loginWithGoogle;
 };
 
-export const googlePromise = () => {
-  signInGoogle()
-    .then(() => {
-      getUserInfo();
-      const hash = '#/mainPage';
-      window.location.hash = hash;
-    })
-    .catch((error) => {
-      console.log(error);
-      console.log('no funciona');
-    });
-};
 // --------------------------- Inicio de sesión Facebook --------------------------- //
 export const signInFacebook = () => {
   const providerFacebook = new firebase.auth.FacebookAuthProvider();
@@ -62,35 +49,8 @@ export const signInFacebook = () => {
   return loginWithFacebook;
 };
 
-export const facebookPromise = () => {
-  signInFacebook()
-    .then(() => {
-      getUserInfo();
-      const hash = '#/mainPage';
-      window.location.hash = hash;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
 // --------------------------- seccion header// cerrar sesión --------------------------- //
 export const signOut = () => firebase.auth().signOut();
-
-export const signOutPromise = () => {
-  signOut()
-    .then(() => {
-      console.log('cerraste sesión');
-      const hash = '#/login';
-      window.location.hash = hash;
-      localStorage.clear();
-    })
-    .catch((error) => {
-      console.log(error);
-      const hash = '#/mainPage';
-      window.location.hash = hash;
-    });
-};
 
 // ------seccion mainpage-------//
 // -----Envia valores de los inputs a Firebase ---- //
@@ -107,12 +67,13 @@ export const publishPost = (objPublicacion) => new Promise((resolver, rechazar) 
 });
 
 // -------------------- Likes de usuarios ---------------------- //
-// eslint-disable-next-line no-shadow
-export const likepublish = (idPost) => {
+
+export const likepublish = (idPost) => new Promise((resolve, reject) => {
   const post = firebase.firestore().collection('posts').doc(idPost);
   post.get()
     .then((res) => {
       if (res.exists) {
+        resolve(res);
         const arrayLikes = res.data().likesUser;
         const userLikes = arrayLikes.filter((a) => a.user === localStorage.getItem('uid'));
         // si el usuario dio like, ELIMINAMOS DICHO REGISTRO DEL ARRAY
@@ -134,9 +95,10 @@ export const likepublish = (idPost) => {
       }
     })
     .catch((error) => {
+      reject(error);
       console.log(error);
     });
-};
+});
 
 // ------------------------------- Eliminar posts ----------------------------- //
 export const deletePost = (idPost) => new Promise((resolver, rechazar) => {
@@ -187,17 +149,18 @@ export const editar = (idPost, newText) => new Promise((resolver, rechazar) => {
       rechazar('edicion rechazada');
     });
 });
+
 export const getPost = (callback) => firebase.firestore().collection('posts')
   .onSnapshot((querySnapshot) => {
     const arrayPost = [];
     querySnapshot.forEach((doc) => {
       arrayPost.push({
-        photo: doc.photo,
-        name: doc.name,
-        description: doc.description,
-        day: doc.day,
-        user: doc.user,
-        likesUser: doc.likesUser,
+        photo: doc.data().photo,
+        name: doc.data().name,
+        description: doc.data().description,
+        day: doc.data().day,
+        user: doc.data().user,
+        likesUser: doc.data().likesUser,
       });
     });
     callback(arrayPost);
