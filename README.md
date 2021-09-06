@@ -38,7 +38,7 @@ Para el desarrollo del prototipo de alta fidelidad se buscó una paleta de color
 
 ## 3. Historias de Usuario
 
-Nuestro proyecto está enfocado a  crear una página web y, aplicativo web movil para los amantes de los animales, y para aquellos que desean o puedan conectar con esta comunidad como: compartir información, contenido lleno de amor ♥, que aporte y ayude a estos animalitos que tanto lo necesitan así como también todas aquellas personas deseen adoptar, donar,  jornadas de vacunacíon, esterelización, siendo participes de propagar la infornación.
+Nuestro proyecto está enfocado a  crear una página web y, aplicativo web movil para los amantes de los animales, y para aquellos que desean o puedan conectar con esta comunidad como: compartir información, contenido lleno de amor ♥, que aporte y ayude a estos animalitos que tanto lo necesitan así como también todas aquellas personas deseen adoptar, donar,  jornadas de vacunacíon, esterelización, siendo participes de propagar la información.
 Las siguientes historias de usuario se han organizado de acuerdo a órdenes de prioridad:
 
 [![Pet-Place-Historias-de-usuarios-page-0001.jpg](https://i.postimg.cc/7ZbfM84z/Pet-Place-Historias-de-usuarios-page-0001.jpg)](https://postimg.cc/PCsXT7Pf)
