@@ -2,7 +2,7 @@ import {
   loginIn, signInFacebook, signInGoogle,
 } from './funciones/funciones-firebase.js';
 // eslint-disable-next-line import/no-unresolved
-import { getUserInfo } from '../../firebase/firebase-user.js';
+import { getUserInfo } from '../firebase/firebase-user.js';
 
 export const viewLogin = () => {
   const loginSection = `

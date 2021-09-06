@@ -113,17 +113,17 @@ Las siguientes historias de usuario se han organizado de acuerdo a órdenes de p
 
 ### Control de Versiones (Git y GitHub)
 
-- [ ] **Git: Instalación y configuración**
+- [x] **Git: Instalación y configuración**
 
-- [ ] **Git: Control de versiones con git (init, clone, add, commit, status, push, pull, remote)**
+- [x] **Git: Control de versiones con git (init, clone, add, commit, status, push, pull, remote)**
 
-- [ ] **Git: Integración de cambios entre ramas (branch, checkout, fetch, merge, reset, rebase, tag)**
+- [x] **Git: Integración de cambios entre ramas (branch, checkout, fetch, merge, reset, rebase, tag)**
 
 - [x] **GitHub: Creación de cuenta y repos, configuración de llaves SSH**
 
 - [x] **GitHub: Despliegue con GitHub Pages**
 
-- [ ] **GitHub: Colaboración en Github (branches | forks | pull requests | code review | tags)**
+- [x] **GitHub: Colaboración en Github (branches | forks | pull requests | code review | tags)**
 
 - [ ] **GitHub: Organización en Github (projects | issues | labels | milestones | releases)**
 
