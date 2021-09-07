@@ -14,7 +14,7 @@ export const signup = (name, email, password) => new Promise((resolve, reject) =
       });
 
       const configuration = {
-        url: 'http://localhost:5000',
+        url: 'https://lim-015-social-network.vercel.app/',
       };
 
       result.user.sendEmailVerification(configuration)
