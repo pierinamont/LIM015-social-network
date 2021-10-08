@@ -23,7 +23,7 @@ export const viewSignup = () => {
                     <input class="input" type="password" placeholder="Coloca tu contraseña" name="" id="signup-password" required>
                     <p id="error-message" style="display:none"></p>
                 </div>
-                <button id="signup-btn">Resgistrarse</button>
+                <button id="signup-btn">Registrarse</button>
                 <button id="signup-btn-cancel">Cancelar</button>
                 <p>¿Ya tienes cuenta? <a id="sign-in" href="#/login">Inicia Sesión</a></p>
             </form>
