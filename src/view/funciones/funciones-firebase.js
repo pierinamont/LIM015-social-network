@@ -14,7 +14,7 @@ export const signup = (name, email, password) => new Promise((resolve, reject) =
       });
 
       const configuration = {
-        url: 'http://localhost:5000',
+        url: 'https://lim-015-social-network.vercel.app/',
       };
 
       result.user.sendEmailVerification(configuration)
@@ -68,12 +68,11 @@ export const publishPost = (objPublicacion) => new Promise((resolver, rechazar) 
 
 // -------------------- Likes de usuarios ---------------------- //
 
-export const likepublish = (idPost) => new Promise((resolve, reject) => {
+export const likepublish = (idPost) => {
   const post = firebase.firestore().collection('posts').doc(idPost);
-  post.get()
+  return post.get()
     .then((res) => {
       if (res.exists) {
-        resolve(res);
         const arrayLikes = res.data().likesUser;
         const userLikes = arrayLikes.filter((a) => a.user === localStorage.getItem('uid'));
         // si el usuario dio like, ELIMINAMOS DICHO REGISTRO DEL ARRAY
@@ -95,10 +94,9 @@ export const likepublish = (idPost) => new Promise((resolve, reject) => {
       }
     })
     .catch((error) => {
-      reject(error);
       console.log(error);
     });
-});
+};
 
 // ------------------------------- Eliminar posts ----------------------------- //
 export const deletePost = (idPost) => new Promise((resolver, rechazar) => {
@@ -115,12 +113,13 @@ export const deletePost = (idPost) => new Promise((resolver, rechazar) => {
 // ------mostrar los like de los usuarios-------//
 export const showlike = (idPost) => new Promise((resolver, reject) => {
   const showPostLike = firebase.firestore().collection('posts').doc(idPost);
-  showPostLike.get().then((res) => {
-    if (res.exists) resolver(res);
-    else {
-      reject(null);
-    }
-  })
+  showPostLike.get()
+    .then((res) => {
+      if (res.exists) resolver(res);
+      else {
+        reject(null);
+      }
+    })
     .catch(() => {
       reject(null);
     });

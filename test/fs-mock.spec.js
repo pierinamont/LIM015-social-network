@@ -135,7 +135,8 @@ global.localStorage = {
 
 describe('Dislike Post', () => {
   it('deberia ser una funcion', () => { expect(typeof likepublish).toBe('function'); });
-  it('deberia hacer dislike al post abc456', () => likepublish('abc456')
+  // eslint-disable-next-line jest/no-focused-tests
+  it.only('deberia hacer dislike al post abc456', () => likepublish('abc456')
     .then(() => {
       const callback = (arrayPost) => {
         const objPost = arrayPost.find((elemento) => elemento.description === 'Quiero un dragon');
